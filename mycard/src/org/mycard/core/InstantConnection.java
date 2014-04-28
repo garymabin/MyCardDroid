@@ -2,7 +2,7 @@ package org.mycard.core;
 
 import org.apache.http.client.HttpClient;
 import org.mycard.StaticApplication;
-import org.mycard.data.wrapper.BaseDataWrapper;
+import org.mycard.model.data.wrapper.BaseDataWrapper;
 
 public class InstantConnection implements IBaseConnection {
 	protected IBaseThread mUpdateThread;

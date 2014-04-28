@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.mycard.R;
-import org.mycard.data.RoomInfo;
-import org.mycard.data.UserInfo;
+import org.mycard.model.data.RoomInfo;
+import org.mycard.model.data.UserInfo;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -1,6 +1,6 @@
-package org.mycard.data.wrapper;
+package org.mycard.model.data.wrapper;
 
-import org.mycard.Constants;
+import org.mycard.common.Constants;
 
 import android.os.Bundle;
 

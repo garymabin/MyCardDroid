@@ -1,8 +1,10 @@
 package org.mycard.core;
 
-import org.mycard.Constants;
 import org.mycard.StaticApplication;
 import org.mycard.actionbar.ActionBarController;
+import org.mycard.common.Constants;
+import org.mycard.core.images.BitmapHolder;
+import org.mycard.net.NetworkStatusManager;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,9 +21,13 @@ public class Controller {
 	
 	private ActionBarController mActionBarController;
 	
+	private NetworkStatusManager mNetworkManager;
+	
 	private Controller(StaticApplication app) {
 		mUpdateController = new UpdateController(app);
 		mActionBarController = new ActionBarController();
+		mLoginStatusTracker = new UserStatusTracker(app);
+		mNetworkManager = NetworkStatusManager.peekInstance(app);
 	}
 
 	public static Controller peekInstance() {
@@ -102,6 +108,42 @@ public class Controller {
 	
 	public void unregisterForActionFilter(Handler h) {
 		mActionBarController.unregisterForActionFilter(h);
+	}
+
+	/**
+	 * 
+	 * @return
+	**/
+	public boolean isWifiConnected() {
+		return mNetworkManager.isWifiConnected();
+	}
+
+	/**
+	 * Create a Message object, in fact, this invoke {@link #buildMessage(int, int, int, Object)}
+	 * @param what 
+	 * 				type of this message
+	 * @return
+	 */
+	public static Message buildMessage(int what) {
+		return buildMessage(what, 0, 0, null);
+	}
+	
+	/**
+	 * Create a Message object.
+	 * @param what	type of this message
+	 * @param arg1	first int arg for this message
+	 * @param arg2	second int arg for this message
+	 * @param obj	Object arg for this message.<font color=red> If this message need to be 
+	 * 			transfered by handler, this Object should be Parcelable
+	 * @return
+	 */
+	public static Message buildMessage(int what, int arg1, int arg2, Object obj) {
+		Message msg = new Message();
+		msg.what = what;
+		msg.arg1 = arg1;
+		msg.arg2 = arg2;
+		msg.obj = obj;
+		return msg;
 	}
 
 

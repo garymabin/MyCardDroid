@@ -1,4 +1,4 @@
-package org.mycard;
+package org.mycard.common;
 
 /**
  * @author mabin
@@ -41,8 +41,27 @@ public interface Constants {
 	public static final int REQUEST_TYPE_UPDATE_ROOM = 0x3001;
 	public static final int REQUEST_TYPE_LOGIN = 0x3002;
 	
-	public static final String BUNDLE_KEY_USER_NAME = "bundle.key.user.name";
+	public static final int REQUEST_TYPE_DOWNLOAD_IMAGE = 0x3003;
+	public static final int REQUEST_TYPE_LOAD_BITMAP = 0x3004;
 	
+	public static final int REQUEST_TYPE_CHANGE_IMAGE_LOAD_PRIORITY = 0x3005;
+	
+	public static final int REQUEST_TYPE_RESET_LOAD_QUEUE = 0x3006;
+	
+	public static final int REQUEST_TYPE_RESET_DOWNLOAD_QUEUE = 0x3007;
+	
+	public static final int REQUEST_TYPE_CLEAR_BITMAP_CACHE = 0x3008;
+	
+	
+	public static final String BUNDLE_KEY_USER_NAME = "bundle.key.user.name";
 	public static final String BUNDLE_KEY_USER_PW = "bundle.key.user.pw";
+	
+	
+	
+	public static final int IMAGE_TYPE_THUMNAIL = 0;
+	public static final int IMAGE_TYPE_ORIGINAL = 1;
+	
+	public static final int BITMAP_LOAD_TYPE_PRELOAD = 0;
+	public static final int BITMAP_LOAD_TYPE_LOAD = 1;
 
 }

@@ -1,4 +1,4 @@
-package org.mycard.data.wrapper;
+package org.mycard.model.data.wrapper;
 
 import java.util.ArrayList;
 

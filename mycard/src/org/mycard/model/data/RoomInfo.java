@@ -1,4 +1,4 @@
-package org.mycard.data;
+package org.mycard.model.data;
 
 import java.util.ArrayList;
 import java.util.List;

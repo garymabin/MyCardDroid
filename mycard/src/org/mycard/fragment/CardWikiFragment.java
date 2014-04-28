@@ -1,8 +1,9 @@
 package org.mycard.fragment;
 
-import org.mycard.Constants;
 import org.mycard.R;
+import org.mycard.common.Constants;
 import org.mycard.core.Controller;
+import org.mycard.model.IDataObserver;
 import org.mycard.provider.YGOCards;
 import org.mycard.utils.ResourceUtils;
 import org.mycard.widget.CustomActionBarView;
@@ -32,7 +33,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class CardWikiFragment extends BaseFragment implements
-		LoaderCallbacks<Cursor>, ActionMode.Callback, OnMenuItemClickListener, OnItemClickListener {
+		LoaderCallbacks<Cursor>, ActionMode.Callback, OnMenuItemClickListener, OnItemClickListener, IDataObserver {
 
 	private static final int QUERY_SOURCE_LOADER_ID = 0;
 	private static final String TAG = "CardWikiFragment";
@@ -237,6 +238,11 @@ public class CardWikiFragment extends BaseFragment implements
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		mActivity.navigateToChild(null, FRAGMENT_ID_CARD_DETAIL);
+	}
+
+	@Override
+	public void notifyDataUpdate(Message msg) {
+		
 	}
 
 }

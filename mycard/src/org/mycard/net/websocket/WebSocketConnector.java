@@ -7,8 +7,8 @@ import org.java_websocket.framing.Framedata;
 import org.java_websocket.handshake.ServerHandshake;
 import org.mycard.core.WebSocketThread;
 import org.mycard.core.WebSocketThread.MoeEventHandler;
-import org.mycard.data.wrapper.BaseDataWrapper;
-import org.mycard.data.wrapper.IBaseWrapper;
+import org.mycard.model.data.wrapper.BaseDataWrapper;
+import org.mycard.model.data.wrapper.IBaseWrapper;
 
 import android.os.Message;
 import android.util.Log;

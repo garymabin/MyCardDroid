@@ -1,6 +1,6 @@
 package org.mycard.core;
 
-import org.mycard.data.wrapper.BaseDataWrapper;
+import org.mycard.model.data.wrapper.BaseDataWrapper;
 import org.mycard.net.websocket.WebSocketConnector;
 
 public class WebSocketConnection implements IBaseConnection {

@@ -1,13 +1,14 @@
-package org.mycard.data;
+package org.mycard.model.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.mycard.data.wrapper.BaseDataWrapper;
-import org.mycard.data.wrapper.RoomDataWrapper;
-import org.mycard.data.wrapper.ServerDataWrapper;
+import org.mycard.model.data.wrapper.BaseDataWrapper;
+import org.mycard.model.data.wrapper.RoomDataWrapper;
+import org.mycard.model.data.wrapper.ServerDataWrapper;
+
 
 public class DataStore {
 	private List<ServerInfo> mServers;

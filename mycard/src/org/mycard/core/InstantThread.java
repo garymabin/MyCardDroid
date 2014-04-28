@@ -2,8 +2,8 @@ package org.mycard.core;
 
 import org.apache.http.client.HttpClient;
 import org.mycard.core.IBaseConnection.TaskStatusCallback;
-import org.mycard.data.wrapper.BaseDataWrapper;
-import org.mycard.data.wrapper.IBaseWrapper;
+import org.mycard.model.data.wrapper.BaseDataWrapper;
+import org.mycard.model.data.wrapper.IBaseWrapper;
 import org.mycard.net.http.BaseHttpConnector;
 
 public abstract class InstantThread extends BaseThread {

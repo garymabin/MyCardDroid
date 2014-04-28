@@ -13,13 +13,12 @@ package org.mycard.fragment;
 
 import org.mycard.MainActivity;
 import org.mycard.R;
-import org.mycard.data.ResourcesConstants;
+import org.mycard.model.data.ResourcesConstants;
 import org.mycard.widget.RoomConfigController;
 import org.mycard.widget.RoomConfigUIBase;
 import org.mycard.widget.RoomDialog;
 
 import cn.garymb.ygodata.YGOGameOptions;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;

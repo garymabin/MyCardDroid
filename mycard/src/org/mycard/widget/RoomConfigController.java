@@ -1,7 +1,7 @@
 package org.mycard.widget;
 
 import org.mycard.R;
-import org.mycard.data.ResourcesConstants;
+import org.mycard.model.data.ResourcesConstants;
 
 import cn.garymb.ygodata.YGOGameOptions;
 import android.content.Context;

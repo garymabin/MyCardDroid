@@ -3,8 +3,8 @@ package org.mycard.core;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-import org.mycard.Constants;
-import org.mycard.data.wrapper.IBaseWrapper;
+import org.mycard.common.Constants;
+import org.mycard.model.data.wrapper.IBaseWrapper;
 
 import android.content.Context;
 import android.content.SharedPreferences;

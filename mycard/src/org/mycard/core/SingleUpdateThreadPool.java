@@ -4,7 +4,7 @@ import java.util.concurrent.BlockingQueue;
 
 import org.apache.http.client.HttpClient;
 import org.mycard.core.IBaseConnection.TaskStatusCallback;
-import org.mycard.data.wrapper.BaseDataWrapper;
+import org.mycard.model.data.wrapper.BaseDataWrapper;
 import org.mycard.net.http.DataHttpConnector;
 
 public class SingleUpdateThreadPool extends SingleHttpThreadPool {

@@ -1,6 +1,7 @@
 package org.mycard.net;
 
-import org.mycard.data.wrapper.BaseDataWrapper;
+import org.mycard.model.data.wrapper.BaseDataWrapper;
+
 
 public interface IBaseConnector {
 	

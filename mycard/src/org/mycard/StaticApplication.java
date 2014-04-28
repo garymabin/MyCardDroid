@@ -1,8 +1,10 @@
 package org.mycard;
 
+import java.io.File;
+
 import org.apache.http.client.HttpClient;
 import org.mycard.core.Controller;
-import org.mycard.data.Model;
+import org.mycard.model.Model;
 import org.mycard.net.http.ThreadSafeHttpClientFactory;
 
 import android.app.Application;
@@ -29,6 +31,10 @@ public class StaticApplication extends Application {
 	
 	public static StaticApplication peekInstance() {
 		return INSTANCE;
+	}
+
+	public File getCacheRootPath() {
+		return null;
 	}
 
 }

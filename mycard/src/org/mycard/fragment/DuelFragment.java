@@ -2,16 +2,15 @@ package org.mycard.fragment;
 
 import java.util.List;
 
-import org.mycard.Constants;
 import org.mycard.R;
+import org.mycard.common.Constants;
 import org.mycard.core.Controller;
-import org.mycard.data.Model;
-import org.mycard.data.ResourcesConstants;
-import org.mycard.data.RoomInfo;
-import org.mycard.data.wrapper.IBaseWrapper;
+import org.mycard.model.Model;
+import org.mycard.model.data.ResourcesConstants;
+import org.mycard.model.data.RoomInfo;
+import org.mycard.model.data.wrapper.IBaseWrapper;
 
 import cn.garymb.ygodata.YGOGameOptions;
-
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;

@@ -1,8 +1,8 @@
 package org.mycard.fragment;
 
-import org.mycard.Constants;
 import org.mycard.MainActivity;
 import org.mycard.R;
+import org.mycard.common.Constants;
 
 import android.app.Activity;
 import android.content.res.Configuration;

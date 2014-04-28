@@ -4,8 +4,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.mycard.Constants;
 import org.mycard.R;
+import org.mycard.common.Constants;
 
 import android.os.Handler;
 import android.support.v4.view.MenuItemCompat;

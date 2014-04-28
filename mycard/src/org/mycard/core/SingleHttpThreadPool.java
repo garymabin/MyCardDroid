@@ -3,7 +3,7 @@ package org.mycard.core;
 import java.util.concurrent.BlockingQueue;
 
 import org.mycard.core.IBaseConnection.TaskStatusCallback;
-import org.mycard.data.wrapper.BaseDataWrapper;
+import org.mycard.model.data.wrapper.BaseDataWrapper;
 import org.mycard.net.IBaseConnector;
 
 public class SingleHttpThreadPool extends BaseThread {

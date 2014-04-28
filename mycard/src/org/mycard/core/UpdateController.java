@@ -1,15 +1,15 @@
 package org.mycard.core;
 
 
-import org.mycard.Constants;
 import org.mycard.StaticApplication;
+import org.mycard.common.Constants;
 import org.mycard.core.IBaseConnection.TaskStatusCallback;
-import org.mycard.data.Model;
-import org.mycard.data.wrapper.BaseDataWrapper;
-import org.mycard.data.wrapper.IBaseWrapper;
-import org.mycard.data.wrapper.LoginDataWrapper;
-import org.mycard.data.wrapper.RoomDataWrapper;
-import org.mycard.data.wrapper.ServerDataWrapper;
+import org.mycard.model.Model;
+import org.mycard.model.data.wrapper.BaseDataWrapper;
+import org.mycard.model.data.wrapper.IBaseWrapper;
+import org.mycard.model.data.wrapper.LoginDataWrapper;
+import org.mycard.model.data.wrapper.RoomDataWrapper;
+import org.mycard.model.data.wrapper.ServerDataWrapper;
 
 import android.content.Context;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package org.mycard.data.wrapper;
+package org.mycard.model.data.wrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,17 +6,17 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.mycard.data.BaseInfo;
-import org.mycard.data.RoomInfo;
+import org.mycard.model.data.BaseInfo;
+import org.mycard.model.data.ServerInfo;
 
-public class RoomDataWrapper extends BaseDataWrapper {
+public class ServerDataWrapper extends BaseDataWrapper {
 
 	private List<JSONObject> mData;
 
-	public RoomDataWrapper(int requestType) {
+	public ServerDataWrapper(int requestType) {
 		super(requestType);
 		mData = new ArrayList<JSONObject>();
-		mUrls.add(ROOM_LIST_URL);
+		mUrls.add(SERVER_LIST_URL);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class RoomDataWrapper extends BaseDataWrapper {
 	}
 
 	public BaseInfo getItem(int index) {
-		BaseInfo info = new RoomInfo();
+		BaseInfo info = new ServerInfo();
 		try {
 			info.initFromJsonData(mData.get(index));
 		} catch (JSONException e) {

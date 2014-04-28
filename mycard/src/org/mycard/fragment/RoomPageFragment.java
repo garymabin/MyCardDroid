@@ -3,12 +3,11 @@ package org.mycard.fragment;
 import java.util.List;
 
 import org.mycard.R;
-import org.mycard.data.ResourcesConstants;
-import org.mycard.data.RoomInfo;
+import org.mycard.model.data.ResourcesConstants;
+import org.mycard.model.data.RoomInfo;
 import org.mycard.widget.adapter.RoomAdapter;
 
 import cn.garymb.ygodata.YGOGameOptions;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Message;

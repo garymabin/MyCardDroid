@@ -1,4 +1,4 @@
-package org.mycard.data;
+package org.mycard.model.data;
 
 import org.json.JSONException;
 import org.json.JSONObject;

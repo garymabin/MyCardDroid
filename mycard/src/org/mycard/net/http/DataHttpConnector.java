@@ -6,10 +6,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.apache.http.client.HttpClient;
-import org.mycard.Constants;
-import org.mycard.data.ResourcesConstants;
-import org.mycard.data.wrapper.BaseDataWrapper;
-import org.mycard.data.wrapper.IBaseWrapper;
+import org.mycard.common.Constants;
+import org.mycard.model.data.ResourcesConstants;
+import org.mycard.model.data.wrapper.BaseDataWrapper;
+import org.mycard.model.data.wrapper.IBaseWrapper;
 
 import android.util.Log;
 

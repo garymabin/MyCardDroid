@@ -1,6 +1,6 @@
 package org.mycard.fragment;
 
-import org.mycard.Constants;
+import org.mycard.common.Constants;
 
 import android.app.Activity;
 import android.os.Bundle;

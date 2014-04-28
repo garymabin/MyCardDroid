@@ -6,10 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.mycard.actionbar.ActionBarCreator;
+import org.mycard.common.Constants;
 import org.mycard.core.Controller;
-import org.mycard.data.Model;
-import org.mycard.data.ResourcesConstants;
-import org.mycard.data.ServerInfo;
 import org.mycard.fragment.BaseFragment.OnActionBarChangeCallback;
 import org.mycard.fragment.BaseFragment;
 import org.mycard.fragment.CardDetailFragment;
@@ -18,6 +16,9 @@ import org.mycard.fragment.CardWikiFragment;
 import org.mycard.fragment.ChatRoomFragment;
 import org.mycard.fragment.FinalPhaseFragment;
 import org.mycard.fragment.DuelFragment;
+import org.mycard.model.Model;
+import org.mycard.model.data.ResourcesConstants;
+import org.mycard.model.data.ServerInfo;
 import org.mycard.widget.CustomActionBarView;
 
 import android.content.Intent;
