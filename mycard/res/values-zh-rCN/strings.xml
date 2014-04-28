@@ -24,6 +24,13 @@
     
     <string name="input_invalid_msg">用户名与密码长度之和不能超过<xliff>%1$d</xliff>个字符</string>
     
+    <string name="item_name_text">名称：</string>
+    <string name="item_level_text">星级：</string>
+    <string name="item_race_text">种族：</string>
+    <string name="item_attr_text">属性：</string>
+    <string name="item_atk_text">攻击力：</string>
+    <string name="item_def_text">防御力：</string>
+    
     <string name="button_create">创建</string>
     <string name="button_join">加入</string>
     <string name="button_cancel">取消</string>
@@ -71,7 +78,17 @@
     <string name="action_filter_type_monster_flip">反转</string>
     <string name="action_filter_type_monster_toon">怪物</string>
     
-    <string name="quick_join_error">无法找到房间</string>
+    <string name="action_filter_race_land">地</string>
+    <string name="action_filter_race_water">水</string>
+    <string name="action_filter_race_hot">炎</string>
+    <string name="action_filter_race_wind">风</string>
+    <string name="action_filter_race_light">光</string>
+    <string name="action_filter_race_dark">暗</string>
+    <string name="action_filter_race_god">神</string>
+    
+    
+    
+	<string name="quick_join_error">无法找到房间</string>
     
     
 </resources>

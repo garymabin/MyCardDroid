@@ -4,10 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="horizontal" >
 
-    <!-->ImageView
+    <!--
+        >ImageView
         android:id="@+id/card_image"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" /-->
+        android:layout_height="wrap_content" /
+    -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,10 +23,16 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/item_name_text"
+                android:textSize="16sp" />
+
+            <TextView
                 android:id="@+id/item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -34,34 +42,68 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:id="@+id/item_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp" />
+                android:text="@string/item_level_text"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/item_level"
+                android:layout_width="16dp"
+                android:layout_height="wrap_content"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:text="@string/item_race_text"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/item_race"
+                android:layout_width="36dp"
+                android:layout_height="wrap_content"
+                android:textSize="12sp" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp" />
+                android:layout_marginLeft="2dp"
+                android:text="@string/item_attr_text"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/item_attr"
+                android:layout_width="12dp"
+                android:layout_height="wrap_content"
+                android:textSize="12sp" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp" />
+                android:layout_marginLeft="2dp"
+                android:text="@string/item_atk_text"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/item_atk"
+                android:layout_width="36dp"
+                android:layout_height="wrap_content"
+                android:textSize="12sp" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp" />
+                android:layout_marginLeft="2dp"
+                android:text="@string/item_def_text"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/item_def"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 

@@ -72,7 +72,7 @@ public class CardWikiFragment extends BaseFragment implements
 			mActionBarView = (CustomActionBarView) LayoutInflater.from(mActivity).inflate(R.layout.custom_actionbar_view, null);
 			mActionMode.setCustomView(mActionBarView);
 			mActionBarView.addNewPopupImage(R.menu.filter_type, R.string.action_filter_string_type, R.string.action_filter_none, this, false);
-			mActionBarView.addNewPopupImage(R.menu.login, R.string.action_filter_string_race, R.string.action_filter_none, this, false);
+			mActionBarView.addNewPopupImage(R.menu.filter_race, R.string.action_filter_string_race, R.string.action_filter_none, this, false);
 			mActionBarView.addNewPopupImage(R.menu.login, R.string.action_filter_string_property, R.string.action_filter_none, this, false);
 			break;
 
@@ -135,26 +135,26 @@ public class CardWikiFragment extends BaseFragment implements
 		public boolean setViewValue(View view, Cursor cursor, int arg2) {
 			switch (arg2) {
 			case 0:
-				((TextView) view).setText("名称：" + cursor.getString(8));
+				((TextView) view).setText(cursor.getString(8));
 				return true;
 			case 1:
-				((TextView) view).setText("星级：" + cursor.getString(5));
+				((TextView) view).setText(cursor.getString(5));
 				return true;
 			case 2:
 				int race = cursor.getInt(6);
 				int n_race = getLog(race);
-				((TextView) view).setText("种族:" + card_race[n_race]);
+				((TextView) view).setText(card_race[n_race]);
 				return true;
 			case 3:
 				int attr = cursor.getInt(7);
 				int n_attr = getLog(attr);
-				((TextView) view).setText("属性：" + card_attr[n_attr]);
+				((TextView) view).setText(card_attr[n_attr]);
 				return true;
 			case 4:
-				((TextView) view).setText("攻击力:" + cursor.getString(3));
+				((TextView) view).setText(cursor.getString(3));
 				return true;
 			case 5:
-				((TextView) view).setText("防御力:" + cursor.getString(4));
+				((TextView) view).setText(cursor.getString(4));
 				return true;
 
 			}
