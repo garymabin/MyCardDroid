@@ -1,7 +1,6 @@
 package org.mycard.fragment;
 
 import org.mycard.MainActivity;
-import org.mycard.R;
 import org.mycard.common.Constants;
 
 import android.app.Activity;
@@ -11,7 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.TextView;
 

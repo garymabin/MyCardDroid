@@ -1,14 +1,3 @@
-/*
- *****************************************************************************
- * Copyright (C) 2005-2013 UCWEB Corporation. All Rights Reserved
-　　　* File        : ImageDownloader.java
- * Description : 
- * Creation    : 2014年4月10日
- * Author      : mabin@ucweb.com
- * History     : 
- *               Creation, 2014年4月10日, mabin, Create the file
- ******************************************************************************
-**/
 package org.mycard.core.images;
 
 import java.io.File;

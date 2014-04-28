@@ -19,7 +19,6 @@ import org.mycard.fragment.DuelFragment;
 import org.mycard.model.Model;
 import org.mycard.model.data.ResourcesConstants;
 import org.mycard.model.data.ServerInfo;
-import org.mycard.widget.CustomActionBarView;
 
 import android.content.Intent;
 import android.content.res.Configuration;

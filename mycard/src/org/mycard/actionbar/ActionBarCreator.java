@@ -6,11 +6,9 @@ import org.mycard.R;
 
 import android.content.Context;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v4.view.MenuItemCompat.OnActionExpandListener;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 
 public class ActionBarCreator {
 
@@ -28,8 +26,6 @@ public class ActionBarCreator {
 
 	private boolean mSettings = true;
 	
-	private WeakReference<View> mFilterView;
-
 	private boolean mPlay = false;
 	
 	private boolean mPersonalCenter = true;

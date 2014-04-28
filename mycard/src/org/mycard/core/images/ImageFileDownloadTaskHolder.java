@@ -5,24 +5,6 @@ import org.mycard.model.data.ImageItem;
 
 import android.text.TextUtils;
 
-
-/**
- * Title: UCNewsReader
- * 
- * Descrption:
- * 
- * Copyright: Copyright (c) 2014
- *
- * Company: ucweb.com
- * 
- * @author wuke@ucweb.com
- * @version 1.0
- *
- * Mofification History:
- * Date			Author		Version		Description
- *-------------------------------------------
- * 2014年4月4日		wuke 		1.0			Create.
- */
 public class ImageFileDownloadTaskHolder {
 	/** 
 	 * 用于唯一标示一个图片下载任务，需要区分缩略图和原图,构造时
