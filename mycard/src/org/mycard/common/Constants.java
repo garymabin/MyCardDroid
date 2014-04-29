@@ -5,6 +5,8 @@ package org.mycard.common;
  *
  */
 public interface Constants {
+	
+	public static final String WORKING_DIRECTORY = "/ygocore/";
 
 	public static final int IO_BUFFER_SIZE = 8192;
 	public static final int TRANSACT_TIMEOUT = 2 * 60 * 1000;
@@ -63,5 +65,14 @@ public interface Constants {
 	
 	public static final int BITMAP_LOAD_TYPE_PRELOAD = 0;
 	public static final int BITMAP_LOAD_TYPE_LOAD = 1;
+	
+	
+	public static final String SETTINGS_ACTION_COMMON = "org.mycard.prefs.PREFS_COMMON";
+	public static final String SETTINGS_ACTION_GAME = "org.mycard.prefs.PREFS_GAME";
+	public static final String SETTINGS_ACTION_ABOUT = "org.mycard.prefs.PREFS_ABOUT";
+	
+	public static final String SETTINGS_FARGMENT_COMMON = "org.mycard.fragment.setting.CommonSettingsFragment";
+	public static final String SETTINGS_FARGMENT_GAME = "org.mycard.fragment.setting.GameSettingsFragment";
+	public static final String SETTINGS_FARGMENT_ABOUT = "org.mycard.fragment.setting.AboutSettingsFragment";
 
 }

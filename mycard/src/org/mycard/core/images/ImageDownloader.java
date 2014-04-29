@@ -16,11 +16,11 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.mycard.StaticApplication;
 import org.mycard.common.Constants;
-import org.mycard.common.Settings;
 import org.mycard.core.Controller;
 import org.mycard.model.data.ImageItem;
 import org.mycard.model.data.ImageItemInfoHelper;
 import org.mycard.model.data.LocalCacheManager;
+import org.mycard.setting.Settings;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -167,8 +167,7 @@ public class ImageDownloader {
 		request.setHeader("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
 		request.setHeader("Accept-Encoding", "gzip,deflate,sdch");
 		request.setHeader("Accept-Language","zh-CN,zh;q=0.8,en;q=0.6,zh-TW;q=0.4");
-		//FIXME 发现神马图片服务器加上这个header参数会导致403，暂时注掉
-//		request.setHeader("Content-Type", "application/x-www-form-urlencoded");
+		request.setHeader("Content-Type", "application/x-www-form-urlencoded");
 	}
 	
 	private boolean isGZipContent(HttpEntity entity) {

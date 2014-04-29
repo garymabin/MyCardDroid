@@ -19,6 +19,7 @@ import org.mycard.fragment.DuelFragment;
 import org.mycard.model.Model;
 import org.mycard.model.data.ResourcesConstants;
 import org.mycard.model.data.ServerInfo;
+import org.mycard.setting.SettingsActivity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -125,6 +126,18 @@ public class MainActivity extends ActionBarActivity implements
 		mHandler = new EventHandler(this);
 		mController.asyncUpdateServer(mHandler
 				.obtainMessage(Constants.MSG_ID_UPDATE_SERVER));
+	}
+	
+	@Override
+	protected void onResume() {
+		mController.registerForActionSettings(mHandler);
+		super.onResume();
+	}
+	
+	@Override
+	protected void onPause() {
+		mController.unregisterForActionSettings(mHandler);
+		super.onPause();
 	}
 
 	private void initView() {
@@ -293,7 +306,10 @@ public class MainActivity extends ActionBarActivity implements
 		case Constants.MSG_ID_UPDATE_SERVER:
 			mServerList = Model.peekInstance().getServerList();
 			break;
-
+		case Constants.ACTION_BAR_EVENT_TYPE_SETTINGS:
+			Log.d(TAG, "receive settings click action");
+			Intent intent = new Intent(this, SettingsActivity.class);
+			startActivity(intent);
 		default:
 			break;
 		}

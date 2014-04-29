@@ -54,7 +54,7 @@ public final class ImageItemInfoHelper {
 			return null;
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append(StaticApplication.peekInstance().getCacheRootPath()).append(File.separator);
+		sb.append(StaticApplication.peekInstance().getDefaultImageCacheRootPath()).append(File.separator);
 		sb.append(item.id);
 		return sb.toString();
 	}

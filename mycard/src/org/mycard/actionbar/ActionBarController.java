@@ -121,5 +121,20 @@ public class ActionBarController {
 		}
 	}
 	
+	public void registerForActionSettings(Handler h) {
+		WeakReference<Handler> ref = new WeakReference<Handler>(h);
+		mActionSettingsList.add(ref);
+	}
+	
+	public void unregisterForActionSettings(Handler h) {
+		for (WeakReference<Handler> item : mActionSettingsList) {
+			if (h == item.get()) {
+				mActionSettingsList.remove(item);
+				item = null;
+				break;
+			}
+		}
+	}
+	
 
 }

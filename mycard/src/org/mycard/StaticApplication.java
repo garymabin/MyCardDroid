@@ -1,13 +1,13 @@
 package org.mycard;
 
-import java.io.File;
-
 import org.apache.http.client.HttpClient;
+import org.mycard.common.Constants;
 import org.mycard.core.Controller;
 import org.mycard.model.Model;
 import org.mycard.net.http.ThreadSafeHttpClientFactory;
 
 import android.app.Application;
+import android.os.Environment;
 
 public class StaticApplication extends Application {
 	
@@ -33,8 +33,8 @@ public class StaticApplication extends Application {
 		return INSTANCE;
 	}
 
-	public File getCacheRootPath() {
-		return null;
+	public String getDefaultImageCacheRootPath() {
+		return Environment.getExternalStorageDirectory().getAbsolutePath() + Constants.WORKING_DIRECTORY;
 	}
 
 }

@@ -109,6 +109,14 @@ public class Controller {
 	public void unregisterForActionFilter(Handler h) {
 		mActionBarController.unregisterForActionFilter(h);
 	}
+	
+	public void registerForActionSettings(Handler h) {
+		mActionBarController.registerForActionSettings(h);
+	}
+	
+	public void unregisterForActionSettings(Handler h) {
+		mActionBarController.unregisterForActionSettings(h);
+	}
 
 	/**
 	 * 

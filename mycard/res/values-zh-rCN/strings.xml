@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="mycard">萌卡</string>
     <string name="room_list">房间列表</string>
@@ -6,7 +6,6 @@
     <string name="action_search">搜索</string>
     <string name="action_play">开始游戏</string>
     <string name="action_new_room">创建房间</string>
-    
     <string name="quick_join">快速加入</string>
     <string name="create_room">创建房间</string>
     <string name="password">房间密码</string>
@@ -21,38 +20,30 @@
     <string name="duel_info">决斗信息</string>
     <string name="duel_options">决斗选项</string>
     <string name="quick_join_hint">房间名$密码</string>
-    
     <string name="input_invalid_msg">用户名与密码长度之和不能超过<xliff>%1$d</xliff>个字符</string>
-    
     <string name="item_name_text">名称：</string>
     <string name="item_level_text">星级：</string>
     <string name="item_race_text">种族：</string>
     <string name="item_attr_text">属性：</string>
     <string name="item_atk_text">攻击力：</string>
     <string name="item_def_text">防御力：</string>
-    
     <string name="button_create">创建</string>
     <string name="button_join">加入</string>
     <string name="button_cancel">取消</string>
-    
     <string name="loading">正在加载中</string>
     <string name="ongoing">进行中</string>
     <string name="pending">等待中</string>
-    
+    <string name="quick_join_error">无法找到房间</string>
     <string name="login">登录</string>
-    
     <string name="sign_up">注册</string>
-    
     <string name="login_sign_up">登录/注册</string>
     <string name="personal_center">个人中心</string>
-    
     <string name="action_filter">筛选</string>
     <string name="action_filter_none">（无）</string>
     <string name="action_filter_string_type">种类</string>
     <string name="action_filter_string_race">种族</string>
     <string name="action_filter_string_property">属性</string>
     <string name="action_filter_string_more">更多</string>
-    
     <string name="action_filter_type_spell">魔法</string>
     <string name="action_filter_type_spell_normal">通常</string>
     <string name="action_filter_type_spell_quick_play">速攻</string>
@@ -93,6 +84,7 @@
     <string name="action_filter_race_devil">恶魔</string>
     <string name="action_filter_race_ud">不死</string>
     <string name="action_filter_race_machanical">机械</string>
+    <string name="action_filter_race_land">地</string>
     <string name="action_filter_race_water">水</string>
     <string name="action_filter_race_hot">炎</string>
     <string name="action_filter_race_rock">岩石</string>
@@ -112,8 +104,11 @@
     <string name="action_filter_race_bramna">创造神</string>
     
     
-    
-	<string name="quick_join_error">无法找到房间</string>
-    
-    
+    <string name="settings_common">常规设置</string>
+    <string name="settings_game">游戏设置</string>
+    <string name="settings_about">关于</string>
+    <string name="settings_common_sub_common">常规</string>
+    <string name="settings_common_card_image_network_pref">2/3G网络下不下载卡图</string>
+    <string name="settings_game_card_quality">卡图质量</string>
+    <string name="settings_game_card_path">卡图保存路径</string>
 </resources>

@@ -1,6 +1,5 @@
 package org.mycard.actionbar;
 
-import java.lang.ref.WeakReference;
 
 import org.mycard.R;
 
@@ -8,7 +7,6 @@ import android.content.Context;
 import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 public class ActionBarCreator {
 

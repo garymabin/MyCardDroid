@@ -8,6 +8,11 @@
         <item >论坛</item>
     </string-array>
     
+    <string-array name="card_quality">
+        <item>速度优先</item>
+        <item>质量优先</item>
+    </string-array>
+    
     <string-array name="duel_mode">
         <item >单局模式</item>
         <item >比赛模式</item>

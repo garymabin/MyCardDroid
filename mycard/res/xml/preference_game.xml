@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ListPreference
+        android:entryValues="@array/opengl_version_value"
+        android:entries="@array/opengl_version"
+        android:persistent="true"
+        android:title="@string/settings_game_opengl"/>
+    <ListPreference
+        android:entries="@array/card_quality"
+        android:entryValues="@array/card_quality_value"
+        android:persistent="true"
+        android:title="@string/settings_game_card_quality" />
+
+</PreferenceScreen>
