@@ -9,12 +9,12 @@ import org.mycard.model.data.ImageItem;
 import org.mycard.model.data.ImageItemInfoHelper;
 import org.mycard.utils.BitmapLruCache;
 import org.mycard.utils.BitmapUtils;
+import org.mycard.utils.LruCache;
 
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
-import android.support.v4.util.LruCache;
 import android.util.Log;
 
 public class ImageLoadManager implements Callback {
@@ -48,7 +48,6 @@ public class ImageLoadManager implements Callback {
 					final String path = (holder.getImageType() == Constants.IMAGE_TYPE_ORIGINAL) ? ImageItemInfoHelper
 							.getImagePath(item) : ImageItemInfoHelper.getThumnailPath(item);
 									
-				   //-------------------modified by ChenWei 2014-04-21  begin 加载图片宽高根据屏幕动态制定
 					int[] resolution = null;
 					if (currentItem != null) {
 						resolution = new int[] { currentItem.getRespectWidth(),currentItem.getRespectHeight() };
@@ -59,8 +58,6 @@ public class ImageLoadManager implements Callback {
 
 					Bitmap bmp = BitmapUtils.createNewBitmapAndCompressByFile(path, resolution, false);
 					
-			      //-----------------modified by ChenWei 2014-04-21  end 加载图片宽高根据屏幕动态制定
-
 					if (bmp != null) {
 						holder.setBitmap(bmp);
 						if (holder.getImageType() == Constants.IMAGE_TYPE_ORIGINAL) {
@@ -86,9 +83,11 @@ public class ImageLoadManager implements Callback {
 	final static int MAX_ORIGINAL_BMP_CACHE_SIZE = 20;
 	final static int MAX_LOAD_QUEUE_SIZE = 30;
 	final static int MAX_PRELOAD_QUEUE_SIZE = 20;
+	
+	final static int MAX_ORIGINAL_BMP_CACHE_BYTES_SIZE = 8 * 1024 * 1024;
 
-	LruCache<String, Bitmap> mThumnailCache = new BitmapLruCache<String>(MAX_THUMNAIL_BMP_CACHE_SIZE);
-	LruCache<String, Bitmap> mOriginalCache = new BitmapLruCache<String>(MAX_ORIGINAL_BMP_CACHE_SIZE);
+	LruCache<String, Bitmap> mThumnailCache = new BitmapLruCache<String>(MAX_THUMNAIL_BMP_CACHE_SIZE, 0);
+	LruCache<String, Bitmap> mOriginalCache = new BitmapLruCache<String>(MAX_ORIGINAL_BMP_CACHE_SIZE, MAX_ORIGINAL_BMP_CACHE_BYTES_SIZE);
 	
 	LinkedList<BitmapHolder> mLoadQueue = new LinkedList<BitmapHolder>();
 	LinkedList<BitmapHolder> mPreLoadQueue = new LinkedList<BitmapHolder>();
