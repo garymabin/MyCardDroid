@@ -78,13 +78,38 @@
     <string name="action_filter_type_monster_flip">反转</string>
     <string name="action_filter_type_monster_toon">怪物</string>
     
-    <string name="action_filter_race_land">地</string>
+    <string name="action_filter_property_land">地</string>
+    <string name="action_filter_property_water">水</string>
+    <string name="action_filter_property_hot">炎</string>
+    <string name="action_filter_property_wind">风</string>
+    <string name="action_filter_property_light">光</string>
+    <string name="action_filter_property_dark">暗</string>
+    <string name="action_filter_property_god">神</string>
+    
+    
+    <string name="action_filter_race_warrior">战士</string>
+    <string name="action_filter_race_magic">魔法使</string>
+    <string name="action_filter_race_angel">天使</string>
+    <string name="action_filter_race_devil">恶魔</string>
+    <string name="action_filter_race_ud">不死</string>
+    <string name="action_filter_race_machanical">机械</string>
     <string name="action_filter_race_water">水</string>
     <string name="action_filter_race_hot">炎</string>
-    <string name="action_filter_race_wind">风</string>
-    <string name="action_filter_race_light">光</string>
-    <string name="action_filter_race_dark">暗</string>
-    <string name="action_filter_race_god">神</string>
+    <string name="action_filter_race_rock">岩石</string>
+    <string name="action_filter_race_birds">鸟兽</string>
+    <string name="action_filter_race_plant">植物</string>
+    <string name="action_filter_race_insect">昆虫</string>
+    <string name="action_filter_race_thunder">雷</string>
+    <string name="action_filter_race_dragon">龙</string>
+    <string name="action_filter_race_orc">兽</string>
+    <string name="action_filter_race_orc_warrior">兽战士</string>
+    <string name="action_filter_race_dinosaur">恐龙</string>
+    <string name="action_filter_race_fish">鱼</string>
+    <string name="action_filter_race_sea_otter">海龙</string>
+    <string name="action_filter_race_reptile">爬虫</string>
+    <string name="action_filter_race_telekenesis">念动力</string>
+    <string name="action_filter_race_devine_beast">幻神兽</string>
+    <string name="action_filter_race_bramna">创造神</string>
     
     
     

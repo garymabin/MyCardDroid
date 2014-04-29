@@ -73,7 +73,7 @@ public class CardWikiFragment extends BaseFragment implements
 			mActionMode.setCustomView(mActionBarView);
 			mActionBarView.addNewPopupImage(R.menu.filter_type, R.string.action_filter_string_type, R.string.action_filter_none, this, false);
 			mActionBarView.addNewPopupImage(R.menu.filter_race, R.string.action_filter_string_race, R.string.action_filter_none, this, false);
-			mActionBarView.addNewPopupImage(R.menu.login, R.string.action_filter_string_property, R.string.action_filter_none, this, false);
+			mActionBarView.addNewPopupImage(R.menu.filter_property, R.string.action_filter_string_property, R.string.action_filter_none, this, false);
 			break;
 
 		default:
