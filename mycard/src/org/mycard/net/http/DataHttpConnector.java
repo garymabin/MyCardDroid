@@ -87,6 +87,13 @@ public class DataHttpConnector extends BaseHttpConnector implements
 		} finally {
 			wrapper.setResult(status);
 			buffer = null;
+			if (data != null) {
+				try {
+					data.close();
+				} catch (IOException e) {
+					//just in case
+				}
+			}
 			out.delete(0, out.length());
 			out = null;
 			System.gc();
