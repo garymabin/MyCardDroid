@@ -7,12 +7,31 @@ package org.mycard.model.data;
 public class ImageItem {
 
 	public String id;
+	
+	public int width;
+	
+	public int height;
 
-	/**
-	 * 
-	 */
-	public ImageItem() {
-		// TODO Auto-generated constructor stub
+	public ImageItem(String id, int height, int width) {
+		this.id = id;
+		this.width = width;
+		this.height = height;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o == null || !(o instanceof ImageItem))
+			return false;
+		
+		ImageItem target = (ImageItem) o;
+		if (this.id != null && this.id.equals(target.id))
+			return true;
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return id.hashCode();
 	}
 
 }

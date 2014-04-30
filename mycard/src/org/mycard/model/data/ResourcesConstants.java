@@ -10,6 +10,8 @@ public interface ResourcesConstants {
 	
 	public static final String IMAGE_URL = "http://test2.my-card.in/images/:";
 	
+	public static final String THUMBNAIL_URL = "http://test2.my-card.in/images/thumbnail/:";
+	
 	public static final String SERVER_LIST_URL = "http://my-card.in/servers.json";
 	public static final String ROOM_LIST_URL = "ws://my-card.in/rooms.json";
 	

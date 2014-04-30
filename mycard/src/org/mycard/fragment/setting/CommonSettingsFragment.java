@@ -39,5 +39,4 @@ public class CommonSettingsFragment extends PreferenceFragment implements OnPref
 		}
 		return false;
 	}
-	
 }

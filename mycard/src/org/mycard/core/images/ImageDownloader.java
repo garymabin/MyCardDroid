@@ -19,7 +19,6 @@ import org.mycard.common.Constants;
 import org.mycard.core.Controller;
 import org.mycard.model.data.ImageItem;
 import org.mycard.model.data.ImageItemInfoHelper;
-import org.mycard.model.data.LocalCacheManager;
 import org.mycard.setting.Settings;
 
 import android.text.TextUtils;
@@ -30,14 +29,12 @@ public class ImageDownloader {
 	
 	private HttpClient mClient;
 	private static final String GZIP = "gzip";
-	private LocalCacheManager mCacheManager;
 
 	/**
 	 * @param cacheManager
 	 */
-	public ImageDownloader(LocalCacheManager cacheManager) {
+	public ImageDownloader() {
 		mClient = StaticApplication.peekInstance().getHttpClient();
-		mCacheManager = cacheManager;
 	}
 
 	/**
@@ -147,10 +144,6 @@ public class ImageDownloader {
 		if (tmpFile != null) {
 			if (resultCode == ImageFileDownloadTaskHolder.RET_DOWNLOAD_SUCCEED) {
 				tmpFile.renameTo(destFile);
-				if (holder.mImageType == Constants.IMAGE_TYPE_ORIGINAL) {
-					mCacheManager.updateImageLastModification(holder.getImageItem().id);
-				}
-				mCacheManager.increamentLocalCacheSize(destFile.length());
 			} else {
 				tmpFile.delete();
 			}

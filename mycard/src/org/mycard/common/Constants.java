@@ -7,6 +7,9 @@ package org.mycard.common;
 public interface Constants {
 	
 	public static final String WORKING_DIRECTORY = "/ygocore/";
+	
+	public static final String CARD_IMAGE_DIRECTORY = "/pics/";
+	public static final String THUMBNAIL_IMAGE_DIRECTORY = "/pics/thumbnail/";
 
 	public static final int IO_BUFFER_SIZE = 8192;
 	public static final int TRANSACT_TIMEOUT = 2 * 60 * 1000;

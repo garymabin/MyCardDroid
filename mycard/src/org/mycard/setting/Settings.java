@@ -10,7 +10,7 @@ public final class Settings {
 	public static final String KEY_PREF_COMMON_IMAGE_DOWNLOAD_VIA_GPRS = "pref_key_common_card_image_download";
 	public static final String KEY_PREF_COMMON_CARD_PATH = "pref_key_common_card_path";
 
-	public static boolean downloadImageSwitcherState;
+	public static boolean downloadImageSwitcherState = true;
 
 	/**
 	 * 

@@ -4,6 +4,8 @@ import org.mycard.StaticApplication;
 import org.mycard.actionbar.ActionBarController;
 import org.mycard.common.Constants;
 import org.mycard.core.images.BitmapHolder;
+import org.mycard.model.IDataObserver;
+import org.mycard.model.Model;
 import org.mycard.net.NetworkStatusManager;
 
 import android.os.Bundle;
@@ -23,7 +25,10 @@ public class Controller {
 	
 	private NetworkStatusManager mNetworkManager;
 	
+	private Model mModel;
+	
 	private Controller(StaticApplication app) {
+		mModel = Model.peekInstance();
 		mUpdateController = new UpdateController(app);
 		mActionBarController = new ActionBarController();
 		mLoginStatusTracker = new UserStatusTracker(app);
@@ -152,6 +157,10 @@ public class Controller {
 		msg.arg2 = arg2;
 		msg.obj = obj;
 		return msg;
+	}
+
+	public void requestDataOperation(IDataObserver observer, Message msg) {
+		mModel.requestDataOperation(observer, msg);
 	}
 
 

@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import org.mycard.common.Constants;
-import org.mycard.model.data.ExtensionImageItem;
 import org.mycard.model.data.ImageItem;
 import org.mycard.model.data.ImageItemInfoHelper;
 import org.mycard.utils.BitmapLruCache;
@@ -41,20 +40,10 @@ public class ImageLoadManager implements Callback {
 				if (holder != null) {
 					// TODO load bitmap
 					final ImageItem item = holder.getImageItem();
-					ExtensionImageItem currentItem = null;
-					if (item != null && item instanceof ExtensionImageItem) {
-						currentItem = (ExtensionImageItem) item;
-					}
 					final String path = (holder.getImageType() == Constants.IMAGE_TYPE_ORIGINAL) ? ImageItemInfoHelper
 							.getImagePath(item) : ImageItemInfoHelper.getThumnailPath(item);
 									
-					int[] resolution = null;
-					if (currentItem != null) {
-						resolution = new int[] { currentItem.getRespectWidth(),currentItem.getRespectHeight() };
-					} else {
-						//FIXME: should not use fix width
-						resolution = new int[] { 480, -1 };
-					}
+					int[] resolution = new int[] { item.width, item.height };
 
 					Bitmap bmp = BitmapUtils.createNewBitmapAndCompressByFile(path, resolution, false);
 					
@@ -62,7 +51,7 @@ public class ImageLoadManager implements Callback {
 						holder.setBitmap(bmp);
 						if (holder.getImageType() == Constants.IMAGE_TYPE_ORIGINAL) {
 							mOriginalCache.put(item.id, bmp);
-						} else { // banner也放在thumnail cache中
+						} else {
 							Log.w("test","item id = " + item.id);
 							mThumnailCache.put(item.id, bmp);
 						}

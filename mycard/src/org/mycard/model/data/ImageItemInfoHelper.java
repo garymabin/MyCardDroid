@@ -3,6 +3,7 @@ package org.mycard.model.data;
 import java.io.File;
 
 import org.mycard.StaticApplication;
+import org.mycard.common.Constants;
 
 import android.text.TextUtils;
 
@@ -30,11 +31,26 @@ public final class ImageItemInfoHelper {
 	}
 	
 	public static String getThumnailPath(ImageItem item) {
-		return null;
+		if (item == null)
+			return null;
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(StaticApplication.peekInstance().getCardImagePath()).append(Constants.THUMBNAIL_IMAGE_DIRECTORY);
+		sb.append(item.id).append(IMAGE_SUFFIX);;
+		return sb.toString();
 	}
 	
 	public static String getThumnailUrl(ImageItem item) {
-		return null;
+		String url = item.id;
+		if (TextUtils.isEmpty(url))
+			return null;
+		
+		if (url.startsWith(HTTP_PREFIX) || url.startsWith(HTTPS_PREFIX))
+			return url;
+		
+		final String baseUrl = ResourcesConstants.THUMBNAIL_URL;
+		url = TextUtils.isEmpty(baseUrl) ? null : baseUrl + url + IMAGE_SUFFIX;
+		return url;
 	}
 	
 	public static boolean isImageExist(ImageItem item) {
@@ -54,8 +70,8 @@ public final class ImageItemInfoHelper {
 			return null;
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append(StaticApplication.peekInstance().getDefaultImageCacheRootPath()).append(File.separator);
-		sb.append(item.id);
+		sb.append(StaticApplication.peekInstance().getCardImagePath()).append(Constants.CARD_IMAGE_DIRECTORY);
+		sb.append(item.id).append(IMAGE_SUFFIX);
 		return sb.toString();
 	}
 	

@@ -5,9 +5,13 @@ import java.util.List;
 
 import org.mycard.StaticApplication;
 import org.mycard.model.data.DataStore;
+import org.mycard.model.data.ImageItem;
 import org.mycard.model.data.RoomInfo;
 import org.mycard.model.data.ServerInfo;
 import org.mycard.model.data.wrapper.BaseDataWrapper;
+
+import android.graphics.Bitmap;
+import android.os.Message;
 
 
 public class Model {
@@ -23,6 +27,7 @@ public class Model {
 	
 	private Model(StaticApplication app) {
 		mDataStore = new DataStore();
+		mImgModelHelper = new ImageModelHelper();
 	}
 
 	public static Model peekInstance() {
@@ -66,5 +71,14 @@ public class Model {
 			mImgModelHelper.onDataObserverUnregistered(o);
 		}
 	}
+	
+	public Bitmap getBitmap(ImageItem item, int type) {
+		return mImgModelHelper.getBitmap(item, type);
+	}
+
+	public void requestDataOperation(IDataObserver observer, Message msg) {
+		mImgModelHelper.requestDataOperation(observer, msg);
+	}
+	
 
 }

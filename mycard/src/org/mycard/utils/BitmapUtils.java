@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -43,6 +44,26 @@ public class BitmapUtils {
         Drawable drawable = (Drawable)bitmapDrawable; 
         return drawable; 
     }
+    
+    public static Bitmap createNewBitmapWithResource(Resources res, int resID,
+			int wh[], boolean forceResize) {
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inJustDecodeBounds = true; // 为true里只读图片的信息，如果长宽，返回的bitmap为null
+		options.inDither = false;
+
+		BitmapFactory.decodeResource(res, resID, options);
+		int requestWidth = wh[0];
+		int bmpWidth = options.outWidth;
+		float inSampleSize =  (float)bmpWidth / (float)requestWidth;
+		if (inSampleSize > 1.0 && inSampleSize < 2.0) {
+			options.inSampleSize = 2;// 设置缩放比例
+		} else if (inSampleSize >= 2.0) {
+			options.inSampleSize = (int)inSampleSize;
+		}
+		options.inJustDecodeBounds = false;
+		Bitmap bitmap = BitmapFactory.decodeResource(res, resID, options);
+		return bitmap;
+	}
 
 	public static Bitmap createNewBitmapAndCompressByFile(String filePath,
 			int wh[], boolean forceResize) {

@@ -13,7 +13,6 @@ import org.mycard.core.images.ImageFileDownloadedCallback;
 import org.mycard.core.images.ImageLoadManager;
 import org.mycard.core.images.ImageLoadedCallback;
 import org.mycard.model.data.ImageItem;
-import org.mycard.model.data.LocalCacheManager;
 
 import android.graphics.Bitmap;
 import android.os.Message;
@@ -67,9 +66,9 @@ public class ImageModelHelper {
 	};
 	
 	
-	public ImageModelHelper(LocalCacheManager localCacheManager) {
+	public ImageModelHelper() {
 		mLoadManager.setImageLoadedCallback(mLoadCallback);
-		mDownloadManager = new ImageFileDownloadManager(localCacheManager);
+		mDownloadManager = new ImageFileDownloadManager();
 		mDownloadManager.setDownloadCallback(mDownloadCallback);
 	}
 

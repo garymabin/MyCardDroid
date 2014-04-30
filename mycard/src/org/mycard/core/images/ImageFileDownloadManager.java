@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import org.mycard.model.data.ImageItem;
-import org.mycard.model.data.LocalCacheManager;
 
 import android.os.Handler;
 import android.os.Handler.Callback;
@@ -73,7 +72,7 @@ public class ImageFileDownloadManager implements Callback {
 	
 	final static int MAX_HOLDER_CACHE_SIZE = 100;
 	
-	public ImageFileDownloadManager(LocalCacheManager localCacheManager) {
+	public ImageFileDownloadManager() {
 		mDownloadTasks = new LinkedList<ImageFileDownloadTaskHolder>();
 		mPreDownloadTasks = new LinkedList<ImageFileDownloadTaskHolder>();
 		mDownloadedTasks = new LinkedList<ImageFileDownloadTaskHolder>();
@@ -81,7 +80,7 @@ public class ImageFileDownloadManager implements Callback {
 		mHolderCache = new LruCache<String, ImageFileDownloadTaskHolder>(MAX_HOLDER_CACHE_SIZE);
 		
 		mHandler = new Handler(this);
-		mImageDownloader = new ImageDownloader(localCacheManager);
+		mImageDownloader = new ImageDownloader();
 	}
 	
 	public void setDownloadCallback(ImageFileDownloadedCallback callback) {
