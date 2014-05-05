@@ -10,6 +10,7 @@ import org.mycard.common.Constants;
 import org.mycard.model.data.ResourcesConstants;
 import org.mycard.model.data.wrapper.BaseDataWrapper;
 import org.mycard.model.data.wrapper.IBaseWrapper;
+import org.mycard.utils.HttpUtils;
 
 import android.util.Log;
 

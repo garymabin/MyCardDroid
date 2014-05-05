@@ -1,4 +1,4 @@
-package org.mycard.net.http;
+package org.mycard.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -47,7 +47,7 @@ public class HttpUtils {
 			if (resp == null || (status = resp.getStatusLine()) == null)
 				return null;
 			int statusCode = status.getStatusCode();
-			if (statusCode < 200 && statusCode >= 300) {
+			if (statusCode < 200 || statusCode >= 300) {
 				Log.d("HttpUtils", "status code = " + statusCode);
 				return null;
 			}
@@ -84,7 +84,7 @@ public class HttpUtils {
 			if (resp == null || (status = resp.getStatusLine()) == null)
 				return false;
 			int statusCode = status.getStatusCode();
-			if (statusCode < 200 && statusCode >= 300)
+			if (statusCode < 200 || statusCode >= 300)
 				return false;
 
 			entity = resp.getEntity();
@@ -142,7 +142,7 @@ public class HttpUtils {
 			if (resp == null || (status = resp.getStatusLine()) == null)
 				return false;
 			int statusCode = status.getStatusCode();
-			if (statusCode < 200 && statusCode >= 300)
+			if (statusCode < 200 || statusCode >= 300)
 				return false;
 
 			entity = resp.getEntity();
@@ -234,7 +234,7 @@ public class HttpUtils {
 			if (resp == null || (status = resp.getStatusLine()) == null)
 				return false;
 			int statusCode = status.getStatusCode();
-			if (statusCode < 200 && statusCode >= 300)
+			if (statusCode < 200 || statusCode >= 300)
 				return false;
 			entity = resp.getEntity();
 			instream = entity.getContent();

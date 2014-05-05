@@ -4,10 +4,6 @@
     android:layout_height="wrap_content"
     android:scrollingCache="false"
     android:background="@color/holo_gray_light"
-    android:paddingTop="5dip"
-    android:paddingBottom="5dip"
-    android:paddingLeft="10dip"
-    android:paddingRight="10dip"
     android:cacheColorHint="@android:color/transparent"
     android:divider="@color/dark_purple"
     android:dividerHeight="0.67dip">

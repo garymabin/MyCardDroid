@@ -5,6 +5,7 @@ import java.io.InputStream;
 import org.apache.http.client.HttpClient;
 import org.mycard.model.data.wrapper.BaseDataWrapper;
 import org.mycard.net.IBaseConnector;
+import org.mycard.utils.HttpUtils;
 
 import android.util.Log;
 
