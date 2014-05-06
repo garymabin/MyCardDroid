@@ -17,6 +17,10 @@ public interface ResourcesConstants {
 	
 	public static final String LOGIN_URL = "https://my-card.in/users/me.json?";
 	
+	public static final String DEFAULT_MC_SERVER_ADDR = "122.0.65.69";
+	
+	public static final int DEFAULT_MC_SERVER_PORT = 7911;
+	
 	public static final String JSON_KEY_ID = "id";
 	public static final String JSON_KEY_NAME = "name";
 	

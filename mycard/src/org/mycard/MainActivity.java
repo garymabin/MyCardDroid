@@ -106,14 +106,12 @@ public class MainActivity extends ActionBarActivity implements
 
 	private EventHandler mHandler;
 
-	private List<ServerInfo> mServerList;
-
 	private LinearLayout mLeftDrawer;
 
 	private ViewGroup mUserPanel;
 
 	private TextView mUserStatusDes;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -297,14 +295,13 @@ public class MainActivity extends ActionBarActivity implements
 	}
 
 	public ServerInfo getServer() {
-		return mServerList == null ? null : mServerList.get(0);
+		return Model.peekInstance().getServerList().get(0);
 	}
 
 	@Override
 	public boolean handleMessage(Message msg) {
 		switch (msg.what) {
 		case Constants.MSG_ID_UPDATE_SERVER:
-			mServerList = Model.peekInstance().getServerList();
 			break;
 		case Constants.ACTION_BAR_EVENT_TYPE_SETTINGS:
 			Log.d(TAG, "receive settings click action");

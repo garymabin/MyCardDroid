@@ -5,6 +5,6 @@
     android:scrollingCache="false"
     android:background="@color/holo_gray_light"
     android:cacheColorHint="@android:color/transparent"
-    android:divider="@color/dark_purple"
-    android:dividerHeight="0.67dip">
+    android:listSelector="@drawable/list_selector"
+    android:divider="@android:color/transparent">
 </ListView>

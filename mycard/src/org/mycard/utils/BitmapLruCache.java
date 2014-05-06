@@ -15,19 +15,6 @@ public class BitmapLruCache<K> extends LruCache<K, Bitmap> {
 	}
 
 	@Override
-	protected synchronized void entryRemoved(boolean evicted, K key, Bitmap oldValue,
-			Bitmap newValue) {
-		if (oldValue != null) {
-			long bytes = ((long) oldValue.getRowBytes()) * oldValue.getHeight();
-			mByteSize -= bytes;
-			
-			if (!oldValue.isRecycled())
-				oldValue.recycle();
-			oldValue = null;
-		}
-	}
-
-	@Override
 	public Bitmap put(K key, Bitmap value) {
         if (key == null || value == null) {
             throw new NullPointerException("key == null || value == null");

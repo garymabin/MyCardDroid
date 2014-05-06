@@ -45,6 +45,10 @@ public class DataStore {
 		for (ServerInfo info : mServers) {
 			servers.add(info.clone());
 		}
+		//try to set default server addr
+		if (servers.size() == 0) {
+			servers.add(new ServerInfo(ResourcesConstants.DEFAULT_MC_SERVER_ADDR, ResourcesConstants.DEFAULT_MC_SERVER_PORT));
+		}
 		return servers;
 	}
 	

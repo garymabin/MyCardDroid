@@ -1,5 +1,6 @@
 package org.mycard.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class Model {
 	
 	private DataStore mDataStore;
 	
+	private List<ServerInfo> mServerList;
 	
 	private ImageModelHelper mImgModelHelper;
 	
@@ -28,6 +30,7 @@ public class Model {
 	private Model(StaticApplication app) {
 		mDataStore = new DataStore();
 		mImgModelHelper = new ImageModelHelper();
+		mServerList = new ArrayList<ServerInfo>();
 	}
 
 	public static Model peekInstance() {

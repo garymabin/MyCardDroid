@@ -5,6 +5,14 @@ import org.json.JSONObject;
 
 public class ServerInfo extends BaseInfo {
 	
+	public ServerInfo() {
+	}
+	
+	public ServerInfo(String ip, int port) {
+		ipAddrString = ip;
+		this.port = port;
+	}
+	
 	public String name;
 	public String ipAddrString;
 	public int port;

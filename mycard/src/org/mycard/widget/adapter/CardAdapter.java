@@ -74,14 +74,14 @@ public class CardAdapter extends CursorAdapter implements IDataObserver{
 	}
 
 	public static final int ID_INDEX = 0;
-	public static final int NAME_INDEX = 1;
-	public static final int OT_INDEX = 2;
-	public static final int TYPE_INDEX = 3;
-	public static final int ATK_INDEX = 4;
-	public static final int DEF_INDEX = 5;
-	public static final int LEVEL_INDEX = 6;
-	public static final int RACE_INDEX = 7;
-	public static final int ATTR_INDEX = 8;
+	public static final int OT_INDEX = 1;
+	public static final int TYPE_INDEX = 2;
+	public static final int ATK_INDEX = 3;
+	public static final int DEF_INDEX = 4;
+	public static final int LEVEL_INDEX = 5;
+	public static final int RACE_INDEX = 6;
+	public static final int ATTR_INDEX = 7;
+	public static final int NAME_INDEX = 8;
 	
 	private boolean initialized;
 	

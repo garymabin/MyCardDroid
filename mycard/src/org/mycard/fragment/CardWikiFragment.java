@@ -33,14 +33,26 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class CardWikiFragment extends BaseFragment implements
-		LoaderCallbacks<Cursor>, ActionMode.Callback, OnMenuItemClickListener, OnItemClickListener, IDataObserver {
+		LoaderCallbacks<Cursor>, ActionMode.Callback, OnMenuItemClickListener, OnItemClickListener {
 
+	public static final String BUNDLE_KEY_PROJECTION = "cardwikifragment.bundle.key.projection";
+	public static final String BUNDLE_KEY_SELECTION = "cardwikifragment.bundle.key.selection";
+	public static final String BUNDLE_KEY_SELECTION_EXTRA = "cardwikifragment.bundle.key.selection.extra";
+	public static final String BUNDLE_KEY_SORT_ORDER = "cardwikifragment.bundle.key.sortoder";
+	public static final String BUNDLE_KEY_INIT_POSITON = "cardwikifragment.bundle.key.init.pos";
+	
 	private static final int QUERY_SOURCE_LOADER_ID = 0;
 	private static final String TAG = "CardWikiFragment";
 	private CursorLoader mCursorLoader;
 
 	private String[] mProjects = YGOCards.COMMON_DATA_PEOJECTION;
 	private String[] mProjects_id = YGOCards.COMMON_DATA_PEOJECTION_ID;
+	
+	private String mSelection;
+	
+	private String[] mSelectionExtra;
+	
+	private String mSortOrder;
 
 	private Uri mContentUri = YGOCards.CONTENT_URI;
 
@@ -99,6 +111,9 @@ public class CardWikiFragment extends BaseFragment implements
 		mActivity.onActionBarChange(
 				Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE,
 				DRAWER_ID_CARD_WIKI, null);
+		mSelection = null;
+		mSelectionExtra = null;
+		mSortOrder = mProjects[5] + " desc";
 	}
 
 	@Override
@@ -124,7 +139,7 @@ public class CardWikiFragment extends BaseFragment implements
 	@Override
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
 		mCursorLoader = new CursorLoader(mContext, mContentUri, mProjects,
-				null, null, mProjects[5] + " desc");
+				mSelection, mSelectionExtra, mSortOrder);
 		return mCursorLoader;
 	}
 
@@ -139,8 +154,7 @@ public class CardWikiFragment extends BaseFragment implements
 
 	@Override
 	public void onLoaderReset(Loader<Cursor> arg0) {
-		// TODO Auto-generated method stub
-
+		mAdapter.swapCursor(null);
 	}
 
 	@Override
@@ -173,12 +187,13 @@ public class CardWikiFragment extends BaseFragment implements
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
+		Bundle bundle = new Bundle();
+		bundle.putStringArray(BUNDLE_KEY_PROJECTION, mProjects_id);
+		bundle.putString(BUNDLE_KEY_SELECTION, mSelection);
+		bundle.putStringArray(BUNDLE_KEY_SELECTION_EXTRA, mSelectionExtra);
+		bundle.putString(BUNDLE_KEY_SORT_ORDER, mSortOrder);
+		bundle.putInt(BUNDLE_KEY_INIT_POSITON, position);
 		mActivity.navigateToChild(null, FRAGMENT_ID_CARD_DETAIL);
-	}
-
-	@Override
-	public void notifyDataUpdate(Message msg) {
-		
 	}
 
 }
