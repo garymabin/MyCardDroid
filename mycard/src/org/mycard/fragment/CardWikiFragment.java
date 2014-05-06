@@ -188,12 +188,12 @@ public class CardWikiFragment extends BaseFragment implements
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		Bundle bundle = new Bundle();
-		bundle.putStringArray(BUNDLE_KEY_PROJECTION, mProjects_id);
+		bundle.putStringArray(BUNDLE_KEY_PROJECTION, mProjects);
 		bundle.putString(BUNDLE_KEY_SELECTION, mSelection);
 		bundle.putStringArray(BUNDLE_KEY_SELECTION_EXTRA, mSelectionExtra);
 		bundle.putString(BUNDLE_KEY_SORT_ORDER, mSortOrder);
 		bundle.putInt(BUNDLE_KEY_INIT_POSITON, position);
-		mActivity.navigateToChild(null, FRAGMENT_ID_CARD_DETAIL);
+		mActivity.navigateToChild(bundle, FRAGMENT_ID_CARD_DETAIL);
 	}
 
 }

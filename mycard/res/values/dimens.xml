@@ -34,6 +34,6 @@
     <dimen name="card_thumbnail_height">64dip</dimen>
     <dimen name="card_thumbnail_width">44dip</dimen>
     
-    <dimen name="card_image_height">254dip</dimen>
+    <dimen name="card_image_height">169dip</dimen>
     <dimen name="card_image_width">177dip</dimen>
 </resources>

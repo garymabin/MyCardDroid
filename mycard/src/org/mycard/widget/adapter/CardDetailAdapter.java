@@ -9,18 +9,13 @@ import android.support.v4.app.FragmentManager;
 
 public class CardDetailAdapter<F extends BaseFragment> extends CursorPagerAdapter<F> implements
 		IDataObserver {
-
+	
 	public CardDetailAdapter(FragmentManager fm,
 			Class<F> fragmentClass, String[] projection,
 			Cursor cursor) {
 		super(fm, fragmentClass, projection, cursor);
 	}
 	
-	@Override
-	public F getItem(int position) {
-		return super.getItem(position);
-	}
-
 	@Override
 	public void notifyDataUpdate(Message msg) {
 	}

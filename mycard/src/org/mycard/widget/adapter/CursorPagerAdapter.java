@@ -8,23 +8,23 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
  
 public class CursorPagerAdapter<F extends Fragment> extends FragmentStatePagerAdapter {
-    private final Class<F> fragmentClass;
-    private final String[] projection;
-    private Cursor cursor;
+    protected final Class<F> fragmentClass;
+    protected final String[] projection;
+    protected Cursor mCursor;
  
     public CursorPagerAdapter(FragmentManager fm, Class<F> fragmentClass, String[] projection, Cursor cursor) {
         super(fm);
         this.fragmentClass = fragmentClass;
         this.projection = projection;
-        this.cursor = cursor;
+        this.mCursor = cursor;
     }
  
     @Override
     public F getItem(int position) {
-        if (cursor == null) // shouldn't happen
+        if (mCursor == null) // shouldn't happen
             return null;
  
-        cursor.moveToPosition(position);
+        mCursor.moveToPosition(position);
         F frag;
         try {
             frag = fragmentClass.newInstance();
@@ -33,7 +33,7 @@ public class CursorPagerAdapter<F extends Fragment> extends FragmentStatePagerAd
         }
         Bundle args = new Bundle();
         for (int i = 0; i < projection.length; ++i) {
-            args.putString(projection[i], cursor.getString(i));
+            args.putString(projection[i], mCursor.getString(i));
         }
         frag.setArguments(args);
         return frag;
@@ -41,21 +41,21 @@ public class CursorPagerAdapter<F extends Fragment> extends FragmentStatePagerAd
  
     @Override
     public int getCount() {
-        if (cursor == null)
+        if (mCursor == null)
             return 0;
         else
-            return cursor.getCount();
+            return mCursor.getCount();
     }
  
     public void swapCursor(Cursor c) {
-        if (cursor == c)
+        if (mCursor == c)
             return;
  
-        this.cursor = c;
+        this.mCursor = c;
         notifyDataSetChanged();
     }
  
     public Cursor getCursor() {
-        return cursor;
+        return mCursor;
     }
 }

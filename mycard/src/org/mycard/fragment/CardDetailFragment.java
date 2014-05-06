@@ -1,10 +1,9 @@
 package org.mycard.fragment;
 
-import java.util.Arrays;
-
 import org.mycard.R;
 import org.mycard.common.Constants;
 import org.mycard.provider.YGOCards;
+import org.mycard.provider.YGOCards.Texts;
 import org.mycard.widget.adapter.CardDetailAdapter;
 
 import android.app.Activity;
@@ -21,40 +20,42 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 
-public class CardDetailFragment extends BaseFragment implements OnTouchListener, LoaderCallbacks<Cursor>{
-	
-	private static final int QUERY_SOURCE_LOADER_ID = 0;
+public class CardDetailFragment extends BaseFragment implements
+		OnTouchListener, LoaderCallbacks<Cursor> {
+
+	private static final int COMMON_DATA_LOADER_ID = 0;
+
 	private ViewPager mViewPager;
 	private CardDetailAdapter<CardDetailPagerFragment> mAdapter;
-	
-	private String[] mProjection;
+
+	private String[] mCommonProjection;
 	private String mSelection;
 	private String[] mSelectionExtra;
 	private String mSortOrder;
-	private CursorLoader mCursorLoader;
+	private CursorLoader mCommonDataLoader;
+	private CursorLoader mTextsDataLoader;
 	private int mInitPos;
-	
+
 	public static CardDetailFragment newInstance(Bundle param) {
 		CardDetailFragment fragment = new CardDetailFragment();
-		
+
 		fragment.setArguments(param);
 		return fragment;
 	}
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle param = getArguments();
-		String[] projection = param.getStringArray(CardWikiFragment.BUNDLE_KEY_PROJECTION);
-		int size = projection.length;
-		mProjection = Arrays.copyOf(projection, projection.length + 1);
-		mProjection[size] = YGOCards.Texts.DESC;
+		mCommonProjection = param
+				.getStringArray(CardWikiFragment.BUNDLE_KEY_PROJECTION);
 		mSelection = param.getString(CardWikiFragment.BUNDLE_KEY_SELECTION);
-		mSelectionExtra = param.getStringArray(CardWikiFragment.BUNDLE_KEY_SELECTION_EXTRA);
+		mSelectionExtra = param
+				.getStringArray(CardWikiFragment.BUNDLE_KEY_SELECTION_EXTRA);
 		mSortOrder = param.getString(CardWikiFragment.BUNDLE_KEY_SORT_ORDER);
 		mInitPos = param.getInt(CardWikiFragment.BUNDLE_KEY_INIT_POSITON);
 	}
-	
+
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -67,22 +68,24 @@ public class CardDetailFragment extends BaseFragment implements OnTouchListener,
 	public boolean handleMessage(Message msg) {
 		return false;
 	}
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.card_detail, null);
 		mViewPager = (ViewPager) view.findViewById(R.id.card_pager);
-		mAdapter = new CardDetailAdapter<CardDetailPagerFragment>(getChildFragmentManager(), CardDetailPagerFragment.class, mProjection, null);
+		mAdapter = new CardDetailAdapter<CardDetailPagerFragment>(
+				getChildFragmentManager(), CardDetailPagerFragment.class,
+				mCommonProjection, null);
 		mViewPager.setAdapter(mAdapter);
 		mViewPager.setCurrentItem(mInitPos);
 		view.setOnTouchListener(this);
 		initCursorLoader();
 		return view;
 	}
-	
+
 	private void initCursorLoader() {
-		getLoaderManager().initLoader(QUERY_SOURCE_LOADER_ID, null, this);
+		getLoaderManager().initLoader(COMMON_DATA_LOADER_ID, null, this);
 	}
 
 	@Override
@@ -92,9 +95,10 @@ public class CardDetailFragment extends BaseFragment implements OnTouchListener,
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
-		mCursorLoader = new CursorLoader(mActivity, YGOCards.CONTENT_URI, mProjection,
-				mSelection, mSelectionExtra, mSortOrder);
-		return mCursorLoader;
+		mCommonDataLoader = new CursorLoader(mActivity, YGOCards.CONTENT_URI,
+				mCommonProjection, mSelection, mSelectionExtra, mSortOrder);
+		return mCommonDataLoader;
+
 	}
 
 	@Override
