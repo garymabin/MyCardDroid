@@ -8,10 +8,11 @@
     <string name="action_new_room">创建房间</string>
     <string name="quick_join">快速加入</string>
     <string name="create_room">创建房间</string>
-    <string name="password">房间密码</string>
+    <string name="room_password">房间密码</string>
     <string name="show_password">显示密码</string>
     <string name="card_limit">卡片允许</string>
     <string name="duel_mode">决斗模式</string>
+    <string name="life_point_hint">Life point</string>
     <string name="room_name">房间名称</string>
     <string name="init_lp">初始LP</string>
     <string name="init_hands">初始手牌数</string>
@@ -38,6 +39,8 @@
     <string name="sign_up">注册</string>
     <string name="login_sign_up">登录/注册</string>
     <string name="personal_center">个人中心</string>
+    <string name="user_name">用户名</string>
+    <string name="password">密码</string>
     <string name="action_filter">筛选</string>
     <string name="action_filter_none">（无）</string>
     <string name="action_filter_string_type">种类</string>

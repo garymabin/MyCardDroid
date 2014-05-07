@@ -29,6 +29,9 @@ public class ActionBarController {
 	public boolean handleAction(MenuItem item) {
 		boolean handled = true;
 		switch (item.getItemId()) {
+		case R.id.action_personal_center:
+			// ????
+			break;
 		case R.id.action_settings:
 			notifyTarget(mActionSettingsList, Constants.ACTION_BAR_EVENT_TYPE_SETTINGS);
 			break;
