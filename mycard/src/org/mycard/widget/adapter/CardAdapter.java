@@ -256,7 +256,6 @@ public class CardAdapter extends CursorAdapter implements IDataObserver{
 		if (item == null)
 			return;
 
-		//同步控制，避免bindView中对ViewHolder对象持有的controller进行了变更而出现异常
 		AbstractImageItemController ctlr = findImageItemControllerByImageItem(item);
 		if (ctlr == null || ctlr.isLoaded(item))
 			return;

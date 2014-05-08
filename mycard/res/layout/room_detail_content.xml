@@ -146,7 +146,7 @@
 
                 <TextView
                     style="@style/room_item_label"
-                    android:text="@string/room_password" />
+                    android:text="@string/password" />
 
                 <EditText
                     android:id="@+id/room_passwd_editbox"

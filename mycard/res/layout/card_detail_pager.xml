@@ -2,117 +2,163 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dip"
-    android:orientation="vertical" >
-    <ImageView
-        android:id="@+id/card_image"
-        android:layout_width="@dimen/card_image_width"
-        android:layout_height="@dimen/card_image_height"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="5dip"
-        android:layout_marginBottom="5dip"
-        android:src="@drawable/unknown" />
-	<LinearLayout 
-	    android:id="@+id/card_info_panel"
-	    android:layout_alignParentTop="true"
-	    android:layout_toRightOf="@id/card_image"
-	    android:layout_height="@dimen/card_image_height"
-	    android:orientation="vertical"
-	    android:gravity="center_vertical"
-	    android:layout_width="match_parent">
-	    <LinearLayout 
-	        style="@style/card_item">
-	        <TextView style="@style/card_item_content"
-	            android:text="卡片归属："/>
-	        <TextView style="@style/card_item_content"
-	            android:id="@+id/card_ot"
-	            android:text="OCG"/>
-	    </LinearLayout>
-	    <LinearLayout
-	        style="@style/card_item">
-	        <TextView style="@style/card_item_content"
-	            android:text="类别："/>
-	        <TextView style="@style/card_item_content"
-	            android:id="@+id/card_type"
-	            android:text="怪兽|效果"/>
-	    </LinearLayout>
-	    <LinearLayout
-	        style="@style/card_item">
-	        <TextView style="@style/card_item_content"
-	            android:text="@string/item_level_text"/>
-	        <TextView style="@style/card_item_content"
-	            android:id="@+id/card_level"
-	            android:text="12"/>
-	    </LinearLayout>
-	     <LinearLayout 
-	        style="@style/card_item">
-	        <TextView style="@style/card_item_content"
-	            android:text="@string/item_race_text"/>
-	        <TextView style="@style/card_item_content"
-	            android:id="@+id/card_race"
-	            android:text="幻龙"/>
-	    </LinearLayout>
-	     <LinearLayout 
-	        style="@style/card_item">
-	        <TextView style="@style/card_item_content"
-	            android:text="@string/item_attr_text"/>
-	        <TextView style="@style/card_item_content"
-	            android:id="@+id/card_attr"
-	            android:text="光"/>
-	    </LinearLayout>
-	    <LinearLayout 
-	        style="@style/card_item">
-	        <TextView style="@style/card_item_content"
-	            android:text="@string/item_atk_text"/>
-	        <TextView style="@style/card_item_content"
-	            android:id="@+id/card_atk"
-	            android:text="3000"/>
-	    </LinearLayout>
-	    <LinearLayout 
-	        style="@style/card_item">
-	        <TextView style="@style/card_item_content"
-	            android:text="@string/item_def_text"/>
-	        <TextView style="@style/card_item_content"
-	            android:id="@+id/card_def"
-	            android:text="2500"/>
-	    </LinearLayout>
-	</LinearLayout>
-	<ScrollView 
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_below="@id/card_image"
-	    android:layout_margin="10dip">
-	    <LinearLayout
-	        android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="vertical">
-	<LinearLayout 
-	    android:id="@+id/card_des_panel"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    
-	    android:orientation="vertical">
-	    <TextView style="@style/card_item_content"
-	            android:text="效果描述："/>
-	    <TextView 
-	        style="@style/card_item_content"
-	        android:id="@+id/card_des"
-	        android:text="这张卡不能特殊召唤。自己场上有’卡通世界‘存在的场合才能特殊召唤。这张卡在特殊召唤的场合不能攻击。"/>
-	</LinearLayout>
-	<LinearLayout 
-	    android:id="@+id/card_wiki_panel"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="vertical"
-	    android:layout_marginTop="10dip">
-	    <TextView style="@style/card_item_content"
-	            android:text="中文调整："/>
-	    <TextView 
-	        android:layout_width="match_parent"
-	        android:id="@+id/card_wiki"
-	        android:layout_height="wrap_content"/>
-	</LinearLayout>
-	</LinearLayout>
-	</ScrollView>
+    android:orientation="vertical"
+    android:padding="5dip" >
+
+    <RelativeLayout
+        android:id="@+id/card_info_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/card_image"
+            android:layout_width="@dimen/card_image_width"
+            android:layout_height="@dimen/card_image_height"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:src="@drawable/unknown" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/card_image"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+
+            <LinearLayout style="@style/card_item" >
+
+                <TextView
+                    style="@style/card_item_content"
+                    android:text="@string/item_ot_text" />
+
+                <TextView
+                    android:id="@+id/card_ot"
+                    style="@style/card_item_content"
+                    android:text="OCG" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/card_item" >
+
+                <TextView
+                    style="@style/card_item_content"
+                    android:text="@string/item_type_text" />
+
+                <TextView
+                    android:id="@+id/card_type"
+                    style="@style/card_item_content"
+                    android:text="怪兽|效果" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/card_item" >
+
+                <TextView
+                    style="@style/card_item_content"
+                    android:text="@string/item_level_text" />
+
+                <TextView
+                    android:id="@+id/card_level"
+                    style="@style/card_item_content"
+                    android:text="12" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/card_item" >
+
+                <TextView
+                    style="@style/card_item_content"
+                    android:text="@string/item_race_text" />
+
+                <TextView
+                    android:id="@+id/card_race"
+                    style="@style/card_item_content"
+                    android:text="幻龙" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/card_item" >
+
+                <TextView
+                    style="@style/card_item_content"
+                    android:text="@string/item_attr_text" />
+
+                <TextView
+                    android:id="@+id/card_attr"
+                    style="@style/card_item_content"
+                    android:text="光" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/card_item" >
+
+                <TextView
+                    style="@style/card_item_content"
+                    android:text="@string/item_atk_text" />
+
+                <TextView
+                    android:id="@+id/card_atk"
+                    style="@style/card_item_content"
+                    android:text="3000" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/card_item" >
+
+                <TextView
+                    style="@style/card_item_content"
+                    android:text="@string/item_def_text" />
+
+                <TextView
+                    android:id="@+id/card_def"
+                    style="@style/card_item_content"
+                    android:text="2500" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_info_panel"
+        android:layout_margin="10dip" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/card_des_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    style="@style/card_item_content"
+                    android:text="@string/item_des_text" />
+
+                <TextView
+                    android:id="@+id/card_des"
+                    style="@style/card_item_content"
+                    android:text="这张卡不能特殊召唤。自己场上有’卡通世界‘存在的场合才能特殊召唤。这张卡在特殊召唤的场合不能攻击。" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/card_wiki_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:orientation="vertical" >
+
+                <TextView
+                    style="@style/card_item_content"
+                    android:text="@string/item_wiki_text" />
+
+                <TextView
+                    android:id="@+id/card_wiki"
+                    style="@style/card_item_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_wiki_to_be_acomplished" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </RelativeLayout>

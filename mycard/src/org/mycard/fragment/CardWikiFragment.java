@@ -1,9 +1,9 @@
 package org.mycard.fragment;
 
 import org.mycard.R;
+import org.mycard.common.ComplexCursorLoader;
 import org.mycard.common.Constants;
 import org.mycard.core.Controller;
-import org.mycard.model.IDataObserver;
 import org.mycard.provider.YGOCards;
 import org.mycard.utils.ResourceUtils;
 import org.mycard.widget.CustomActionBarView;
@@ -12,11 +12,11 @@ import org.mycard.widget.adapter.CardAdapter;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorWindow;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.view.ActionMode;
@@ -30,11 +30,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class CardWikiFragment extends BaseFragment implements
 		LoaderCallbacks<Cursor>, ActionMode.Callback, OnMenuItemClickListener, OnItemClickListener {
 
+	public static final String BUNDLE_KEY_CURSOR_WINDOW = "cardwikifragment.bundle.key.cursor.window";
 	public static final String BUNDLE_KEY_PROJECTION = "cardwikifragment.bundle.key.projection";
 	public static final String BUNDLE_KEY_SELECTION = "cardwikifragment.bundle.key.selection";
 	public static final String BUNDLE_KEY_SELECTION_EXTRA = "cardwikifragment.bundle.key.selection.extra";
@@ -43,7 +43,7 @@ public class CardWikiFragment extends BaseFragment implements
 	
 	private static final int QUERY_SOURCE_LOADER_ID = 0;
 	private static final String TAG = "CardWikiFragment";
-	private CursorLoader mCursorLoader;
+	private ComplexCursorLoader mCursorLoader;
 
 	private String[] mProjects = YGOCards.COMMON_DATA_PEOJECTION;
 	private String[] mProjects_id = YGOCards.COMMON_DATA_PEOJECTION_ID;
@@ -63,6 +63,8 @@ public class CardWikiFragment extends BaseFragment implements
 	private Context mContext;
 
 	private ActionMode mActionMode;
+	
+	private CursorWindow mCursorWindow;
 
 	/*
 	 * (non-Javadoc)
@@ -138,18 +140,18 @@ public class CardWikiFragment extends BaseFragment implements
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
-		mCursorLoader = new CursorLoader(mContext, mContentUri, mProjects,
+		mCursorLoader = new ComplexCursorLoader(mContext, mContentUri, mProjects,
 				mSelection, mSelectionExtra, mSortOrder);
 		return mCursorLoader;
 	}
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> arg0, Cursor arg1) {
-		// TODO Auto-generated method stub
 		if (arg1 != null) {
 			Log.d(TAG, "--->load finished");
 		}
 		mAdapter.swapCursor(arg1);
+		mCursorWindow = mCursorLoader.getCursorWindow();
 	}
 
 	@Override
@@ -193,6 +195,7 @@ public class CardWikiFragment extends BaseFragment implements
 		bundle.putStringArray(BUNDLE_KEY_SELECTION_EXTRA, mSelectionExtra);
 		bundle.putString(BUNDLE_KEY_SORT_ORDER, mSortOrder);
 		bundle.putInt(BUNDLE_KEY_INIT_POSITON, position);
+		bundle.putParcelable(BUNDLE_KEY_CURSOR_WINDOW, mCursorWindow);
 		mActivity.navigateToChild(bundle, FRAGMENT_ID_CARD_DETAIL);
 	}
 

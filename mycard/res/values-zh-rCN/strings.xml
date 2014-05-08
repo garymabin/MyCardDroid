@@ -22,12 +22,20 @@
     <string name="duel_options">决斗选项</string>
     <string name="quick_join_hint">房间名$密码</string>
     <string name="input_invalid_msg">用户名与密码长度之和不能超过<xliff>%1$d</xliff>个字符</string>
+    <string name="item_type_text">类别：</string>
+    <string name="item_ot_text">归属：</string>
     <string name="item_name_text">名称：</string>
     <string name="item_level_text">星级：</string>
     <string name="item_race_text">种族：</string>
     <string name="item_attr_text">属性：</string>
     <string name="item_atk_text">攻击力：</string>
     <string name="item_def_text">防御力：</string>
+    <string name="item_wiki_text">调整：</string>
+    <string name="item_des_text">卡片描述：</string>
+    
+    <string name="item_wiki_to_be_acomplished">敬请期待！</string>
+    
+    
     <string name="button_create">创建</string>
     <string name="button_join">加入</string>
     <string name="button_cancel">取消</string>
