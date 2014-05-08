@@ -9,11 +9,12 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.TextView;
 
-public abstract class BaseFragment extends Fragment implements Handler.Callback, Constants{
+public abstract class BaseFragment extends Fragment implements Handler.Callback, Constants, FragmentNavigationListener{
 
 	public interface OnActionBarChangeCallback {
 		void onActionBarChange(int msgType, int action, Object extra);
@@ -39,8 +40,7 @@ public abstract class BaseFragment extends Fragment implements Handler.Callback,
 	protected DataHandler mHandler;
 	protected OnActionBarChangeCallback mActionBarCallback;
 	
-	protected TextView mActionBarTitle;
-	
+	private String mTitle;
 	
 	@Override
 	public void onResume() {
@@ -55,8 +55,14 @@ public abstract class BaseFragment extends Fragment implements Handler.Callback,
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		int actionBarTitleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
-		mActionBarTitle = (TextView) mActivity.findViewById(actionBarTitleId);
+		mTitle = getArguments().getString(ARG_ITEM_TITLE);
+		setTitle();
+	}
+
+	protected void setTitle() {
+		if (mTitle != null) {
+			mActivity.setTitle(mTitle);
+		}
 	}
 
 	@Override
@@ -69,7 +75,7 @@ public abstract class BaseFragment extends Fragment implements Handler.Callback,
 			mActionBarCallback = (OnActionBarChangeCallback) activity;
 		}
 	}
-
+	
 	protected void showDialog(Bundle params, Fragment target, int requestCode) {
 		// DialogFragment.show() will take care of adding the fragment
 		// in a transaction. We also want to remove any currently showing
@@ -103,5 +109,14 @@ public abstract class BaseFragment extends Fragment implements Handler.Callback,
 		RoomDetailFragment newFragment = RoomDetailFragment
 				.newInstance(params);
 		newFragment.show(ft, "dialog");
+	}
+
+	@Override
+	public void onEventFromChild(int requestCode, int eventType, Bundle data) {
+	}
+
+	@Override
+	public boolean handleMessage(Message msg) {
+		return false;
 	}
 }

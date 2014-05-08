@@ -36,17 +36,18 @@ public class CardWikiFragment extends BaseFragment implements
 
 	public static final String BUNDLE_KEY_CURSOR_WINDOW = "cardwikifragment.bundle.key.cursor.window";
 	public static final String BUNDLE_KEY_PROJECTION = "cardwikifragment.bundle.key.projection";
-	public static final String BUNDLE_KEY_SELECTION = "cardwikifragment.bundle.key.selection";
-	public static final String BUNDLE_KEY_SELECTION_EXTRA = "cardwikifragment.bundle.key.selection.extra";
-	public static final String BUNDLE_KEY_SORT_ORDER = "cardwikifragment.bundle.key.sortoder";
 	public static final String BUNDLE_KEY_INIT_POSITON = "cardwikifragment.bundle.key.init.pos";
 	
 	private static final int QUERY_SOURCE_LOADER_ID = 0;
+	
+	private static final int REQUEST_ID_CARD_DETAIL = 0;
+	
+	
 	private static final String TAG = "CardWikiFragment";
 	private ComplexCursorLoader mCursorLoader;
 
-	private String[] mProjects = YGOCards.COMMON_DATA_PEOJECTION;
-	private String[] mProjects_id = YGOCards.COMMON_DATA_PEOJECTION_ID;
+	private String[] mProjects = YGOCards.COMMON_DATA_PROJECTION;
+	private String[] mProjects_id = YGOCards.COMMON_DATA_PROJECTION_ID;
 	
 	private String mSelection;
 	
@@ -110,12 +111,17 @@ public class CardWikiFragment extends BaseFragment implements
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		mActivity.onActionBarChange(
-				Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE,
-				DRAWER_ID_CARD_WIKI, null);
+		refreshActionBar();
 		mSelection = null;
 		mSelectionExtra = null;
 		mSortOrder = mProjects[5] + " desc";
+	}
+
+	private void refreshActionBar() {
+		mActivity.onActionBarChange(
+				Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE,
+				DRAWER_ID_CARD_WIKI, null);
+		setTitle();
 	}
 
 	@Override
@@ -191,12 +197,18 @@ public class CardWikiFragment extends BaseFragment implements
 			long id) {
 		Bundle bundle = new Bundle();
 		bundle.putStringArray(BUNDLE_KEY_PROJECTION, mProjects);
-		bundle.putString(BUNDLE_KEY_SELECTION, mSelection);
-		bundle.putStringArray(BUNDLE_KEY_SELECTION_EXTRA, mSelectionExtra);
-		bundle.putString(BUNDLE_KEY_SORT_ORDER, mSortOrder);
 		bundle.putInt(BUNDLE_KEY_INIT_POSITON, position);
 		bundle.putParcelable(BUNDLE_KEY_CURSOR_WINDOW, mCursorWindow);
-		mActivity.navigateToChild(bundle, FRAGMENT_ID_CARD_DETAIL);
+		mActivity.navigateToChild(bundle, FRAGMENT_ID_CARD_DETAIL, REQUEST_ID_CARD_DETAIL);
+	}
+	
+	@Override
+	public void onEventFromChild(int requestCode, int eventType, Bundle data) {
+		if (REQUEST_ID_CARD_DETAIL == requestCode) {
+			if (eventType == FRAGMENT_NAVIGATION_BACK_EVENT) {
+				refreshActionBar();
+			}
+		}
 	}
 
 }

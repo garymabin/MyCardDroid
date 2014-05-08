@@ -7,10 +7,10 @@ public final class YGOCards {
 
 	public static final String AUTHROITY = "org.mycard.provider";
 
-	public static final String[] COMMON_DATA_PEOJECTION = new String[] {
+	public static final String[] COMMON_DATA_PROJECTION = new String[] {
 			Datas.ID_ALIAS, Datas.OT, Datas.TYPE, Datas.ATK, Datas.DEF, Datas.LEVEL,
 			Datas.RACE, Datas.ATTRIBUTE, Texts.NAME };
-	public static final String[] COMMON_DATA_PEOJECTION_ID = new String[] {
+	public static final String[] COMMON_DATA_PROJECTION_ID = new String[] {
 		"_id", Datas.OT, Datas.TYPE, Datas.ATK, Datas.DEF, Datas.LEVEL,
 		Datas.RACE, Datas.ATTRIBUTE, Texts.NAME };
 
@@ -20,6 +20,8 @@ public final class YGOCards {
 
 	public static final Uri CONTENT_URI = Uri
 			.parse("content://org.mycard.provider/combined");
+	
+	public static final int COMMON_DATA_PROJECTION_NAME_INDEX = 8;
 
 	public static final class Datas implements BaseColumns {
 

@@ -3,7 +3,6 @@ package org.mycard.core;
 import org.mycard.StaticApplication;
 import org.mycard.actionbar.ActionBarController;
 import org.mycard.common.Constants;
-import org.mycard.core.images.BitmapHolder;
 import org.mycard.model.IDataObserver;
 import org.mycard.model.Model;
 import org.mycard.net.NetworkStatusManager;

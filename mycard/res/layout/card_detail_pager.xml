@@ -137,8 +137,7 @@
 
                 <TextView
                     android:id="@+id/card_des"
-                    style="@style/card_item_content"
-                    android:text="这张卡不能特殊召唤。自己场上有’卡通世界‘存在的场合才能特殊召唤。这张卡在特殊召唤的场合不能攻击。" />
+                    style="@style/card_item_content"/>
             </LinearLayout>
 
             <LinearLayout

@@ -248,12 +248,10 @@ public class MainActivity extends ActionBarActivity implements
 		transaction.replace(R.id.content_frame, fragment).commit();
 		// Highlight the selected item, update the title, and close the drawer
 		mDrawerList.setItemChecked(position - 1, true);
-		setTitle(mDrawerItems[position - 1]);
-		// mDrawerLayout.closeDrawer(mDrawerList);
 		mDrawerLayout.closeDrawer(mLeftDrawer);
 	}
 	
-	public void navigateToChild(Bundle param, int id) {
+	public void navigateToChild(Bundle param, int id, int requestCode) {
 		Fragment fragment = null;
 		switch (id) {
 		case FRAGMENT_ID_CARD_DETAIL:
@@ -263,7 +261,10 @@ public class MainActivity extends ActionBarActivity implements
 			break;
 		}
 		// Insert the fragment by adding a new fragment
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		FragmentTransaction ft = fragmentManager.beginTransaction();
+		Fragment parent = fragmentManager.findFragmentById(R.id.content_frame);
+		fragment.setTargetFragment(parent, requestCode);
 		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 		ft.add(R.id.content_frame, fragment).addToBackStack(null).commit();
 	}

@@ -82,7 +82,6 @@ public class CardDetailPagerFragment extends BaseFragment implements LoaderCallb
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = initView(inflater);
-		mActivity.setTitle(mName);
 		initCursorLoader();
 		return view;
 	}

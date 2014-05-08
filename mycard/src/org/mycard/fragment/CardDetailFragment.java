@@ -2,6 +2,7 @@ package org.mycard.fragment;
 
 import org.mycard.R;
 import org.mycard.common.Constants;
+import org.mycard.provider.YGOCards;
 import org.mycard.widget.adapter.CardDetailAdapter;
 
 import android.app.Activity;
@@ -9,6 +10,8 @@ import android.database.CursorWindow;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,7 +19,9 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 
 public class CardDetailFragment extends BaseFragment implements
-		OnTouchListener {
+		OnTouchListener, OnPageChangeListener {
+	
+	private static final String TAG = "CardDetailFragment";
 
 	private ViewPager mViewPager;
 	private CardDetailAdapter<CardDetailPagerFragment> mAdapter;
@@ -50,6 +55,13 @@ public class CardDetailFragment extends BaseFragment implements
 				Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE,
 				FRAGMENT_ID_CARD_DETAIL, null);
 	}
+	
+	@Override
+	public void onDetach() {
+		Log.d(TAG, "onDetach : E");
+		super.onDetach();
+		((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(), FRAGMENT_NAVIGATION_BACK_EVENT, null);
+	}
 
 	@Override
 	public boolean handleMessage(Message msg) {
@@ -65,6 +77,7 @@ public class CardDetailFragment extends BaseFragment implements
 				getChildFragmentManager(), CardDetailPagerFragment.class,
 				mCommonProjection, mWindow);
 		mViewPager.setAdapter(mAdapter);
+		mViewPager.setOnPageChangeListener(this);
 		mViewPager.setCurrentItem(mInitPos);
 		view.setOnTouchListener(this);
 		return view;
@@ -73,5 +86,18 @@ public class CardDetailFragment extends BaseFragment implements
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		return true;
+	}
+
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+	}
+
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+	}
+
+	@Override
+	public void onPageSelected(int arg0) {
+		mActivity.setTitle(mWindow.getString(arg0, YGOCards.COMMON_DATA_PROJECTION_NAME_INDEX));
 	}
 }
