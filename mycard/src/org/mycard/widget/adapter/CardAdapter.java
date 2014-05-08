@@ -112,6 +112,14 @@ public class CardAdapter extends CursorAdapter implements IDataObserver{
 		thumbnailImageWidthInPixel = context.getResources().getDimensionPixelSize(R.dimen.card_image_width);
 		mAttachedListView = new WeakReference<ListView>(attachTarget);
 	}
+	
+	public void onFragmentActive() {
+		Controller.peekInstance().registerDataObserver(this);
+	}
+	
+	public void onFragmentInactive() {
+		Controller.peekInstance().unregisterDataObserver(this);
+	}
 
 	@Override
 	public void bindView(View containerView, Context context, Cursor cursor) {

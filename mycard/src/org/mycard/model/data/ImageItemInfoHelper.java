@@ -36,7 +36,10 @@ public final class ImageItemInfoHelper {
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append(StaticApplication.peekInstance().getCardImagePath()).append(Constants.THUMBNAIL_IMAGE_DIRECTORY);
-		sb.append(item.id).append(IMAGE_SUFFIX);;
+		if (!new File(sb.toString()).exists()) {
+			new File(sb.toString()).mkdirs();
+		}
+		sb.append(item.id).append(IMAGE_SUFFIX);
 		return sb.toString();
 	}
 	
@@ -71,6 +74,9 @@ public final class ImageItemInfoHelper {
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append(StaticApplication.peekInstance().getCardImagePath()).append(Constants.CARD_IMAGE_DIRECTORY);
+		if (!new File(sb.toString()).exists()) {
+			new File(sb.toString()).mkdirs();
+		}
 		sb.append(item.id).append(IMAGE_SUFFIX);
 		return sb.toString();
 	}

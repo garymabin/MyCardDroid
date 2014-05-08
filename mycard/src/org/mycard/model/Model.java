@@ -36,6 +36,7 @@ public class Model {
 		mImgModelHelper = new ImageModelHelper();
 		mServerList = new ArrayList<YGOServerInfo>();
 		mYGOArrayStore = new YGOArrayStore(app.getResources());
+		mObserverList = new HashSet<IDataObserver>();
 	}
 
 	public static Model peekInstance() {
@@ -103,6 +104,5 @@ public class Model {
 	public void requestDataOperation(IDataObserver observer, Message msg) {
 		mImgModelHelper.requestDataOperation(observer, msg);
 	}
-	
 
 }

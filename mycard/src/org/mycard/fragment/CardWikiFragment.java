@@ -116,6 +116,12 @@ public class CardWikiFragment extends BaseFragment implements
 		mSelectionExtra = null;
 		mSortOrder = mProjects[5] + " desc";
 	}
+	
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		mAdapter.onFragmentInactive();
+	}
 
 	private void refreshActionBar() {
 		mActivity.onActionBarChange(
@@ -134,6 +140,7 @@ public class CardWikiFragment extends BaseFragment implements
 
 		listView = (ListView) view.findViewById(R.id.card_info_list);
 		mAdapter = new CardAdapter(mContext, mProjects_id,  null, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER, listView);
+		mAdapter.onFragmentActive();
 		listView.setAdapter(mAdapter);
 		listView.setOnItemClickListener(this);
 		initCursorLoader();

@@ -17,8 +17,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginBottom="5dip"
-            android:layout_marginRight="5dip"
-            android:src="@drawable/unknown" />
+            android:layout_marginRight="5dip"/>
 
         <LinearLayout
             android:layout_width="match_parent"

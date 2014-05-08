@@ -53,6 +53,13 @@ public class CardDetailPagerFragment extends BaseFragment implements LoaderCallb
 		super.onAttach(activity);
 		mImageHeightInPixel =  activity.getResources().getDimensionPixelSize(R.dimen.card_image_height);
 		mImageWidthInPixel =  activity.getResources().getDimensionPixelSize(R.dimen.card_image_width);
+		Controller.peekInstance().registerDataObserver(this);
+	}
+	
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		Controller.peekInstance().unregisterDataObserver(this);
 	}
 	
 
@@ -102,7 +109,7 @@ public class CardDetailPagerFragment extends BaseFragment implements LoaderCallb
 		((TextView)view.findViewById(R.id.card_ot)).setText(model.getYGOCardOT(mOT));
 		((TextView)view.findViewById(R.id.card_level)).setText(mLevel == -1 ? "N/A": mLevel + "");
 		((TextView)view.findViewById(R.id.card_atk)).setText(mAtk >= 0 ? mAtk + "" : "?");
-		((TextView)view.findViewById(R.id.card_def)).setText(mDef >=0 ? mDef + "" : "?");
+		((TextView)view.findViewById(R.id.card_def)).setText(mDef >= 0 ? mDef + "" : "?");
 		mImageItemController = new ImageViewImageItemController(mActivity,
 				(ImageView) view.findViewById(R.id.card_image));
 		mImageItem = new ImageItem(mID, mImageHeightInPixel, mImageWidthInPixel);

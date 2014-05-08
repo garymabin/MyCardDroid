@@ -161,6 +161,14 @@ public class Controller {
 	public void requestDataOperation(IDataObserver observer, Message msg) {
 		mModel.requestDataOperation(observer, msg);
 	}
+	
+	public void registerDataObserver(IDataObserver observer) {
+		mModel.registerDataObserver(observer);
+	}
+	
+	public void unregisterDataObserver(IDataObserver observer) {
+		mModel.unregisterDataObserver(observer);
+	}
 
 
 }
