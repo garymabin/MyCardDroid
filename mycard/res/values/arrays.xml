@@ -8,6 +8,11 @@
         <item>Chat</item>
         <item>Forum</item>
     </string-array>
+    
+    <string-array name="card_quality">
+        <item>Speed</item>
+        <item>Quality</item>
+    </string-array>
 
     <string-array name="duel_mode">
         <item>Single-game mode</item>
@@ -15,6 +20,41 @@
         <item>Tag mode</item>
     </string-array>
     
+    <string-array name="card_race">
+        <item >战士</item>
+        <item >魔法使</item>
+        <item >天使</item>
+        <item >恶魔</item>
+        <item >不死</item>
+        <item >机械</item>
+        <item >水</item>
+        <item >炎</item>
+        <item >岩石</item>
+        <item >鸟兽</item>
+        <item >植物</item>
+        <item >昆虫</item>
+        <item >雷</item>
+        <item >龙</item>
+        <item >兽</item>
+        <item >兽战士</item>
+        <item >恐龙</item>
+        <item >鱼</item>
+        <item >海龙</item>
+        <item >爬虫</item>
+        <item >念动力</item>
+        <item >幻神兽</item>
+        <item >创造神</item>
+    </string-array>
+    
+    <string-array name="card_attr">
+        <item >地</item>
+        <item >水</item>
+        <item >炎</item>
+        <item >风</item>
+        <item >光</item>
+        <item >暗</item>
+        <item >神</item>
+    </string-array>
     
     <string-array name="card_limit">
         <item>OCG</item>

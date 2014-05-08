@@ -16,6 +16,7 @@ import org.mycard.fragment.CardWikiFragment;
 import org.mycard.fragment.ChatRoomFragment;
 import org.mycard.fragment.FinalPhaseFragment;
 import org.mycard.fragment.DuelFragment;
+import org.mycard.fragment.UserStatusFragment;
 import org.mycard.model.Model;
 import org.mycard.model.data.ResourcesConstants;
 import org.mycard.model.data.ServerInfo;
@@ -142,8 +143,8 @@ public class MainActivity extends ActionBarActivity implements
 
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-				R.drawable.ic_navigation_drawer, R.string.app_name,
-				R.string.app_name);
+				R.drawable.ic_navigation_drawer, R.string.mycard,
+				R.string.mycard);
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
 		mUserStatusDes = (TextView) findViewById(R.id.user_status_des_text);
@@ -316,7 +317,11 @@ public class MainActivity extends ActionBarActivity implements
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.user_panel) {
-			Log.i(TAG, "user panel clicked");
+			getSupportFragmentManager()
+				.beginTransaction()
+				.replace(R.id.content_frame, new UserStatusFragment())
+				.commit();
+			mDrawerLayout.closeDrawer(mLeftDrawer);
 		}
 
 	}
