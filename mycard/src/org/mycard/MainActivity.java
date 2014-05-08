@@ -2,6 +2,7 @@ package org.mycard;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -244,6 +245,7 @@ public class MainActivity extends ActionBarActivity implements
 		// Insert the fragment by replacing any existing fragment
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction transaction = fragmentManager.beginTransaction();
+		fragmentManager.popBackStack();
 		transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 		transaction.replace(R.id.content_frame, fragment).commit();
 		// Highlight the selected item, update the title, and close the drawer
