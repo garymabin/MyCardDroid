@@ -1,7 +1,9 @@
 package org.mycard.fragment;
 
 import org.mycard.R;
+import org.mycard.common.Constants;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -12,6 +14,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class UserStatusFragment extends BaseFragment {
+	
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		mActivity.onActionBarChange(
+				Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE,
+				FRAGMENT_ID_USER_STATUS, null);
+	}
 	
 	@Override
 	public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

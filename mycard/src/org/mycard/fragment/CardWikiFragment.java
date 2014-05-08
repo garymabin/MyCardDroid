@@ -126,7 +126,7 @@ public class CardWikiFragment extends BaseFragment implements
 	private void refreshActionBar() {
 		mActivity.onActionBarChange(
 				Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE,
-				DRAWER_ID_CARD_WIKI, null);
+				FRAGMENT_ID_CARD_WIKI, null);
 		setTitle();
 	}
 
@@ -206,7 +206,7 @@ public class CardWikiFragment extends BaseFragment implements
 		bundle.putStringArray(BUNDLE_KEY_PROJECTION, mProjects);
 		bundle.putInt(BUNDLE_KEY_INIT_POSITON, position);
 		bundle.putParcelable(BUNDLE_KEY_CURSOR_WINDOW, mCursorWindow);
-		mActivity.navigateToChild(bundle, FRAGMENT_ID_CARD_DETAIL, REQUEST_ID_CARD_DETAIL);
+		mActivity.navigateToChildFragment(bundle, FRAGMENT_ID_CARD_DETAIL, REQUEST_ID_CARD_DETAIL);
 	}
 	
 	@Override

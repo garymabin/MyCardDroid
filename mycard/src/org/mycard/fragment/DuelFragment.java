@@ -110,7 +110,7 @@ public class DuelFragment extends TabFragment {
 		mTabs = getResources().getStringArray(R.array.duel_mode);
 		mTabCount = mTabs.length;
 		mActivity.onActionBarChange(Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE,
-				DRAWER_ID_DUEL, null);
+				FRAGMENT_ID_DUEL, null);
 	}
 
 	@Override

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="draw_items">
+    <string-array name="fragment_items">
         <item >萌卡</item>
         <item >对战</item>
         <item >卡查</item>
         <item >聊天</item>
         <item >论坛</item>
+        <item >个人中心</item>
     </string-array>
     
     <string-array name="card_quality">
@@ -102,6 +103,7 @@
         <item >效果</item>
         <item >融合</item>
         <item >仪式</item>
+        <item >效果</item>
         <item >陷阱怪兽</item>
         <item >灵魂</item>
         <item >同盟</item>

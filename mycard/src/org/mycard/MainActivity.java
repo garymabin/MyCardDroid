@@ -37,7 +37,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -90,9 +89,9 @@ public class MainActivity extends ActionBarActivity implements
 	private DrawerLayout mDrawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private ListView mDrawerList;
-	private String[] mDrawerItems;
+	private String[] mFragmentItems;
 
-	private Integer[] imageArray = { R.drawable.ic_drawer_home,
+	private Integer[] mDrawerImageArray = { R.drawable.ic_drawer_home,
 			R.drawable.ic_drawer_duel, R.drawable.ic_drawer_card_wiki,
 			R.drawable.ic_drawer_chat, R.drawable.ic_drawer_forum };
 	private int[] viewTo = { R.id.drawer_item_image, R.id.drawer_item_text };
@@ -151,13 +150,13 @@ public class MainActivity extends ActionBarActivity implements
 		mUserStatusDes = (TextView) findViewById(R.id.user_status_des_text);
 		mUserStatusDes.setText(R.string.login_sign_up);
 
-		mDrawerItems = getResources().getStringArray(R.array.draw_items);
+		mFragmentItems = getResources().getStringArray(R.array.fragment_items);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
-		int size = mDrawerItems.length;
+		int size = mDrawerImageArray.length;
 		for (int i = 0; i < size; i++) {
 			Map<String, Object> item = new HashMap<String, Object>();
-			item.put(IMAGE_TAG, imageArray[i]);
-			item.put(TEXT_TAG, mDrawerItems[i]);
+			item.put(IMAGE_TAG, mDrawerImageArray[i]);
+			item.put(TEXT_TAG, mFragmentItems[i]);
 			mDrawerListData.add(item);
 		}
 
@@ -214,33 +213,43 @@ public class MainActivity extends ActionBarActivity implements
 
 	/** Swaps fragments in the main content view */
 	private void selectItem(int position) {
+		// Highlight the selected item, update the title, and close the drawer
+		navigateToFragment(position);
+		mDrawerList.setItemChecked(position - 1, true);
+		mDrawerLayout.closeDrawer(mLeftDrawer);
+	}
+
+	protected void navigateToFragment(int id) {
 		Fragment fragment = null;
-		switch (position) {
-		case DRAWER_ID_DUEL:
+		switch (id) {
+		case FRAGMENT_ID_DUEL:
 			fragment = new DuelFragment();
 			break;
-		case DRAWER_ID_MY_CARD:
+		case FRAGMENT_ID_MY_CARD:
 			fragment = new HomePageFragment();
 			break;
-		case DRAWER_ID_CARD_WIKI:
+		case FRAGMENT_ID_CARD_WIKI:
 			fragment = new CardWikiFragment();
 			break;
-		case DRAWER_ID_CHAT_ROOM:
+		case FRAGMENT_ID_CHAT_ROOM:
 			fragment = new ChatRoomFragment();
 			break;
-		case DRAWER_ID_FORUM_LINK:
+		case FRAGMENT_ID_FORUM_LINK:
 			Uri uri = Uri.parse(ResourcesConstants.FORUM_URL);
 			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 			startActivity(intent);
 			return;
-		case DRAWER_ID_FINAL_PHASE:
+		case FRAGMENT_ID_FINAL_PHASE:
 			fragment = new FinalPhaseFragment();
+			break;
+		case FRAGMENT_ID_USER_STATUS:
+			fragment = new UserStatusFragment();
 			break;
 		default:
 			break;
 		}
 		Bundle args = new Bundle();
-		args.putString(BaseFragment.ARG_ITEM_TITLE, mDrawerItems[position - 1]);
+		args.putString(BaseFragment.ARG_ITEM_TITLE, mFragmentItems[id - 1]);
 		fragment.setArguments(args);
 		// Insert the fragment by replacing any existing fragment
 		FragmentManager fragmentManager = getSupportFragmentManager();
@@ -248,12 +257,9 @@ public class MainActivity extends ActionBarActivity implements
 		fragmentManager.popBackStack();
 		transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 		transaction.replace(R.id.content_frame, fragment).commit();
-		// Highlight the selected item, update the title, and close the drawer
-		mDrawerList.setItemChecked(position - 1, true);
-		mDrawerLayout.closeDrawer(mLeftDrawer);
 	}
 	
-	public void navigateToChild(Bundle param, int id, int requestCode) {
+	public void navigateToChildFragment(Bundle param, int id, int requestCode) {
 		Fragment fragment = null;
 		switch (id) {
 		case FRAGMENT_ID_CARD_DETAIL:
@@ -276,10 +282,10 @@ public class MainActivity extends ActionBarActivity implements
 		// TODO Auto-generated method stub
 		switch (msgType) {
 		case Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE:
-			if (action == DRAWER_ID_DUEL) {
+			if (action == FRAGMENT_ID_DUEL) {
 				mActionBarCreator = new ActionBarCreator(this).setRoomCreate(
 						true).setPlay(true);
-			} else if (action == DRAWER_ID_CARD_WIKI) {
+			} else if (action == FRAGMENT_ID_CARD_WIKI) {
 				mActionBarCreator = new ActionBarCreator(this).setFilter(true).setSearch(true);
 			} else {
 				mActionBarCreator = new ActionBarCreator(this);
@@ -320,10 +326,7 @@ public class MainActivity extends ActionBarActivity implements
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.user_panel) {
-			getSupportFragmentManager()
-				.beginTransaction()
-				.replace(R.id.content_frame, new UserStatusFragment())
-				.commit();
+			navigateToFragment(FRAGMENT_ID_USER_STATUS);
 			mDrawerLayout.closeDrawer(mLeftDrawer);
 		}
 
