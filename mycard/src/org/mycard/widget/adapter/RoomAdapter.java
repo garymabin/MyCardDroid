@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.mycard.R;
-import org.mycard.model.data.RoomInfo;
-import org.mycard.model.data.UserInfo;
+import org.mycard.ygo.YGORoomInfo;
+import org.mycard.ygo.YGOUserInfo;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -25,12 +25,12 @@ public class RoomAdapter extends BaseAdapter {
 		public TextView mStatus;
 	}
 
-	private List<RoomInfo> mDataList;
+	private List<YGORoomInfo> mDataList;
 	private Context mContext;
 
 	private int mFilter;
 
-	public RoomAdapter(List<RoomInfo> lists, Context context, int filter) {
+	public RoomAdapter(List<YGORoomInfo> lists, Context context, int filter) {
 		// TODO Auto-generated constructor stub
 		super();
 		setData(lists);
@@ -38,15 +38,15 @@ public class RoomAdapter extends BaseAdapter {
 		mFilter = filter;
 	}
 
-	public void setData(List<RoomInfo> lists) {
+	public void setData(List<YGORoomInfo> lists) {
 		// TODO Auto-generated method stub
-		mDataList = new LinkedList<RoomInfo>();
-		for (RoomInfo info : lists) {
+		mDataList = new LinkedList<YGORoomInfo>();
+		for (YGORoomInfo info : lists) {
 			if (info.mode == mFilter) {
 				if (!info.status) {
-					((LinkedList<RoomInfo>)mDataList).addFirst(info.clone());
+					((LinkedList<YGORoomInfo>)mDataList).addFirst(info.clone());
 				} else {
-					((LinkedList<RoomInfo>)mDataList).addLast(info.clone());
+					((LinkedList<YGORoomInfo>)mDataList).addLast(info.clone());
 				}
 			}
 		}
@@ -89,7 +89,7 @@ public class RoomAdapter extends BaseAdapter {
 					.findViewById(R.id.item_list_status);
 			convertView.setTag(holder);
 		}
-		RoomInfo info = mDataList.get(position);
+		YGORoomInfo info = mDataList.get(position);
 		ViewHolder holder = (ViewHolder) convertView.getTag();
 		holder.mCustomImage.setImageResource(R.drawable.logo);
 		holder.mTitle.setText(info.name);
@@ -105,9 +105,9 @@ public class RoomAdapter extends BaseAdapter {
 		return convertView;
 	}
 
-	private String generatePropertyString(RoomInfo roomInfo) {
+	private String generatePropertyString(YGORoomInfo roomInfo) {
 		StringBuilder builder = new StringBuilder();
-		for (UserInfo userInfo : roomInfo.mUsers) {
+		for (YGOUserInfo userInfo : roomInfo.mUsers) {
 			builder.append(userInfo.name + " | ");
 		}
 		if (builder.length() > 2) {

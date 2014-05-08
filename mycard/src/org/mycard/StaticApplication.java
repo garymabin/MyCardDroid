@@ -3,7 +3,6 @@ package org.mycard;
 import org.apache.http.client.HttpClient;
 import org.mycard.common.Constants;
 import org.mycard.core.Controller;
-import org.mycard.model.Model;
 import org.mycard.net.http.ThreadSafeHttpClientFactory;
 import org.mycard.setting.Settings;
 

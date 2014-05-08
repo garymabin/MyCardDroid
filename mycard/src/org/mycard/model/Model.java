@@ -3,13 +3,15 @@ package org.mycard.model;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.mycard.StaticApplication;
 import org.mycard.model.data.DataStore;
 import org.mycard.model.data.ImageItem;
-import org.mycard.model.data.RoomInfo;
-import org.mycard.model.data.ServerInfo;
 import org.mycard.model.data.wrapper.BaseDataWrapper;
+import org.mycard.ygo.YGOArrayStore;
+import org.mycard.ygo.YGORoomInfo;
+import org.mycard.ygo.YGOServerInfo;
 
 import android.graphics.Bitmap;
 import android.os.Message;
@@ -21,16 +23,19 @@ public class Model {
 	
 	private DataStore mDataStore;
 	
-	private List<ServerInfo> mServerList;
+	private YGOArrayStore mYGOArrayStore;
+	
+	private List<YGOServerInfo> mServerList;
 	
 	private ImageModelHelper mImgModelHelper;
 	
-	private HashSet<IDataObserver> mObserverList;
+	private Set<IDataObserver> mObserverList;
 	
 	private Model(StaticApplication app) {
 		mDataStore = new DataStore();
 		mImgModelHelper = new ImageModelHelper();
-		mServerList = new ArrayList<ServerInfo>();
+		mServerList = new ArrayList<YGOServerInfo>();
+		mYGOArrayStore = new YGOArrayStore(app.getResources());
 	}
 
 	public static Model peekInstance() {
@@ -45,11 +50,11 @@ public class Model {
 		mDataStore.updateData(wrapper);
 	}
 
-	public List<ServerInfo> getServerList() {
+	public List<YGOServerInfo> getServerList() {
 		return mDataStore.getServerList();
 	}
 
-	public List<RoomInfo> getRooms() {
+	public List<YGORoomInfo> getRooms() {
 		return mDataStore.getRooms();
 	}
 	
@@ -77,6 +82,22 @@ public class Model {
 	
 	public Bitmap getBitmap(ImageItem item, int type) {
 		return mImgModelHelper.getBitmap(item, type);
+	}
+	
+	public String getYGOCardType(int code) {
+		return mYGOArrayStore.getCardType(code);
+	}
+	
+	public String getYGOCardRace(int code) {
+		return mYGOArrayStore.getCardRace(code);
+	}
+	
+	public String getYGOCardAttr(int code) {
+		return mYGOArrayStore.getCardAttr(code);
+	}
+	
+	public String getYGOCardOT(int code) {
+		return mYGOArrayStore.getCardOT(code);
 	}
 
 	public void requestDataOperation(IDataObserver observer, Message msg) {

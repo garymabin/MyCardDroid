@@ -1,4 +1,4 @@
-package org.mycard.provider;
+package org.mycard.ygo.provider;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

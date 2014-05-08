@@ -1,17 +1,18 @@
-package org.mycard.model.data;
+package org.mycard.ygo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.mycard.model.data.BaseInfo;
 
-public class UserInfo extends BaseInfo {
+public class YGOUserInfo extends BaseInfo {
 	
 	public String name;
 	public int playerID;
 	public boolean certified;
 	
 	@Override
-	protected UserInfo clone() {
-		return (UserInfo)super.clone();
+	protected YGOUserInfo clone() {
+		return (YGOUserInfo)super.clone();
 	}
 	
 	@Override

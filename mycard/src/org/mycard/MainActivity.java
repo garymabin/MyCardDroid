@@ -19,8 +19,8 @@ import org.mycard.fragment.DuelFragment;
 import org.mycard.fragment.UserStatusFragment;
 import org.mycard.model.Model;
 import org.mycard.model.data.ResourcesConstants;
-import org.mycard.model.data.ServerInfo;
 import org.mycard.setting.SettingsActivity;
+import org.mycard.ygo.YGOServerInfo;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -296,7 +296,7 @@ public class MainActivity extends ActionBarActivity implements
 		supportInvalidateOptionsMenu();
 	}
 
-	public ServerInfo getServer() {
+	public YGOServerInfo getServer() {
 		return Model.peekInstance().getServerList().get(0);
 	}
 

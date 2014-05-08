@@ -1,14 +1,15 @@
-package org.mycard.model.data;
+package org.mycard.ygo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.mycard.model.data.BaseInfo;
 
-public class ServerInfo extends BaseInfo {
+public class YGOServerInfo extends BaseInfo {
 	
-	public ServerInfo() {
+	public YGOServerInfo() {
 	}
 	
-	public ServerInfo(String ip, int port) {
+	public YGOServerInfo(String ip, int port) {
 		ipAddrString = ip;
 		this.port = port;
 	}
@@ -22,8 +23,8 @@ public class ServerInfo extends BaseInfo {
 	public String serverType;
 	
 	@Override
-	protected ServerInfo clone() {
-		return (ServerInfo)super.clone();
+	public YGOServerInfo clone() {
+		return (YGOServerInfo)super.clone();
 	}
 	
 	@Override

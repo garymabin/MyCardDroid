@@ -40,8 +40,8 @@
         </activity>
 
         <provider
-            android:name=".provider.YGOCardsProvider"
-            android:authorities="org.mycard.provider"
+            android:name=".ygo.provider.YGOCardsProvider"
+            android:authorities="org.mycard.ygo.provider"
             android:exported="false" >
         </provider>
     </application>

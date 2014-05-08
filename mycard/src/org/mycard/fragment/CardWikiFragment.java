@@ -4,7 +4,7 @@ import org.mycard.R;
 import org.mycard.common.ComplexCursorLoader;
 import org.mycard.common.Constants;
 import org.mycard.core.Controller;
-import org.mycard.provider.YGOCards;
+import org.mycard.ygo.provider.YGOCards;
 import org.mycard.utils.ResourceUtils;
 import org.mycard.widget.CustomActionBarView;
 import org.mycard.widget.adapter.CardAdapter;

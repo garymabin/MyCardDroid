@@ -7,7 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.mycard.model.data.BaseInfo;
-import org.mycard.model.data.RoomInfo;
+import org.mycard.ygo.YGORoomInfo;
 
 public class RoomDataWrapper extends BaseDataWrapper {
 
@@ -35,7 +35,7 @@ public class RoomDataWrapper extends BaseDataWrapper {
 	}
 
 	public BaseInfo getItem(int index) {
-		BaseInfo info = new RoomInfo();
+		BaseInfo info = new YGORoomInfo();
 		try {
 			info.initFromJsonData(mData.get(index));
 		} catch (JSONException e) {

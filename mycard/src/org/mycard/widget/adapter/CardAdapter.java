@@ -95,9 +95,6 @@ public class CardAdapter extends CursorAdapter implements IDataObserver{
 	protected int mRaceColumnId;
 	protected int mAttrColumnId;
 	
-	private String[] card_race;
-	private String[] card_attr;
-	
 	private List<String> mColumnNames;
 	
 	private int thumbnailImageHeightInPixel;
@@ -113,8 +110,6 @@ public class CardAdapter extends CursorAdapter implements IDataObserver{
 		
 		thumbnailImageHeightInPixel = context.getResources().getDimensionPixelSize(R.dimen.card_thumbnail_height);
 		thumbnailImageWidthInPixel = context.getResources().getDimensionPixelSize(R.dimen.card_image_width);
-		card_race = ResourceUtils.getStringArray(R.array.card_race);
-		card_attr = ResourceUtils.getStringArray(R.array.card_attr);
 		mAttachedListView = new WeakReference<ListView>(attachTarget);
 	}
 
@@ -137,8 +132,8 @@ public class CardAdapter extends CursorAdapter implements IDataObserver{
 			holder.mLevelText.setText(cursor.getString(mLevelColumnId));
 			holder.mAtkText.setText(cursor.getString(mATKColumnId));
 			holder.mDefText.setText(cursor.getString(mDEFColumnId));
-			holder.mRaceText.setText(card_race[getLog(cursor.getInt(mRaceColumnId))]);
-			holder.mAttrText.setText(card_attr[getLog(cursor.getInt(mAttrColumnId))]);
+			holder.mRaceText.setText(Model.peekInstance().getYGOCardRace(cursor.getInt(mRaceColumnId)));
+			holder.mAttrText.setText(Model.peekInstance().getYGOCardAttr(cursor.getInt(mAttrColumnId)));
 		}
 		
 	}
@@ -184,16 +179,6 @@ public class CardAdapter extends CursorAdapter implements IDataObserver{
 		}
 	}
 	
-	// 获取数值对应位移数
-	private int getLog(int value) {
-		int x = 0;
-		while (value > 1) {
-			value >>= 1;
-			x++;
-		}
-		return x;
-	}
-
 	@Override
 	public void notifyDataUpdate(Message msg) {
 		if (msg == null)

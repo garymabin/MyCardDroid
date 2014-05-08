@@ -11,8 +11,6 @@ import android.os.Build;
 public class DatabaseUtils {
     private static final String TAG = "DatabaseUtils";
 
-    private static final boolean DEBUG = false;
-
     /**
      * Fills the specified cursor window by iterating over the contents of the cursor.
      * The window is filled until the cursor is exhausted or the window runs out

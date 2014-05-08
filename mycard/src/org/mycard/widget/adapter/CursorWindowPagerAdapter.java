@@ -5,9 +5,10 @@ import android.database.CursorWindow;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
  
-public class CursorWindowPagerAdapter<F extends Fragment> extends FragmentStatePagerAdapter {
+public class CursorWindowPagerAdapter<F extends Fragment> extends FragmentPagerAdapter {
     protected final Class<F> fragmentClass;
     protected final String[] projection;
     protected CursorWindow mCursorWindow;

@@ -1,11 +1,11 @@
-package org.mycard.provider;
+package org.mycard.ygo.provider;
 
 import android.net.Uri;
 import android.provider.BaseColumns;
 
 public final class YGOCards {
 
-	public static final String AUTHROITY = "org.mycard.provider";
+	public static final String AUTHROITY = "org.mycard.ygo.provider";
 
 	public static final String[] COMMON_DATA_PROJECTION = new String[] {
 			Datas.ID_ALIAS, Datas.OT, Datas.TYPE, Datas.ATK, Datas.DEF, Datas.LEVEL,
@@ -19,14 +19,14 @@ public final class YGOCards {
 			Datas.RACE, Datas.ATTRIBUTE, Texts.NAME, Texts.DESC };
 
 	public static final Uri CONTENT_URI = Uri
-			.parse("content://org.mycard.provider/combined");
+			.parse("content://org.mycard.ygo.provider/combined");
 	
 	public static final int COMMON_DATA_PROJECTION_NAME_INDEX = 8;
 
 	public static final class Datas implements BaseColumns {
 
 		public static final Uri CONTENT_URI = Uri
-				.parse("content://org.mycard.provider/datas");
+				.parse("content://org.mycard.ygo.provider/datas");
 		
 		public static final String ID_ALIAS = "datas._id as _id";
 		/**
@@ -84,7 +84,7 @@ public final class YGOCards {
 	public static final class Texts implements BaseColumns {
 
 		public static final Uri CONTENT_URI = Uri
-				.parse("content://org.mycard.provider/texts");
+				.parse("content://org.mycard.ygo.provider/texts");
 
 		/**
 		 * Card name.

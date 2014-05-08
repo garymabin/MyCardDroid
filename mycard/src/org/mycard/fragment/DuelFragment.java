@@ -7,8 +7,8 @@ import org.mycard.common.Constants;
 import org.mycard.core.Controller;
 import org.mycard.model.Model;
 import org.mycard.model.data.ResourcesConstants;
-import org.mycard.model.data.RoomInfo;
 import org.mycard.model.data.wrapper.IBaseWrapper;
+import org.mycard.ygo.YGORoomInfo;
 
 import cn.garymb.ygodata.YGOGameOptions;
 import android.app.Activity;
@@ -220,7 +220,7 @@ public class DuelFragment extends TabFragment {
 						mExtraView.setVisibility(View.GONE);
 					}
 				}
-				List<RoomInfo> data = Model.peekInstance().getRooms();
+				List<YGORoomInfo> data = Model.peekInstance().getRooms();
 				int size = mFragments.size();
 				for (int i = 0; i < size; i++) {
 					RoomPageFragment f = ((RoomPageFragment) mFragments.get(i));
@@ -264,9 +264,9 @@ public class DuelFragment extends TabFragment {
 			} else {
 				options.mRoomPasswd = "";
 			}
-			List<RoomInfo> data = Model.peekInstance().getRooms();
-			RoomInfo target = null;
-			for (RoomInfo info : data) {
+			List<YGORoomInfo> data = Model.peekInstance().getRooms();
+			YGORoomInfo target = null;
+			for (YGORoomInfo info : data) {
 				if (info.name.equals(options.mRoomName) && isPrivate == info.privacy) {
 					target = info;
 					break;

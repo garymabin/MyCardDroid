@@ -1,4 +1,4 @@
-package org.mycard.model.data;
+package org.mycard.ygo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,14 +6,15 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.mycard.model.data.BaseInfo;
 
-public class RoomInfo extends BaseInfo {
+public class YGORoomInfo extends BaseInfo {
 	
 	public String name;
 	public boolean status;
 	public int serverId;
 	
-	public List<UserInfo> mUsers = new ArrayList<UserInfo>();
+	public List<YGOUserInfo> mUsers = new ArrayList<YGOUserInfo>();
 	public int mode = 0;
 	public int rule = -1;
 	public boolean privacy = false;
@@ -37,7 +38,7 @@ public class RoomInfo extends BaseInfo {
 		serverId = data.getInt(JSON_KEY_ROOM_SERVER_ID);
 		JSONArray usersArray = data.getJSONArray(JSON_KEY_ROOM_USERS);
 		for (int i = 0; i < usersArray.length(); i ++) {
-			UserInfo info = new UserInfo();
+			YGOUserInfo info = new YGOUserInfo();
 			info.initFromJsonData(usersArray.getJSONObject(i));
 			mUsers.add(info);
 		}
@@ -85,10 +86,10 @@ public class RoomInfo extends BaseInfo {
 	}
 	
 	@Override
-	public RoomInfo clone() {
-		RoomInfo info = (RoomInfo)super.clone();
-		info.mUsers = new ArrayList<UserInfo>();
-		for (UserInfo item : mUsers) {
+	public YGORoomInfo clone() {
+		YGORoomInfo info = (YGORoomInfo)super.clone();
+		info.mUsers = new ArrayList<YGOUserInfo>();
+		for (YGOUserInfo item : mUsers) {
 			info.mUsers.add(item.clone());
 		}
 		return info;

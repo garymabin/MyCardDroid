@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.mycard.R;
 import org.mycard.model.data.ResourcesConstants;
-import org.mycard.model.data.RoomInfo;
 import org.mycard.widget.adapter.RoomAdapter;
+import org.mycard.ygo.YGORoomInfo;
 
 import cn.garymb.ygodata.YGOGameOptions;
 import android.app.Activity;
@@ -25,7 +25,7 @@ public class RoomPageFragment extends BaseFragment implements OnItemClickListene
 	
 	private ListView mContentView;
 	private RoomAdapter mAdapter;
-	private List<RoomInfo> mData;
+	private List<YGORoomInfo> mData;
 	
 	private boolean isDataBinded = false;
 	
@@ -93,7 +93,7 @@ public class RoomPageFragment extends BaseFragment implements OnItemClickListene
 	 * 
 	 * @return
 	**/
-	/*package*/ void setData(List<RoomInfo> data) {
+	/*package*/ void setData(List<YGORoomInfo> data) {
 		mData = data;
 		if (mAdapter == null) {
 			Log.d(TAG, "create new adapter " + getArguments().getInt("index", 0));
@@ -114,7 +114,7 @@ public class RoomPageFragment extends BaseFragment implements OnItemClickListene
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		RoomInfo info = (RoomInfo) mAdapter.getItem(position);
+		YGORoomInfo info = (YGORoomInfo) mAdapter.getItem(position);
 		Bundle data = new Bundle();
 		YGOGameOptions options = new YGOGameOptions();
 		options.mName = "illusory";

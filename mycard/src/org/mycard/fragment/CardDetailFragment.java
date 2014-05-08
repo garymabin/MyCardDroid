@@ -2,8 +2,8 @@ package org.mycard.fragment;
 
 import org.mycard.R;
 import org.mycard.common.Constants;
-import org.mycard.provider.YGOCards;
 import org.mycard.widget.adapter.CardDetailAdapter;
+import org.mycard.ygo.provider.YGOCards;
 
 import android.app.Activity;
 import android.database.CursorWindow;
@@ -46,8 +46,10 @@ public class CardDetailFragment extends BaseFragment implements
 				.getStringArray(CardWikiFragment.BUNDLE_KEY_PROJECTION);
 		mInitPos = param.getInt(CardWikiFragment.BUNDLE_KEY_INIT_POSITON);
 		mWindow = param.getParcelable(CardWikiFragment.BUNDLE_KEY_CURSOR_WINDOW);
+		//FIXME: this may cause some problem.
+		param.remove(CardWikiFragment.BUNDLE_KEY_CURSOR_WINDOW);
 	}
-
+	
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);

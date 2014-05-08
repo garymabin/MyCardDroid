@@ -3,7 +3,6 @@ package org.mycard.fragment;
 import org.mycard.R;
 import org.mycard.common.Constants;
 import org.mycard.core.Controller;
-import org.mycard.core.images.AbstractImageItemController;
 import org.mycard.core.images.BitmapHolder;
 import org.mycard.core.images.ImageFileDownloadTaskHolder;
 import org.mycard.core.images.ImageViewImageItemController;
@@ -11,7 +10,7 @@ import org.mycard.model.IDataObserver;
 import org.mycard.model.Model;
 import org.mycard.model.data.ImageItem;
 import org.mycard.model.data.ImageItemInfoHelper;
-import org.mycard.provider.YGOCards;
+import org.mycard.ygo.provider.YGOCards;
 
 import android.app.Activity;
 import android.database.Cursor;
@@ -36,7 +35,6 @@ public class CardDetailPagerFragment extends BaseFragment implements LoaderCallb
 	private int mAttr;
 	private int mOT;
 	private int mLevel;
-	private String mName;
 	private String mID;
 	private int mAtk;
 	private int mDef;
@@ -73,7 +71,6 @@ public class CardDetailPagerFragment extends BaseFragment implements LoaderCallb
 		mAttr = Integer.parseInt(param.getString(YGOCards.Datas.ATTRIBUTE));
 		mOT = Integer.parseInt(param.getString(YGOCards.Datas.OT));
 		mLevel = Integer.parseInt(param.getString(YGOCards.Datas.LEVEL));
-		mName = param.getString(YGOCards.Texts.NAME);
 		mAtk = Integer.parseInt(param.getString(YGOCards.Datas.ATK));
 		mDef = Integer.parseInt(param.getString(YGOCards.Datas.DEF));
 	}
@@ -96,15 +93,16 @@ public class CardDetailPagerFragment extends BaseFragment implements LoaderCallb
 	**/
 	private View initView(LayoutInflater inflater) {
 		View view = inflater.inflate(R.layout.card_detail_pager, null);
+		final Model model = Model.peekInstance();
 		mCardDesView = (TextView) view.findViewById(R.id.card_des);
 		mCardWikiView = (TextView) view.findViewById(R.id.card_wiki);
-		((TextView)view.findViewById(R.id.card_type)).setText(mType + "");
-		((TextView)view.findViewById(R.id.card_race)).setText(mRace + "");
-		((TextView)view.findViewById(R.id.card_attr)).setText(mAttr + "");
-		((TextView)view.findViewById(R.id.card_ot)).setText(mOT + "");
-		((TextView)view.findViewById(R.id.card_level)).setText(mLevel + "");
-		((TextView)view.findViewById(R.id.card_atk)).setText(mAtk + "");
-		((TextView)view.findViewById(R.id.card_def)).setText(mDef + "");
+		((TextView)view.findViewById(R.id.card_type)).setText(model.getYGOCardType(mType));
+		((TextView)view.findViewById(R.id.card_race)).setText(model.getYGOCardRace(mRace));
+		((TextView)view.findViewById(R.id.card_attr)).setText(model.getYGOCardAttr(mAttr));
+		((TextView)view.findViewById(R.id.card_ot)).setText(model.getYGOCardOT(mOT));
+		((TextView)view.findViewById(R.id.card_level)).setText(mLevel == -1 ? "N/A": mLevel + "");
+		((TextView)view.findViewById(R.id.card_atk)).setText(mAtk >= 0 ? mAtk + "" : "?");
+		((TextView)view.findViewById(R.id.card_def)).setText(mDef >=0 ? mDef + "" : "?");
 		mImageItemController = new ImageViewImageItemController(mActivity,
 				(ImageView) view.findViewById(R.id.card_image));
 		mImageItem = new ImageItem(mID, mImageHeightInPixel, mImageWidthInPixel);
