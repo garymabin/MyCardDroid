@@ -76,7 +76,7 @@ public abstract class BaseFragment extends Fragment implements Handler.Callback,
 		}
 	}
 	
-	protected void showDialog(Bundle params, Fragment target, int requestCode) {
+	public void showDialog(Bundle params, Fragment target, int requestCode) {
 		// DialogFragment.show() will take care of adding the fragment
 		// in a transaction. We also want to remove any currently showing
 		// dialog, so make our own transaction and take care of that here.
@@ -88,13 +88,13 @@ public abstract class BaseFragment extends Fragment implements Handler.Callback,
 		ft.addToBackStack(null);
 
 		// Create and show the dialog.
-		RoomDetailFragment newFragment = RoomDetailFragment
+		CommonDialogFragment newFragment = CommonDialogFragment
 				.newInstance(params);
 		newFragment.setTargetFragment(target, requestCode);
 		newFragment.show(ft, "dialog");
 	}
 	
-	protected void showDialog(Bundle params) {
+	public void showDialog(Bundle params) {
 		// DialogFragment.show() will take care of adding the fragment
 		// in a transaction. We also want to remove any currently showing
 		// dialog, so make our own transaction and take care of that here.
@@ -106,7 +106,7 @@ public abstract class BaseFragment extends Fragment implements Handler.Callback,
 		ft.addToBackStack(null);
 
 		// Create and show the dialog.
-		RoomDetailFragment newFragment = RoomDetailFragment
+		CommonDialogFragment newFragment = CommonDialogFragment
 				.newInstance(params);
 		newFragment.show(ft, "dialog");
 	}

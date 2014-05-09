@@ -22,12 +22,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class RoomConfigController implements TextWatcher,
+public class RoomDialogConfigController extends BaseDialogConfigController implements TextWatcher,
 		OnItemSelectedListener, OnCheckedChangeListener {
-
-	private final RoomConfigUIBase mConfigUI;
-
-	private View mView;
 
 	private YGOGameOptions mOptions;
 
@@ -49,10 +45,9 @@ public class RoomConfigController implements TextWatcher,
 	
 	private int mMode;
 
-	public RoomConfigController(RoomConfigUIBase parent, View view,
+	public RoomDialogConfigController(DialogConfigUIBase parent, View view,
 			YGOGameOptions options, boolean isPrivate, int mode) {
-		mConfigUI = parent;
-		mView = view;
+		super(parent, view);
 		mOptions = options;
 		mMode = mode;
 

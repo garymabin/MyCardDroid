@@ -17,6 +17,10 @@ public interface ResourcesConstants {
 	
 	public static final String LOGIN_URL = "https://my-card.in/users/me.json?";
 	
+	public static final String DONATE_URL_WAP = "http://shenghuo.alipay.com/send/payment/fill.htm?optEmail=zh99998@gmail.com";
+	
+	public static final String DONATE_URL_MOBILE = "https://qr.alipay.com/ap2vghtyurv0kj0u62";
+	
 	public static final String DEFAULT_MC_SERVER_ADDR = "122.0.65.69";
 	
 	public static final int DEFAULT_MC_SERVER_PORT = 7911;
@@ -80,6 +84,7 @@ public interface ResourcesConstants {
 	public static final int DIALOG_MODE_CREATE_ROOM = 0;
 	public static final int DIALOG_MODE_QUICK_JOIN = 1;
 	public static final int DIALOG_MODE_JOIN_GAME = 2;
+	public static final int DIALOG_MODE_DONATE = 3;
 	
 	public static final String ROOM_INFO_NAME = "room.info.name";
 	public static final String ROOM_INFO_RULE = "room.info.rule";

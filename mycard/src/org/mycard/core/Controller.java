@@ -121,6 +121,14 @@ public class Controller {
 	public void unregisterForActionSettings(Handler h) {
 		mActionBarController.unregisterForActionSettings(h);
 	}
+	
+	public void registerForActionSupport(Handler h) {
+		mActionBarController.registerForActionSupport(h);
+	}
+	
+	public void unregisterForActionSupport(Handler h) {
+		mActionBarController.unregisterForActionSupport(h);
+	}
 
 	/**
 	 * 

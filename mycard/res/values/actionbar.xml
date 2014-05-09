@@ -10,4 +10,5 @@
     <item type="id" name="action_search"/>
     <item type="id" name="action_play"/>
     <item type="id" name="action_loading"/>
+    <item type="id" name="action_support"/>
 </resources>

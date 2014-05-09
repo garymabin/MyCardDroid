@@ -11,21 +11,24 @@ import android.os.Handler;
 import android.view.MenuItem;
 
 public class ActionBarController {
-	
+
 	private List<WeakReference<Handler>> mActionNewList;
 	private List<WeakReference<Handler>> mActionFilterList;
 	private List<WeakReference<Handler>> mActionSettingsList;
 	private List<WeakReference<Handler>> mActionPlayList;
 	private List<WeakReference<Handler>> mActionSearchList;
-	
+
+	private List<WeakReference<Handler>> mActionSupportList;
+
 	public ActionBarController() {
 		mActionNewList = new ArrayList<WeakReference<Handler>>();
 		mActionSettingsList = new ArrayList<WeakReference<Handler>>();
 		mActionPlayList = new ArrayList<WeakReference<Handler>>();
 		mActionSearchList = new ArrayList<WeakReference<Handler>>();
 		mActionFilterList = new ArrayList<WeakReference<Handler>>();
+		mActionSupportList = new ArrayList<WeakReference<Handler>>();
 	}
-	
+
 	public boolean handleAction(MenuItem item) {
 		boolean handled = true;
 		switch (item.getItemId()) {
@@ -33,7 +36,8 @@ public class ActionBarController {
 			// ????
 			break;
 		case R.id.action_settings:
-			notifyTarget(mActionSettingsList, Constants.ACTION_BAR_EVENT_TYPE_SETTINGS);
+			notifyTarget(mActionSettingsList,
+					Constants.ACTION_BAR_EVENT_TYPE_SETTINGS);
 			break;
 		case R.id.action_new:
 			notifyTarget(mActionNewList, Constants.ACTION_BAR_EVENT_TYPE_NEW);
@@ -42,18 +46,23 @@ public class ActionBarController {
 			notifyTarget(mActionPlayList, Constants.ACTION_BAR_EVENT_TYPE_PLAY);
 			break;
 		case R.id.action_search:
-			notifyTarget(mActionSearchList, Constants.ACTION_BAR_EVENT_TYPE_SEARCH);
+			notifyTarget(mActionSearchList,
+					Constants.ACTION_BAR_EVENT_TYPE_SEARCH);
 			break;
 		case R.id.action_filter:
-			notifyTarget(mActionFilterList, Constants.ACTION_BAR_EVENT_TYPE_FILTER);
+			notifyTarget(mActionFilterList,
+					Constants.ACTION_BAR_EVENT_TYPE_FILTER);
 			break;
+		case R.id.action_support:
+			notifyTarget(mActionSupportList,
+					Constants.ACTION_BAR_EVENT_TYPE_DONATE);
 		default:
 			handled = false;
 			break;
 		}
 		return handled;
 	}
-	
+
 	private void notifyTarget(List<WeakReference<Handler>> list, int msgType) {
 		for (WeakReference<Handler> item : list) {
 			Handler h = item.get();
@@ -62,17 +71,17 @@ public class ActionBarController {
 			}
 		}
 	}
-	
+
 	public void registerForActionNew(Handler h) {
 		WeakReference<Handler> ref = new WeakReference<Handler>(h);
 		mActionNewList.add(ref);
 	}
-	
+
 	public void registerForActionSearch(Handler h) {
 		WeakReference<Handler> ref = new WeakReference<Handler>(h);
 		mActionSearchList.add(ref);
 	}
-	
+
 	public void unregisterForActionSearch(Handler h) {
 		for (WeakReference<Handler> item : mActionSearchList) {
 			if (h == item.get()) {
@@ -83,12 +92,11 @@ public class ActionBarController {
 		}
 	}
 
-	
 	public void registerForActionFilter(Handler h) {
 		WeakReference<Handler> ref = new WeakReference<Handler>(h);
 		mActionFilterList.add(ref);
 	}
-	
+
 	public void unregisterForActionFilter(Handler h) {
 		for (WeakReference<Handler> item : mActionFilterList) {
 			if (h == item.get()) {
@@ -98,7 +106,7 @@ public class ActionBarController {
 			}
 		}
 	}
-	
+
 	public void unregisterForActionNew(Handler h) {
 		for (WeakReference<Handler> item : mActionNewList) {
 			if (h == item.get()) {
@@ -108,12 +116,12 @@ public class ActionBarController {
 			}
 		}
 	}
-	
+
 	public void registerForActionPlay(Handler h) {
 		WeakReference<Handler> ref = new WeakReference<Handler>(h);
 		mActionPlayList.add(ref);
 	}
-	
+
 	public void unregisterForActionPlay(Handler h) {
 		for (WeakReference<Handler> item : mActionPlayList) {
 			if (h == item.get()) {
@@ -123,12 +131,12 @@ public class ActionBarController {
 			}
 		}
 	}
-	
+
 	public void registerForActionSettings(Handler h) {
 		WeakReference<Handler> ref = new WeakReference<Handler>(h);
 		mActionSettingsList.add(ref);
 	}
-	
+
 	public void unregisterForActionSettings(Handler h) {
 		for (WeakReference<Handler> item : mActionSettingsList) {
 			if (h == item.get()) {
@@ -138,6 +146,20 @@ public class ActionBarController {
 			}
 		}
 	}
-	
+
+	public void registerForActionSupport(Handler h) {
+		WeakReference<Handler> ref = new WeakReference<Handler>(h);
+		mActionSupportList.add(ref);
+	}
+
+	public void unregisterForActionSupport(Handler h) {
+		for (WeakReference<Handler> item : mActionSupportList) {
+			if (h == item.get()) {
+				mActionSupportList.remove(item);
+				item = null;
+				break;
+			}
+		}
+	}
 
 }

@@ -3,10 +3,10 @@ package org.mycard.widget;
 import android.content.Context;
 import android.widget.Button;
 
-public interface RoomConfigUIBase {
+public interface DialogConfigUIBase {
 	Context getContext();
 	
-	RoomConfigController getController();
+	BaseDialogConfigController getController();
 	
 	void setPositiveButton(CharSequence text);
 	

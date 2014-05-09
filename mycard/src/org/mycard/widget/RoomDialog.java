@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class RoomDialog extends AlertDialog implements RoomConfigUIBase{
+public class RoomDialog extends AlertDialog implements DialogConfigUIBase{
 	
 	private final DialogInterface.OnClickListener mListener;
 	
@@ -21,7 +21,7 @@ public class RoomDialog extends AlertDialog implements RoomConfigUIBase{
 	
 	private int mMode;
 	
-	private RoomConfigController mController;
+	private RoomDialogConfigController mController;
 	
 	
 	public RoomDialog(Context context, DialogInterface.OnClickListener listener, YGOGameOptions options, boolean isPrivate, int mode) {
@@ -36,7 +36,7 @@ public class RoomDialog extends AlertDialog implements RoomConfigUIBase{
 	protected void onCreate(Bundle savedInstanceState) {
 		mView = getLayoutInflater().inflate(R.layout.room_detail_content, null);
 		setView(mView);
-		mController = new RoomConfigController(this, mView, mOptions, mIsPrivate, mMode);
+		mController = new RoomDialogConfigController(this, mView, mOptions, mIsPrivate, mMode);
 		setInverseBackgroundForced(true);
 		super.onCreate(savedInstanceState);
 		mController.enableSubmitIfAppropriate();
@@ -53,7 +53,7 @@ public class RoomDialog extends AlertDialog implements RoomConfigUIBase{
 	}
 
 	@Override
-	public RoomConfigController getController() {
+	public BaseDialogConfigController getController() {
 		return mController;
 	}
 

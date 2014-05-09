@@ -130,12 +130,14 @@ public class MainActivity extends ActionBarActivity implements
 	@Override
 	protected void onResume() {
 		mController.registerForActionSettings(mHandler);
+		mController.registerForActionSupport(mHandler);
 		super.onResume();
 	}
 	
 	@Override
 	protected void onPause() {
 		mController.unregisterForActionSettings(mHandler);
+		mController.unregisterForActionSupport(mHandler);
 		super.onPause();
 	}
 
@@ -317,6 +319,12 @@ public class MainActivity extends ActionBarActivity implements
 			Log.d(TAG, "receive settings click action");
 			Intent intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
+			break;
+		case Constants.ACTION_BAR_EVENT_TYPE_DONATE:
+			BaseFragment fragment = (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.content_frame);
+			Bundle bundle = new Bundle();
+			bundle.putInt(ResourcesConstants.MODE_OPTIONS, ResourcesConstants.DIALOG_MODE_DONATE);
+			fragment.showDialog(bundle);
 		default:
 			break;
 		}
