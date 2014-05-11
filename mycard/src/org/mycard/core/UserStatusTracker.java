@@ -1,6 +1,7 @@
 package org.mycard.core;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mycard.common.Constants;
@@ -24,6 +25,7 @@ public class UserStatusTracker extends Handler {
 	private Context mContext;
 	
 	public UserStatusTracker(Context context) {
+		mNotifyTargets = new ArrayList<WeakReference<Handler>>();
 		mContext = context;
 	}
 	
