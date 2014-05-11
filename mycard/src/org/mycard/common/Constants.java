@@ -42,6 +42,7 @@ public interface Constants {
 	public static final int ACTION_BAR_EVENT_TYPE_PLAY = 0x2003;
 	public static final int ACTION_BAR_EVENT_TYPE_FILTER = 0x2004;
 	public static final int ACTION_BAR_EVENT_TYPE_DONATE = 0x2005;
+	public static final int ACTION_BAR_EVENT_TYPE_PERSONAL_CENTER = 0x2006;
 	
 	
 	public static final int REQUEST_TYPE_UPDATE_SERVER = 0x3000;
