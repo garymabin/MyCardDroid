@@ -9,6 +9,7 @@ import org.mycard.widget.RoomDialog;
 import org.mycard.widget.RoomDialogConfigController;
 
 import cn.garymb.ygodata.YGOGameOptions;
+import cn.garymb.ygomobile.YGOMobileActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -149,7 +150,7 @@ public class CommonDialogFragment extends DialogFragment implements
 			case ResourcesConstants.DIALOG_MODE_CREATE_ROOM:
 			case ResourcesConstants.DIALOG_MODE_QUICK_JOIN:
 			case ResourcesConstants.DIALOG_MODE_JOIN_GAME: {
-				Intent intent = new Intent();
+				Intent intent = new Intent(getActivity(), YGOMobileActivity.class);
 				YGOGameOptions options = null ;
 				if (mDialogMode == DIALOG_MODE_CREATE_ROOM) {
 					options = ((RoomDialogConfigController) ((RoomDialog)dialog).getController()).getGameOption();
@@ -164,8 +165,8 @@ public class CommonDialogFragment extends DialogFragment implements
 					((DuelFragment)f).handleMessage(Message.obtain(null, getTargetRequestCode(), 0, 0, options));
 					return;
 				}
-				ComponentName component = new ComponentName("cn.garymb.ygomobile", "cn.garymb.ygomobile.YGOMobileActivity");
-				intent.setComponent(component);
+//				ComponentName component = new ComponentName("cn.garymb.ygomobile", "cn.garymb.ygomobile.YGOMobileActivity");
+//				intent.setComponent(component);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 				intent.putExtra(YGOGameOptions.YGO_GAME_OPTIONS_BUNDLE_KEY, options);
 				startActivity(intent);

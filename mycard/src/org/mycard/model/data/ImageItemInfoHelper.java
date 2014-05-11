@@ -9,9 +9,6 @@ import android.text.TextUtils;
 
 
 public final class ImageItemInfoHelper {
-	final static String SUFFIX_THUMNAIL = "t";
-	final static String SUFFIX_ORIGINAL = "o";
-	
 	final static String HTTP_PREFIX = "http://";
 	final static String HTTPS_PREFIX = "https://";
 	
@@ -73,7 +70,7 @@ public final class ImageItemInfoHelper {
 			return null;
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append(StaticApplication.peekInstance().getCardImagePath()).append(Constants.CARD_IMAGE_DIRECTORY);
+		sb.append(StaticApplication.peekInstance().getCardImagePath());
 		if (!new File(sb.toString()).exists()) {
 			new File(sb.toString()).mkdirs();
 		}

@@ -6,10 +6,22 @@ package org.mycard.common;
  */
 public interface Constants {
 	
-	public static final String WORKING_DIRECTORY = "/ygocore/";
+	public static final String WORKING_DIRECTORY = "/ygopro/";
 	
+	public static final String FONT_DIRECTORY = "/fonts/";
+	public static final String DEFAULT_FONT_NAME = "WQYMicroHei.ttf";
 	public static final String CARD_IMAGE_DIRECTORY = "/pics/";
-	public static final String THUMBNAIL_IMAGE_DIRECTORY = "/pics/thumbnail/";
+	public static final String THUMBNAIL_IMAGE_DIRECTORY = "/thumbnail/";
+	
+	public static final String CORE_CONFIG_PATH = "core";
+	
+	public static final String CORE_SKIN_PATH = "textures";
+	
+	public static final String DEFAULT_DECK_NAME = "new.ydk";
+	
+	public static final String DEFAULT_OGLES_CONFIG = "1";
+	
+	public static final String DEFAULT_CARD_QUALITY_CONFIG = "1";
 	
 	public static final int IO_BUFFER_SIZE = 8192;
 	public static final int TRANSACT_TIMEOUT = 2 * 60 * 1000;
@@ -31,6 +43,10 @@ public interface Constants {
 	public static final String PREF_FILE_COMMON = "pref_common";
 	public static final String PREF_KEY_LOGIN_STATUS = "pref_login_status";
 	public static final String PREF_KEY_LOGIN_NAME = "pref_login_name";
+	
+	public static final String PREF_KEY_DATA_VERSION = "pref_data_ver";
+	
+	public static final String PREF_KEY_LAST_DECK = "pref_last_deck";
 	
 	
 	public static final int ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE = 0x1000;

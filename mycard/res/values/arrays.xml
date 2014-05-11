@@ -70,17 +70,17 @@
         <item>OpenGL ES 2.0 builtin shaders</item>
     </string-array>
     
-    <integer-array name="opengl_version_value">
+    <string-array name="opengl_version_value">
         <item>0</item>
         <item>1</item>
         <item>2</item>
-    </integer-array>
+    </string-array>
     
     
-    <integer-array name="card_quality_value">
+    <string-array name="card_quality_value">
         <item>0</item>
         <item>1</item>
-    </integer-array>
+    </string-array>
     
         
     <string-array name="card_type">
@@ -146,5 +146,12 @@
         <item >卡通</item>
         <item >超量</item>
         <item >摇摆</item>
+    </string-array>
+    
+     <string-array name="duel_options">
+        <item >Cancel</item>
+        <item >R</item>
+        <item >S</item>
+        <item >A</item>
     </string-array>
 </resources>

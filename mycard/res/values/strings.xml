@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
 	<string name="mycard">My Card</string>
+	<string name="crash_title">应用程序崩溃</string>
+    <string name="crashed">w(ﾟДﾟ)w.. 萌卡崩溃啦！</string>
+    <string name="crash_dialog_comment_prompt">萌卡崩溃了喵，请将错误日志通过邮件发送给俺们喵，有其他想法可以在下面反馈喵!</string>
+    <string name="crash_dialog_ok_toast">感谢喵!</string>
     <string name="room_list">Rooms</string>
     <string name="action_settings">Settings</string>
     <string name="action_search">Search</string>
@@ -31,7 +35,13 @@
     <string name="item_def_text">防御力：</string>
     <string name="button_create">Create</string>
     <string name="button_join">Join</string>
+    <string name="button_ok">OK</string>
     <string name="button_cancel">Cancel</string>
+    <string name="cancel">Cancel</string>
+    <string name="refresh_texture">R</string>
+    <string name="ignore_chain">S</string>
+    <string name="react_chain">A</string>
+    <string name="combobox_choose_item">请选择一项</string>
     <string name="loading">Loading</string>
     <string name="ongoing">Ongoing</string>
     <string name="pending">Pending</string>
@@ -123,5 +133,6 @@
     <string name="settings_common_card_image_network_pref">Do not download card images while on mobile data plan</string>
     <string name="settings_game_card_quality">Card image quality</string>
     <string name="settings_game_card_path">Card image save path</string>
+    <string name="settings_game_font_path">Game font path</string>
     <string name="settings_game_opengl">OpenGL</string>
 </resources>

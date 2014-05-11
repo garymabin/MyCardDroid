@@ -2,6 +2,7 @@ package org.mycard.fragment;
 
 import java.util.List;
 
+import org.mycard.MainActivity;
 import org.mycard.R;
 import org.mycard.common.Constants;
 import org.mycard.core.Controller;
@@ -11,6 +12,7 @@ import org.mycard.model.data.wrapper.IBaseWrapper;
 import org.mycard.ygo.YGORoomInfo;
 
 import cn.garymb.ygodata.YGOGameOptions;
+import cn.garymb.ygomobile.YGOMobileActivity;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -288,9 +290,9 @@ public class DuelFragment extends TabFragment {
 					options.mStartHand = target.startHand == -1 ? 5 : target.startHand;
 					options.mStartLP = target.startLp == -1 ? 8000 : target.startLp;
 				} 
-				Intent intent = new Intent();
-				ComponentName component = new ComponentName("cn.garymb.ygomobile", "cn.garymb.ygomobile.YGOMobileActivity");
-				intent.setComponent(component);
+				Intent intent = new Intent(getActivity(), YGOMobileActivity.class);
+//				ComponentName component = new ComponentName("cn.garymb.ygomobile", "cn.garymb.ygomobile.YGOMobileActivity");
+//				intent.setComponent(component);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 				intent.putExtra(YGOGameOptions.YGO_GAME_OPTIONS_BUNDLE_KEY, options);
 				startActivity(intent);

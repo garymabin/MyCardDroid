@@ -162,7 +162,6 @@ public class ImageModelHelper {
 
 	/**
 	 * 清除指定的Bitmap缓存，具体实现见 {@link ImageLoadManager#resetCache(int)}
-	 * 场景举例：从图集正文返回到列表，则原图的缓存没有继续存在的价值
 	 * @param msg
 	 */
 	private void resetBitmapCache(Message msg) {

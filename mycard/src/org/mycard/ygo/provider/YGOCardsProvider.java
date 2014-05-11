@@ -49,12 +49,12 @@ public class YGOCardsProvider extends ContentProvider {
 				mDataBasePath = "/data/data/" + context.getPackageName()
 						+ "/databases/";
 			}
-			try {
-				createDataBase();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				createDataBase();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		}
 
 		/**
@@ -157,7 +157,7 @@ public class YGOCardsProvider extends ContentProvider {
 
 	}
 
-	private static final String DATABASE_NAME = "cards.cdb";
+	public static final String DATABASE_NAME = "cards.cdb";
 
 	private DataBaseHelper mOpenHelper;
 	private static final UriMatcher s_urlMatcher = new UriMatcher(
