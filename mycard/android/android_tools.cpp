@@ -390,7 +390,6 @@ void setLastDeck(android_app* app, const char* deckname) {
 			"(Ljava/lang/String;)V");
 	jstring deckstring = jni->NewStringUTF(deckname);
 	jni->CallVoidMethod(classApp, setDeckMethod, deckstring);
-	jni->DeleteLocalRef(deckstring);
 	jni->DeleteLocalRef(classApp);
 	jni->DeleteLocalRef(ClassNativeActivity);
 	app->activity->vm->DetachCurrentThread();

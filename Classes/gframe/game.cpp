@@ -1300,9 +1300,6 @@ void Game::LoadConfig() {
 	gameConf.roompass[0] = 0;
 }
 void Game::SaveConfig() {
-	char linebuf[256];
-	BufferIO::EncodeUTF8(gameConf.lastdeck, linebuf);
-	android::setLastDeck(appMain, linebuf);
 }
 void Game::ShowCardInfo(int code) {
 	CardData cd;

@@ -85,22 +85,31 @@ public class StaticApplication extends Application {
 		CrashSender sender = new CrashSender(this);
 		ACRA.getErrorReporter().setReportSender(sender);
 		mHttpFactory = new ThreadSafeHttpClientFactory(this);
+		mSettingsPref = PreferenceManager.getDefaultSharedPreferences(this);
+		Controller.peekInstance();
 		checkAndCopyCoreConfig();
 		checkAndCopyGameSkin();
 		checkAndCopyDatabase();
 		checkAndCopyFonts();
-		mSettingsPref = PreferenceManager.getDefaultSharedPreferences(this);
-		Controller.peekInstance();
 	}
 
 	private void checkAndCopyFonts() {
-
+		File file = new File(getFontPath());
+		if (!file.exists()) {
+			try {
+				Log.d("test", getFontPath());
+				copyRawData(getFontPath(), R.raw.fonts);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private void checkAndCopyDatabase() {
 		if (!checkDataBase()) {
 			try {
-				copyDataBase();
+				new File(mDataBasePath).mkdirs();
+				copyRawData(mDataBasePath + YGOCardsProvider.DATABASE_NAME, R.raw.cards);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -150,14 +159,12 @@ public class StaticApplication extends Application {
 		}
 	}
 
-	private void copyDataBase() throws IOException {
-		new File(mDataBasePath).mkdirs();
+	private void copyRawData(String path, int resId) throws IOException {
 		// Open your local db as the input stream
-		InputStream myInput = getResources().openRawResource(R.raw.cards);
+		InputStream myInput = getResources().openRawResource(resId);
 		// Path to the just created empty db
-		String outFileName = mDataBasePath + YGOCardsProvider.DATABASE_NAME;
 		// Open the empty db as the output stream
-		OutputStream myOutput = new FileOutputStream(outFileName);
+		OutputStream myOutput = new FileOutputStream(path);
 		// transfer bytes from the inputfile to the outputfile
 		byte[] buffer = new byte[1024];
 		int length;
@@ -351,7 +358,6 @@ public class StaticApplication extends Application {
 
 	public String getFontPath() {
 		return getDefaultResPath()
-				+ File.pathSeparator
 				+ Constants.FONT_DIRECTORY
 				+ mSettingsPref.getString(Settings.KEY_PREF_GAME_FONT_NAME,
 						getDefaultFontName());

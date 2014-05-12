@@ -66,11 +66,14 @@ public class GameSettingsFragment extends PreferenceFragment implements OnPrefer
 			mResPathPreference.setSummary((CharSequence) newValue);
 			mResPathPreference.setText((String) newValue);
 		} else if(preference.getKey().equals(Settings.KEY_PREF_GAME_OGLES_CONFIG)) {
+			mOGLESPreference.setValue((String) newValue);
 			mOGLESPreference.setSummary(mOGLESPreference.getEntry());
 		} else if(preference.getKey().equals(Settings.KEY_PREF_GAME_IMAGE_QUALITY)) {
+			mOGLESPreference.setValue((String) newValue);
 			mCardQualityPreference.setSummary(mCardQualityPreference.getEntry());
 		} else if (preference.getKey().equals(Settings.KEY_PREF_GAME_FONT_NAME)) {
-			mFontNamePreference.setSummary(mFontNamePreference.getValue());
+			mOGLESPreference.setValue((String) newValue);
+			mFontNamePreference.setSummary(mFontNamePreference.getEntry());
 		}
 		return false;
 	}

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-	<string name="mycard">My Card</string>
-	<string name="crash_title">应用程序崩溃</string>
+
+    <string name="mycard">My Card</string>
+    <string name="crash_title">应用程序崩溃</string>
     <string name="crashed">w(ﾟДﾟ)w.. 萌卡崩溃啦！</string>
     <string name="crash_dialog_comment_prompt">萌卡崩溃了喵，请将错误日志通过邮件发送给俺们喵，有其他想法可以在下面反馈喵!</string>
     <string name="crash_dialog_ok_toast">感谢喵!</string>
@@ -82,7 +83,6 @@
     <string name="action_filter_type_monster_spirit">灵魂</string>
     <string name="action_filter_type_monster_flip">反转</string>
     <string name="action_filter_type_monster_toon">怪物</string>
-    
     <string name="action_filter_property_land">地</string>
     <string name="action_filter_property_water">水</string>
     <string name="action_filter_property_hot">炎</string>
@@ -90,8 +90,6 @@
     <string name="action_filter_property_light">光</string>
     <string name="action_filter_property_dark">暗</string>
     <string name="action_filter_property_god">神</string>
-    
-    
     <string name="action_filter_race_warrior">战士</string>
     <string name="action_filter_race_magic">魔法使</string>
     <string name="action_filter_race_angel">天使</string>
@@ -116,12 +114,9 @@
     <string name="action_filter_race_telekenesis">念动力</string>
     <string name="action_filter_race_devine_beast">幻神兽</string>
     <string name="action_filter_race_bramna">创造神</string>
-    
-    
     <string name="settings_common">Common settings</string>
     <string name="settings_game">Game settings</string>
     <string name="settings_about">About</string>
-    
     <string name="donate">Donate</string>
     <string name="support_us_des">萌卡属于非盈利项目，依靠众人的捐助维持运作。如果您可以提供捐助帮助服务持续运行，我们将不胜感激。</string>
     <string name="support_via">您可以通过以下方式对我们进行捐助：</string>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="org.mycard"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.mycard"
     android:versionCode="1"
-    android:versionName="1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="10"
@@ -9,15 +10,15 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
-        android:name="StaticApplication"
+        android:name="org.mycard.StaticApplication"
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/mycard"
@@ -34,9 +35,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".setting.SettingsActivity"
+            android:name="org.mycard.setting.SettingsActivity"
             android:parentActivityName="org.mycard.MainActivity"
             android:theme="@style/AppTheme" >
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -46,8 +48,8 @@
             android:name="cn.garymb.ygomobile.YGOMobileActivity"
             android:clearTaskOnLaunch="true"
             android:configChanges="orientation|keyboardHidden"
-            android:label="YGOMobile"
             android:exported="true"
+            android:label="YGOMobile"
             android:launchMode="singleTask"
             android:screenOrientation="sensorLandscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
@@ -71,7 +73,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <provider
-            android:name=".ygo.provider.YGOCardsProvider"
+            android:name="org.mycard.ygo.provider.YGOCardsProvider"
             android:authorities="org.mycard.ygo.provider"
             android:exported="false" >
         </provider>
