@@ -131,6 +131,7 @@ public class MainActivity extends ActionBarActivity implements
 	protected void onResume() {
 		mController.registerForActionSettings(mHandler);
 		mController.registerForActionSupport(mHandler);
+		mController.registerForActionPersonalCenter(mHandler);
 		super.onResume();
 	}
 	
@@ -138,6 +139,7 @@ public class MainActivity extends ActionBarActivity implements
 	protected void onPause() {
 		mController.unregisterForActionSettings(mHandler);
 		mController.unregisterForActionSupport(mHandler);
+		mController.unregisterForActionPersonalCenter(mHandler);
 		super.onPause();
 	}
 
@@ -314,6 +316,9 @@ public class MainActivity extends ActionBarActivity implements
 	public boolean handleMessage(Message msg) {
 		switch (msg.what) {
 		case Constants.MSG_ID_UPDATE_SERVER:
+			break;
+		case Constants.ACTION_BAR_EVENT_TYPE_PERSONAL_CENTER:
+			navigateToFragment(FRAGMENT_ID_USER_STATUS);
 			break;
 		case Constants.ACTION_BAR_EVENT_TYPE_SETTINGS:
 			Log.d(TAG, "receive settings click action");

@@ -17,12 +17,13 @@ public class ActionBarController {
 	private List<WeakReference<Handler>> mActionSettingsList;
 	private List<WeakReference<Handler>> mActionPlayList;
 	private List<WeakReference<Handler>> mActionSearchList;
-
+	private List<WeakReference<Handler>> mActionPersonalCenterList;
 	private List<WeakReference<Handler>> mActionSupportList;
 
 	public ActionBarController() {
 		mActionNewList = new ArrayList<WeakReference<Handler>>();
 		mActionSettingsList = new ArrayList<WeakReference<Handler>>();
+		mActionPersonalCenterList = new ArrayList<WeakReference<Handler>>();
 		mActionPlayList = new ArrayList<WeakReference<Handler>>();
 		mActionSearchList = new ArrayList<WeakReference<Handler>>();
 		mActionFilterList = new ArrayList<WeakReference<Handler>>();
@@ -33,7 +34,8 @@ public class ActionBarController {
 		boolean handled = true;
 		switch (item.getItemId()) {
 		case R.id.action_personal_center:
-			// ????
+			notifyTarget(mActionPersonalCenterList,
+					Constants.ACTION_BAR_EVENT_TYPE_PERSONAL_CENTER);
 			break;
 		case R.id.action_settings:
 			notifyTarget(mActionSettingsList,
@@ -161,5 +163,19 @@ public class ActionBarController {
 			}
 		}
 	}
+	
+	public void registerForActionPersnalCenter(Handler h) {
+		WeakReference<Handler> ref = new WeakReference<Handler>(h);
+		mActionPersonalCenterList.add(ref);
+	}
 
+	public void unregisterForActionPersonalCenter(Handler h) {
+		for (WeakReference<Handler> item : mActionPersonalCenterList) {
+			if (h == item.get()) {
+				mActionPersonalCenterList.remove(item);
+				item = null;
+				break;
+			}
+		}
+	}
 }

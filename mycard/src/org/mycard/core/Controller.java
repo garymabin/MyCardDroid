@@ -129,6 +129,14 @@ public class Controller {
 	public void unregisterForActionSupport(Handler h) {
 		mActionBarController.unregisterForActionSupport(h);
 	}
+	
+	public void registerForActionPersonalCenter(Handler h) {
+		mActionBarController.registerForActionPersnalCenter(h);
+	}
+	
+	public void unregisterForActionPersonalCenter(Handler h) {
+		mActionBarController.unregisterForActionPersonalCenter(h);
+	}
 
 	/**
 	 * 
