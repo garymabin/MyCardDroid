@@ -97,7 +97,8 @@ public class StaticApplication extends Application {
 		File file = new File(getFontPath());
 		if (!file.exists()) {
 			try {
-				Log.d("test", getFontPath());
+				new File(getDefaultResPath()
+				+ Constants.FONT_DIRECTORY).mkdirs();
 				copyRawData(getFontPath(), R.raw.fonts);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -146,14 +147,6 @@ public class StaticApplication extends Application {
 		} finally {
 			db.endTransaction();
 		}
-		try {
-			db.beginTransaction();
-			db.execSQL("CREATE TABLE android_metadata (locale TEXT DEFAULT 'en_US');");
-			db.execSQL("INSERT INTO android_metadata VALUES ('en_US');");
-			db.setTransactionSuccessful();
-		} finally {
-			db.endTransaction();
-		}
 		if (db != null) {
 			db.close();
 		}
@@ -185,20 +178,7 @@ public class StaticApplication extends Application {
 		} else {
 			mDataBasePath = "/data/data/" + getPackageName() + "/databases/";
 		}
-		SQLiteDatabase checkDB = null;
-		try {
-			String myPath = mDataBasePath + YGOCardsProvider.DATABASE_NAME;
-			checkDB = SQLiteDatabase.openDatabase(myPath, null,
-					SQLiteDatabase.OPEN_READONLY);
-		} catch (Exception e) {
-			// catch all exception.
-			e.printStackTrace();
-		}
-		if (checkDB != null) {
-			checkDB.close();
-		}
-
-		return checkDB != null ? true : false;
+		return new File(mDataBasePath + YGOCardsProvider.DATABASE_NAME).exists();
 	}
 
 	private void checkAndCopyGameSkin() {
