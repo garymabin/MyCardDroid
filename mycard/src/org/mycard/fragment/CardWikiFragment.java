@@ -4,9 +4,12 @@ import org.mycard.R;
 import org.mycard.common.ComplexCursorLoader;
 import org.mycard.common.Constants;
 import org.mycard.core.Controller;
+import org.mycard.ygo.ICardFilter;
+import org.mycard.ygo.YGOCardFilter;
 import org.mycard.ygo.provider.YGOCards;
 import org.mycard.utils.ResourceUtils;
-import org.mycard.widget.CustomActionBarView;
+import org.mycard.widget.CardFilterActionBarView;
+import org.mycard.widget.CardFilterSelectionPanel;
 import org.mycard.widget.adapter.CardAdapter;
 
 import android.app.Activity;
@@ -59,13 +62,19 @@ public class CardWikiFragment extends BaseFragment implements
 
 	private CardAdapter mAdapter;
 	
-	private CustomActionBarView mActionBarView;
+	private CardFilterActionBarView mActionBarView;
 	private ListView listView;
 	private Context mContext;
 
 	private ActionMode mActionMode;
 	
 	private CursorWindow mCursorWindow;
+	
+	private ICardFilter mCardFilter;
+	
+	private CardFilterSelectionPanel mTypePanel;
+	private CardFilterSelectionPanel mRacePanel;
+	private CardFilterSelectionPanel mPropPanel;
 
 	/*
 	 * (non-Javadoc)
@@ -81,11 +90,15 @@ public class CardWikiFragment extends BaseFragment implements
 		case Constants.ACTION_BAR_EVENT_TYPE_FILTER:
 			Log.i(TAG, "receive action bar filter click event");
 			mActionMode = mActivity.startSupportActionMode(this);
-			mActionBarView = (CustomActionBarView) LayoutInflater.from(mActivity).inflate(R.layout.custom_actionbar_view, null);
+			mActionBarView = (CardFilterActionBarView) LayoutInflater.from(mActivity).inflate(R.layout.custom_actionbar_view, null);
 			mActionMode.setCustomView(mActionBarView);
-			mActionBarView.addNewPopupImage(R.menu.filter_type, R.string.action_filter_string_type, R.string.action_filter_none, this, false);
-			mActionBarView.addNewPopupImage(R.menu.filter_race, R.string.action_filter_string_race, R.string.action_filter_none, this, false);
-			mActionBarView.addNewPopupImage(R.menu.filter_property, R.string.action_filter_string_property, R.string.action_filter_none, this, false);
+			mTypePanel = mActionBarView.addNewPopupMenu(R.menu.filter_type, R.string.action_filter_string_type,
+					new int[]{R.array.card_type_none, R.array.card_monster_type, R.array.card_spell_type, R.array.card_trap_type}, this, false);
+			mTypePanel.setCardFilterDelegate(mCardFilter);
+			mRacePanel = mActionBarView.addNewPopupMenu(R.menu.filter_race, R.string.action_filter_string_race, new int[]{R.array.card_race}, this, false);
+			mRacePanel.setCardFilterDelegate(mCardFilter);
+			mPropPanel = mActionBarView.addNewPopupMenu(R.menu.filter_property, R.string.action_filter_string_property, new int[]{R.array.card_attr}, this, false);
+			mPropPanel.setCardFilterDelegate(mCardFilter);
 			break;
 
 		default:
@@ -112,6 +125,7 @@ public class CardWikiFragment extends BaseFragment implements
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		refreshActionBar();
+		mCardFilter = new YGOCardFilter();
 		mSelection = null;
 		mSelectionExtra = null;
 		mSortOrder = mProjects[5] + " desc";
@@ -196,7 +210,59 @@ public class CardWikiFragment extends BaseFragment implements
 
 	@Override
 	public boolean onMenuItemClick(MenuItem paramMenuItem) {
-		return false;
+		boolean handled = true;
+		switch (paramMenuItem.getGroupId()) {
+		case R.id.filter_group_monster:
+			handled = mTypePanel.setCurrentSelection(1, paramMenuItem.getOrder());
+			if (handled) {
+				mTypePanel.onFilter(ICardFilter.CARD_FILTER_TYPE, 0, paramMenuItem.getOrder(), null);
+				mSelection = mTypePanel.buildSelection();
+			}
+			break;
+		case R.id.filter_group_race:
+			handled = mRacePanel.setCurrentSelection(0, paramMenuItem.getOrder());
+			if (handled) {
+				mRacePanel.onFilter(ICardFilter.CARD_FILTER_RACE, paramMenuItem.getOrder(), 0, null);
+				mSelection = mRacePanel.buildSelection();
+			}
+			break;
+		case R.id.filter_group_property:
+			handled = mPropPanel.setCurrentSelection(0, paramMenuItem.getOrder());
+			if (handled) {
+				mPropPanel.onFilter(ICardFilter.CARD_FILTER_ATTR, paramMenuItem.getOrder(), 0, null);
+				mSelection = mPropPanel.buildSelection();
+			}
+			break;
+		case R.id.filter_group_spell:
+			handled = mTypePanel.setCurrentSelection(2, paramMenuItem.getOrder());
+			if (handled) {
+				mTypePanel.onFilter(ICardFilter.CARD_FILTER_TYPE, 1, paramMenuItem.getOrder(), null);
+				mSelection = mTypePanel.buildSelection();
+			}
+			break;
+		case R.id.filter_group_trap:
+			handled = mTypePanel.setCurrentSelection(3, paramMenuItem.getOrder());
+			if (handled) {
+				mTypePanel.onFilter(ICardFilter.CARD_FILTER_TYPE, 2, paramMenuItem.getOrder(), null);
+				mSelection = mTypePanel.buildSelection();
+			}
+			break;
+		case R.id.filter_group_type_none:
+			handled = mTypePanel.setCurrentSelection(0, 0);
+			if (handled) {
+				mTypePanel.onFilter(ICardFilter.CARD_FILTER_TYPE, ICardFilter.CARD_FILTER_TYPE_ALL, paramMenuItem.getOrder(), null);
+				mSelection = mTypePanel.buildSelection();
+			}
+			break;
+		default:
+			handled = false;
+			break;
+		}
+		if (handled) {
+			getLoaderManager().restartLoader(QUERY_SOURCE_LOADER_ID,
+					null, this);
+		}
+		return handled;
 	}
 
 	@Override

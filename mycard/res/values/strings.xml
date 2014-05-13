@@ -83,7 +83,9 @@
     <string name="action_filter_type_monster_union">同盟</string>
     <string name="action_filter_type_monster_spirit">灵魂</string>
     <string name="action_filter_type_monster_flip">反转</string>
-    <string name="action_filter_type_monster_toon">怪物</string>
+    <string name="action_filter_type_monster_toon">卡通</string>
+    <string name="action_filter_type_monster_pendulum">摇摆</string>
+    
     <string name="action_filter_property_land">地</string>
     <string name="action_filter_property_water">水</string>
     <string name="action_filter_property_hot">炎</string>
@@ -115,6 +117,8 @@
     <string name="action_filter_race_telekenesis">念动力</string>
     <string name="action_filter_race_devine_beast">幻神兽</string>
     <string name="action_filter_race_bramna">创造神</string>
+    <string name="action_filter_race_phantom_dragon">幻龙</string>
+    
     <string name="settings_common">Common settings</string>
     <string name="settings_game">Game settings</string>
     <string name="settings_about">About</string>

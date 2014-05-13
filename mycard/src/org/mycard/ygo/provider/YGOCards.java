@@ -21,6 +21,9 @@ public final class YGOCards {
 	public static final Uri CONTENT_URI = Uri
 			.parse("content://org.mycard.ygo.provider/combined");
 	
+	public static final int COMMON_DATA_PROJECTION_TYPE_INDEX = 2;
+	public static final int COMMON_DATA_PROJECTION_RACE_INDEX = 6;
+	public static final int COMMON_DATA_PROJECTION_ATTR_INDEX = 7;
 	public static final int COMMON_DATA_PROJECTION_NAME_INDEX = 8;
 
 	public static final class Datas implements BaseColumns {

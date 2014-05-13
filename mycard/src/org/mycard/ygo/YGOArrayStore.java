@@ -1,8 +1,12 @@
 package org.mycard.ygo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mycard.R;
 
 import android.content.res.Resources;
+import android.util.SparseIntArray;
 
 public class YGOArrayStore {
 	public static final int  TYPE_MONSTER		=	    0x1;        //
@@ -28,6 +32,46 @@ public class YGOArrayStore {
 	public static final int  TYPE_TOON			=		0x400000;	//
 	public static final int  TYPE_XYZ			=		0x800000;	//
 	public static final int  TYPE_PENDULUM		=		0x1000000;  //
+	
+	public static final List<SparseIntArray> sTypeMaps = new ArrayList<SparseIntArray>(3);
+	
+	static {
+		SparseIntArray monsterArray = new SparseIntArray();
+		//monster card
+		monsterArray.append(ICardFilter.CARD_FILTER_TYPE_MONSTER_ALL, TYPE_MONSTER);
+		monsterArray.append(ICardFilter.CARD_FILTER_TYPE_MONSTER_NORMAL, TYPE_NORMAL);
+		monsterArray.append(ICardFilter.CARD_FILTER_TYPE_MONSTER_EFFECT, TYPE_EFFECT);
+		monsterArray.append(ICardFilter.CARD_FILTER_TYPE_MONSTER_SYNRO, TYPE_SYNCHRO);
+		monsterArray.append(ICardFilter.CARD_FILTER_TYPE_MONSTER_TUNER, TYPE_TUNER);
+		monsterArray.append(ICardFilter.CARD_FILTER_TYPE_MONSTER_XYZ, TYPE_XYZ);
+		monsterArray.append(ICardFilter.CARD_FILTER_TYPE_MONSTER_FUSION, TYPE_FUSION);
+		monsterArray.append(ICardFilter.CARD_FILTER_TYPE_MONSTER_RITUAL, TYPE_RITUAL);
+		monsterArray.append(ICardFilter.CARD_FILTER_TYPE_MONSTER_SPIRIT, TYPE_SPIRIT);
+		monsterArray.append(ICardFilter.CARD_FILTER_TYPE_MONSTER_FLIP, TYPE_FLIP);
+		monsterArray.append(ICardFilter.CARD_FILTER_TYPE_MONSTER_GEMINI, TYPE_DUAL);
+		monsterArray.append(ICardFilter.CARD_FILTER_TYPE_MONSTER_UNION, TYPE_UNION);
+		monsterArray.append(ICardFilter.CARD_FILTER_TYPE_MONSTER_TOKEN, TYPE_TOKEN);
+		monsterArray.append(ICardFilter.CARD_FILTER_TYPE_MONSTER_TOON, TYPE_TOON);
+		monsterArray.append(ICardFilter.CARD_FILTER_TYPE_MONSTER_PENDULUM, TYPE_PENDULUM);
+		sTypeMaps.add(monsterArray);
+		
+		//spell card
+		SparseIntArray spellArray = new SparseIntArray();
+		spellArray.append(ICardFilter.CARD_FILTER_TYPE_SPELL_ALL, TYPE_SPELL);
+		spellArray.append(ICardFilter.CARD_FILTER_TYPE_SPELL_QUICK, TYPE_QUICKPLAY);
+		spellArray.append(ICardFilter.CARD_FILTER_TYPE_SPELL_CONTINUOUS, TYPE_CONTINUOUS);
+		spellArray.append(ICardFilter.CARD_FILTER_TYPE_SPELL_EQUIP, TYPE_EQUIP);
+		spellArray.append(ICardFilter.CARD_FILTER_TYPE_SPELL_FIELD, TYPE_FIELD);
+		sTypeMaps.add(spellArray);
+		
+		//trap card
+		SparseIntArray trapArray = new SparseIntArray();
+		trapArray.append(ICardFilter.CARD_FILTER_TYPE_TRAP_ALL, TYPE_TRAP);
+		trapArray.append(ICardFilter.CARD_FILTER_TYPE_TRAP_NOARMAL, TYPE_NORMAL);
+		trapArray.append(ICardFilter.CARD_FILTER_TYPE_TRAP_CONTINUOUS, TYPE_CONTINUOUS);
+		trapArray.append(ICardFilter.CARD_FILTER_TYPE_TRAP_COUNTER, TYPE_COUNTER);
+		sTypeMaps.add(trapArray);
+	}
 	
 	private String[] mOTArray;
 	
@@ -87,7 +131,7 @@ public class YGOArrayStore {
 			x++;
 		}
 		if (x < mRaceArray.length) {
-			return mRaceArray[x];
+			return mRaceArray[++x];
 		} else {
 			return mUnknown;
 		}
@@ -100,7 +144,7 @@ public class YGOArrayStore {
 			x++;
 		}
 		if (x < mAttrArray.length) {
-			return mAttrArray[x];
+			return mAttrArray[++x];
 		} else {
 			return mUnknown;
 		}

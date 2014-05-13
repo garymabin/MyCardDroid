@@ -17,7 +17,6 @@ import org.mycard.model.data.ImageItem;
 
 
 import org.mycard.model.data.ImageItemInfoHelper;
-import org.mycard.utils.ResourceUtils;
 
 import android.content.Context;
 import android.database.Cursor;

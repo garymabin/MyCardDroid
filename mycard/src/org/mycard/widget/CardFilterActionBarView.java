@@ -18,7 +18,7 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-public class CustomActionBarView extends RelativeLayout implements
+public class CardFilterActionBarView extends RelativeLayout implements
 		android.view.View.OnClickListener {
 
 	private ViewGroup mBasicPanel;
@@ -30,15 +30,15 @@ public class CustomActionBarView extends RelativeLayout implements
 	private View mNextNavigation;
 	private View mPrevNavigation;
 
-	public CustomActionBarView(Context context, AttributeSet attrs, int defStyle) {
+	public CardFilterActionBarView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
 
-	public CustomActionBarView(Context context, AttributeSet attrs) {
+	public CardFilterActionBarView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
-	public CustomActionBarView(Context context) {
+	public CardFilterActionBarView(Context context) {
 		super(context);
 	}
 
@@ -72,14 +72,14 @@ public class CustomActionBarView extends RelativeLayout implements
 		return spinner.getId();
 	}
 
-	public int addNewPopupImage(int menuRes, int typeRes, int desRes, OnMenuItemClickListener listener,
+	public CardFilterSelectionPanel addNewPopupMenu(int menuRes, int typeRes, int[] desResArrays, OnMenuItemClickListener listener,
 			boolean isExtended) {
-		ViewGroup panel = (ViewGroup) LayoutInflater.from(getContext())
-				.inflate(R.layout.custom_image, null);
+		CardFilterSelectionPanel panel = (CardFilterSelectionPanel) LayoutInflater.from(getContext())
+				.inflate(R.layout.card_filter_selection_panel, null);
 		TextView type = (TextView) panel.findViewById(R.id.type);
-		TextView des = (TextView) panel.findViewById(R.id.des);
+		panel.setId(typeRes);
 		type.setText(typeRes);
-		des.setText(desRes);
+		panel.setResourceArrays(desResArrays);
 		panel.setOnClickListener(this);
 		panel.setTag(R.id.custom_view_menu, menuRes);
 		panel.setTag(R.id.custom_view_listener, listener);
@@ -91,7 +91,7 @@ public class CustomActionBarView extends RelativeLayout implements
 		} else {
 			mMoreItemPanel.addView(panel);
 		}
-		return panel.getId();
+		return panel;
 	}
 
 	@Override

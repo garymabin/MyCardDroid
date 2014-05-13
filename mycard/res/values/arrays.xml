@@ -45,6 +45,7 @@
         <item >念动力</item>
         <item >幻神兽</item>
         <item >创造神</item>
+        <item >幻龙</item>
     </string-array>
     
     <string-array name="card_attr">
@@ -82,42 +83,47 @@
         <item>1</item>
     </string-array>
     
+    <string-array name="card_type_none">
+        <item >（无）</item>
+    </string-array>
         
     <string-array name="card_type">
+        <item >（无）</item>
         <item >怪兽</item>
         <item >魔法</item>
         <item >陷阱</item>
     </string-array>
     
     <string-array name="card_monster_type">
-        <item >通常</item>
-        <item >效果</item>
-        <item >融合</item>
-        <item >仪式</item>
-        <item >灵魂</item>
-        <item >同盟</item>
-        <item >二重</item>
-        <item >调整</item>
-        <item >同调</item>
-        <item >衍生物</item>
-        <item >反转</item>
-        <item >卡通</item>
-        <item >超量</item>
-        <item >摇摆</item>
+        <item >怪兽</item>
+        <item >怪兽｜通常</item>
+        <item >怪兽｜效果</item>
+        <item >怪兽｜同调</item>
+        <item >怪兽｜调整</item>
+        <item >怪兽｜超量</item>
+        <item >怪兽｜融合</item>
+        <item >怪兽｜仪式</item>
+        <item >怪兽｜灵魂</item>
+        <item >怪兽｜反转</item>
+        <item >怪兽｜二重</item>
+        <item >怪兽｜同盟</item>
+        <item >怪兽｜衍生物</item>
+        <item >怪兽｜卡通</item>
+        <item >怪兽｜摇摆</item>
     </string-array>
     
     <string-array name="card_spell_type">
-        <item >通常</item>
-        <item >速攻</item>
-        <item >永续</item>
-        <item >装备</item>
-        <item >场地</item>
+        <item >魔法</item>
+        <item >魔法｜速攻</item>
+        <item >魔法｜永续</item>
+        <item >魔法｜装备</item>
+        <item >魔法｜场地</item>
     </string-array>
     
     <string-array name="card_trap_type">
-        <item >通常</item>
-        <item >永续</item>
-        <item >反击</item>
+        <item >陷阱</item>
+        <item >陷阱｜永续</item>
+        <item >陷阱｜反击</item>
     </string-array>
     
      <string-array name="card_mix_type">

@@ -50,6 +50,7 @@ public class WebSocketConnector {
 				StringBuilder builder = new StringBuilder();
 				mWrapper.parse(builder.append(arg0));
 				mHandler.sendEmptyMessage(WebSocketThread.MSG_ID_DATA_UPDATE);
+				builder.delete(0, builder.length());
 			}
 
 			@Override
