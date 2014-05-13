@@ -135,6 +135,9 @@ public class CardWikiFragment extends BaseFragment implements
 	public void onDetach() {
 		super.onDetach();
 		mAdapter.onFragmentInactive();
+		mTypePanel.resetFilter();
+		mRacePanel.resetFilter();
+		mPropPanel.resetFilter();
 	}
 
 	private void refreshActionBar() {

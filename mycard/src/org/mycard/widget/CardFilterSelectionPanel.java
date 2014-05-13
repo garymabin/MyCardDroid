@@ -100,6 +100,9 @@ public class CardFilterSelectionPanel extends LinearLayout implements ICardFilte
 	}
 	@Override
 	public void resetFilter() {
+		mIndex = 0;
+		mSelection = 0;
+		saveLastSelection();
 		if (mCardFilterDelegate != null) {
 			mCardFilterDelegate.resetFilter();
 		}

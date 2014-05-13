@@ -33,6 +33,9 @@ public class YGOArrayStore {
 	public static final int  TYPE_XYZ			=		0x800000;	//
 	public static final int  TYPE_PENDULUM		=		0x1000000;  //
 	
+	
+	public static final int  CARD_LEVEL_MASK = 0xFFFF;
+	
 	public static final List<SparseIntArray> sTypeMaps = new ArrayList<SparseIntArray>(3);
 	
 	static {

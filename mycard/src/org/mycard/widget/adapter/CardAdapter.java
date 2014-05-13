@@ -17,6 +17,7 @@ import org.mycard.model.data.ImageItem;
 
 
 import org.mycard.model.data.ImageItemInfoHelper;
+import org.mycard.ygo.YGOArrayStore;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -136,11 +137,22 @@ public class CardAdapter extends CursorAdapter implements IDataObserver{
 				requestImage(item, false);
 			}
 			holder.mNameText.setText(cursor.getString(mNameColumnId));
-			holder.mLevelText.setText(cursor.getString(mLevelColumnId));
-			holder.mAtkText.setText(cursor.getString(mATKColumnId));
-			holder.mDefText.setText(cursor.getString(mDEFColumnId));
-			holder.mRaceText.setText(Model.peekInstance().getYGOCardRace(cursor.getInt(mRaceColumnId)));
-			holder.mAttrText.setText(Model.peekInstance().getYGOCardAttr(cursor.getInt(mAttrColumnId)));
+			if ((cursor.getInt(mTypeColumnId) & YGOArrayStore.TYPE_MONSTER) > 0) {
+				int atk = cursor.getInt(mATKColumnId);
+				int def = cursor.getInt(mDEFColumnId);
+				int level = cursor.getInt(mLevelColumnId);
+				holder.mLevelText.setText((level & YGOArrayStore.CARD_LEVEL_MASK) + "");
+				holder.mAtkText.setText(atk >= 0 ? atk + "" : "?");
+				holder.mDefText.setText(def >= 0 ? def + "" : "?");
+				holder.mRaceText.setText(Model.peekInstance().getYGOCardRace(cursor.getInt(mRaceColumnId)));
+				holder.mAttrText.setText(Model.peekInstance().getYGOCardAttr(cursor.getInt(mAttrColumnId)));
+			} else {
+				holder.mLevelText.setText("N/A");
+				holder.mAtkText.setText("N/A");
+				holder.mDefText.setText("N/A");
+				holder.mRaceText.setText("N/A");
+				holder.mAttrText.setText("N/A");
+			}
 		}
 		
 	}
