@@ -72,7 +72,7 @@ public class CardFilterActionBarView extends RelativeLayout implements
 		return spinner.getId();
 	}
 
-	public CardFilterSelectionPanel addNewPopupMenu(int menuRes, int typeRes, int[] desResArrays, OnMenuItemClickListener listener,
+	public CardFilterSelectionPanel addNewPopupMenu(int menuRes, int typeRes, int[] desResArrays, OnCardFilterChangeListener listener,
 			boolean isExtended) {
 		CardFilterSelectionPanel panel = (CardFilterSelectionPanel) LayoutInflater.from(getContext())
 				.inflate(R.layout.card_filter_selection_panel, null);
@@ -81,8 +81,9 @@ public class CardFilterActionBarView extends RelativeLayout implements
 		type.setText(typeRes);
 		panel.setResourceArrays(desResArrays);
 		panel.setOnClickListener(this);
+		panel.setCardFilterChangeListener(listener);
 		panel.setTag(R.id.custom_view_menu, menuRes);
-		panel.setTag(R.id.custom_view_listener, listener);
+		panel.setTag(R.id.custom_view_listener, (OnMenuItemClickListener)panel);
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
 		params.weight = 1.0f;
 		panel.setLayoutParams(params);

@@ -10,6 +10,8 @@ import org.mycard.ygo.provider.YGOCards;
 import org.mycard.utils.ResourceUtils;
 import org.mycard.widget.CardFilterActionBarView;
 import org.mycard.widget.CardFilterSelectionPanel;
+import org.mycard.widget.OnCardFilterChangeListener;
+import org.mycard.widget.SearchActionView;
 import org.mycard.widget.adapter.CardAdapter;
 
 import android.app.Activity;
@@ -21,12 +23,14 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.PopupMenu.OnMenuItemClickListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +39,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class CardWikiFragment extends BaseFragment implements
-		LoaderCallbacks<Cursor>, ActionMode.Callback, OnMenuItemClickListener, OnItemClickListener {
+		LoaderCallbacks<Cursor>, ActionMode.Callback, OnMenuItemClickListener, OnItemClickListener, OnCardFilterChangeListener {
 
 	public static final String BUNDLE_KEY_CURSOR_WINDOW = "cardwikifragment.bundle.key.cursor.window";
 	public static final String BUNDLE_KEY_PROJECTION = "cardwikifragment.bundle.key.projection";
@@ -75,6 +79,8 @@ public class CardWikiFragment extends BaseFragment implements
 	private CardFilterSelectionPanel mTypePanel;
 	private CardFilterSelectionPanel mRacePanel;
 	private CardFilterSelectionPanel mPropPanel;
+	
+	private SearchActionView mSearchView;
 
 	/*
 	 * (non-Javadoc)
@@ -86,6 +92,7 @@ public class CardWikiFragment extends BaseFragment implements
 		switch (msg.what) {
 		case Constants.ACTION_BAR_EVENT_TYPE_SEARCH:
 			Log.i(TAG, "receive action bar search click event");
+			mSearchView = (SearchActionView) MenuItemCompat.getActionView(mActivity.getMenu().findItem(R.id.action_search));
 			break;
 		case Constants.ACTION_BAR_EVENT_TYPE_FILTER:
 			Log.i(TAG, "receive action bar filter click event");
@@ -105,6 +112,12 @@ public class CardWikiFragment extends BaseFragment implements
 			break;
 		}
 		return false;
+	}
+	
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
 	}
 
 	@Override
@@ -163,7 +176,7 @@ public class CardWikiFragment extends BaseFragment implements
 		initCursorLoader();
 		return view;
 	}
-
+	
 	private void initCursorLoader() {
 		getLoaderManager().initLoader(QUERY_SOURCE_LOADER_ID, null, this);
 	}
@@ -276,6 +289,7 @@ public class CardWikiFragment extends BaseFragment implements
 		bundle.putInt(BUNDLE_KEY_INIT_POSITON, position);
 		bundle.putParcelable(BUNDLE_KEY_CURSOR_WINDOW, mCursorWindow);
 		mActivity.navigateToChildFragment(bundle, FRAGMENT_ID_CARD_DETAIL, REQUEST_ID_CARD_DETAIL);
+		mActionMode.finish();
 	}
 	
 	@Override
@@ -285,6 +299,14 @@ public class CardWikiFragment extends BaseFragment implements
 				refreshActionBar();
 			}
 		}
+	}
+
+
+	@Override
+	public void onChange(String newSelection) {
+		mSelection = newSelection;
+		getLoaderManager().restartLoader(QUERY_SOURCE_LOADER_ID,
+				null, this);
 	}
 
 }

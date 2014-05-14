@@ -112,6 +112,8 @@ public class MainActivity extends ActionBarActivity implements
 
 	private TextView mUserStatusDes;
 	
+	private Menu mMenu;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -187,8 +189,13 @@ public class MainActivity extends ActionBarActivity implements
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		mMenu = menu;
 		mActionBarCreator.createMenu(menu);
 		return super.onCreateOptionsMenu(menu);
+	}
+	
+	public Menu getMenu() {
+		return mMenu;
 	}
 
 	@Override

@@ -9,11 +9,13 @@ import org.mycard.ygo.ICardFilter;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.widget.PopupMenu.OnMenuItemClickListener;
 import android.util.AttributeSet;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class CardFilterSelectionPanel extends LinearLayout implements ICardFilter {
+public class CardFilterSelectionPanel extends LinearLayout implements ICardFilter, OnMenuItemClickListener{
 	
 	private static final String TAG = "CardFilterSelectionPanel";
 	
@@ -32,6 +34,8 @@ public class CardFilterSelectionPanel extends LinearLayout implements ICardFilte
 	private List<String[]> mSelectionArrays;
 	
 	private ICardFilter mCardFilterDelegate;
+	
+	private OnCardFilterChangeListener mListener;
 
 	public CardFilterSelectionPanel(Context context) {
 		this(context, null);
@@ -79,6 +83,10 @@ public class CardFilterSelectionPanel extends LinearLayout implements ICardFilte
 		mCardFilterDelegate = filter;
 	}
 	
+	public void setCardFilterChangeListener(OnCardFilterChangeListener listener) {
+		mListener = listener;
+	}
+	
 	public boolean setCurrentSelection(int index, int selection) {
 		boolean isChanged = false;
 		if (mIndex != index || mSelection != selection) {
@@ -103,6 +111,7 @@ public class CardFilterSelectionPanel extends LinearLayout implements ICardFilte
 		mIndex = 0;
 		mSelection = 0;
 		saveLastSelection();
+		mListener = null;
 		if (mCardFilterDelegate != null) {
 			mCardFilterDelegate.resetFilter();
 		}
@@ -113,5 +122,56 @@ public class CardFilterSelectionPanel extends LinearLayout implements ICardFilte
 			return mCardFilterDelegate.buildSelection();
 		}
 		return null;
+	}
+	@Override
+	public boolean onMenuItemClick(MenuItem paramMenuItem) {
+		boolean handled = true;
+		switch (paramMenuItem.getGroupId()) {
+		case R.id.filter_group_monster:
+			handled = setCurrentSelection(1, paramMenuItem.getOrder());
+			if (handled) {
+				onFilter(ICardFilter.CARD_FILTER_TYPE, 0, paramMenuItem.getOrder(), null);
+			}
+			break;
+		case R.id.filter_group_race:
+			handled = setCurrentSelection(0, paramMenuItem.getOrder());
+			if (handled) {
+				onFilter(ICardFilter.CARD_FILTER_RACE, paramMenuItem.getOrder(), 0, null);
+			}
+			break;
+		case R.id.filter_group_property:
+			handled = setCurrentSelection(0, paramMenuItem.getOrder());
+			if (handled) {
+				onFilter(ICardFilter.CARD_FILTER_ATTR, paramMenuItem.getOrder(), 0, null);
+			}
+			break;
+		case R.id.filter_group_spell:
+			handled = setCurrentSelection(2, paramMenuItem.getOrder());
+			if (handled) {
+				onFilter(ICardFilter.CARD_FILTER_TYPE, 1, paramMenuItem.getOrder(), null);
+			}
+			break;
+		case R.id.filter_group_trap:
+			handled = setCurrentSelection(3, paramMenuItem.getOrder());
+			if (handled) {
+				onFilter(ICardFilter.CARD_FILTER_TYPE, 2, paramMenuItem.getOrder(), null);
+			}
+			break;
+		case R.id.filter_group_type_none:
+			handled = setCurrentSelection(0, 0);
+			if (handled) {
+				onFilter(ICardFilter.CARD_FILTER_TYPE, ICardFilter.CARD_FILTER_TYPE_ALL, paramMenuItem.getOrder(), null);
+			}
+			break;
+		default:
+			handled = false;
+			break;
+		}
+		if (handled) {
+			if (mListener != null) {
+				mListener.onChange(buildSelection());
+			}
+		}
+		return handled;
 	}
 }

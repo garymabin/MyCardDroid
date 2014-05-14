@@ -82,29 +82,15 @@ public class YGOArrayStore {
 	
 	private String[] mAttrArray;
 	
-	private String[] mTypeArray;
-	
-	private String[] mMonsterTypeArray;
-	
-	private String[] mTrapTypeArray;
-	
-	private String[] mSpellTypeArray;
-	
 	private String[] mMixCardTypeArray;
 	
 	private String mUnknown = "???";
 	
 	public YGOArrayStore(Resources res) {
-		mTypeArray = res.getStringArray(R.array.card_type);
 		mOTArray = res.getStringArray(R.array.card_limit);
 		mRaceArray = res.getStringArray(R.array.card_race);
-		mTypeArray = res.getStringArray(R.array.card_type);
 		
 		mAttrArray = res.getStringArray(R.array.card_attr);
-		
-		mMonsterTypeArray = res.getStringArray(R.array.card_monster_type);
-		mSpellTypeArray = res.getStringArray(R.array.card_spell_type);
-		mTrapTypeArray = res.getStringArray(R.array.card_trap_type);
 		
 		mMixCardTypeArray = res.getStringArray(R.array.card_mix_type);
 	}
