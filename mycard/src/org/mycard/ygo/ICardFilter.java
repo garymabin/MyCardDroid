@@ -4,9 +4,11 @@ import android.os.Bundle;
 
 public interface ICardFilter {
 	
-	public static final int CARD_FILTER_TYPE = 0;
-	public static final int CARD_FILTER_RACE = 1;
-	public static final int CARD_FILTER_ATTR = 2;
+	public static final int CARD_FILTER_MONSTER_TYPE = 0;
+	public static final int CARD_FILTER_SPELL_TYPE = 1;
+	public static final int CARD_FILTER_TRAP_TYPE = 2;
+	public static final int CARD_FILTER_RACE = 3;
+	public static final int CARD_FILTER_ATTR = 4;
 	
 	public static final int CARD_FILTER_TYPE_ALL =  0xFFFF; 
 	
@@ -55,15 +57,15 @@ public interface ICardFilter {
 	public static final int CARD_FILTER_RACE_THUNDER = 0xd;
 	public static final int CARD_FILTER_RACE_DRAGON = 0xe;
 	public static final int CARD_FILTER_RACE_BEAST = 0xf;
-	public static final int CARD_FILTER_RACE_BEASTWARRIOR = 0x0;
-	public static final int CARD_FILTER_RACE_DINOSAUR = 0x1;
-	public static final int CARD_FILTER_RACE_FISH = 0x2;
-	public static final int CARD_FILTER_RACE_SEASERPENT = 0x3;
-	public static final int CARD_FILTER_RACE_REPTILE = 0x4;
-	public static final int CARD_FILTER_RACE_PSYCHO = 0x5;
-	public static final int CARD_FILTER_RACE_DEVINE = 0x6;
-	public static final int CARD_FILTER_RACE_CREATORGOD = 0x7;
-	public static final int CARD_FILTER_RACE_PHANTOMDRAGON = 0x8;
+	public static final int CARD_FILTER_RACE_BEASTWARRIOR = 0x10;
+	public static final int CARD_FILTER_RACE_DINOSAUR = 0x11;
+	public static final int CARD_FILTER_RACE_FISH = 0x12;
+	public static final int CARD_FILTER_RACE_SEASERPENT = 0x13;
+	public static final int CARD_FILTER_RACE_REPTILE = 0x14;
+	public static final int CARD_FILTER_RACE_PSYCHO = 0x15;
+	public static final int CARD_FILTER_RACE_DEVINE = 0x16;
+	public static final int CARD_FILTER_RACE_CREATORGOD = 0x17;
+	public static final int CARD_FILTER_RACE_PHANTOMDRAGON = 0x18;
 	
 	public static final int CARD_FILTER_ATTR_ALL = 0x0;
 	public static final int CARD_FILTER_ATTR_EARTH = 0x1;
@@ -75,7 +77,7 @@ public interface ICardFilter {
 	public static final int CARD_FILTER_ATTR_DEVINE = 0x7;
 	
 	
-	void onFilter(int type, int arg1, int arg2, Bundle obj);
+	void onFilter(int type, int arg1, Bundle obj);
 	
 	void resetFilter();
 	

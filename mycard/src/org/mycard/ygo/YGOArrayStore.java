@@ -9,29 +9,62 @@ import android.content.res.Resources;
 import android.util.SparseIntArray;
 
 public class YGOArrayStore {
-	public static final int  TYPE_MONSTER		=	    0x1;        //
-	public static final int  TYPE_SPELL			=		0x2;		//
-	public static final int  TYPE_TRAP			=	    0x4;		//
-	public static final int  TYPE_NORMAL		=		0x10;		//
-	public static final int  TYPE_EFFECT		=		0x20;		//
-	public static final int  TYPE_FUSION		=		0x40;		//
-	public static final int  TYPE_RITUAL		=		0x80;		//
-	public static final int  TYPE_TRAPMONSTER 	=    	0x100;		//
-	public static final int  TYPE_SPIRIT		=		0x200;		//
-	public static final int  TYPE_UNION			=		0x400;		//
-	public static final int  TYPE_DUAL			=		0x800;		//
-	public static final int  TYPE_TUNER			=		0x1000;		//
-	public static final int  TYPE_SYNCHRO		=		0x2000;	    //
-	public static final int  TYPE_TOKEN			=		0x4000;		//
-	public static final int  TYPE_QUICKPLAY		=		0x10000;	//
-	public static final int  TYPE_CONTINUOUS	=		0x20000;	//
-	public static final int  TYPE_EQUIP			=		0x40000;	//
-	public static final int  TYPE_FIELD			=		0x80000;	//
-	public static final int  TYPE_COUNTER		=		0x100000;	//
-	public static final int  TYPE_FLIP			=		0x200000;	//
-	public static final int  TYPE_TOON			=		0x400000;	//
-	public static final int  TYPE_XYZ			=		0x800000;	//
-	public static final int  TYPE_PENDULUM		=		0x1000000;  //
+	public static final int TYPE_MONSTER		=	    0x1;        //
+	public static final int TYPE_SPELL			=		0x2;		//
+	public static final int TYPE_TRAP			=	    0x4;		//
+	public static final int TYPE_NORMAL			=		0x10;		//
+	public static final int TYPE_EFFECT			=		0x20;		//
+	public static final int TYPE_FUSION			=		0x40;		//
+	public static final int TYPE_RITUAL			=		0x80;		//
+	public static final int TYPE_TRAPMONSTER 	=    	0x100;		//
+	public static final int TYPE_SPIRIT			=		0x200;		//
+	public static final int TYPE_UNION			=		0x400;		//
+	public static final int TYPE_DUAL			=		0x800;		//
+	public static final int TYPE_TUNER			=		0x1000;		//
+	public static final int TYPE_SYNCHRO		=		0x2000;	    //
+	public static final int TYPE_TOKEN			=		0x4000;		//
+	public static final int TYPE_QUICKPLAY		=		0x10000;	//
+	public static final int TYPE_CONTINUOUS		=		0x20000;	//
+	public static final int TYPE_EQUIP			=		0x40000;	//
+	public static final int TYPE_FIELD			=		0x80000;	//
+	public static final int TYPE_COUNTER		=		0x100000;	//
+	public static final int TYPE_FLIP			=		0x200000;	//
+	public static final int TYPE_TOON			=		0x400000;	//
+	public static final int TYPE_XYZ			=		0x800000;	//
+	public static final int TYPE_PENDULUM		=		0x1000000;  //
+
+	public static final int RACE_WARRIOR		=		0x1;			//
+	public static final int RACE_SPELLCASTER	=		0x2;			//
+	public static final int RACE_FAIRY			=		0x4;			//
+	public static final int RACE_FIEND			=		0x8;			//
+	public static final int RACE_ZOMBIE			=		0x10;		//
+	public static final int RACE_MACHINE		=		0x20;		//
+	public static final int RACE_AQUA			=		0x40;		//
+	public static final int RACE_PYRO			=		0x80;		//
+	public static final int RACE_ROCK			=		0x100;		//
+	public static final int RACE_WINDBEAST		=		0x200;		//
+	public static final int RACE_PLANT			=		0x400;		//
+	public static final int RACE_INSECT			=		0x800;		//
+	public static final int RACE_THUNDER		=		0x1000;		//
+	public static final int RACE_DRAGON			=		0x2000;		//
+	public static final int RACE_BEAST			=		0x4000;		//
+	public static final int RACE_BEASTWARRIOR	=		0x8000;		//
+	public static final int RACE_DINOSAUR		=		0x10000;		//
+	public static final int RACE_FISH			=		0x20000;		//
+	public static final int RACE_SEASERPENT		=		0x40000;		//
+	public static final int RACE_REPTILE		=		0x80000;		//
+	public static final int RACE_PSYCHO			=		0x100000;	//
+	public static final int RACE_DEVINE			=		0x200000;	//
+	public static final int RACE_CREATORGOD		=		0x400000;	//
+	public static final int RACE_PHANTOMDRAGON	=		0x800000;	//
+	
+	public static final int ATTRIBUTE_EARTH		=		0x01;		//
+	public static final int ATTRIBUTE_WATER		=		0x02;		//
+	public static final int ATTRIBUTE_FIRE		=		0x04;		//
+	public static final int ATTRIBUTE_WIND		=		0x08;		//
+	public static final int ATTRIBUTE_LIGHT		=		0x10;		//
+	public static final int ATTRIBUTE_DARK		=		0x20;		//
+	public static final int ATTRIBUTE_DEVINE	=		0x40;		//
 	
 	
 	public static final int  CARD_LEVEL_MASK = 0xFFFF;
@@ -74,6 +107,49 @@ public class YGOArrayStore {
 		trapArray.append(ICardFilter.CARD_FILTER_TYPE_TRAP_CONTINUOUS, TYPE_CONTINUOUS);
 		trapArray.append(ICardFilter.CARD_FILTER_TYPE_TRAP_COUNTER, TYPE_COUNTER);
 		sTypeMaps.add(trapArray);
+		
+		//race
+		SparseIntArray raceArray = new SparseIntArray();
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_ALL, 0xFFFFFF);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_WARRIOR, RACE_WARRIOR);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_SPELLCASTER, RACE_SPELLCASTER);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_FAIRY, RACE_FAIRY);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_FIEND, RACE_FIEND);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_ZOMBIE, RACE_ZOMBIE);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_MACHINE, RACE_MACHINE);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_AQUA, RACE_AQUA);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_PYRO, RACE_PYRO);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_ROCK, RACE_ROCK);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_WINDBEAST, RACE_WINDBEAST);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_PLANT, RACE_PLANT);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_INSECT, RACE_INSECT);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_THUNDER, RACE_THUNDER);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_DRAGON, RACE_DRAGON);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_BEAST, RACE_BEAST);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_BEASTWARRIOR, RACE_BEASTWARRIOR);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_DINOSAUR, RACE_DINOSAUR);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_FISH, RACE_FISH);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_SEASERPENT, RACE_SEASERPENT);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_REPTILE, RACE_REPTILE);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_PSYCHO, RACE_PSYCHO);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_DEVINE, RACE_DEVINE);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_CREATORGOD, RACE_CREATORGOD);
+		raceArray.append(ICardFilter.CARD_FILTER_RACE_PHANTOMDRAGON, RACE_PHANTOMDRAGON);
+		sTypeMaps.add(raceArray);
+		
+		//attribute
+		SparseIntArray attrArray = new SparseIntArray();
+		attrArray.append(ICardFilter.CARD_FILTER_ATTR_ALL, 0xFF);
+		attrArray.append(ICardFilter.CARD_FILTER_ATTR_EARTH, ATTRIBUTE_EARTH);
+		attrArray.append(ICardFilter.CARD_FILTER_ATTR_WATER, ATTRIBUTE_WATER);
+		attrArray.append(ICardFilter.CARD_FILTER_ATTR_FIRE, ATTRIBUTE_FIRE);
+		attrArray.append(ICardFilter.CARD_FILTER_ATTR_WIND, ATTRIBUTE_WIND);
+		attrArray.append(ICardFilter.CARD_FILTER_ATTR_LIGHT, ATTRIBUTE_LIGHT);
+		attrArray.append(ICardFilter.CARD_FILTER_ATTR_DARK, ATTRIBUTE_DARK);
+		attrArray.append(ICardFilter.CARD_FILTER_ATTR_DEVINE, ATTRIBUTE_DEVINE);
+		
+		sTypeMaps.add(attrArray);
+		
 	}
 	
 	private String[] mOTArray;

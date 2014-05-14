@@ -55,7 +55,7 @@ public class CardDetailFragment extends BaseFragment implements
 		super.onAttach(activity);
 		mActivity.onActionBarChange(
 				Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE,
-				FRAGMENT_ID_CARD_DETAIL, null);
+				FRAGMENT_ID_CARD_DETAIL, 0, null);
 	}
 	
 	@Override

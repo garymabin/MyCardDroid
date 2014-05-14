@@ -220,7 +220,7 @@ public class YGOCardsProvider extends ContentProvider {
 		try {
 			if (match == CARD_COMBINED) {
 				if (selection != null && selection.length() > 0){  
-                    selection += "AND datas." + YGOCards.Datas._ID + " = texts."+YGOCards.Texts._ID;  
+                    selection += "AND (datas." + YGOCards.Datas._ID + " = texts."+YGOCards.Texts._ID + ")";  
                 }  
                 else{  
                     selection = "datas." + YGOCards.Datas._ID + " = texts." + YGOCards.Texts._ID;  

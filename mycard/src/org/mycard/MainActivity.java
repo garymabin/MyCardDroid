@@ -288,7 +288,7 @@ public class MainActivity extends ActionBarActivity implements
 	}
 
 	@Override
-	public void onActionBarChange(int msgType, int action, Object extra) {
+	public void onActionBarChange(int msgType, int action, int arg1, Object extra) {
 		// TODO Auto-generated method stub
 		switch (msgType) {
 		case Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE:
@@ -296,7 +296,7 @@ public class MainActivity extends ActionBarActivity implements
 				mActionBarCreator = new ActionBarCreator(this).setRoomCreate(
 						true).setPlay(true);
 			} else if (action == FRAGMENT_ID_CARD_WIKI) {
-				mActionBarCreator = new ActionBarCreator(this).setFilter(true).setSearch(true);
+				mActionBarCreator = new ActionBarCreator(this).setFilter(true).setSearch(true, arg1);
 			} else {
 				mActionBarCreator = new ActionBarCreator(this);
 			}

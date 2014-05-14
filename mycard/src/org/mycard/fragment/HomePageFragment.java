@@ -13,7 +13,7 @@ public class HomePageFragment extends BaseFragment {
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		mActivity.onActionBarChange(Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE,
-				FRAGMENT_ID_MY_CARD, null);
+				FRAGMENT_ID_MY_CARD, 0, null);
 	}
 
 	/* (non-Javadoc)

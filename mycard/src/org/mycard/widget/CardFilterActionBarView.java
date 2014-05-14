@@ -53,7 +53,7 @@ public class CardFilterActionBarView extends RelativeLayout implements
 		mPrevNavigation = findViewById(R.id.navigation_previous);
 		mNextNavigation.setOnClickListener(this);
 	}
-
+	
 	public int addNewSpinner(int promptRes, int entryRes,
 			OnItemSelectedListener listener, boolean isExtended) {
 		Spinner spinner = (Spinner) LayoutInflater.from(getContext()).inflate(

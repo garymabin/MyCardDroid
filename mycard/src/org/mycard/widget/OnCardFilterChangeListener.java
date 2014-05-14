@@ -1,5 +1,5 @@
 package org.mycard.widget;
 
 public interface OnCardFilterChangeListener {
-	void onChange(String newSelection);
+	void onChange(int type, String newSelection);
 }

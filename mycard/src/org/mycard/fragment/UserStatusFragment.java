@@ -25,7 +25,7 @@ public class UserStatusFragment extends BaseFragment {
 		super.onAttach(activity);
 		mActivity.onActionBarChange(
 				Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE,
-				FRAGMENT_ID_USER_STATUS, null);
+				FRAGMENT_ID_USER_STATUS, 0, null);
 		Controller.peekInstance().registerForLoginStatusChange(mHandler);
 		mProgressDialog = new ProgressDialog(activity);
 		mProgressDialog.setMessage(activity.getString(R.string.logging));

@@ -30,6 +30,8 @@ public class ActionBarCreator {
 	private boolean mFilter = false;
 
 	private boolean mSupport = true;
+	
+	private int mSearchResId;
 
 	public ActionBarCreator setPersonalCenter(boolean userStatus) {
 		mPersonalCenter = userStatus;
@@ -46,8 +48,9 @@ public class ActionBarCreator {
 		return this;
 	}
 
-	public ActionBarCreator setSearch(boolean search) {
+	public ActionBarCreator setSearch(boolean search, int resID) {
 		mSearch = search;
+		mSearchResId = resID;
 		return this;
 	}
 
@@ -131,8 +134,7 @@ public class ActionBarCreator {
 							item,
 							MenuItemCompat.SHOW_AS_ACTION_ALWAYS
 									| MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-			MenuItemCompat.setActionView(item,
-					R.layout.custom_actionbar_searchview);
+			MenuItemCompat.setActionView(item, mSearchResId);
 		}
 		if (mRoomCreate) {
 			MenuItem item = menu

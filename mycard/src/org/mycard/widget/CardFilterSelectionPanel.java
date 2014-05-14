@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.mycard.R;
 import org.mycard.ygo.ICardFilter;
+import org.mycard.ygo.YGOCardSelectionBuilder;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -101,9 +102,9 @@ public class CardFilterSelectionPanel extends LinearLayout implements ICardFilte
 
 
 	@Override
-	public void onFilter(int type, int arg1, int arg2, Bundle obj) {
+	public void onFilter(int type, int arg1, Bundle obj) {
 		if (mCardFilterDelegate != null) {
-			mCardFilterDelegate.onFilter(type, arg1, arg2, obj);
+			mCardFilterDelegate.onFilter(type, arg1, obj);
 		}
 	}
 	@Override
@@ -130,37 +131,37 @@ public class CardFilterSelectionPanel extends LinearLayout implements ICardFilte
 		case R.id.filter_group_monster:
 			handled = setCurrentSelection(1, paramMenuItem.getOrder());
 			if (handled) {
-				onFilter(ICardFilter.CARD_FILTER_TYPE, 0, paramMenuItem.getOrder(), null);
+				onFilter(ICardFilter.CARD_FILTER_MONSTER_TYPE, paramMenuItem.getOrder(), null);
 			}
 			break;
 		case R.id.filter_group_race:
 			handled = setCurrentSelection(0, paramMenuItem.getOrder());
 			if (handled) {
-				onFilter(ICardFilter.CARD_FILTER_RACE, paramMenuItem.getOrder(), 0, null);
+				onFilter(ICardFilter.CARD_FILTER_RACE, paramMenuItem.getOrder(), null);
 			}
 			break;
 		case R.id.filter_group_property:
 			handled = setCurrentSelection(0, paramMenuItem.getOrder());
 			if (handled) {
-				onFilter(ICardFilter.CARD_FILTER_ATTR, paramMenuItem.getOrder(), 0, null);
+				onFilter(ICardFilter.CARD_FILTER_ATTR, paramMenuItem.getOrder(), null);
 			}
 			break;
 		case R.id.filter_group_spell:
 			handled = setCurrentSelection(2, paramMenuItem.getOrder());
 			if (handled) {
-				onFilter(ICardFilter.CARD_FILTER_TYPE, 1, paramMenuItem.getOrder(), null);
+				onFilter(ICardFilter.CARD_FILTER_SPELL_TYPE, paramMenuItem.getOrder(), null);
 			}
 			break;
 		case R.id.filter_group_trap:
 			handled = setCurrentSelection(3, paramMenuItem.getOrder());
 			if (handled) {
-				onFilter(ICardFilter.CARD_FILTER_TYPE, 2, paramMenuItem.getOrder(), null);
+				onFilter(ICardFilter.CARD_FILTER_TRAP_TYPE, paramMenuItem.getOrder(), null);
 			}
 			break;
 		case R.id.filter_group_type_none:
 			handled = setCurrentSelection(0, 0);
 			if (handled) {
-				onFilter(ICardFilter.CARD_FILTER_TYPE, ICardFilter.CARD_FILTER_TYPE_ALL, paramMenuItem.getOrder(), null);
+				onFilter(ICardFilter.CARD_FILTER_TYPE_ALL, ICardFilter.CARD_FILTER_TYPE_MONSTER_ALL, null);
 			}
 			break;
 		default:
@@ -169,7 +170,7 @@ public class CardFilterSelectionPanel extends LinearLayout implements ICardFilte
 		}
 		if (handled) {
 			if (mListener != null) {
-				mListener.onChange(buildSelection());
+				mListener.onChange(YGOCardSelectionBuilder.SELECTION_SEGMENT_TOTAL, buildSelection());
 			}
 		}
 		return handled;

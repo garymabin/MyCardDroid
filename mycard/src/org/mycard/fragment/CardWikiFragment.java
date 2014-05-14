@@ -6,12 +6,13 @@ import org.mycard.common.Constants;
 import org.mycard.core.Controller;
 import org.mycard.ygo.ICardFilter;
 import org.mycard.ygo.YGOCardFilter;
+import org.mycard.ygo.YGOCardSelectionBuilder;
 import org.mycard.ygo.provider.YGOCards;
 import org.mycard.utils.ResourceUtils;
 import org.mycard.widget.CardFilterActionBarView;
 import org.mycard.widget.CardFilterSelectionPanel;
 import org.mycard.widget.OnCardFilterChangeListener;
-import org.mycard.widget.SearchActionView;
+import org.mycard.widget.CardFilterSearchActionView;
 import org.mycard.widget.adapter.CardAdapter;
 
 import android.app.Activity;
@@ -44,6 +45,8 @@ public class CardWikiFragment extends BaseFragment implements
 	public static final String BUNDLE_KEY_PROJECTION = "cardwikifragment.bundle.key.projection";
 	public static final String BUNDLE_KEY_INIT_POSITON = "cardwikifragment.bundle.key.init.pos";
 	
+	private static final String BUNDLE_KEY_INTERNAL_SELECTION = "selection";
+	
 	private static final int QUERY_SOURCE_LOADER_ID = 0;
 	
 	private static final int REQUEST_ID_CARD_DETAIL = 0;
@@ -73,13 +76,14 @@ public class CardWikiFragment extends BaseFragment implements
 	
 	private CursorWindow mCursorWindow;
 	
+	private YGOCardSelectionBuilder mSelectionBuilder;
 	private ICardFilter mCardFilter;
 	
 	private CardFilterSelectionPanel mTypePanel;
 	private CardFilterSelectionPanel mRacePanel;
 	private CardFilterSelectionPanel mPropPanel;
 	
-	private SearchActionView mSearchView;
+	private CardFilterSearchActionView mSearchView;
 
 	/*
 	 * (non-Javadoc)
@@ -91,7 +95,8 @@ public class CardWikiFragment extends BaseFragment implements
 		switch (msg.what) {
 		case Constants.ACTION_BAR_EVENT_TYPE_SEARCH:
 			Log.i(TAG, "receive action bar search click event");
-			mSearchView = (SearchActionView) MenuItemCompat.getActionView(mActivity.getMenu().findItem(R.id.action_search));
+			mSearchView = (CardFilterSearchActionView) MenuItemCompat.getActionView(mActivity.getMenu().findItem(R.id.action_search));
+			mSearchView.setOnCardFilterListener(this);
 			break;
 		case Constants.ACTION_BAR_EVENT_TYPE_FILTER:
 			Log.i(TAG, "receive action bar filter click event");
@@ -138,6 +143,7 @@ public class CardWikiFragment extends BaseFragment implements
 		super.onAttach(activity);
 		refreshActionBar();
 		mCardFilter = new YGOCardFilter();
+		mSelectionBuilder = new YGOCardSelectionBuilder();
 		mSelection = null;
 		mSelectionExtra = null;
 		mSortOrder = mProjects[5] + " desc";
@@ -155,7 +161,7 @@ public class CardWikiFragment extends BaseFragment implements
 	private void refreshActionBar() {
 		mActivity.onActionBarChange(
 				Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE,
-				FRAGMENT_ID_CARD_WIKI, null);
+				FRAGMENT_ID_CARD_WIKI, R.layout.card_filter_actionbar_searchview, null);
 		setTitle();
 	}
 
@@ -181,7 +187,10 @@ public class CardWikiFragment extends BaseFragment implements
 	}
 
 	@Override
-	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
+	public Loader<Cursor> onCreateLoader(int arg0, Bundle bundle) {
+		if (bundle != null) {
+			mSelection = bundle.getString(BUNDLE_KEY_INTERNAL_SELECTION);
+		}
 		mCursorLoader = new ComplexCursorLoader(mContext, mContentUri, mProjects,
 				mSelection, mSelectionExtra, mSortOrder);
 		return mCursorLoader;
@@ -231,7 +240,9 @@ public class CardWikiFragment extends BaseFragment implements
 		bundle.putInt(BUNDLE_KEY_INIT_POSITON, position);
 		bundle.putParcelable(BUNDLE_KEY_CURSOR_WINDOW, mCursorWindow);
 		mActivity.navigateToChildFragment(bundle, FRAGMENT_ID_CARD_DETAIL, REQUEST_ID_CARD_DETAIL);
-		mActionMode.finish();
+		if (mActionMode != null) {
+			mActionMode.finish();
+		}
 	}
 	
 	@Override
@@ -245,10 +256,11 @@ public class CardWikiFragment extends BaseFragment implements
 
 
 	@Override
-	public void onChange(String newSelection) {
-		mSelection = newSelection;
+	public void onChange(int type, String newSelection) {
+		Bundle bundle = new Bundle();
+		bundle.putString(BUNDLE_KEY_INTERNAL_SELECTION, mSelectionBuilder.setSelection(type, newSelection).toString());
 		getLoaderManager().restartLoader(QUERY_SOURCE_LOADER_ID,
-				null, this);
+				bundle, this);
 	}
 
 }
