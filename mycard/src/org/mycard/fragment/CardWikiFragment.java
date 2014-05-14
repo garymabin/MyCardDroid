@@ -26,7 +26,6 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.view.ActionMode;
-import android.support.v7.widget.PopupMenu.OnMenuItemClickListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -39,7 +38,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class CardWikiFragment extends BaseFragment implements
-		LoaderCallbacks<Cursor>, ActionMode.Callback, OnMenuItemClickListener, OnItemClickListener, OnCardFilterChangeListener {
+		LoaderCallbacks<Cursor>, ActionMode.Callback, OnItemClickListener, OnCardFilterChangeListener {
 
 	public static final String BUNDLE_KEY_CURSOR_WINDOW = "cardwikifragment.bundle.key.cursor.window";
 	public static final String BUNDLE_KEY_PROJECTION = "cardwikifragment.bundle.key.projection";
@@ -222,63 +221,6 @@ public class CardWikiFragment extends BaseFragment implements
 	@Override
 	public void onDestroyActionMode(ActionMode paramActionMode) {
 		mActionMode = null;
-	}
-
-	@Override
-	public boolean onMenuItemClick(MenuItem paramMenuItem) {
-		boolean handled = true;
-		switch (paramMenuItem.getGroupId()) {
-		case R.id.filter_group_monster:
-			handled = mTypePanel.setCurrentSelection(1, paramMenuItem.getOrder());
-			if (handled) {
-				mTypePanel.onFilter(ICardFilter.CARD_FILTER_TYPE, 0, paramMenuItem.getOrder(), null);
-				mSelection = mTypePanel.buildSelection();
-			}
-			break;
-		case R.id.filter_group_race:
-			handled = mRacePanel.setCurrentSelection(0, paramMenuItem.getOrder());
-			if (handled) {
-				mRacePanel.onFilter(ICardFilter.CARD_FILTER_RACE, paramMenuItem.getOrder(), 0, null);
-				mSelection = mRacePanel.buildSelection();
-			}
-			break;
-		case R.id.filter_group_property:
-			handled = mPropPanel.setCurrentSelection(0, paramMenuItem.getOrder());
-			if (handled) {
-				mPropPanel.onFilter(ICardFilter.CARD_FILTER_ATTR, paramMenuItem.getOrder(), 0, null);
-				mSelection = mPropPanel.buildSelection();
-			}
-			break;
-		case R.id.filter_group_spell:
-			handled = mTypePanel.setCurrentSelection(2, paramMenuItem.getOrder());
-			if (handled) {
-				mTypePanel.onFilter(ICardFilter.CARD_FILTER_TYPE, 1, paramMenuItem.getOrder(), null);
-				mSelection = mTypePanel.buildSelection();
-			}
-			break;
-		case R.id.filter_group_trap:
-			handled = mTypePanel.setCurrentSelection(3, paramMenuItem.getOrder());
-			if (handled) {
-				mTypePanel.onFilter(ICardFilter.CARD_FILTER_TYPE, 2, paramMenuItem.getOrder(), null);
-				mSelection = mTypePanel.buildSelection();
-			}
-			break;
-		case R.id.filter_group_type_none:
-			handled = mTypePanel.setCurrentSelection(0, 0);
-			if (handled) {
-				mTypePanel.onFilter(ICardFilter.CARD_FILTER_TYPE, ICardFilter.CARD_FILTER_TYPE_ALL, paramMenuItem.getOrder(), null);
-				mSelection = mTypePanel.buildSelection();
-			}
-			break;
-		default:
-			handled = false;
-			break;
-		}
-		if (handled) {
-			getLoaderManager().restartLoader(QUERY_SOURCE_LOADER_ID,
-					null, this);
-		}
-		return handled;
 	}
 
 	@Override
