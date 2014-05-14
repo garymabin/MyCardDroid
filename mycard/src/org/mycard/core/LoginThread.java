@@ -1,11 +1,9 @@
 package org.mycard.core;
 
-import java.io.InputStream;
-
-import org.mycard.model.data.wrapper.BaseDataWrapper;
 import org.apache.http.client.HttpClient;
 import org.mycard.core.IBaseConnection.TaskStatusCallback;
 import org.mycard.net.http.BaseHttpConnector;
+import org.mycard.net.http.DataHttpConnector;
 
 public class LoginThread extends InstantThread {
 
@@ -15,18 +13,6 @@ public class LoginThread extends InstantThread {
 
 	@Override
 	protected BaseHttpConnector initConnector(HttpClient client) {
-		return new BaseHttpConnector(client) {
-			
-			@Override
-			protected void handleResponse(InputStream data, BaseDataWrapper wrapper)
-					throws InterruptedException {
-				handleResponse(data, wrapper);
-			}
-		};
+		return new DataHttpConnector(client);
 	}
-	
-	protected void handleResult(InputStream data, BaseDataWrapper wrapper) {
-		
-	}
-
 }

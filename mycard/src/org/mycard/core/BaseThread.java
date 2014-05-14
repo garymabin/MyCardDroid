@@ -20,5 +20,10 @@ public abstract class BaseThread extends Thread implements IBaseThread{
 			isRunning = false;
 		}
 	}
+	
+	@Override
+	public boolean isRunning() {
+		return isRunning;
+	}
 
 }

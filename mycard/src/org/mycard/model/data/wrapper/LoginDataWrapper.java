@@ -9,7 +9,6 @@ public class LoginDataWrapper extends BaseDataWrapper {
 
 	public LoginDataWrapper(int requestType) {
 		super(requestType);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override

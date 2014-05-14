@@ -13,4 +13,6 @@ public interface IBaseThread {
 	 * Start the thread;
 	 */
 	void start();
+	
+	boolean isRunning();
 }

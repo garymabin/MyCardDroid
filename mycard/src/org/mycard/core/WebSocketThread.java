@@ -79,4 +79,9 @@ public class WebSocketThread extends HandlerThread implements IBaseThread, Handl
 		isTerminateRequest = true;
 		mConnector.terminate();
 	}
+
+	@Override
+	public boolean isRunning() {
+		return !isTerminateRequest;
+	}
 }
