@@ -190,6 +190,7 @@ public class CardWikiFragment extends BaseFragment implements
 		mAdapter = new CardAdapter(mContext, mProjects_id,  null, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER, listView);
 		mAdapter.onFragmentActive();
 		listView.setAdapter(mAdapter);
+		listView.setFastScrollEnabled(true);
 		listView.setOnItemClickListener(this);
 		initCursorLoader();
 		return view;

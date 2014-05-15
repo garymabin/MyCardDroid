@@ -17,6 +17,7 @@ import org.mycard.model.data.ImageItem;
 
 
 import org.mycard.model.data.ImageItemInfoHelper;
+import org.mycard.widget.LevelsIndexer;
 import org.mycard.ygo.YGOArrayStore;
 
 import android.content.Context;
@@ -29,9 +30,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SectionIndexer;
 import android.widget.TextView;
 
-public class CardAdapter extends CursorAdapter implements IDataObserver{
+public class CardAdapter extends CursorAdapter implements IDataObserver,SectionIndexer{
 	
 	private final class ViewHolder {
 		ImageView mCardThumbnail;
@@ -102,11 +104,16 @@ public class CardAdapter extends CursorAdapter implements IDataObserver{
 	private int thumbnailImageWidthInPixel;
 	
 	private WeakReference<ListView> mAttachedListView;
+	
+	protected LevelsIndexer levelsIndexer;
 
 	public CardAdapter(Context context, String[] projection, Cursor c, int flags, ListView attachTarget) {
 		super(context, c, flags);
 		initialized = false;
 		mColumnNames = Arrays.asList(projection);
+		
+		levelsIndexer = new LevelsIndexer(c, LEVEL_INDEX,
+				"12,11,10,9,8,7,6,5,4,3,2,1,0");
 		
 		thumbnailImageHeightInPixel = context.getResources().getDimensionPixelSize(R.dimen.card_thumbnail_height);
 		thumbnailImageWidthInPixel = context.getResources().getDimensionPixelSize(R.dimen.card_image_width);
@@ -125,6 +132,9 @@ public class CardAdapter extends CursorAdapter implements IDataObserver{
 	public void bindView(View containerView, Context context, Cursor cursor) {
 		if (containerView != null && containerView.getTag() != null) {
 			ViewHolder holder = (ViewHolder) containerView.getTag();
+			
+			levelsIndexer.setCursor(cursor);
+			
 			String id = cursor.getString(mIDColumnId);
 			ImageItem item = new ImageItem(id, thumbnailImageHeightInPixel, thumbnailImageWidthInPixel);
 			holder.mController = new ImageViewImageItemController(context, holder.mCardThumbnail);
@@ -265,6 +275,24 @@ public class CardAdapter extends CursorAdapter implements IDataObserver{
 			return;
 
 		ctlr.setBitmap(holder.getBitmap());
+	}
+
+	@Override
+	public Object[] getSections() {
+		// TODO Auto-generated method stub
+		return levelsIndexer.getSections();
+	}
+
+	@Override
+	public int getPositionForSection(int sectionIndex) {
+		// TODO Auto-generated method stub
+		return levelsIndexer.getPositionForSection(sectionIndex);
+	}
+
+	@Override
+	public int getSectionForPosition(int position) {
+		// TODO Auto-generated method stub
+		return levelsIndexer.getSectionForPosition(position);
 	}
 
 }
