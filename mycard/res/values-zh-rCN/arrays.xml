@@ -20,6 +20,13 @@
         <item >双人模式</item>
     </string-array>
     
+    <string-array name="card_limit">
+        <item>（无）</item>
+        <item>OCG</item>
+        <item>TCG</item>
+        <item>OCG/TCG</item>
+    </string-array>
+    
     
     <string-array name="card_race">
         <item >（无）</item>

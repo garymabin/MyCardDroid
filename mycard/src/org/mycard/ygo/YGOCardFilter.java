@@ -17,6 +17,8 @@ public class YGOCardFilter implements ICardFilter {
 	private int mAttrIndex;
 	private int mAttr;
 	
+	private int mOT;
+	
 	public YGOCardFilter() {
 		reset();
 	}
@@ -44,6 +46,8 @@ public class YGOCardFilter implements ICardFilter {
 		case CARD_FILTER_ATTR:
 			mAttrIndex = type;
 			mAttr = arg1;
+		case CARD_FILTER_OT:
+			mOT = arg1;
 			break;
 		default:
 			break;
@@ -87,6 +91,10 @@ public class YGOCardFilter implements ICardFilter {
 		if (mAttr != CARD_FILTER_ATTR_ALL) {
 			sb.append("(").append(YGOCards.Datas.ATTRIBUTE).append("&")
 			.append(YGOArrayStore.sTypeMaps.get(mAttrIndex).get(mAttr)).append(" > 0) AND ");
+		}
+		if (mOT != CARD_FILTER_OT_ALL) {
+			sb.append("(").append(YGOCards.Datas.OT).append("=")
+			.append(mOT).append(") AND ");
 		}
 		if (sb.length() > 5) {
 			sb.delete(sb.length() - 5, sb.length());

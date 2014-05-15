@@ -59,6 +59,7 @@
     </string-array>
     
     <string-array name="card_limit">
+        <item>(none)</item>
         <item>OCG</item>
         <item>TCG</item>
         <item>OCG/TCG</item>

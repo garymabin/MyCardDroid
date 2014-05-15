@@ -164,6 +164,12 @@ public class CardFilterSelectionPanel extends LinearLayout implements ICardFilte
 				onFilter(ICardFilter.CARD_FILTER_TYPE_ALL, ICardFilter.CARD_FILTER_TYPE_MONSTER_ALL, null);
 			}
 			break;
+		case R.id.filter_group_ot:
+			handled = setCurrentSelection(0, paramMenuItem.getOrder());
+			if (handled) {
+				onFilter(ICardFilter.CARD_FILTER_OT, paramMenuItem.getOrder(), null);
+			}
+			break;
 		default:
 			handled = false;
 			break;

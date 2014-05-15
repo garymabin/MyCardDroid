@@ -82,6 +82,7 @@ public class CardWikiFragment extends BaseFragment implements
 	private CardFilterSelectionPanel mTypePanel;
 	private CardFilterSelectionPanel mRacePanel;
 	private CardFilterSelectionPanel mPropPanel;
+	private CardFilterSelectionPanel mOTPanel;
 	
 	private CardFilterSearchActionView mSearchView;
 
@@ -97,19 +98,31 @@ public class CardWikiFragment extends BaseFragment implements
 			Log.i(TAG, "receive action bar search click event");
 			mSearchView = (CardFilterSearchActionView) MenuItemCompat.getActionView(mActivity.getMenu().findItem(R.id.action_search));
 			mSearchView.setOnCardFilterListener(this);
+			mSearchView.setQueryHint(mActivity.getResources().getString(R.string.card_search_hint));
 			break;
 		case Constants.ACTION_BAR_EVENT_TYPE_FILTER:
 			Log.i(TAG, "receive action bar filter click event");
 			mActionMode = mActivity.startSupportActionMode(this);
 			mActionBarView = (CardFilterActionBarView) LayoutInflater.from(mActivity).inflate(R.layout.custom_actionbar_view, null);
 			mActionMode.setCustomView(mActionBarView);
-			mTypePanel = mActionBarView.addNewPopupMenu(R.menu.filter_type, R.string.action_filter_string_type,
-					new int[]{R.array.card_type_none, R.array.card_monster_type, R.array.card_spell_type, R.array.card_trap_type}, this, false);
+			mTypePanel = mActionBarView.addNewPopupMenu(R.menu.filter_type,
+					R.string.action_filter_string_type, new int[] {
+							R.array.card_type_none, R.array.card_monster_type,
+							R.array.card_spell_type, R.array.card_trap_type },
+					this, false);
 			mTypePanel.setCardFilterDelegate(mCardFilter);
-			mRacePanel = mActionBarView.addNewPopupMenu(R.menu.filter_race, R.string.action_filter_string_race, new int[]{R.array.card_race}, this, false);
+			mRacePanel = mActionBarView.addNewPopupMenu(R.menu.filter_race,
+					R.string.action_filter_string_race,
+					new int[] { R.array.card_race }, this, false);
 			mRacePanel.setCardFilterDelegate(mCardFilter);
-			mPropPanel = mActionBarView.addNewPopupMenu(R.menu.filter_property, R.string.action_filter_string_property, new int[]{R.array.card_attr}, this, false);
+			mPropPanel = mActionBarView.addNewPopupMenu(R.menu.filter_property,
+					R.string.action_filter_string_property,
+					new int[] { R.array.card_attr }, this, false);
 			mPropPanel.setCardFilterDelegate(mCardFilter);
+			mOTPanel = mActionBarView.addNewPopupMenu(R.menu.filter_ot,
+					R.string.action_filter_string_ot,
+					new int[] { R.array.card_limit }, this, false);
+			mOTPanel.setCardFilterDelegate(mCardFilter);
 			break;
 
 		default:

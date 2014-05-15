@@ -219,7 +219,7 @@ public class YGOArrayStore {
 		if (code < 1 || code > mOTArray.length) {
 			return mUnknown;
 		} else {
-			return mOTArray[code - 1];
+			return mOTArray[code];
 		}
 	}
 }

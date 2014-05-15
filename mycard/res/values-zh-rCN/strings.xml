@@ -124,6 +124,11 @@
     <string name="action_filter_race_bramna">创造神</string>
     <string name="action_filter_race_phantom_dragon">幻龙</string>
     
+    <string name="action_filter_ot_ocg">OCG</string>
+    <string name="action_filter_ot_tcg">TCG</string>
+    <string name="action_filter_ot_ocgtcg">OCG/TCG</string>
+    
+    <string name="card_search_hint">请输入卡片名称或者代码</string>
     
     <string name="donate">捐助</string>
     <string name="support_us_des">萌卡属于非盈利项目，依靠众人的捐助维持运作。如果您可以提供捐助帮助服务持续运行，我们将不胜感激。</string>

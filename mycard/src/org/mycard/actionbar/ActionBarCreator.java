@@ -4,6 +4,7 @@ import org.mycard.R;
 
 import android.content.Context;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 

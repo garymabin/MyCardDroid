@@ -1,6 +1,7 @@
 package org.mycard.widget;
 
 import org.mycard.R;
+import org.mycard.utils.SimpleAnimator;
 
 import android.content.Context;
 import android.support.v7.widget.PopupMenu;
@@ -10,6 +11,10 @@ import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -52,6 +57,7 @@ public class CardFilterActionBarView extends RelativeLayout implements
 		mNextNavigation = findViewById(R.id.navigation_next);
 		mPrevNavigation = findViewById(R.id.navigation_previous);
 		mNextNavigation.setOnClickListener(this);
+		mPrevNavigation.setOnClickListener(this);
 	}
 	
 	public int addNewSpinner(int promptRes, int entryRes,
@@ -98,9 +104,9 @@ public class CardFilterActionBarView extends RelativeLayout implements
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.navigation_next) {
-			// TODO:perform alimation();
+			SimpleAnimator.performSlideNextAnimation(getContext(), mBasicPanel, mMorePanel);
 		} else if (v.getId() == R.id.navigation_previous) {
-			// perform alimation();
+			SimpleAnimator.performSlideBackAnimation(getContext(), mMorePanel, mBasicPanel);
 		} else {
 			PopupMenu popup = new PopupMenu(getContext(), v);
 			MenuInflater inflater = popup.getMenuInflater();

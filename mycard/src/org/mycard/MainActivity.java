@@ -197,7 +197,7 @@ public class MainActivity extends ActionBarActivity implements
 	public Menu getMenu() {
 		return mMenu;
 	}
-
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Pass the event to ActionBarDrawerToggle, if it returns
