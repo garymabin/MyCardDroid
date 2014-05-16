@@ -16,9 +16,9 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class CardFilterSelectionPanel extends LinearLayout implements ICardFilter, OnMenuItemClickListener{
+public class CardFilterMenuItem extends LinearLayout implements ICardFilter, OnMenuItemClickListener{
 	
-	private static final String TAG = "CardFilterSelectionPanel";
+	private static final String TAG = "CardFilterMenuItem";
 	
 	private static final String PREF_KEY_LAST_INDEX = "index";
 	
@@ -38,10 +38,10 @@ public class CardFilterSelectionPanel extends LinearLayout implements ICardFilte
 	
 	private OnCardFilterChangeListener mListener;
 
-	public CardFilterSelectionPanel(Context context) {
+	public CardFilterMenuItem(Context context) {
 		this(context, null);
 	}
-	public CardFilterSelectionPanel(Context context, AttributeSet attrs) {
+	public CardFilterMenuItem(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}
@@ -102,9 +102,9 @@ public class CardFilterSelectionPanel extends LinearLayout implements ICardFilte
 
 
 	@Override
-	public void onFilter(int type, int arg1, Bundle obj) {
+	public void onFilter(int type, int arg1, int arg2, Bundle obj) {
 		if (mCardFilterDelegate != null) {
-			mCardFilterDelegate.onFilter(type, arg1, obj);
+			mCardFilterDelegate.onFilter(type, arg1, arg2, obj);
 		}
 	}
 	@Override
@@ -131,43 +131,43 @@ public class CardFilterSelectionPanel extends LinearLayout implements ICardFilte
 		case R.id.filter_group_monster:
 			handled = setCurrentSelection(1, paramMenuItem.getOrder());
 			if (handled) {
-				onFilter(ICardFilter.CARD_FILTER_MONSTER_TYPE, paramMenuItem.getOrder(), null);
+				onFilter(ICardFilter.CARD_FILTER_MONSTER_TYPE, paramMenuItem.getOrder(), -1, null);
 			}
 			break;
 		case R.id.filter_group_race:
 			handled = setCurrentSelection(0, paramMenuItem.getOrder());
 			if (handled) {
-				onFilter(ICardFilter.CARD_FILTER_RACE, paramMenuItem.getOrder(), null);
+				onFilter(ICardFilter.CARD_FILTER_RACE, paramMenuItem.getOrder(), -1, null);
 			}
 			break;
 		case R.id.filter_group_property:
 			handled = setCurrentSelection(0, paramMenuItem.getOrder());
 			if (handled) {
-				onFilter(ICardFilter.CARD_FILTER_ATTR, paramMenuItem.getOrder(), null);
+				onFilter(ICardFilter.CARD_FILTER_ATTR, paramMenuItem.getOrder(), -1, null);
 			}
 			break;
 		case R.id.filter_group_spell:
 			handled = setCurrentSelection(2, paramMenuItem.getOrder());
 			if (handled) {
-				onFilter(ICardFilter.CARD_FILTER_SPELL_TYPE, paramMenuItem.getOrder(), null);
+				onFilter(ICardFilter.CARD_FILTER_SPELL_TYPE, paramMenuItem.getOrder(), -1, null);
 			}
 			break;
 		case R.id.filter_group_trap:
 			handled = setCurrentSelection(3, paramMenuItem.getOrder());
 			if (handled) {
-				onFilter(ICardFilter.CARD_FILTER_TRAP_TYPE, paramMenuItem.getOrder(), null);
+				onFilter(ICardFilter.CARD_FILTER_TRAP_TYPE, paramMenuItem.getOrder(), -1, null);
 			}
 			break;
 		case R.id.filter_group_type_none:
 			handled = setCurrentSelection(0, 0);
 			if (handled) {
-				onFilter(ICardFilter.CARD_FILTER_TYPE_ALL, ICardFilter.CARD_FILTER_TYPE_MONSTER_ALL, null);
+				onFilter(ICardFilter.CARD_FILTER_TYPE_ALL, ICardFilter.CARD_FILTER_TYPE_MONSTER_ALL, -1, null);
 			}
 			break;
 		case R.id.filter_group_ot:
 			handled = setCurrentSelection(0, paramMenuItem.getOrder());
 			if (handled) {
-				onFilter(ICardFilter.CARD_FILTER_OT, paramMenuItem.getOrder(), null);
+				onFilter(ICardFilter.CARD_FILTER_OT, paramMenuItem.getOrder(), -1, null);
 			}
 			break;
 		default:

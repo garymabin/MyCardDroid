@@ -42,7 +42,7 @@ public class CardFilterSearchActionView extends SearchView implements ICardFilte
 	
 	
 	@Override
-	public void onFilter(int type, int arg1, Bundle obj) {
+	public void onFilter(int type, int arg1, int arg2, Bundle obj) {
 	}
 
 	@Override

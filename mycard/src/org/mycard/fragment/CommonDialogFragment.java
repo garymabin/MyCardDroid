@@ -5,6 +5,8 @@ import org.mycard.R;
 import org.mycard.model.data.ResourcesConstants;
 import org.mycard.widget.DonateDialog;
 import org.mycard.widget.DonateDialogConfigController;
+import org.mycard.widget.RangeDialog;
+import org.mycard.widget.RangeDialogConfigController;
 import org.mycard.widget.RoomDialog;
 import org.mycard.widget.RoomDialogConfigController;
 
@@ -125,7 +127,12 @@ public class CommonDialogFragment extends DialogFragment implements
 		case ResourcesConstants.DIALOG_MODE_DONATE:
 			dlg = new DonateDialog(mActivity, this);
 			break;
-
+		case ResourcesConstants.DIALOG_MODE_FILTER_ATK:
+			dlg = new RangeDialog(mActivity, this, RangeDialogConfigController.RANGE_DIALOG_TYPE_ATK, getArguments());
+			break;
+		case ResourcesConstants.DIALOG_MODE_FILTER_DEF:
+			dlg = new RangeDialog(mActivity, this, RangeDialogConfigController.RANGE_DIALOG_TYPE_DEF, getArguments());
+			break;
 		default:
 			break;
 		}
@@ -165,8 +172,6 @@ public class CommonDialogFragment extends DialogFragment implements
 					((DuelFragment)f).handleMessage(Message.obtain(null, getTargetRequestCode(), 0, 0, options));
 					return;
 				}
-//				ComponentName component = new ComponentName("cn.garymb.ygomobile", "cn.garymb.ygomobile.YGOMobileActivity");
-//				intent.setComponent(component);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 				intent.putExtra(YGOGameOptions.YGO_GAME_OPTIONS_BUNDLE_KEY, options);
 				startActivity(intent);
@@ -201,7 +206,14 @@ public class CommonDialogFragment extends DialogFragment implements
 				startActivity(intent);
 				break;
 			}
-
+			case ResourcesConstants.DIALOG_MODE_FILTER_ATK:
+			case ResourcesConstants.DIALOG_MODE_FILTER_DEF:
+				int max = ((RangeDialogConfigController)((RangeDialog)getDialog()).getController()).getMaxValue();
+				int min = ((RangeDialogConfigController)((RangeDialog)getDialog()).getController()).getMinValue();;
+				Bundle data = new Bundle();
+				data.putInt("max", max);
+				data.putInt("min", min);
+				((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(), -1, data);
 			default:
 				break;
 			}

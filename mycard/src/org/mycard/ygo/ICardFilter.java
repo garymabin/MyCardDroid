@@ -10,6 +10,8 @@ public interface ICardFilter {
 	public static final int CARD_FILTER_RACE = 3;
 	public static final int CARD_FILTER_ATTR = 4;
 	public static final int CARD_FILTER_OT = 5;
+	public static final int CARD_FILTER_ATK = 6;
+	public static final int CARD_FILTER_DEF = 7;
 	
 	public static final int CARD_FILTER_TYPE_ALL =  0xFFFF; 
 	
@@ -79,8 +81,10 @@ public interface ICardFilter {
 	
 	public static final int CARD_FILTER_OT_ALL = 0x0;
 	
+	public static final int CARD_FILTER_ATKDEF_DEF = -1;
 	
-	void onFilter(int type, int arg1, Bundle obj);
+	
+	void onFilter(int type, int arg1, int arg2, Bundle obj);
 	
 	void resetFilter();
 	

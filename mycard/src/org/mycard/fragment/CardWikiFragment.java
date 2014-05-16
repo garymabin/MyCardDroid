@@ -8,9 +8,11 @@ import org.mycard.ygo.ICardFilter;
 import org.mycard.ygo.YGOCardFilter;
 import org.mycard.ygo.YGOCardSelectionBuilder;
 import org.mycard.ygo.provider.YGOCards;
+import org.mycard.model.data.ResourcesConstants;
 import org.mycard.utils.ResourceUtils;
 import org.mycard.widget.CardFilterActionBarView;
-import org.mycard.widget.CardFilterSelectionPanel;
+import org.mycard.widget.CardFilterDialogItem;
+import org.mycard.widget.CardFilterMenuItem;
 import org.mycard.widget.OnCardFilterChangeListener;
 import org.mycard.widget.CardFilterSearchActionView;
 import org.mycard.widget.adapter.CardAdapter;
@@ -33,13 +35,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class CardWikiFragment extends BaseFragment implements
-		LoaderCallbacks<Cursor>, ActionMode.Callback, OnItemClickListener, OnCardFilterChangeListener {
+		LoaderCallbacks<Cursor>, ActionMode.Callback, OnItemClickListener, OnCardFilterChangeListener, OnClickListener {
 
 	public static final String BUNDLE_KEY_CURSOR_WINDOW = "cardwikifragment.bundle.key.cursor.window";
 	public static final String BUNDLE_KEY_PROJECTION = "cardwikifragment.bundle.key.projection";
@@ -50,6 +53,8 @@ public class CardWikiFragment extends BaseFragment implements
 	private static final int QUERY_SOURCE_LOADER_ID = 0;
 	
 	private static final int REQUEST_ID_CARD_DETAIL = 0;
+	private static final int REQUEST_ID_CARD_FILTER_ATK = 1;
+	private static final int REQUEST_ID_CARD_FILTER_DEF = 2;
 	
 	
 	private static final String TAG = "CardWikiFragment";
@@ -79,10 +84,13 @@ public class CardWikiFragment extends BaseFragment implements
 	private YGOCardSelectionBuilder mSelectionBuilder;
 	private ICardFilter mCardFilter;
 	
-	private CardFilterSelectionPanel mTypePanel;
-	private CardFilterSelectionPanel mRacePanel;
-	private CardFilterSelectionPanel mPropPanel;
-	private CardFilterSelectionPanel mOTPanel;
+	private CardFilterMenuItem mTypePanel;
+	private CardFilterMenuItem mRacePanel;
+	private CardFilterMenuItem mPropPanel;
+	private CardFilterMenuItem mOTPanel;
+	
+	private CardFilterDialogItem mAtkPanel;
+	private CardFilterDialogItem mDefPanel;
 	
 	private CardFilterSearchActionView mSearchView;
 
@@ -123,6 +131,15 @@ public class CardWikiFragment extends BaseFragment implements
 					R.string.action_filter_string_ot,
 					new int[] { R.array.card_limit }, this, false);
 			mOTPanel.setCardFilterDelegate(mCardFilter);
+			
+			mAtkPanel = mActionBarView.addNewPopupDialog(
+					R.string.action_filter_atk, this,
+					this, true);
+			mAtkPanel.setCardFilterDelegate(mCardFilter);
+			mDefPanel = mActionBarView.addNewPopupDialog(
+					R.string.action_filter_def, this,
+					this, true);
+			mDefPanel.setCardFilterDelegate(mCardFilter);
 			break;
 
 		default:
@@ -169,6 +186,8 @@ public class CardWikiFragment extends BaseFragment implements
 		mTypePanel.resetFilter();
 		mRacePanel.resetFilter();
 		mPropPanel.resetFilter();
+		mAtkPanel.resetFilter();
+		mDefPanel.resetFilter();
 	}
 
 	private void refreshActionBar() {
@@ -264,6 +283,10 @@ public class CardWikiFragment extends BaseFragment implements
 			if (eventType == FRAGMENT_NAVIGATION_BACK_EVENT) {
 				refreshActionBar();
 			}
+		} else if (REQUEST_ID_CARD_FILTER_ATK == requestCode) {
+			mAtkPanel.setRange(ICardFilter.CARD_FILTER_ATK, data.getInt("min"), data.getInt("max"));
+		} else if (REQUEST_ID_CARD_FILTER_DEF == requestCode) {
+			mDefPanel.setRange(ICardFilter.CARD_FILTER_DEF, data.getInt("min"), data.getInt("max"));
 		}
 	}
 
@@ -274,6 +297,25 @@ public class CardWikiFragment extends BaseFragment implements
 		bundle.putString(BUNDLE_KEY_INTERNAL_SELECTION, mSelectionBuilder.setSelection(type, newSelection).toString());
 		getLoaderManager().restartLoader(QUERY_SOURCE_LOADER_ID,
 				bundle, this);
+	}
+
+
+	@Override
+	public void onClick(View v) {
+		if (v.equals(mAtkPanel)) {
+			Bundle bundle = new Bundle();
+			bundle.putInt(ResourcesConstants.MODE_OPTIONS, ResourcesConstants.DIALOG_MODE_FILTER_ATK);
+			bundle.putInt("max", mAtkPanel.getMax());
+			bundle.putInt("min", mAtkPanel.getMin());
+			showDialog(bundle, this, REQUEST_ID_CARD_FILTER_ATK);
+		} else if (v.equals(mDefPanel)) {
+			Bundle bundle = new Bundle();
+			bundle.putInt("max", mDefPanel.getMax());
+			bundle.putInt("min", mDefPanel.getMin());
+			bundle.putInt(ResourcesConstants.MODE_OPTIONS, ResourcesConstants.DIALOG_MODE_FILTER_DEF);
+			showDialog(bundle, this, REQUEST_ID_CARD_FILTER_DEF);
+		}
+		
 	}
 
 }

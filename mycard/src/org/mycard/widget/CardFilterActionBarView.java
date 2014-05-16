@@ -11,10 +11,6 @@ import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
-import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -28,23 +24,31 @@ public class CardFilterActionBarView extends RelativeLayout implements
 
 	private ViewGroup mBasicPanel;
 	private ViewGroup mMorePanel;
-	
+
 	private LinearLayout mBasicItemPanel;
 	private LinearLayout mMoreItemPanel;
 
 	private View mNextNavigation;
 	private View mPrevNavigation;
 
-	public CardFilterActionBarView(Context context, AttributeSet attrs, int defStyle) {
+	private LayoutInflater mInflater;
+
+	public CardFilterActionBarView(Context context, AttributeSet attrs,
+			int defStyle) {
 		super(context, attrs, defStyle);
+		init(context);
 	}
 
 	public CardFilterActionBarView(Context context, AttributeSet attrs) {
-		super(context, attrs);
+		this(context, attrs, -1);
 	}
 
 	public CardFilterActionBarView(Context context) {
-		super(context);
+		this(context, null, -1);
+	}
+
+	private void init(Context context) {
+		mInflater = LayoutInflater.from(context);
 	}
 
 	@Override
@@ -59,7 +63,7 @@ public class CardFilterActionBarView extends RelativeLayout implements
 		mNextNavigation.setOnClickListener(this);
 		mPrevNavigation.setOnClickListener(this);
 	}
-	
+
 	public int addNewSpinner(int promptRes, int entryRes,
 			OnItemSelectedListener listener, boolean isExtended) {
 		Spinner spinner = (Spinner) LayoutInflater.from(getContext()).inflate(
@@ -78,19 +82,41 @@ public class CardFilterActionBarView extends RelativeLayout implements
 		return spinner.getId();
 	}
 
-	public CardFilterSelectionPanel addNewPopupMenu(int menuRes, int typeRes, int[] desResArrays, OnCardFilterChangeListener listener,
-			boolean isExtended) {
-		CardFilterSelectionPanel panel = (CardFilterSelectionPanel) LayoutInflater.from(getContext())
-				.inflate(R.layout.card_filter_selection_panel, null);
-		TextView type = (TextView) panel.findViewById(R.id.type);
+	public CardFilterDialogItem addNewPopupDialog(int typeRes, OnCardFilterChangeListener onFilterListener,
+			OnClickListener onClickListener, boolean isExtended) {
+		CardFilterDialogItem panel = (CardFilterDialogItem) mInflater.inflate(
+				R.layout.card_filter_actionbar_dlg_item, null);
 		panel.setId(typeRes);
-		type.setText(typeRes);
+		((TextView) panel.findViewById(R.id.type)).setText(typeRes);
+		panel.setOnClickListener(onClickListener);
+		panel.setCardFilterChangeListener(onFilterListener);
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+		params.weight = 1.0f;
+		panel.setLayoutParams(params);
+		if (!isExtended) {
+			mBasicItemPanel.addView(panel);
+		} else {
+			mMoreItemPanel.addView(panel);
+		}
+		return panel;
+	}
+
+	public CardFilterMenuItem addNewPopupMenu(int menuRes, int typeRes,
+			int[] desResArrays, OnCardFilterChangeListener listener,
+			boolean isExtended) {
+		CardFilterMenuItem panel = (CardFilterMenuItem) mInflater.inflate(
+				R.layout.card_filter_actionbar_menu_item, null);
+		panel.setId(typeRes);
+		((TextView) panel.findViewById(R.id.type)).setText(typeRes);
 		panel.setResourceArrays(desResArrays);
 		panel.setOnClickListener(this);
 		panel.setCardFilterChangeListener(listener);
-		panel.setTag(R.id.custom_view_menu, menuRes);
-		panel.setTag(R.id.custom_view_listener, (OnMenuItemClickListener)panel);
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+		panel.setTag(R.id.card_filter_menu, menuRes);
+		panel.setTag(R.id.card_filter_menu_listener,
+				(OnMenuItemClickListener) panel);
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
 		params.weight = 1.0f;
 		panel.setLayoutParams(params);
 		if (!isExtended) {
@@ -104,17 +130,19 @@ public class CardFilterActionBarView extends RelativeLayout implements
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.navigation_next) {
-			SimpleAnimator.performSlideNextAnimation(getContext(), mBasicPanel, mMorePanel);
+			SimpleAnimator.performSlideNextAnimation(getContext(), mBasicPanel,
+					mMorePanel);
 		} else if (v.getId() == R.id.navigation_previous) {
-			SimpleAnimator.performSlideBackAnimation(getContext(), mMorePanel, mBasicPanel);
-		} else {
+			SimpleAnimator.performSlideBackAnimation(getContext(), mMorePanel,
+					mBasicPanel);
+		} else if (v instanceof CardFilterMenuItem) {
 			PopupMenu popup = new PopupMenu(getContext(), v);
 			MenuInflater inflater = popup.getMenuInflater();
-			inflater.inflate((Integer) v.getTag(R.id.custom_view_menu),
+			inflater.inflate((Integer) v.getTag(R.id.card_filter_menu),
 					popup.getMenu());
 			popup.show();
 			popup.setOnMenuItemClickListener((OnMenuItemClickListener) v
-					.getTag(R.id.custom_view_listener));
+					.getTag(R.id.card_filter_menu_listener));
 		}
 	}
 

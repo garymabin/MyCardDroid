@@ -128,6 +128,8 @@
     <string name="action_filter_ot_tcg">TCG</string>
     <string name="action_filter_ot_ocgtcg">OCG/TCG</string>
     
+    <string name="action_filter_atk">攻击力</string>
+    <string name="action_filter_def">防御力</string>
     <string name="card_search_hint">请输入卡片名称或者代码</string>
     
     <string name="donate">捐助</string>
