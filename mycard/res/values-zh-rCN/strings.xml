@@ -132,6 +132,9 @@
     <string name="action_filter_def">防御力</string>
     <string name="card_search_hint">请输入卡片名称或者代码</string>
     
+    <string name="action_filter_level">星等</string>
+    <string name="action_filter_effect">效果</string>
+    
     <string name="donate">捐助</string>
     <string name="support_us_des">萌卡属于非盈利项目，依靠众人的捐助维持运作。如果您可以提供捐助帮助服务持续运行，我们将不胜感激。</string>
     <string name="support_via">您可以通过以下方式对我们进行捐助：</string>

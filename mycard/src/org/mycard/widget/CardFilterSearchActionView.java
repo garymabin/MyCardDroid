@@ -5,7 +5,6 @@ import org.mycard.ygo.YGOCardSelectionBuilder;
 import org.mycard.ygo.provider.YGOCards;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -42,7 +41,7 @@ public class CardFilterSearchActionView extends SearchView implements ICardFilte
 	
 	
 	@Override
-	public void onFilter(int type, int arg1, int arg2, Bundle obj) {
+	public void onFilter(int type, int arg1, int arg2, Object obj) {
 	}
 
 	@Override

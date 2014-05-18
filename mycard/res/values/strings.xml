@@ -126,8 +126,10 @@
     
     <string name="action_filter_atk">攻击力</string>
     <string name="action_filter_def">防御力</string>
-    
     <string name="card_search_hint">请输入卡片名称或者代码</string>
+    
+    <string name="action_filter_level">星等</string>
+    <string name="action_filter_effect">效果</string>
     
     <string name="settings_common">Common settings</string>
     <string name="settings_game">Game settings</string>

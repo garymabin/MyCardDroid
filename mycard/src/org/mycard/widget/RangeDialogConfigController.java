@@ -37,7 +37,7 @@ public class RangeDialogConfigController extends BaseDialogConfigController impl
 			mTo.setText(max + "");
 		}
 		
-		mConfigUI.setPositiveButton(res.getString(R.string.button_ok));
+		mConfigUI.setPositiveButton(res.getString(R.string.action_filter));
 		mConfigUI.setCancelButton(res.getString(R.string.button_cancel));
 		
 		if (type == RANGE_DIALOG_TYPE_ATK) {

@@ -6,12 +6,11 @@ import org.mycard.ygo.YGOCardSelectionBuilder;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class CardFilterDialogItem extends LinearLayout implements ICardFilter {
+public class CardFilterRangeItem extends LinearLayout implements ICardFilter {
 
 	private static final String TAG = "CardFilterDialogItem";
 
@@ -29,11 +28,11 @@ public class CardFilterDialogItem extends LinearLayout implements ICardFilter {
 
 	private TextView mDes;
 
-	public CardFilterDialogItem(Context context) {
+	public CardFilterRangeItem(Context context) {
 		this(context, null);
 	}
 
-	public CardFilterDialogItem(Context context, AttributeSet attrs) {
+	public CardFilterRangeItem(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
@@ -69,7 +68,7 @@ public class CardFilterDialogItem extends LinearLayout implements ICardFilter {
 	}
 
 	@Override
-	public void onFilter(int type, int arg1, int arg2, Bundle obj) {
+	public void onFilter(int type, int arg1, int arg2, Object obj) {
 		if (mCardFilterDelegate != null) {
 			mCardFilterDelegate.onFilter(type, arg1, arg2, obj);
 		}

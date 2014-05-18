@@ -9,7 +9,6 @@ import org.mycard.ygo.YGOCardSelectionBuilder;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.support.v7.widget.PopupMenu.OnMenuItemClickListener;
 import android.util.AttributeSet;
 import android.view.MenuItem;
@@ -102,7 +101,7 @@ public class CardFilterMenuItem extends LinearLayout implements ICardFilter, OnM
 
 
 	@Override
-	public void onFilter(int type, int arg1, int arg2, Bundle obj) {
+	public void onFilter(int type, int arg1, int arg2, Object obj) {
 		if (mCardFilterDelegate != null) {
 			mCardFilterDelegate.onFilter(type, arg1, arg2, obj);
 		}

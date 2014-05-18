@@ -1,8 +1,8 @@
 package org.mycard.ygo;
 
-import org.mycard.ygo.provider.YGOCards;
+import java.util.List;
 
-import android.os.Bundle;
+import org.mycard.ygo.provider.YGOCards;
 
 public class YGOCardFilter implements ICardFilter {
 	
@@ -24,6 +24,9 @@ public class YGOCardFilter implements ICardFilter {
 	private int mDefMax;
 	private int mDefMin;
 	
+	private List<Integer> mLevelList;
+	private List<Integer> mEffectList;
+	
 	public YGOCardFilter() {
 		reset();
 	}
@@ -38,10 +41,15 @@ public class YGOCardFilter implements ICardFilter {
 		mAtkMin = CARD_FILTER_ATKDEF_DEF;
 		mDefMax = CARD_FILTER_ATKDEF_DEF;
 		mDefMin = CARD_FILTER_ATKDEF_DEF;
+		
+		mLevelList = null;
+		mEffectList = null;
+		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public void onFilter(int type, int arg1, int arg2, Bundle obj) {
+	public void onFilter(int type, int arg1, int arg2, Object obj) {
 		switch (type) {
 		case CARD_FILTER_TYPE_ALL:
 		case CARD_FILTER_MONSTER_TYPE:
@@ -67,6 +75,12 @@ public class YGOCardFilter implements ICardFilter {
 		case CARD_FILTER_DEF:
 			mDefMax = arg2;
 			mDefMin = arg1;
+			break;
+		case CARD_FILTER_LEVEL:
+			mLevelList = (List<Integer>) obj;
+			break;
+		case CARD_FILTER_EFFECT:
+			mEffectList = (List<Integer>) obj;
 			break;
 		default:
 			break;
@@ -116,6 +130,24 @@ public class YGOCardFilter implements ICardFilter {
 				sb.append("(").append(YGOCards.Datas.DEF)
 				.append(" BETWEEN ").append(mDefMin).append(" AND ").append(mDefMax).append(") AND ");;
 			}
+		}
+		if (mLevelList != null && mLevelList.size() > 0) {
+			int size = mLevelList.size();
+			sb.append("(");
+			for (int i = 0; i < size; i++) {
+				sb.append("(").append(YGOCards.Datas.LEVEL).append("=").append(mLevelList.get(i) + 1).append(") OR "); 
+			}
+			sb.delete(sb.length() - 4, sb.length());
+			sb.append(") AND ");
+		}
+		if (mEffectList != null && mEffectList.size() > 0) {
+			int size = mEffectList.size();
+			int effect = 0;
+			for (int i = 0; i < size; i++) {
+				int filter = 0x1;
+				effect |= (filter <<= mEffectList.get(i));
+			}
+			sb.append("(").append(YGOCards.Datas.CATEGORY).append("&").append(effect).append(">0) AND ");
 		}
 		if (sb.length() > 5) {
 			sb.delete(sb.length() - 5, sb.length());

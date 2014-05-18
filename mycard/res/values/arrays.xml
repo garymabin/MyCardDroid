@@ -48,6 +48,56 @@
         <item >幻龙</item>
     </string-array>
     
+    <string-array name="card_level">
+        <item >1</item>
+        <item >2</item>
+        <item >3</item>
+        <item >4</item>
+        <item >5</item>
+        <item >6</item>
+        <item >7</item>
+        <item >8</item>
+        <item >9</item>
+        <item >10</item>
+        <item >11</item>
+        <item >12</item>
+    </string-array>
+    
+    <string-array name="card_effect">
+        <item >魔陷破坏</item>
+        <item >怪兽破坏</item>
+        <item >卡片除外</item>
+        <item >送去墓地</item>
+        <item >返回手牌</item>
+        <item >返回卡组</item>
+        <item >手牌破坏</item>
+        <item >卡组破坏</item>
+        <item >抽卡辅助</item>
+        <item >卡组检索</item>
+        <item >卡片回收</item>
+        <item >表示形式</item>
+        <item >控制权</item>
+        <item >攻守变化</item>
+        <item >穿刺伤害</item>
+        <item >多次攻击</item>
+        <item >攻击限制</item>
+        <item >直接攻击</item>
+        <item >特殊召唤</item>
+        <item >衍生物</item>
+        <item >种族相关</item>
+        <item >属性相关</item>
+        <item >LP伤害</item>
+        <item >LP回复</item>
+        <item >破坏耐性</item>
+        <item >效果耐性</item>
+        <item >指示物</item>
+        <item >幸运</item>
+        <item >融合相关</item>
+        <item >同调相关</item>
+        <item >超量相关</item>
+        <item >效果无效</item>
+    </string-array>
+    
     <string-array name="card_attr">
         <item >地</item>
         <item >水</item>

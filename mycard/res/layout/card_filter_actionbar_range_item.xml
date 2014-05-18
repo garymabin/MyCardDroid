@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<org.mycard.widget.CardFilterDialogItem xmlns:android="http://schemas.android.com/apk/res/android"
+<org.mycard.widget.CardFilterRangeItem xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:background="@drawable/activated_background_holo_light"
@@ -11,4 +11,4 @@
 
     <include layout="@layout/card_filter_actionbar_item"  android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 
-</org.mycard.widget.CardFilterDialogItem>
+</org.mycard.widget.CardFilterRangeItem>

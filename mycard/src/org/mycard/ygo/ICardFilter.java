@@ -1,6 +1,5 @@
 package org.mycard.ygo;
 
-import android.os.Bundle;
 
 public interface ICardFilter {
 	
@@ -12,6 +11,8 @@ public interface ICardFilter {
 	public static final int CARD_FILTER_OT = 5;
 	public static final int CARD_FILTER_ATK = 6;
 	public static final int CARD_FILTER_DEF = 7;
+	public static final int CARD_FILTER_LEVEL = 8;
+	public static final int CARD_FILTER_EFFECT = 9;
 	
 	public static final int CARD_FILTER_TYPE_ALL =  0xFFFF; 
 	
@@ -84,7 +85,7 @@ public interface ICardFilter {
 	public static final int CARD_FILTER_ATKDEF_DEF = -1;
 	
 	
-	void onFilter(int type, int arg1, int arg2, Bundle obj);
+	void onFilter(int type, int arg1, int arg2, Object obj);
 	
 	void resetFilter();
 	

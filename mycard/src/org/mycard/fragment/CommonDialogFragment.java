@@ -1,10 +1,16 @@
 package org.mycard.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mycard.MainActivity;
 import org.mycard.R;
 import org.mycard.model.data.ResourcesConstants;
+import org.mycard.widget.BaseDialog;
 import org.mycard.widget.DonateDialog;
 import org.mycard.widget.DonateDialogConfigController;
+import org.mycard.widget.GridSelectionDialog;
+import org.mycard.widget.GridSelectionDialogController;
 import org.mycard.widget.RangeDialog;
 import org.mycard.widget.RangeDialogConfigController;
 import org.mycard.widget.RoomDialog;
@@ -133,6 +139,12 @@ public class CommonDialogFragment extends DialogFragment implements
 		case ResourcesConstants.DIALOG_MODE_FILTER_DEF:
 			dlg = new RangeDialog(mActivity, this, RangeDialogConfigController.RANGE_DIALOG_TYPE_DEF, getArguments());
 			break;
+		case ResourcesConstants.DIALOG_MODE_FILTER_LEVEL:
+			dlg = new GridSelectionDialog(mActivity, this, R.array.card_level, getArguments());
+			break;
+		case ResourcesConstants.DIALOG_MODE_FILTER_EFFECT:
+			dlg = new GridSelectionDialog(mActivity, this, R.array.card_effect, getArguments());
+			break;
 		default:
 			break;
 		}
@@ -207,13 +219,23 @@ public class CommonDialogFragment extends DialogFragment implements
 				break;
 			}
 			case ResourcesConstants.DIALOG_MODE_FILTER_ATK:
-			case ResourcesConstants.DIALOG_MODE_FILTER_DEF:
-				int max = ((RangeDialogConfigController)((RangeDialog)getDialog()).getController()).getMaxValue();
-				int min = ((RangeDialogConfigController)((RangeDialog)getDialog()).getController()).getMinValue();;
+			case ResourcesConstants.DIALOG_MODE_FILTER_DEF: {
+				int max = ((RangeDialogConfigController)((BaseDialog)getDialog()).getController()).getMaxValue();
+				int min = ((RangeDialogConfigController)((BaseDialog)getDialog()).getController()).getMinValue();;
 				Bundle data = new Bundle();
 				data.putInt("max", max);
 				data.putInt("min", min);
 				((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(), -1, data);
+				break;
+			}
+			case ResourcesConstants.DIALOG_MODE_FILTER_LEVEL:
+			case ResourcesConstants.DIALOG_MODE_FILTER_EFFECT: {
+				List<Integer> list = ((GridSelectionDialogController)((BaseDialog)getDialog()).getController()).getSelections();
+				Bundle data = new Bundle();
+				data.putIntegerArrayList("selections", (ArrayList<Integer>) list);
+				((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(), -1, data);
+				break;
+			}
 			default:
 				break;
 			}

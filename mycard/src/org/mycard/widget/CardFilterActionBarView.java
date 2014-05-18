@@ -82,10 +82,30 @@ public class CardFilterActionBarView extends RelativeLayout implements
 		return spinner.getId();
 	}
 
-	public CardFilterDialogItem addNewPopupDialog(int typeRes, OnCardFilterChangeListener onFilterListener,
+	public CardFilterRangeItem addNewPopupRangeDialog(int typeRes, OnCardFilterChangeListener onFilterListener,
 			OnClickListener onClickListener, boolean isExtended) {
-		CardFilterDialogItem panel = (CardFilterDialogItem) mInflater.inflate(
-				R.layout.card_filter_actionbar_dlg_item, null);
+		CardFilterRangeItem panel = (CardFilterRangeItem) mInflater.inflate(
+				R.layout.card_filter_actionbar_range_item, null);
+		panel.setId(typeRes);
+		((TextView) panel.findViewById(R.id.type)).setText(typeRes);
+		panel.setOnClickListener(onClickListener);
+		panel.setCardFilterChangeListener(onFilterListener);
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+		params.weight = 1.0f;
+		panel.setLayoutParams(params);
+		if (!isExtended) {
+			mBasicItemPanel.addView(panel);
+		} else {
+			mMoreItemPanel.addView(panel);
+		}
+		return panel;
+	}
+	
+	public CardFilterGridItem addNewPopupGridDialog(int typeRes, OnCardFilterChangeListener onFilterListener,
+			OnClickListener onClickListener, boolean isExtended) {
+		CardFilterGridItem panel = (CardFilterGridItem) mInflater.inflate(
+				R.layout.card_filter_actionbar_grid_item, null);
 		panel.setId(typeRes);
 		((TextView) panel.findViewById(R.id.type)).setText(typeRes);
 		panel.setOnClickListener(onClickListener);

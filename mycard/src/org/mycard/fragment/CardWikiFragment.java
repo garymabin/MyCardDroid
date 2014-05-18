@@ -1,5 +1,7 @@
 package org.mycard.fragment;
 
+import java.util.ArrayList;
+
 import org.mycard.R;
 import org.mycard.common.ComplexCursorLoader;
 import org.mycard.common.Constants;
@@ -11,8 +13,10 @@ import org.mycard.ygo.provider.YGOCards;
 import org.mycard.model.data.ResourcesConstants;
 import org.mycard.utils.ResourceUtils;
 import org.mycard.widget.CardFilterActionBarView;
-import org.mycard.widget.CardFilterDialogItem;
+import org.mycard.widget.CardFilterGridItem;
 import org.mycard.widget.CardFilterMenuItem;
+import org.mycard.widget.CardFilterRangeItem;
+import org.mycard.widget.GridSelectionDialogController;
 import org.mycard.widget.OnCardFilterChangeListener;
 import org.mycard.widget.CardFilterSearchActionView;
 import org.mycard.widget.adapter.CardAdapter;
@@ -55,7 +59,8 @@ public class CardWikiFragment extends BaseFragment implements
 	private static final int REQUEST_ID_CARD_DETAIL = 0;
 	private static final int REQUEST_ID_CARD_FILTER_ATK = 1;
 	private static final int REQUEST_ID_CARD_FILTER_DEF = 2;
-	
+	private static final int REQUEST_ID_CARD_FILTER_LEVEL = 3;
+	private static final int REQUEST_ID_CARD_FILTER_EFFECT = 4;
 	
 	private static final String TAG = "CardWikiFragment";
 	private ComplexCursorLoader mCursorLoader;
@@ -89,8 +94,12 @@ public class CardWikiFragment extends BaseFragment implements
 	private CardFilterMenuItem mPropPanel;
 	private CardFilterMenuItem mOTPanel;
 	
-	private CardFilterDialogItem mAtkPanel;
-	private CardFilterDialogItem mDefPanel;
+	private CardFilterRangeItem mAtkPanel;
+	private CardFilterRangeItem mDefPanel;
+	
+	private CardFilterGridItem mLevelPanel;
+	private CardFilterGridItem mEffectPanel;
+	
 	
 	private CardFilterSearchActionView mSearchView;
 
@@ -132,14 +141,18 @@ public class CardWikiFragment extends BaseFragment implements
 					new int[] { R.array.card_limit }, this, false);
 			mOTPanel.setCardFilterDelegate(mCardFilter);
 			
-			mAtkPanel = mActionBarView.addNewPopupDialog(
+			mAtkPanel = mActionBarView.addNewPopupRangeDialog(
 					R.string.action_filter_atk, this,
 					this, true);
 			mAtkPanel.setCardFilterDelegate(mCardFilter);
-			mDefPanel = mActionBarView.addNewPopupDialog(
+			mDefPanel = mActionBarView.addNewPopupRangeDialog(
 					R.string.action_filter_def, this,
 					this, true);
 			mDefPanel.setCardFilterDelegate(mCardFilter);
+			mLevelPanel = mActionBarView.addNewPopupGridDialog(R.string.action_filter_level, this, this, true);
+			mLevelPanel.setCardFilterDelegate(mCardFilter);
+			mEffectPanel = mActionBarView.addNewPopupGridDialog(R.string.action_filter_effect, this, this, true);
+			mEffectPanel.setCardFilterDelegate(mCardFilter);
 			break;
 
 		default:
@@ -287,6 +300,10 @@ public class CardWikiFragment extends BaseFragment implements
 			mAtkPanel.setRange(ICardFilter.CARD_FILTER_ATK, data.getInt("min"), data.getInt("max"));
 		} else if (REQUEST_ID_CARD_FILTER_DEF == requestCode) {
 			mDefPanel.setRange(ICardFilter.CARD_FILTER_DEF, data.getInt("min"), data.getInt("max"));
+		} else if (REQUEST_ID_CARD_FILTER_LEVEL == requestCode) {
+			mLevelPanel.setSelection(ICardFilter.CARD_FILTER_LEVEL, data.getIntegerArrayList("selections"));
+		} else if (REQUEST_ID_CARD_FILTER_EFFECT == requestCode) {
+			mEffectPanel.setSelection(ICardFilter.CARD_FILTER_EFFECT, data.getIntegerArrayList("selections"));
 		}
 	}
 
@@ -314,6 +331,18 @@ public class CardWikiFragment extends BaseFragment implements
 			bundle.putInt("min", mDefPanel.getMin());
 			bundle.putInt(ResourcesConstants.MODE_OPTIONS, ResourcesConstants.DIALOG_MODE_FILTER_DEF);
 			showDialog(bundle, this, REQUEST_ID_CARD_FILTER_DEF);
+		} else if (v.equals(mLevelPanel)) {
+			Bundle bundle = new Bundle();
+			bundle.putInt(ResourcesConstants.MODE_OPTIONS, ResourcesConstants.DIALOG_MODE_FILTER_LEVEL);
+			bundle.putIntegerArrayList("selection", (ArrayList<Integer>) mLevelPanel.getSelection());
+			bundle.putInt("type", GridSelectionDialogController.GRID_SELECTION_TYPE_LEVEL);
+			showDialog(bundle, this, REQUEST_ID_CARD_FILTER_LEVEL);
+		} else if (v.equals(mEffectPanel)) {
+			Bundle bundle = new Bundle();
+			bundle.putInt(ResourcesConstants.MODE_OPTIONS, ResourcesConstants.DIALOG_MODE_FILTER_EFFECT);
+			bundle.putIntegerArrayList("selection", (ArrayList<Integer>) mEffectPanel.getSelection());
+			bundle.putInt("type", GridSelectionDialogController.GRID_SELECTION_TYPE_EFFECT);
+			showDialog(bundle, this, REQUEST_ID_CARD_FILTER_EFFECT);
 		}
 		
 	}
