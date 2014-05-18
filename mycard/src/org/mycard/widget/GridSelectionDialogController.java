@@ -8,39 +8,58 @@ import org.mycard.R;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.SparseBooleanArray;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.TextView;
 
 public class GridSelectionDialogController extends BaseDialogConfigController implements OnClickListener {
 	
-	public static final int GRID_SELECTION_TYPE_LEVEL = 0;
-	public static final int GRID_SELECTION_TYPE_EFFECT = 1;
-	
-	public final class MultiSelectionAdapter extends ArrayAdapter<String> {
-
-		public MultiSelectionAdapter(Context context, int resource,
-				int textViewResourceId, String[] objects) {
-			super(context, resource, textViewResourceId, objects);
-		}
+	public final class GridSelectionAdapter extends BaseAdapter {
+		private LayoutInflater mInflater;
 		
+		public GridSelectionAdapter(Context context) {
+			mInflater = LayoutInflater.from(context);
+		}
+
+		@Override
+		public int getCount() {
+			return mGridString.length;
+		}
+
+		@Override
+		public String getItem(int position) {
+			return mGridString[position];
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			View view = super.getView(position, convertView, parent);
-			view.setOnClickListener(GridSelectionDialogController.this);
-			view.setTag(position);
-			if (mSelectionMap.get(position)) {
-				((CardSelectionLabel)view).setSelected(true);
-			} else {
-				((CardSelectionLabel)view).setSelected(false);
+			if (convertView == null) {
+				convertView = mInflater.inflate(R.layout.grid_item, null);
+				convertView.setOnClickListener(GridSelectionDialogController.this);
 			}
-			return view;
+			convertView.setTag(position);
+			((TextView)convertView.findViewById(R.id.cardSelectionLabel1)).setText(mGridString[position]);
+			if (mSelectionMap.get(position)) {
+				((CardSelectionLabel)convertView).setSelect(true);
+			} else {
+				((CardSelectionLabel)convertView).setSelect(false);
+			}
+			return convertView;
 		}
 
 	}
+
+	public static final int GRID_SELECTION_TYPE_LEVEL = 0;
+	public static final int GRID_SELECTION_TYPE_EFFECT = 1;
 
 	private GridView mGridView;
 	
@@ -49,6 +68,8 @@ public class GridSelectionDialogController extends BaseDialogConfigController im
 	private SparseBooleanArray mSelectionMap;
 	
 	private int mSize;
+	
+	private String[] mGridString;
 
 	public GridSelectionDialogController(DialogConfigUIBase configUI, View view, int gridRes, int type, List<Integer> initSelection) {
 		super(configUI, view);
@@ -56,8 +77,8 @@ public class GridSelectionDialogController extends BaseDialogConfigController im
 		final Resources res = context.getResources();
 		mSelectionMap = new SparseBooleanArray();
 		mGridView = (GridView) view.findViewById(R.id.grid_view);
-		String[] grid = context.getResources().getStringArray(gridRes);
-		mSize = grid.length;
+		mGridString = context.getResources().getStringArray(gridRes);
+		mSize = mGridString.length;
 		for (int i = 0; i < mSize; i++) {
 			if (initSelection != null && initSelection.contains(i)) {
 				mSelectionMap.append(i, true);
@@ -66,7 +87,7 @@ public class GridSelectionDialogController extends BaseDialogConfigController im
 			}
 			
 		}
-		mAdapter = new MultiSelectionAdapter(context, R.layout.grid_item, R.id.cardSelectionLabel1, grid);
+		mAdapter = new GridSelectionAdapter(context);
 		mGridView.setAdapter(mAdapter);
 		if (type == GRID_SELECTION_TYPE_LEVEL) {
 			mConfigUI.setTitle(R.string.action_filter_level);

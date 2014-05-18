@@ -14,6 +14,8 @@ public class CardSelectionLabel extends LinearLayout {
 	private int originColor;
 	private int selectionColor;
 	
+	private boolean isSelected;
+	
 	private TextView mLabel;
 
 	public CardSelectionLabel(Context context, AttributeSet attrs) {
@@ -30,6 +32,7 @@ public class CardSelectionLabel extends LinearLayout {
 		mLabel = (TextView) findViewById(R.id.cardSelectionLabel1);
 		originColor = getResources().getColor(R.color.black);
 		selectionColor = getResources().getColor(R.color.apptheme_color);
+		isSelected = false;
 	}
 	
 	@Override
@@ -46,7 +49,7 @@ public class CardSelectionLabel extends LinearLayout {
 
 		case MotionEvent.ACTION_UP:
 			setPressed(false);
-			setSelected(!isSelected());
+			setSelect(!isSelected);
 			performClick();
 			handled = true;
 			break;
@@ -57,10 +60,8 @@ public class CardSelectionLabel extends LinearLayout {
 		return handled;
 	}
 	
-	@Override
-	public void setSelected(boolean selected) {
-		super.setSelected(selected);
-		mLabel.setTextColor(isSelected() ? selectionColor : originColor);
+	public void setSelect(boolean selected) {
+		isSelected = selected;
+		mLabel.setTextColor(isSelected ? selectionColor : originColor);
 	}
-	
 }
