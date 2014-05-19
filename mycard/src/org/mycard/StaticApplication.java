@@ -68,6 +68,7 @@ customReportContent = { ReportField.REPORT_ID, APP_VERSION_NAME, ANDROID_VERSION
 		resDialogTitle = R.string.crash_title, 
 		resDialogCommentPrompt = R.string.crash_dialog_comment_prompt, 
 		resDialogOkToast = R.string.crash_dialog_ok_toast)
+
 public class StaticApplication extends Application {
 
 	static {

@@ -39,6 +39,7 @@ public interface Constants {
 	public static final int MSG_ID_UPDATE_ROOM_LIST = 0;
 	public static final int MSG_ID_UPDATE_SERVER = 1;
 	public static final int MSG_ID_LOGIN = 2;
+	public static final int MSG_ID_EXIT_CONFIRM_ALARM = 3;
 	
 	public static final String PREF_FILE_COMMON = "pref_common";
 	public static final String PREF_KEY_LOGIN_STATUS = "pref_login_status";

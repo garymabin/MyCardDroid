@@ -24,6 +24,7 @@ import org.mycard.ygo.YGOServerInfo;
 
 import com.google.analytics.tracking.android.EasyTracker;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -49,6 +50,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity implements
 		OnActionBarChangeCallback, Handler.Callback, OnClickListener, Constants {
@@ -91,6 +93,8 @@ public class MainActivity extends ActionBarActivity implements
 	private ActionBarDrawerToggle mDrawerToggle;
 	private ListView mDrawerList;
 	private String[] mFragmentItems;
+	
+	private boolean isExit;
 
 	private Integer[] mDrawerImageArray = { R.drawable.ic_drawer_home,
 			R.drawable.ic_drawer_duel, R.drawable.ic_drawer_card_wiki,
@@ -350,6 +354,8 @@ public class MainActivity extends ActionBarActivity implements
 			Bundle bundle = new Bundle();
 			bundle.putInt(ResourcesConstants.MODE_OPTIONS, ResourcesConstants.DIALOG_MODE_DONATE);
 			fragment.showDialog(bundle);
+		case Constants.MSG_ID_EXIT_CONFIRM_ALARM:
+			isExit = false;
 		default:
 			break;
 		}
@@ -362,7 +368,16 @@ public class MainActivity extends ActionBarActivity implements
 			navigateToFragment(FRAGMENT_ID_USER_STATUS);
 			mDrawerLayout.closeDrawer(mLeftDrawer);
 		}
-
 	}
-
+	
+	@Override
+	public void finish() {
+		if (!isExit) {
+			isExit = true;
+			Toast.makeText(this, R.string.exit_hint, Toast.LENGTH_SHORT).show();
+			mHandler.sendEmptyMessageDelayed(Constants.MSG_ID_EXIT_CONFIRM_ALARM, 2000);
+		} else {
+			super.finish();
+		}
+	}
 }

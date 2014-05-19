@@ -148,4 +148,6 @@
     <string name="settings_game_card_path">Card image save path</string>
     <string name="settings_game_font_path">Game font path</string>
     <string name="settings_game_opengl">OpenGL</string>
+    
+    <string name="exit_hint">"再按一次退出萌卡喵！"</string>
 </resources>
