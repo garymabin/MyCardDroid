@@ -1,10 +1,18 @@
 package org.mycard.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mycard.MainActivity;
 import org.mycard.R;
 import org.mycard.model.data.ResourcesConstants;
+import org.mycard.widget.BaseDialog;
 import org.mycard.widget.DonateDialog;
 import org.mycard.widget.DonateDialogConfigController;
+import org.mycard.widget.GridSelectionDialog;
+import org.mycard.widget.GridSelectionDialogController;
+import org.mycard.widget.RangeDialog;
+import org.mycard.widget.RangeDialogConfigController;
 import org.mycard.widget.RoomDialog;
 import org.mycard.widget.RoomDialogConfigController;
 
@@ -125,7 +133,18 @@ public class CommonDialogFragment extends DialogFragment implements
 		case ResourcesConstants.DIALOG_MODE_DONATE:
 			dlg = new DonateDialog(mActivity, this);
 			break;
-
+		case ResourcesConstants.DIALOG_MODE_FILTER_ATK:
+			dlg = new RangeDialog(mActivity, this, RangeDialogConfigController.RANGE_DIALOG_TYPE_ATK, getArguments());
+			break;
+		case ResourcesConstants.DIALOG_MODE_FILTER_DEF:
+			dlg = new RangeDialog(mActivity, this, RangeDialogConfigController.RANGE_DIALOG_TYPE_DEF, getArguments());
+			break;
+		case ResourcesConstants.DIALOG_MODE_FILTER_LEVEL:
+			dlg = new GridSelectionDialog(mActivity, this, R.array.card_level, getArguments());
+			break;
+		case ResourcesConstants.DIALOG_MODE_FILTER_EFFECT:
+			dlg = new GridSelectionDialog(mActivity, this, R.array.card_effect, getArguments());
+			break;
 		default:
 			break;
 		}
@@ -165,8 +184,6 @@ public class CommonDialogFragment extends DialogFragment implements
 					((DuelFragment)f).handleMessage(Message.obtain(null, getTargetRequestCode(), 0, 0, options));
 					return;
 				}
-//				ComponentName component = new ComponentName("cn.garymb.ygomobile", "cn.garymb.ygomobile.YGOMobileActivity");
-//				intent.setComponent(component);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 				intent.putExtra(YGOGameOptions.YGO_GAME_OPTIONS_BUNDLE_KEY, options);
 				startActivity(intent);
@@ -201,7 +218,19 @@ public class CommonDialogFragment extends DialogFragment implements
 				startActivity(intent);
 				break;
 			}
-
+			case ResourcesConstants.DIALOG_MODE_FILTER_ATK:
+			case ResourcesConstants.DIALOG_MODE_FILTER_DEF: {
+				int max = ((RangeDialogConfigController)((BaseDialog)getDialog()).getController()).getMaxValue();
+				int min = ((RangeDialogConfigController)((BaseDialog)getDialog()).getController()).getMinValue();;
+				((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(), -1, min, max, null);
+				break;
+			}
+			case ResourcesConstants.DIALOG_MODE_FILTER_LEVEL:
+			case ResourcesConstants.DIALOG_MODE_FILTER_EFFECT: {
+				List<Integer> list = ((GridSelectionDialogController)((BaseDialog)getDialog()).getController()).getSelections();
+				((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(), -1, -1, -1, list);
+				break;
+			}
 			default:
 				break;
 			}

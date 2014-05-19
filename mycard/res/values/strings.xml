@@ -9,6 +9,7 @@
     <string name="room_list">Rooms</string>
     <string name="action_settings">Settings</string>
     <string name="action_search">Search</string>
+    <string name="action_reset">Reset</string>
     <string name="action_play">Play</string>
     <string name="action_new_room">New room</string>
     <string name="action_support">Support us</string>
@@ -59,6 +60,7 @@
     <string name="action_filter_string_type">种类</string>
     <string name="action_filter_string_race">种族</string>
     <string name="action_filter_string_property">属性</string>
+    <string name="action_filter_string_ot">归属</string>
     <string name="action_filter_string_more">更多</string>
     <string name="action_filter_type_spell">魔法</string>
     <string name="action_filter_type_spell_normal">通常</string>
@@ -83,7 +85,9 @@
     <string name="action_filter_type_monster_union">同盟</string>
     <string name="action_filter_type_monster_spirit">灵魂</string>
     <string name="action_filter_type_monster_flip">反转</string>
-    <string name="action_filter_type_monster_toon">怪物</string>
+    <string name="action_filter_type_monster_toon">卡通</string>
+    <string name="action_filter_type_monster_pendulum">摇摆</string>
+    
     <string name="action_filter_property_land">地</string>
     <string name="action_filter_property_water">水</string>
     <string name="action_filter_property_hot">炎</string>
@@ -115,6 +119,19 @@
     <string name="action_filter_race_telekenesis">念动力</string>
     <string name="action_filter_race_devine_beast">幻神兽</string>
     <string name="action_filter_race_bramna">创造神</string>
+    <string name="action_filter_race_phantom_dragon">幻龙</string>
+    
+    <string name="action_filter_ot_ocg">OCG</string>
+    <string name="action_filter_ot_tcg">TCG</string>
+    <string name="action_filter_ot_ocgtcg">OCG/TCG</string>
+    
+    <string name="action_filter_atk">攻击力</string>
+    <string name="action_filter_def">防御力</string>
+    <string name="card_search_hint">请输入卡片名称或者代码</string>
+    
+    <string name="action_filter_level">星等</string>
+    <string name="action_filter_effect">效果</string>
+    
     <string name="settings_common">Common settings</string>
     <string name="settings_game">Game settings</string>
     <string name="settings_about">About</string>

@@ -37,6 +37,6 @@ public abstract class InstantThread extends BaseThread {
 				mCallback.onTaskFinish(mWrapper);
 			}
 		}
+		isRunning = false;
 	}
-
 }

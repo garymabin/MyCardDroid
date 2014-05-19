@@ -82,11 +82,12 @@ public class DataHttpConnector extends BaseHttpConnector implements
 		} catch (IOException e) {
 			e.printStackTrace();
 			status = IBaseWrapper.TASK_STATUS_FAILED;
+			wrapper.setResult(status);
 		} catch (OutOfMemoryError e) {
 			e.printStackTrace();
 			status = IBaseWrapper.TASK_STATUS_FAILED;
-		} finally {
 			wrapper.setResult(status);
+		} finally {
 			buffer = null;
 			if (data != null) {
 				try {

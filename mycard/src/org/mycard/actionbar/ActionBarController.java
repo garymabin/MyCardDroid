@@ -19,15 +19,17 @@ public class ActionBarController {
 	private List<WeakReference<Handler>> mActionSearchList;
 	private List<WeakReference<Handler>> mActionPersonalCenterList;
 	private List<WeakReference<Handler>> mActionSupportList;
+	private List<WeakReference<Handler>> mActionResetList;
 
 	public ActionBarController() {
-		mActionNewList = new ArrayList<WeakReference<Handler>>();
-		mActionSettingsList = new ArrayList<WeakReference<Handler>>();
-		mActionPersonalCenterList = new ArrayList<WeakReference<Handler>>();
-		mActionPlayList = new ArrayList<WeakReference<Handler>>();
-		mActionSearchList = new ArrayList<WeakReference<Handler>>();
-		mActionFilterList = new ArrayList<WeakReference<Handler>>();
-		mActionSupportList = new ArrayList<WeakReference<Handler>>();
+		mActionNewList = new ArrayList<WeakReference<Handler>>(3);
+		mActionSettingsList = new ArrayList<WeakReference<Handler>>(3);
+		mActionPersonalCenterList = new ArrayList<WeakReference<Handler>>(3);
+		mActionPlayList = new ArrayList<WeakReference<Handler>>(3);
+		mActionSearchList = new ArrayList<WeakReference<Handler>>(3);
+		mActionFilterList = new ArrayList<WeakReference<Handler>>(3);
+		mActionSupportList = new ArrayList<WeakReference<Handler>>(3);
+		mActionResetList = new ArrayList<WeakReference<Handler>>(3);
 	}
 
 	public boolean handleAction(MenuItem item) {
@@ -58,6 +60,10 @@ public class ActionBarController {
 		case R.id.action_support:
 			notifyTarget(mActionSupportList,
 					Constants.ACTION_BAR_EVENT_TYPE_DONATE);
+			break;
+		case R.id.action_reset:
+			notifyTarget(mActionResetList, Constants.ACTION_BAR_EVENT_TYPE_RESET);
+			break;
 		default:
 			handled = false;
 			break;
@@ -177,5 +183,20 @@ public class ActionBarController {
 				break;
 			}
 		}
+	}
+
+	public void registerForActionReset(Handler h) {
+		WeakReference<Handler> ref = new WeakReference<Handler>(h);
+		mActionResetList.add(ref);		
+	}
+
+	public void unregisterForActionReset(Handler h) {
+		for (WeakReference<Handler> item : mActionSupportList) {
+			if (h == item.get()) {
+				mActionResetList.remove(item);
+				item = null;
+				break;
+			}
+		}		
 	}
 }

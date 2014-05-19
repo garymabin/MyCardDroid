@@ -137,6 +137,14 @@ public class Controller {
 	public void unregisterForActionPersonalCenter(Handler h) {
 		mActionBarController.unregisterForActionPersonalCenter(h);
 	}
+	
+	public void registerForActionReset(Handler h) {
+		mActionBarController.registerForActionReset(h);
+	}
+	
+	public void unregisterForActionReset(Handler h) {
+		mActionBarController.unregisterForActionReset(h);
+	}
 
 	/**
 	 * 

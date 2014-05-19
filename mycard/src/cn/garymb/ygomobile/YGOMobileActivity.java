@@ -141,7 +141,6 @@ public class YGOMobileActivity extends NativeActivity implements
 			mLock = mPM.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, TAG);
 		}
 		mLock.acquire();
-		EasyTracker.getInstance(getApplicationContext()).activityStart(this);
 	}
 
 	/*
@@ -190,7 +189,6 @@ public class YGOMobileActivity extends NativeActivity implements
 		if (mLock != null) {
 			mLock.release();
 		}
-		EasyTracker.getInstance(getApplicationContext()).activityStop(this);
 	}
 
 	/**

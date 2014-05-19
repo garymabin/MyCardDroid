@@ -22,6 +22,8 @@ import org.mycard.model.data.ResourcesConstants;
 import org.mycard.setting.SettingsActivity;
 import org.mycard.ygo.YGOServerInfo;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -112,6 +114,8 @@ public class MainActivity extends ActionBarActivity implements
 
 	private TextView mUserStatusDes;
 	
+	private Menu mMenu;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -140,6 +144,18 @@ public class MainActivity extends ActionBarActivity implements
 		mController.unregisterForActionSupport(mHandler);
 		mController.unregisterForActionPersonalCenter(mHandler);
 		super.onPause();
+	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(getApplicationContext()).activityStart(this);
+	}
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+		EasyTracker.getInstance(getApplicationContext()).activityStop(this);
 	}
 
 	private void initView() {
@@ -187,10 +203,15 @@ public class MainActivity extends ActionBarActivity implements
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		mMenu = menu;
 		mActionBarCreator.createMenu(menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-
+	
+	public Menu getMenu() {
+		return mMenu;
+	}
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Pass the event to ActionBarDrawerToggle, if it returns
@@ -281,7 +302,7 @@ public class MainActivity extends ActionBarActivity implements
 	}
 
 	@Override
-	public void onActionBarChange(int msgType, int action, Object extra) {
+	public void onActionBarChange(int msgType, int action, int arg1, Object extra) {
 		// TODO Auto-generated method stub
 		switch (msgType) {
 		case Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE:
@@ -289,7 +310,7 @@ public class MainActivity extends ActionBarActivity implements
 				mActionBarCreator = new ActionBarCreator(this).setRoomCreate(
 						true).setPlay(true);
 			} else if (action == FRAGMENT_ID_CARD_WIKI) {
-				mActionBarCreator = new ActionBarCreator(this).setFilter(true).setSearch(true);
+				mActionBarCreator = new ActionBarCreator(this).setFilter(true).setSearch(true, arg1).setReset(true);
 			} else {
 				mActionBarCreator = new ActionBarCreator(this);
 			}

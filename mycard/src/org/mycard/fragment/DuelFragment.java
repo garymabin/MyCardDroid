@@ -2,7 +2,6 @@ package org.mycard.fragment;
 
 import java.util.List;
 
-import org.mycard.MainActivity;
 import org.mycard.R;
 import org.mycard.common.Constants;
 import org.mycard.core.Controller;
@@ -14,7 +13,6 @@ import org.mycard.ygo.YGORoomInfo;
 import cn.garymb.ygodata.YGOGameOptions;
 import cn.garymb.ygomobile.YGOMobileActivity;
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
@@ -112,7 +110,7 @@ public class DuelFragment extends TabFragment {
 		mTabs = getResources().getStringArray(R.array.duel_mode);
 		mTabCount = mTabs.length;
 		mActivity.onActionBarChange(Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE,
-				FRAGMENT_ID_DUEL, null);
+				FRAGMENT_ID_DUEL, 0, null);
 	}
 
 	@Override
@@ -135,7 +133,7 @@ public class DuelFragment extends TabFragment {
 		Controller.peekInstance().asyncUpdateRoomList(mHandler
 				.obtainMessage(Constants.MSG_ID_UPDATE_ROOM_LIST));
 		mActionBarCallback.onActionBarChange(
-				Constants.ACTION_BAR_CHANGE_TYPE_DATA_LOADING, 1, null);
+				Constants.ACTION_BAR_CHANGE_TYPE_DATA_LOADING, 1, 0, null);
 		for (int i = 0; i < mFragments.size(); i++) {
 			RoomPageFragment f = ((RoomPageFragment) mFragments.get(i));
 			if (f != null) {
@@ -217,7 +215,7 @@ public class DuelFragment extends TabFragment {
 				if (!isDataloaded) {
 					isDataloaded = true;
 					mActionBarCallback.onActionBarChange(
-							Constants.ACTION_BAR_CHANGE_TYPE_DATA_LOADING, 0, null);
+							Constants.ACTION_BAR_CHANGE_TYPE_DATA_LOADING, 0, 0, null);
 					if (mExtraView != null) {
 						mExtraView.setVisibility(View.GONE);
 					}

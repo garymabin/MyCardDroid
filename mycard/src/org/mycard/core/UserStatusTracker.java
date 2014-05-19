@@ -71,6 +71,8 @@ public class UserStatusTracker extends Handler {
 			int result = IBaseWrapper.TASK_STATUS_SUCCESS;
 			if (msg.arg2 != IBaseWrapper.TASK_STATUS_SUCCESS) {
 				result = LOGIN_STATUS_LOGIN_FAILED;
+			} else {
+				result = LOGIN_STATUS_LOGGED_IN;
 			}
 			changeLoginStatus(result, true);
 			break;

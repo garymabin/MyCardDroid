@@ -8,6 +8,7 @@
     <string name="room_list">房间列表</string>
     <string name="action_settings">设置</string>
     <string name="action_support">支持我们</string>
+    <string name="action_reset">重置</string>
     <string name="action_search">搜索</string>
     <string name="action_play">开始游戏</string>
     <string name="action_new_room">创建房间</string>
@@ -65,14 +66,12 @@
     <string name="action_filter_string_property">属性</string>
     <string name="action_filter_string_more">更多</string>
     <string name="action_filter_type_spell">魔法</string>
-    <string name="action_filter_type_spell_normal">通常</string>
     <string name="action_filter_type_spell_quick_play">速攻</string>
     <string name="action_filter_type_spell_ritual">仪式</string>
     <string name="action_filter_type_spell_equip">装备</string>
     <string name="action_filter_type_spell_field">场地</string>
     <string name="action_filter_type_spell_continuous">永续</string>
     <string name="action_filter_type_trap">陷阱</string>
-    <string name="action_filter_type_trap_normal">通常</string>
     <string name="action_filter_type_trap_continuous">永续</string>
     <string name="action_filter_type_trap_counter">反击</string>
     <string name="action_filter_type_monster">怪物</string>
@@ -85,9 +84,11 @@
     <string name="action_filter_type_monster_tunner">调整</string>
     <string name="action_filter_type_monster_gemini">二重</string>
     <string name="action_filter_type_monster_union">同盟</string>
+    <string name="action_filter_type_monster_token">衍生物</string>
     <string name="action_filter_type_monster_spirit">灵魂</string>
     <string name="action_filter_type_monster_flip">反转</string>
-    <string name="action_filter_type_monster_toon">怪物</string>
+    <string name="action_filter_type_monster_toon">卡通</string>
+    <string name="action_filter_type_monster_pendulum">摇摆</string>
     
     <string name="action_filter_property_land">地</string>
     <string name="action_filter_property_water">水</string>
@@ -122,7 +123,18 @@
     <string name="action_filter_race_telekenesis">念动力</string>
     <string name="action_filter_race_devine_beast">幻神兽</string>
     <string name="action_filter_race_bramna">创造神</string>
+    <string name="action_filter_race_phantom_dragon">幻龙</string>
     
+    <string name="action_filter_ot_ocg">OCG</string>
+    <string name="action_filter_ot_tcg">TCG</string>
+    <string name="action_filter_ot_ocgtcg">OCG/TCG</string>
+    
+    <string name="action_filter_atk">攻击力</string>
+    <string name="action_filter_def">防御力</string>
+    <string name="card_search_hint">请输入卡片名称或者代码</string>
+    
+    <string name="action_filter_level">星等</string>
+    <string name="action_filter_effect">效果</string>
     
     <string name="donate">捐助</string>
     <string name="support_us_des">萌卡属于非盈利项目，依靠众人的捐助维持运作。如果您可以提供捐助帮助服务持续运行，我们将不胜感激。</string>

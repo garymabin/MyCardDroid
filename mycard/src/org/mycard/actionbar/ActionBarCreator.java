@@ -4,6 +4,7 @@ import org.mycard.R;
 
 import android.content.Context;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -30,6 +31,10 @@ public class ActionBarCreator {
 	private boolean mFilter = false;
 
 	private boolean mSupport = true;
+	
+	private boolean mReset = false;
+	
+	private int mSearchResId;
 
 	public ActionBarCreator setPersonalCenter(boolean userStatus) {
 		mPersonalCenter = userStatus;
@@ -46,8 +51,9 @@ public class ActionBarCreator {
 		return this;
 	}
 
-	public ActionBarCreator setSearch(boolean search) {
+	public ActionBarCreator setSearch(boolean search, int resID) {
 		mSearch = search;
+		mSearchResId = resID;
 		return this;
 	}
 
@@ -63,6 +69,11 @@ public class ActionBarCreator {
 
 	public ActionBarCreator setFilter(boolean filter) {
 		mFilter = filter;
+		return this;
+	}
+	
+	public ActionBarCreator setReset(boolean reset) {
+		mReset = reset;
 		return this;
 	}
 
@@ -86,16 +97,23 @@ public class ActionBarCreator {
 			MenuItemCompat.setShowAsAction(item,
 					MenuItemCompat.SHOW_AS_ACTION_NEVER);
 		}
+		
 		if (mSupport) {
 			MenuItem item = menu.add(Menu.NONE, R.id.action_support, index++,
 					R.string.action_support);
 			MenuItemCompat.setShowAsAction(item,
 					MenuItemCompat.SHOW_AS_ACTION_NEVER);
 		}
+		
+		if (mReset) {
+			MenuItem item = menu.add(Menu.NONE, R.id.action_reset, index++, R.string.action_reset)
+					.setIcon(R.drawable.ic_action_reset);
+			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		}
 
 		if (mFilter) {
 			MenuItem item = menu.add(Menu.NONE, R.id.action_filter, index++,
-					mContext.getResources().getString(R.string.action_filter))
+					R.string.action_filter)
 					.setIcon(R.drawable.ic_action_empty_filter);
 			MenuItemCompat
 					.setShowAsAction(
@@ -131,8 +149,7 @@ public class ActionBarCreator {
 							item,
 							MenuItemCompat.SHOW_AS_ACTION_ALWAYS
 									| MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-			MenuItemCompat.setActionView(item,
-					R.layout.custom_actionbar_searchview);
+			MenuItemCompat.setActionView(item, mSearchResId);
 		}
 		if (mRoomCreate) {
 			MenuItem item = menu

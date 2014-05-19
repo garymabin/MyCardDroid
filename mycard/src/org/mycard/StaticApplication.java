@@ -25,6 +25,7 @@ import java.security.cert.X509Certificate;
 import java.util.Arrays;
 
 import org.acra.ACRA;
+import org.acra.ReportField;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 import org.apache.http.client.HttpClient;
@@ -34,7 +35,6 @@ import org.mycard.net.http.ThreadSafeHttpClientFactory;
 import org.mycard.setting.Settings;
 import org.mycard.ygo.provider.YGOCardsProvider;
 
-import cn.garymb.ygomobile.core.CrashSender;
 import cn.garymb.ygomobile.util.FileOpsUtils;
 
 import com.github.nativehandler.NativeCrashHandler;
@@ -53,9 +53,21 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 @ReportsCrashes(formKey = "", // will not be used
-customReportContent = { APP_VERSION_NAME, ANDROID_VERSION, PHONE_MODEL,
+                formUri = "https://zh99998.cloudant.com/acra-mycard/_design/acra-storage/_update/report",
+customReportContent = { ReportField.REPORT_ID, APP_VERSION_NAME, ANDROID_VERSION, PHONE_MODEL,
 		CUSTOM_DATA, STACK_TRACE, USER_CRASH_DATE, LOGCAT, BUILD,
-		TOTAL_MEM_SIZE, DISPLAY, DUMPSYS_MEMINFO, DEVICE_FEATURES, ENVIRONMENT }, mailTo = "garymabin@gmail.com", includeDropBoxSystemTags = true, mode = ReportingInteractionMode.DIALOG, resDialogText = R.string.crashed, resDialogIcon = android.R.drawable.ic_dialog_info, resDialogTitle = R.string.crash_title, resDialogCommentPrompt = R.string.crash_dialog_comment_prompt, resDialogOkToast = R.string.crash_dialog_ok_toast)
+		TOTAL_MEM_SIZE, DISPLAY, DUMPSYS_MEMINFO, DEVICE_FEATURES, ENVIRONMENT },
+		reportType = org.acra.sender.HttpSender.Type.JSON,
+		httpMethod = org.acra.sender.HttpSender.Method.PUT,
+		formUriBasicAuthLogin="arloonlyingetedivareesce",
+		formUriBasicAuthPassword="PYGoQYsT2WVHHGNqwMSoJlrg",
+		includeDropBoxSystemTags = true, 
+		mode = ReportingInteractionMode.DIALOG, 
+		resDialogText = R.string.crashed, 
+		resDialogIcon = android.R.drawable.ic_dialog_info, 
+		resDialogTitle = R.string.crash_title, 
+		resDialogCommentPrompt = R.string.crash_dialog_comment_prompt, 
+		resDialogOkToast = R.string.crash_dialog_ok_toast)
 public class StaticApplication extends Application {
 
 	static {
@@ -82,8 +94,6 @@ public class StaticApplication extends Application {
 		INSTANCE = this;
 		new NativeCrashHandler().registerForNativeCrash(this);
 		ACRA.init(this);
-		CrashSender sender = new CrashSender(this);
-		ACRA.getErrorReporter().setReportSender(sender);
 		mHttpFactory = new ThreadSafeHttpClientFactory(this);
 		mSettingsPref = PreferenceManager.getDefaultSharedPreferences(this);
 		Controller.peekInstance();

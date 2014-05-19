@@ -5,19 +5,17 @@ import org.mycard.common.Constants;
 
 import android.app.Activity;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.widget.TextView;
 
 public abstract class BaseFragment extends Fragment implements Handler.Callback, Constants, FragmentNavigationListener{
 
 	public interface OnActionBarChangeCallback {
-		void onActionBarChange(int msgType, int action, Object extra);
+		void onActionBarChange(int msgType, int action, int arg1, Object extra);
 	}
 
 	/**
@@ -112,7 +110,7 @@ public abstract class BaseFragment extends Fragment implements Handler.Callback,
 	}
 
 	@Override
-	public void onEventFromChild(int requestCode, int eventType, Bundle data) {
+	public void onEventFromChild(int requestCode, int eventType, int arg1, int arg2, Object data) {
 	}
 
 	@Override
