@@ -43,6 +43,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.ListView;
 
 public class CardWikiFragment extends BaseFragment implements
@@ -114,6 +115,8 @@ public class CardWikiFragment extends BaseFragment implements
 		case Constants.ACTION_BAR_EVENT_TYPE_SEARCH:
 			Log.i(TAG, "receive action bar search click event");
 			mSearchView = (CardFilterSearchActionView) MenuItemCompat.getActionView(mActivity.getMenu().findItem(R.id.action_search));
+			View searchPlate = mSearchView.findViewById(R.id.search_plate);
+			searchPlate.setBackgroundResource(R.drawable.apptheme_search_edit_text_holo_light);
 			mSearchView.setOnCardFilterListener(this);
 			mSearchView.setQueryHint(mActivity.getResources().getString(R.string.card_search_hint));
 			break;
@@ -154,7 +157,10 @@ public class CardWikiFragment extends BaseFragment implements
 			mEffectPanel = mActionBarView.addNewPopupGridDialog(R.string.action_filter_effect, this, this, true);
 			mEffectPanel.setCardFilterDelegate(mCardFilter);
 			break;
-
+		case Constants.ACTION_BAR_EVENT_TYPE_RESET:
+			resetFilters();
+			getLoaderManager().restartLoader(QUERY_SOURCE_LOADER_ID,
+					null, this);
 		default:
 			break;
 		}
@@ -172,6 +178,7 @@ public class CardWikiFragment extends BaseFragment implements
 		super.onResume();
 		Controller.peekInstance().registerForActionSearch(mHandler);
 		Controller.peekInstance().registerForActionFilter(mHandler);
+		Controller.peekInstance().registerForActionReset(mHandler);
 	}
 
 	@Override
@@ -179,6 +186,7 @@ public class CardWikiFragment extends BaseFragment implements
 		super.onPause();
 		Controller.peekInstance().unregisterForActionSearch(mHandler);
 		Controller.peekInstance().unregisterForActionFilter(mHandler);
+		Controller.peekInstance().unregisterForActionReset(mHandler);
 	}
 
 	@Override
@@ -196,11 +204,32 @@ public class CardWikiFragment extends BaseFragment implements
 	public void onDetach() {
 		super.onDetach();
 		mAdapter.onFragmentInactive();
-		mTypePanel.resetFilter();
-		mRacePanel.resetFilter();
-		mPropPanel.resetFilter();
-		mAtkPanel.resetFilter();
-		mDefPanel.resetFilter();
+		resetFilters();
+	}
+
+
+	private void resetFilters() {
+		if (mTypePanel != null) {
+			mTypePanel.resetFilter();
+		}
+		if (mRacePanel != null) {
+			mRacePanel.resetFilter();
+		}
+		if (mPropPanel != null) {
+			mPropPanel.resetFilter();
+		}
+		if (mAtkPanel != null) {
+			mAtkPanel.resetFilter();
+		}
+		if (mDefPanel != null) {
+			mDefPanel.resetFilter();
+		}
+		if (mLevelPanel != null) {
+			mLevelPanel.resetFilter();
+		}
+		if (mEffectPanel != null) {
+			mEffectPanel.resetFilter();
+		}
 	}
 
 	private void refreshActionBar() {
@@ -235,6 +264,8 @@ public class CardWikiFragment extends BaseFragment implements
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle bundle) {
 		if (bundle != null) {
 			mSelection = bundle.getString(BUNDLE_KEY_INTERNAL_SELECTION);
+		} else {
+			mSelection = null;
 		}
 		mCursorLoader = new ComplexCursorLoader(mContext, mContentUri, mProjects,
 				mSelection, mSelectionExtra, mSortOrder);

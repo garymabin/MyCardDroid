@@ -11,4 +11,5 @@
     <item type="id" name="action_play"/>
     <item type="id" name="action_loading"/>
     <item type="id" name="action_support"/>
+    <item type="id" name="action_reset"/>
 </resources>

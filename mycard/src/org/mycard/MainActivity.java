@@ -296,7 +296,7 @@ public class MainActivity extends ActionBarActivity implements
 				mActionBarCreator = new ActionBarCreator(this).setRoomCreate(
 						true).setPlay(true);
 			} else if (action == FRAGMENT_ID_CARD_WIKI) {
-				mActionBarCreator = new ActionBarCreator(this).setFilter(true).setSearch(true, arg1);
+				mActionBarCreator = new ActionBarCreator(this).setFilter(true).setSearch(true, arg1).setReset(true);
 			} else {
 				mActionBarCreator = new ActionBarCreator(this);
 			}

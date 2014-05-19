@@ -32,6 +32,8 @@ public class ActionBarCreator {
 
 	private boolean mSupport = true;
 	
+	private boolean mReset = false;
+	
 	private int mSearchResId;
 
 	public ActionBarCreator setPersonalCenter(boolean userStatus) {
@@ -69,6 +71,11 @@ public class ActionBarCreator {
 		mFilter = filter;
 		return this;
 	}
+	
+	public ActionBarCreator setReset(boolean reset) {
+		mReset = reset;
+		return this;
+	}
 
 	public boolean isFilterEnabled() {
 		return mFilter;
@@ -90,16 +97,23 @@ public class ActionBarCreator {
 			MenuItemCompat.setShowAsAction(item,
 					MenuItemCompat.SHOW_AS_ACTION_NEVER);
 		}
+		
 		if (mSupport) {
 			MenuItem item = menu.add(Menu.NONE, R.id.action_support, index++,
 					R.string.action_support);
 			MenuItemCompat.setShowAsAction(item,
 					MenuItemCompat.SHOW_AS_ACTION_NEVER);
 		}
+		
+		if (mReset) {
+			MenuItem item = menu.add(Menu.NONE, R.id.action_reset, index++, R.string.action_reset)
+					.setIcon(R.drawable.ic_action_reset);
+			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		}
 
 		if (mFilter) {
 			MenuItem item = menu.add(Menu.NONE, R.id.action_filter, index++,
-					mContext.getResources().getString(R.string.action_filter))
+					R.string.action_filter)
 					.setIcon(R.drawable.ic_action_empty_filter);
 			MenuItemCompat
 					.setShowAsAction(
