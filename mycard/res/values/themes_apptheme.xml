@@ -12,6 +12,8 @@
     <item name="android:checkboxStyle">@style/CheckBoxAppTheme</item>
 
     <item name="android:spinnerStyle">@style/SpinnerAppTheme</item>
+    
+    <item name="android:radioButtonStyle">@style/RadioButtonAppTheme</item>
 
     <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemAppTheme</item>
     

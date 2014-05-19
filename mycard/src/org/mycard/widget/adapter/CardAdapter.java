@@ -266,5 +266,4 @@ public class CardAdapter extends CursorAdapter implements IDataObserver{
 
 		ctlr.setBitmap(holder.getBitmap());
 	}
-
 }

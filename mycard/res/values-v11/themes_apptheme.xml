@@ -6,6 +6,14 @@
   <style name="AppTheme" parent="@style/_AppTheme"/>
 
   <style name="_AppTheme" parent="Theme.AppCompat.Light">
+      
+    <item name="android:editTextStyle">@style/EditTextAppTheme</item>
+
+    <item name="android:checkboxStyle">@style/CheckBoxAppTheme</item>
+
+    <item name="android:spinnerStyle">@style/SpinnerAppTheme</item>
+    
+    <item name="android:radioButtonStyle">@style/RadioButtonAppTheme</item>
 
     <item name="android:editTextBackground">@drawable/apptheme_edit_text_holo_light</item>
 
@@ -14,6 +22,8 @@
     <item name="android:dropDownSpinnerStyle">@style/SpinnerAppTheme</item>
     
     <item name="android:actionModeBackground">@drawable/ab_dark_purper</item>
+    
+    <item name="android:listChoiceIndicatorSingle">@drawable/apptheme_btn_radio_holo_light</item>
     
   </style>
 

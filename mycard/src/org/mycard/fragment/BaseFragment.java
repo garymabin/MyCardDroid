@@ -110,7 +110,7 @@ public abstract class BaseFragment extends Fragment implements Handler.Callback,
 	}
 
 	@Override
-	public void onEventFromChild(int requestCode, int eventType, Bundle data) {
+	public void onEventFromChild(int requestCode, int eventType, int arg1, int arg2, Object data) {
 	}
 
 	@Override

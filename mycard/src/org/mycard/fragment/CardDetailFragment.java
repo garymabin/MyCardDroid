@@ -62,7 +62,8 @@ public class CardDetailFragment extends BaseFragment implements
 	public void onDetach() {
 		Log.d(TAG, "onDetach : E");
 		super.onDetach();
-		((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(), FRAGMENT_NAVIGATION_BACK_EVENT, null);
+		int currentSecltion = mViewPager.getCurrentItem();
+		((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(), FRAGMENT_NAVIGATION_BACK_EVENT, currentSecltion - mInitPos, -1, null);
 	}
 
 	@Override

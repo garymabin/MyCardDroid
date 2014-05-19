@@ -4,7 +4,7 @@
         android:key="pref_key_game_res_path"
         android:persistent="true"
         android:title="@string/settings_game_res_path" />
-    <ListPreference
+    <org.mycard.setting.CustomListPreferences
         android:key="pref_key_game_ogles_config"
         android:entries="@array/opengl_version"
         android:entryValues="@array/opengl_version_value"

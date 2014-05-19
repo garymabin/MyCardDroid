@@ -1,31 +1,34 @@
 package org.mycard.fragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mycard.R;
 import org.mycard.common.ComplexCursorLoader;
 import org.mycard.common.Constants;
 import org.mycard.core.Controller;
-import org.mycard.ygo.ICardFilter;
-import org.mycard.ygo.YGOCardFilter;
-import org.mycard.ygo.YGOCardSelectionBuilder;
-import org.mycard.ygo.provider.YGOCards;
 import org.mycard.model.data.ResourcesConstants;
 import org.mycard.utils.ResourceUtils;
 import org.mycard.widget.CardFilterActionBarView;
 import org.mycard.widget.CardFilterGridItem;
 import org.mycard.widget.CardFilterMenuItem;
 import org.mycard.widget.CardFilterRangeItem;
+import org.mycard.widget.CardFilterSearchActionView;
 import org.mycard.widget.GridSelectionDialogController;
 import org.mycard.widget.OnCardFilterChangeListener;
-import org.mycard.widget.CardFilterSearchActionView;
 import org.mycard.widget.adapter.CardAdapter;
+import org.mycard.ygo.ICardFilter;
+import org.mycard.ygo.YGOCardFilter;
+import org.mycard.ygo.YGOCardSelectionBuilder;
+import org.mycard.ygo.provider.YGOCards;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorWindow;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -43,7 +46,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
 import android.widget.ListView;
 
 public class CardWikiFragment extends BaseFragment implements
@@ -80,7 +82,7 @@ public class CardWikiFragment extends BaseFragment implements
 	private CardAdapter mAdapter;
 	
 	private CardFilterActionBarView mActionBarView;
-	private ListView listView;
+	private ListView mListView;
 	private Context mContext;
 
 	private ActionMode mActionMode;
@@ -103,6 +105,9 @@ public class CardWikiFragment extends BaseFragment implements
 	
 	
 	private CardFilterSearchActionView mSearchView;
+	
+	private int mSavedPosition;
+	private int mSavedYPixelFromItemTop;
 
 	/*
 	 * (non-Javadoc)
@@ -247,11 +252,11 @@ public class CardWikiFragment extends BaseFragment implements
 
 		View view = inflater.inflate(R.layout.card_info_list, null);
 
-		listView = (ListView) view.findViewById(R.id.card_info_list);
-		mAdapter = new CardAdapter(mContext, mProjects_id,  null, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER, listView);
+		mListView = (ListView) view.findViewById(R.id.card_info_list);
+		mAdapter = new CardAdapter(mContext, mProjects_id,  null, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER, mListView);
 		mAdapter.onFragmentActive();
-		listView.setAdapter(mAdapter);
-		listView.setOnItemClickListener(this);
+		mListView.setAdapter(mAdapter);
+		mListView.setOnItemClickListener(this);
 		initCursorLoader();
 		return view;
 	}
@@ -315,26 +320,36 @@ public class CardWikiFragment extends BaseFragment implements
 		bundle.putStringArray(BUNDLE_KEY_PROJECTION, mProjects);
 		bundle.putInt(BUNDLE_KEY_INIT_POSITON, position);
 		bundle.putParcelable(BUNDLE_KEY_CURSOR_WINDOW, mCursorWindow);
+		mSavedPosition = mListView.getFirstVisiblePosition();
+		View v = mListView.getChildAt(0);
+		mSavedYPixelFromItemTop = (v == null) ? 0 : v.getTop();
 		mActivity.navigateToChildFragment(bundle, FRAGMENT_ID_CARD_DETAIL, REQUEST_ID_CARD_DETAIL);
 		if (mActionMode != null) {
 			mActionMode.finish();
 		}
 	}
 	
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	@SuppressWarnings("unchecked")
 	@Override
-	public void onEventFromChild(int requestCode, int eventType, Bundle data) {
+	public void onEventFromChild(int requestCode, int eventType, int arg1, int arg2, Object data) {
 		if (REQUEST_ID_CARD_DETAIL == requestCode) {
 			if (eventType == FRAGMENT_NAVIGATION_BACK_EVENT) {
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+					mListView.smoothScrollToPositionFromTop(mSavedPosition + arg1, mSavedYPixelFromItemTop);
+				} else {
+					mListView.setSelectionFromTop(mSavedPosition + arg1, mSavedYPixelFromItemTop);
+				}
 				refreshActionBar();
 			}
 		} else if (REQUEST_ID_CARD_FILTER_ATK == requestCode) {
-			mAtkPanel.setRange(ICardFilter.CARD_FILTER_ATK, data.getInt("min"), data.getInt("max"));
+			mAtkPanel.setRange(ICardFilter.CARD_FILTER_ATK, arg1, arg2);
 		} else if (REQUEST_ID_CARD_FILTER_DEF == requestCode) {
-			mDefPanel.setRange(ICardFilter.CARD_FILTER_DEF, data.getInt("min"), data.getInt("max"));
+			mDefPanel.setRange(ICardFilter.CARD_FILTER_DEF, arg1, arg2);
 		} else if (REQUEST_ID_CARD_FILTER_LEVEL == requestCode) {
-			mLevelPanel.setSelection(ICardFilter.CARD_FILTER_LEVEL, data.getIntegerArrayList("selections"));
+			mLevelPanel.setSelection(ICardFilter.CARD_FILTER_LEVEL, (List<Integer>) data);
 		} else if (REQUEST_ID_CARD_FILTER_EFFECT == requestCode) {
-			mEffectPanel.setSelection(ICardFilter.CARD_FILTER_EFFECT, data.getIntegerArrayList("selections"));
+			mEffectPanel.setSelection(ICardFilter.CARD_FILTER_EFFECT, (List<Integer>) data);
 		}
 	}
 

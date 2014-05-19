@@ -222,18 +222,13 @@ public class CommonDialogFragment extends DialogFragment implements
 			case ResourcesConstants.DIALOG_MODE_FILTER_DEF: {
 				int max = ((RangeDialogConfigController)((BaseDialog)getDialog()).getController()).getMaxValue();
 				int min = ((RangeDialogConfigController)((BaseDialog)getDialog()).getController()).getMinValue();;
-				Bundle data = new Bundle();
-				data.putInt("max", max);
-				data.putInt("min", min);
-				((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(), -1, data);
+				((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(), -1, min, max, null);
 				break;
 			}
 			case ResourcesConstants.DIALOG_MODE_FILTER_LEVEL:
 			case ResourcesConstants.DIALOG_MODE_FILTER_EFFECT: {
 				List<Integer> list = ((GridSelectionDialogController)((BaseDialog)getDialog()).getController()).getSelections();
-				Bundle data = new Bundle();
-				data.putIntegerArrayList("selections", (ArrayList<Integer>) list);
-				((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(), -1, data);
+				((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(), -1, -1, -1, list);
 				break;
 			}
 			default:

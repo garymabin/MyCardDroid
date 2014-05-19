@@ -22,6 +22,8 @@ import org.mycard.model.data.ResourcesConstants;
 import org.mycard.setting.SettingsActivity;
 import org.mycard.ygo.YGOServerInfo;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -142,6 +144,18 @@ public class MainActivity extends ActionBarActivity implements
 		mController.unregisterForActionSupport(mHandler);
 		mController.unregisterForActionPersonalCenter(mHandler);
 		super.onPause();
+	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(getApplicationContext()).activityStart(this);
+	}
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+		EasyTracker.getInstance(getApplicationContext()).activityStop(this);
 	}
 
 	private void initView() {
