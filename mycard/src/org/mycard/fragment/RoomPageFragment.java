@@ -3,6 +3,7 @@ package org.mycard.fragment;
 import java.util.List;
 
 import org.mycard.R;
+import org.mycard.core.Controller;
 import org.mycard.model.data.ResourcesConstants;
 import org.mycard.widget.adapter.RoomAdapter;
 import org.mycard.ygo.YGORoomInfo;
@@ -117,7 +118,7 @@ public class RoomPageFragment extends BaseFragment implements OnItemClickListene
 		YGORoomInfo info = (YGORoomInfo) mAdapter.getItem(position);
 		Bundle data = new Bundle();
 		YGOGameOptions options = new YGOGameOptions();
-		options.mName = "illusory";
+		options.mName = Controller.peekInstance().getLoginName();
 		options.mMode = info.mode;
 		options.mServerAddr = mActivity.getServer() == null ?  ""  :mActivity.getServer().ipAddrString;
 		options.mPort = mActivity.getServer().port;

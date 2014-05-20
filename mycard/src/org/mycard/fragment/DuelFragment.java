@@ -273,7 +273,7 @@ public class DuelFragment extends TabFragment {
 				}
 			}
 			if (target != null) {
-				options.mName = "illusory";
+				options.mName = Controller.peekInstance().getLoginName();
 				options.mMode = target.mode;
 				options.mServerAddr = mActivity.getServer().ipAddrString;
 				options.mPort = mActivity.getServer().port;

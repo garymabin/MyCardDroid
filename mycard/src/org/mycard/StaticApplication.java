@@ -370,8 +370,7 @@ public class StaticApplication extends Application {
 	}
 
 	public String getUserName() {
-		// FIXME: should not be hard codeed +KT fix it plz.
-		return "illusory";
+		return Controller.peekInstance().getLoginName();
 	}
 
 }

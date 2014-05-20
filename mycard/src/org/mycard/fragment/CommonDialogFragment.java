@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.mycard.MainActivity;
 import org.mycard.R;
+import org.mycard.core.Controller;
 import org.mycard.model.data.ResourcesConstants;
 import org.mycard.widget.BaseDialog;
 import org.mycard.widget.DonateDialog;
@@ -175,7 +176,7 @@ public class CommonDialogFragment extends DialogFragment implements
 					options = ((RoomDialogConfigController) ((RoomDialog)dialog).getController()).getGameOption();
 					options.mServerAddr = mActivity.getServer().ipAddrString;
 					options.mPort = mActivity.getServer().port;
-					options.mName = "illusory";
+					options.mName = Controller.peekInstance().getLoginName();
 				} else if (mDialogMode == DIALOG_MODE_JOIN_GAME) {
 					options = mGameOptions;
 				} else if (mDialogMode == DIALOG_MODE_QUICK_JOIN) {
