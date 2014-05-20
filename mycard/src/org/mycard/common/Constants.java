@@ -31,7 +31,7 @@ public interface Constants {
 	public static final int FRAGMENT_ID_CARD_WIKI = 3;
 	public static final int FRAGMENT_ID_CHAT_ROOM = 4;
 	public static final int FRAGMENT_ID_FORUM_LINK = 5;
-	public static final int FRAGMENT_ID_USER_STATUS = 6;
+	public static final int FRAGMENT_ID_PERSONAL_CENTER = 6;
 	public static final int FRAGMENT_ID_FINAL_PHASE = 7;
 	public static final int FRAGMENT_ID_CARD_DETAIL = 8;
 	

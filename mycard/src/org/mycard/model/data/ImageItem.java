@@ -8,6 +8,8 @@ public class ImageItem {
 
 	public String id;
 	
+	public String urlSegment;
+	
 	public int width;
 	
 	public int height;
@@ -16,6 +18,13 @@ public class ImageItem {
 		this.id = id;
 		this.width = width;
 		this.height = height;
+	}
+	
+	public ImageItem(String id, int height, int width, String urlSegment) {
+		this.id = id;
+		this.width = width;
+		this.height = height;
+		this.urlSegment = urlSegment;
 	}
 	
 	@Override

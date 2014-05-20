@@ -6,6 +6,8 @@ package org.mycard.model.data;
  */
 public interface ResourcesConstants {
 	
+	public static final String AVATAR_URL = "https://my-card.in/users/";
+	
 	public static final String FORUM_URL = "https://forum.my-card.in/";
 	
 	public static final String IMAGE_URL = "http://test2.my-card.in/images/";

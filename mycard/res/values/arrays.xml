@@ -21,6 +21,12 @@
         <item>Tag mode</item>
     </string-array>
     
+	<string-array name="user_info">
+        <item>积分信息</item>
+        <item>用户信息</item>
+        <item>其他信息</item>
+    </string-array>
+    
     <string-array name="card_race">
         <item >战士</item>
         <item >魔法使</item>

@@ -4,7 +4,7 @@
     <string name="mycard">My Card</string>
     <string name="crash_title">应用程序崩溃</string>
     <string name="crashed">w(ﾟДﾟ)w.. 萌卡崩溃啦！</string>
-    <string name="crash_dialog_comment_prompt">萌卡崩溃了喵，请将错误日志通过邮件发送给俺们喵，有其他想法可以在下面反馈喵!</string>
+    <string name="crash_dialog_comment_prompt">萌卡崩溃了喵，错误日志在您点击确定之后将会发送给俺们喵，有其他想法可以在下面反馈喵!</string>
     <string name="crash_dialog_ok_toast">感谢喵!</string>
     <string name="room_list">Rooms</string>
     <string name="action_settings">Settings</string>
@@ -49,9 +49,10 @@
     <string name="pending">Pending</string>
     <string name="quick_join_error">Cannot find room</string>
     <string name="login">Login</string>
-    <string name="sign_up">Sing up</string>
+    <string name="sign_up">Sign up</string>
     <string name="login_sign_up">Login/Sign up</string>
     <string name="logging">Loging in</string>
+    <string name="login_failed">Login failed</string>
     <string name="personal_center">Personal center</string>
     <string name="user_name">User name</string>
     <string name="password">Password</string>

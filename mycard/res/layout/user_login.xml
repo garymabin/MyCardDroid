@@ -29,10 +29,11 @@
 
     <Button
         android:id="@+id/loginButton"
+        android:layout_marginTop="10dip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/passWordEditText"
         android:layout_below="@+id/passWordEditText"
-        android:text="@string/login" />
-
+        android:text="@string/login"
+        android:textSize="14sp" />
 </RelativeLayout>

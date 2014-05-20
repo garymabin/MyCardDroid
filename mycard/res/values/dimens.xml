@@ -38,6 +38,12 @@
     <dimen name="card_image_height">169dip</dimen>
     <dimen name="card_image_width">118dip</dimen>
     
+    <dimen name="user_image_height">60dip</dimen>
+    <dimen name="user_image_width">60dip</dimen>
+    
+    <dimen name="user_large_image_height">100dip</dimen>
+    <dimen name="user_large_image_width">100dip</dimen>
+    
     <integer name="default_ogles_config">1</integer>
     <integer name="default_card_quality_config">1</integer>
 </resources>

@@ -16,7 +16,8 @@ import org.mycard.fragment.CardWikiFragment;
 import org.mycard.fragment.ChatRoomFragment;
 import org.mycard.fragment.FinalPhaseFragment;
 import org.mycard.fragment.DuelFragment;
-import org.mycard.fragment.UserStatusFragment;
+import org.mycard.fragment.PersonalCenterFragment;
+import org.mycard.fragment.UserLoginFragment;
 import org.mycard.model.Model;
 import org.mycard.model.data.ResourcesConstants;
 import org.mycard.setting.SettingsActivity;
@@ -46,6 +47,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.LinearLayout;
@@ -114,10 +116,6 @@ public class MainActivity extends ActionBarActivity implements
 
 	private LinearLayout mLeftDrawer;
 
-	private ViewGroup mUserPanel;
-
-	private TextView mUserStatusDes;
-	
 	private Menu mMenu;
 	
 	@Override
@@ -169,10 +167,7 @@ public class MainActivity extends ActionBarActivity implements
 				R.drawable.ic_navigation_drawer, R.string.mycard,
 				R.string.mycard);
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-		mUserStatusDes = (TextView) findViewById(R.id.user_status_des_text);
-		mUserStatusDes.setText(R.string.login_sign_up);
-
+		
 		mFragmentItems = getResources().getStringArray(R.array.fragment_items);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 		int size = mDrawerImageArray.length;
@@ -186,9 +181,6 @@ public class MainActivity extends ActionBarActivity implements
 		mDrawerList.setAdapter(new SimpleAdapter(this, mDrawerListData,
 				R.layout.drawer_list_item, dataFrom, viewTo));
 		mLeftDrawer = (LinearLayout) findViewById(R.id.left_layout);
-		mUserPanel = (ViewGroup) findViewById(R.id.user_panel);
-		mUserPanel.setOnClickListener(this);
-
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 		selectItem(1);
 	}
@@ -270,8 +262,8 @@ public class MainActivity extends ActionBarActivity implements
 		case FRAGMENT_ID_FINAL_PHASE:
 			fragment = new FinalPhaseFragment();
 			break;
-		case FRAGMENT_ID_USER_STATUS:
-			fragment = new UserStatusFragment();
+		case FRAGMENT_ID_PERSONAL_CENTER:
+			fragment = new PersonalCenterFragment();
 			break;
 		default:
 			break;
@@ -342,7 +334,7 @@ public class MainActivity extends ActionBarActivity implements
 		case Constants.MSG_ID_UPDATE_SERVER:
 			break;
 		case Constants.ACTION_BAR_EVENT_TYPE_PERSONAL_CENTER:
-			navigateToFragment(FRAGMENT_ID_USER_STATUS);
+			navigateToFragment(FRAGMENT_ID_PERSONAL_CENTER);
 			break;
 		case Constants.ACTION_BAR_EVENT_TYPE_SETTINGS:
 			Log.d(TAG, "receive settings click action");
@@ -354,8 +346,10 @@ public class MainActivity extends ActionBarActivity implements
 			Bundle bundle = new Bundle();
 			bundle.putInt(ResourcesConstants.MODE_OPTIONS, ResourcesConstants.DIALOG_MODE_DONATE);
 			fragment.showDialog(bundle);
+			break;
 		case Constants.MSG_ID_EXIT_CONFIRM_ALARM:
 			isExit = false;
+			break;
 		default:
 			break;
 		}
@@ -365,7 +359,7 @@ public class MainActivity extends ActionBarActivity implements
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.user_panel) {
-			navigateToFragment(FRAGMENT_ID_USER_STATUS);
+			navigateToFragment(FRAGMENT_ID_PERSONAL_CENTER);
 			mDrawerLayout.closeDrawer(mLeftDrawer);
 		}
 	}
