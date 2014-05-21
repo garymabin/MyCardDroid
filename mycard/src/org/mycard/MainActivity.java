@@ -11,11 +11,11 @@ import org.mycard.core.Controller;
 import org.mycard.fragment.BaseFragment.OnActionBarChangeCallback;
 import org.mycard.fragment.BaseFragment;
 import org.mycard.fragment.CardDetailFragment;
+import org.mycard.fragment.DuelFragment;
 import org.mycard.fragment.HomePageFragment;
 import org.mycard.fragment.CardWikiFragment;
 import org.mycard.fragment.ChatRoomFragment;
 import org.mycard.fragment.FinalPhaseFragment;
-import org.mycard.fragment.DuelFragment;
 import org.mycard.fragment.PersonalCenterFragment;
 import org.mycard.fragment.UserLoginFragment;
 import org.mycard.model.Model;
@@ -25,7 +25,6 @@ import org.mycard.ygo.YGOServerInfo;
 
 import com.google.analytics.tracking.android.EasyTracker;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -44,14 +43,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity implements
@@ -182,7 +178,7 @@ public class MainActivity extends ActionBarActivity implements
 				R.layout.drawer_list_item, dataFrom, viewTo));
 		mLeftDrawer = (LinearLayout) findViewById(R.id.left_layout);
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-		selectItem(1);
+		selectItem(2);
 	}
 
 	private void initActionBar() {
@@ -285,6 +281,9 @@ public class MainActivity extends ActionBarActivity implements
 		case FRAGMENT_ID_CARD_DETAIL:
 			fragment = CardDetailFragment.newInstance(param);
 			break;
+		case FRAGMENT_ID_USER_LOGIN:
+			fragment = new UserLoginFragment();
+			fragment.setArguments(param);
 		default:
 			break;
 		}
@@ -294,7 +293,7 @@ public class MainActivity extends ActionBarActivity implements
 		Fragment parent = fragmentManager.findFragmentById(R.id.content_frame);
 		fragment.setTargetFragment(parent, requestCode);
 		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-		ft.add(R.id.content_frame, fragment).addToBackStack(null).commit();
+		ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 	}
 
 	@Override
@@ -305,13 +304,21 @@ public class MainActivity extends ActionBarActivity implements
 			if (action == FRAGMENT_ID_DUEL) {
 				mActionBarCreator = new ActionBarCreator(this).setRoomCreate(
 						true).setPlay(true);
+				mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+				mActionBar.setDisplayShowTitleEnabled(false);
 			} else if (action == FRAGMENT_ID_CARD_WIKI) {
 				mActionBarCreator = new ActionBarCreator(this).setFilter(true).setSearch(true, arg1).setReset(true);
+				mActionBar.setDisplayShowTitleEnabled(true);
+				mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 			} else {
 				mActionBarCreator = new ActionBarCreator(this);
+				mActionBar.setDisplayShowTitleEnabled(true);
+				mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 			}
 			break;
 		case Constants.ACTION_BAR_CHANGE_TYPE_DATA_LOADING:
+			mActionBar.setDisplayShowTitleEnabled(false);
+			mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 			if (action == 0) {
 				mActionBarCreator = new ActionBarCreator(this).setRoomCreate(
 						true).setPlay(true);

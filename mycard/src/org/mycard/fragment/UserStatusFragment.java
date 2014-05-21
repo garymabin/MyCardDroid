@@ -27,8 +27,6 @@ public class UserStatusFragment extends BaseFragment implements IDataObserver{
 	
 	private String mLoginName;
 	
-	private ImageView mUserImage;
-
 	private ImageViewImageItemController mImageItemController;
 
 	private ImageItem mImageItem;

@@ -1,6 +1,5 @@
 package org.mycard.fragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.mycard.MainActivity;
@@ -182,7 +181,7 @@ public class CommonDialogFragment extends DialogFragment implements
 				} else if (mDialogMode == DIALOG_MODE_QUICK_JOIN) {
 					Fragment f = getTargetFragment();
 					options = ((RoomDialogConfigController) ((RoomDialog)dialog).getController()).getGameOption();
-					((DuelFragment)f).handleMessage(Message.obtain(null, getTargetRequestCode(), 0, 0, options));
+					((RoomListFragment)f).handleMessage(Message.obtain(null, getTargetRequestCode(), 0, 0, options));
 					return;
 				}
 				intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
@@ -223,13 +222,13 @@ public class CommonDialogFragment extends DialogFragment implements
 			case ResourcesConstants.DIALOG_MODE_FILTER_DEF: {
 				int max = ((RangeDialogConfigController)((BaseDialog)getDialog()).getController()).getMaxValue();
 				int min = ((RangeDialogConfigController)((BaseDialog)getDialog()).getController()).getMinValue();;
-				((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(), -1, min, max, null);
+				((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(), FragmentNavigationListener.FRAGMENT_NAVIGATION_CARD_EVENT, min, max, null);
 				break;
 			}
 			case ResourcesConstants.DIALOG_MODE_FILTER_LEVEL:
 			case ResourcesConstants.DIALOG_MODE_FILTER_EFFECT: {
 				List<Integer> list = ((GridSelectionDialogController)((BaseDialog)getDialog()).getController()).getSelections();
-				((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(), -1, -1, -1, list);
+				((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(), FragmentNavigationListener.FRAGMENT_NAVIGATION_CARD_EVENT, -1, -1, list);
 				break;
 			}
 			default:

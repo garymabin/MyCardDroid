@@ -14,7 +14,6 @@ import org.mycard.model.data.ImageItemInfoHelper;
 import org.mycard.model.data.ResourcesConstants;
 
 import android.app.Activity;
-import android.content.IntentSender.SendIntentException;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Message;

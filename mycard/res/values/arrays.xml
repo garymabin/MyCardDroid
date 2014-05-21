@@ -27,6 +27,11 @@
         <item>其他信息</item>
     </string-array>
     
+	<string-array name="duel_list">
+        <item>房间列表</item>
+        <item>自由连接</item>
+    </string-array>
+    
     <string-array name="card_race">
         <item >战士</item>
         <item >魔法使</item>

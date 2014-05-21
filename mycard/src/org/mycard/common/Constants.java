@@ -34,6 +34,7 @@ public interface Constants {
 	public static final int FRAGMENT_ID_PERSONAL_CENTER = 6;
 	public static final int FRAGMENT_ID_FINAL_PHASE = 7;
 	public static final int FRAGMENT_ID_CARD_DETAIL = 8;
+	public static final int FRAGMENT_ID_USER_LOGIN = 9;
 	
 	
 	public static final int MSG_ID_UPDATE_ROOM_LIST = 0;

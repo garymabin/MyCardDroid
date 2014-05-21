@@ -150,5 +150,6 @@
     <string name="settings_game_font_path">Game font path</string>
     <string name="settings_game_opengl">OpenGL</string>
     
+    <string name="login_hint_not_logged_in">&lt;p>请&lt;a href="login">&lt;u>登录&lt;/u>&lt;/a>后以查看决斗房间列表哦，或者切换到&lt;a href="freemode">&lt;u>自由连接&lt;/u>&lt;/a>模式喵&lt;/p></string>
     <string name="exit_hint">"再按一次退出萌卡喵！"</string>
 </resources>

@@ -154,5 +154,12 @@
     <string name="settings_game_font_name">字体列表</string>
     <string name="settings_game_res_path">资源路径</string>
     
+    <string name="login_hint_not_logged_in">&lt;p>\u00A0\u00A0请&lt;a href="login">&lt;u>登录&lt;/u>&lt;/a>后以查看决斗房间列表哦，或者切换到&lt;a href="freemode">&lt;u>自由连接&lt;/u>&lt;/a>模式喵&lt;/p></string>
+    <string name="login_hint_not_logged_in_seg1">请</string>
+    <string name="login_hint_not_logged_in_seg2">登录</string>
+    <string name="login_hint_not_logged_in_seg3">后以查看决斗房间列表哦，或者切换到</string>
+    <string name="login_hint_not_logged_in_seg4">自由连接模式</string>
+    <string name="login_hint_not_logged_int_seg5">喵</string>
+    
     <string name="exit_hint">"再按一次退出萌卡喵！"</string>
 </resources>

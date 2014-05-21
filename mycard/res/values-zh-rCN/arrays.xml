@@ -23,6 +23,10 @@
         <item>用户信息</item>
         <item>其他信息</item>
     </string-array>
+    <string-array name="duel_list">
+        <item>房间列表</item>
+        <item>自由连接</item>
+    </string-array>
     <string-array name="card_limit">
         <item>（无）</item>
         <item>OCG</item>

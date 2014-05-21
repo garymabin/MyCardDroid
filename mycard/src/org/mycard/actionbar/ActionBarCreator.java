@@ -4,16 +4,16 @@ import org.mycard.R;
 
 import android.content.Context;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.SearchView;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class ActionBarCreator {
-
+	
 	private Context mContext;
 
-	public ActionBarCreator(Context context) {
-		mContext = context;
+	public ActionBarCreator(ActionBarActivity activity) {
+		mContext = activity;
 	}
 
 	private boolean mLoading = false;
@@ -35,7 +35,7 @@ public class ActionBarCreator {
 	private boolean mReset = false;
 	
 	private int mSearchResId;
-
+	
 	public ActionBarCreator setPersonalCenter(boolean userStatus) {
 		mPersonalCenter = userStatus;
 		return this;
@@ -76,7 +76,7 @@ public class ActionBarCreator {
 		mReset = reset;
 		return this;
 	}
-
+	
 	public boolean isFilterEnabled() {
 		return mFilter;
 	}
@@ -162,7 +162,5 @@ public class ActionBarCreator {
 			MenuItemCompat.setShowAsAction(item,
 					MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		}
-
 	}
-
 }
