@@ -62,6 +62,11 @@ public class Controller {
 		mLoginStatusTracker.setLoginName(name);
 	}
 	
+	public void asyncLogout() {
+		//TODO: @zh99998 how to log out.
+		mLoginStatusTracker.changeLoginStatus(UserStatusTracker.LOGIN_STATUS_LOG_OUT, true);
+	}
+	
 	public String getLoginName() {
 		return mLoginStatusTracker.getLoginName();
 	}
@@ -193,6 +198,4 @@ public class Controller {
 	public void unregisterDataObserver(IDataObserver observer) {
 		mModel.unregisterDataObserver(observer);
 	}
-
-
 }

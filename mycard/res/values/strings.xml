@@ -49,6 +49,7 @@
     <string name="pending">Pending</string>
     <string name="quick_join_error">Cannot find room</string>
     <string name="login">Login</string>
+    <string name="logout">log out</string>
     <string name="sign_up">Sign up</string>
     <string name="login_sign_up">Login/Sign up</string>
     <string name="logging">Loging in</string>

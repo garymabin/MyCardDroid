@@ -27,6 +27,7 @@ public class ActionBarCreator {
 	private boolean mPlay = false;
 
 	private boolean mPersonalCenter = true;
+	private int mPersonalCenterDes = 0;
 
 	private boolean mFilter = false;
 
@@ -36,8 +37,9 @@ public class ActionBarCreator {
 	
 	private int mSearchResId;
 	
-	public ActionBarCreator setPersonalCenter(boolean userStatus) {
+	public ActionBarCreator setPersonalCenter(boolean userStatus, int desId) {
 		mPersonalCenter = userStatus;
+		mPersonalCenterDes = desId;
 		return this;
 	}
 
@@ -87,7 +89,8 @@ public class ActionBarCreator {
 		if (mPersonalCenter) {
 			MenuItem useritem = menu.add(Menu.NONE,
 					R.id.action_personal_center, index++,
-					R.string.personal_center);
+					mPersonalCenterDes == 0 ? R.string.personal_center :
+						mPersonalCenterDes);
 			MenuItemCompat.setShowAsAction(useritem,
 					MenuItemCompat.SHOW_AS_ACTION_NEVER);
 		}

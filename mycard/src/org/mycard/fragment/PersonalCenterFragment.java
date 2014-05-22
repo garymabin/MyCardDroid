@@ -7,6 +7,7 @@ import org.mycard.core.UserStatusTracker;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -33,6 +34,25 @@ public class PersonalCenterFragment extends BaseFragment {
 		mActivity.onActionBarChange(
 				Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE,
 				FRAGMENT_ID_PERSONAL_CENTER, 0, null);
+		Controller.peekInstance().registerForLoginStatusChange(mHandler);
+	}
+	
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		Controller.peekInstance().unregisterForLoginStatusChange(mHandler);
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		Controller.peekInstance().unregisterForActionPersonalCenter(mHandler);
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		Controller.peekInstance().registerForActionPersonalCenter(mHandler);
 	}
 
 	private void switchState(int state) {
@@ -68,5 +88,18 @@ public class PersonalCenterFragment extends BaseFragment {
 				switchState(UserStatusTracker.LOGIN_STATUS_LOGGED_IN);
 			}
 		}
+	}
+	
+	@Override
+	public boolean handleMessage(Message msg) {
+		int msgType = msg.what;
+		if (msgType == Constants.ACTION_BAR_EVENT_TYPE_PERSONAL_CENTER) {
+			Controller.peekInstance().asyncLogout();
+		} else if (msgType == Constants.MSG_ID_LOGIN) {
+			if (msg.arg1 == UserStatusTracker.LOGIN_STATUS_LOG_OUT) {
+				switchState(UserStatusTracker.LOGIN_STATUS_LOG_OUT);
+			}
+		}
+		return false;
 	}
 }

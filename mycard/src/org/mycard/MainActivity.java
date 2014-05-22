@@ -114,9 +114,12 @@ public class MainActivity extends ActionBarActivity implements
 
 	private Menu mMenu;
 	
+	private FragmentManager mFragmentManager;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mFragmentManager = getSupportFragmentManager();
 		setContentView(R.layout.activity_main);
 		initActionBar();
 		initView();
@@ -268,9 +271,8 @@ public class MainActivity extends ActionBarActivity implements
 		args.putString(BaseFragment.ARG_ITEM_TITLE, mFragmentItems[id - 1]);
 		fragment.setArguments(args);
 		// Insert the fragment by replacing any existing fragment
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		FragmentTransaction transaction = fragmentManager.beginTransaction();
-		fragmentManager.popBackStack();
+		FragmentTransaction transaction = mFragmentManager.beginTransaction();
+		mFragmentManager.popBackStack();
 		transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 		transaction.replace(R.id.content_frame, fragment).commit();
 	}
@@ -288,9 +290,8 @@ public class MainActivity extends ActionBarActivity implements
 			break;
 		}
 		// Insert the fragment by adding a new fragment
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		FragmentTransaction ft = fragmentManager.beginTransaction();
-		Fragment parent = fragmentManager.findFragmentById(R.id.content_frame);
+		FragmentTransaction ft = mFragmentManager.beginTransaction();
+		Fragment parent = mFragmentManager.findFragmentById(R.id.content_frame);
 		fragment.setTargetFragment(parent, requestCode);
 		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 		ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
@@ -308,6 +309,10 @@ public class MainActivity extends ActionBarActivity implements
 				mActionBar.setDisplayShowTitleEnabled(false);
 			} else if (action == FRAGMENT_ID_CARD_WIKI) {
 				mActionBarCreator = new ActionBarCreator(this).setFilter(true).setSearch(true, arg1).setReset(true);
+				mActionBar.setDisplayShowTitleEnabled(true);
+				mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+			} else if (action == FRAGMENT_ID_PERSONAL_CENTER){
+				mActionBarCreator = new ActionBarCreator(this).setPersonalCenter(true, R.string.logout);
 				mActionBar.setDisplayShowTitleEnabled(true);
 				mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 			} else {
@@ -341,7 +346,9 @@ public class MainActivity extends ActionBarActivity implements
 		case Constants.MSG_ID_UPDATE_SERVER:
 			break;
 		case Constants.ACTION_BAR_EVENT_TYPE_PERSONAL_CENTER:
-			navigateToFragment(FRAGMENT_ID_PERSONAL_CENTER);
+			if (!(mFragmentManager.findFragmentById(R.id.content_frame) instanceof PersonalCenterFragment)) {
+				navigateToFragment(FRAGMENT_ID_PERSONAL_CENTER);
+			}
 			break;
 		case Constants.ACTION_BAR_EVENT_TYPE_SETTINGS:
 			Log.d(TAG, "receive settings click action");
@@ -349,7 +356,7 @@ public class MainActivity extends ActionBarActivity implements
 			startActivity(intent);
 			break;
 		case Constants.ACTION_BAR_EVENT_TYPE_DONATE:
-			BaseFragment fragment = (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.content_frame);
+			BaseFragment fragment = (BaseFragment) mFragmentManager.findFragmentById(R.id.content_frame);
 			Bundle bundle = new Bundle();
 			bundle.putInt(ResourcesConstants.MODE_OPTIONS, ResourcesConstants.DIALOG_MODE_DONATE);
 			fragment.showDialog(bundle);
