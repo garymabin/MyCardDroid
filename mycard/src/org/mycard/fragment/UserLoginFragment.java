@@ -6,6 +6,8 @@ import org.mycard.core.UserStatusTracker;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
@@ -13,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethod;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -23,7 +27,7 @@ public class UserLoginFragment extends BaseFragment {
 	private int mLoginStatus;
 	
 	private ProgressDialog mProgressDialog;
-
+	
 	private int currentState;
 	
 	@Override
@@ -50,8 +54,7 @@ public class UserLoginFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = null;
-		rootView = inflater.inflate(R.layout.user_login, null);
+		final View rootView = inflater.inflate(R.layout.user_login, null);
 		final EditText usernameEditText = (EditText) rootView
 				.findViewById(R.id.usernameEditText);
 		final EditText passwordEditText = (EditText) rootView
@@ -70,6 +73,8 @@ public class UserLoginFragment extends BaseFragment {
 				loginBundle.putString(BUNDLE_KEY_USER_NAME, username);
 				loginBundle.putString(BUNDLE_KEY_USER_PW, password);
 				Controller.peekInstance().asyncLogin(loginBundle);
+				InputMethodManager im = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+				im.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
 			}
 
 		});
@@ -94,6 +99,7 @@ public class UserLoginFragment extends BaseFragment {
 			mProgressDialog.dismiss();
 			Toast.makeText(mActivity, R.string.login_failed, Toast.LENGTH_SHORT).show();
 		} else if (status == UserStatusTracker.LOGIN_STATUS_LOGGED_IN){
+			mProgressDialog.dismiss();
 			((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(),
 					FRAGMENT_NAVIGATION_DUEL_LOGIN_SUCCEED_EVENT, -1, -1, null);
 		}
