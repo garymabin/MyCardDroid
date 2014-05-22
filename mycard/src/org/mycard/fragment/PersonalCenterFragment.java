@@ -54,6 +54,7 @@ public class PersonalCenterFragment extends BaseFragment {
 		args.putInt("userstatus", state);
 		fragment.setArguments(args);
 		FragmentManager fm = getChildFragmentManager();
+		fragment.setTargetFragment(fragment, REQUEST_CODE_LOGIN);
 		FragmentTransaction transaction = fm.beginTransaction();
 		fm.popBackStack();
 		transaction.replace(R.id.personal_center_panel, fragment).commit();
