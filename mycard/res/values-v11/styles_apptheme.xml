@@ -18,7 +18,6 @@
 
     <!-- 对话框样式 -->
     <style name="CustomDialog" parent="android:style/Theme.Holo.Dialog">
-
         <!-- 背景颜色及透明程度 -->
         <item name="android:windowBackground">@color/low_translucent_cover</item>
         <!-- 是否浮现在activity之上 -->
@@ -27,5 +26,5 @@
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowFullscreen">true</item>
     </style>
-
+    
 </resources>

@@ -6,7 +6,7 @@
             android:title="@string/settings_common_card_image_network_pref"
             android:persistent="true"
             android:defaultValue="true"/>
-        <EditTextPreference 
+        <org.mycard.widget.preference.MyCardEditTextPreference 
             android:key="pref_key_common_card_path"
             android:persistent="true"
             android:title="@string/settings_game_card_path"/>

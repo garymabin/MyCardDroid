@@ -10,7 +10,7 @@
     <item name="android:buttonStyle">@style/ButtonAppTheme</item>
 
     <item name="android:imageButtonStyle">@style/ImageButtonAppTheme</item>
-      
+    
     <item name="android:editTextStyle">@style/EditTextAppTheme</item>
 
     <item name="android:checkboxStyle">@style/CheckBoxAppTheme</item>

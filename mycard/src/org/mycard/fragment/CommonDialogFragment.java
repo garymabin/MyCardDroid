@@ -74,7 +74,6 @@ public class CommonDialogFragment extends DialogFragment implements
 	
 	@Override
 	public void onStart() {
-		// TODO Auto-generated method stub
 		super.onStart();
 		final Resources res = getResources();
         // Title
