@@ -20,7 +20,7 @@
             android:layout_height="@dimen/card_thumbnail_height"
             android:layout_marginRight="6dip" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
@@ -29,6 +29,8 @@
                 android:id="@+id/linearLayout1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -48,8 +50,11 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
+                android:layout_below="@id/linearLayout1"
+                android:layout_alignLeft="@id/linearLayout1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -76,7 +81,7 @@
 
                 <TextView
                     android:id="@+id/item_race"
-                    android:layout_width="36dp"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/file_property_text_color"
                     android:textSize="12sp" />
@@ -91,7 +96,7 @@
 
                 <TextView
                     android:id="@+id/item_attr"
-                    android:layout_width="12dp"
+                    android:layout_width="30dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/file_property_text_color"
                     android:textSize="12sp" />
@@ -100,6 +105,8 @@
             <LinearLayout
                 android:id="@+id/linearLayout3"
                 android:layout_width="wrap_content"
+                android:layout_below="@id/linearLayout2"
+                android:layout_alignLeft="@id/linearLayout1"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
                 android:orientation="horizontal" >
@@ -107,7 +114,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
                     android:text="@string/item_atk_text"
                     android:textColor="@color/file_property_text_color"
                     android:textSize="12sp" />
@@ -134,7 +140,7 @@
                     android:textColor="@color/file_property_text_color"
                     android:textSize="12sp" />
             </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 
 </FrameLayout>

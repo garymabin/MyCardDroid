@@ -87,6 +87,8 @@ public class StaticApplication extends Application {
 	private String mCoreConfigVersion;
 
 	private String mDataBasePath;
+	
+	private float mDensity;
 
 	@Override
 	public void onCreate() {
@@ -102,6 +104,7 @@ public class StaticApplication extends Application {
 		checkAndCopyGameSkin();
 		checkAndCopyDatabase();
 		checkAndCopyFonts();
+		mDensity = getResources().getDisplayMetrics().density;
 	}
 
 	private void checkAndCopyFonts() {
@@ -371,6 +374,10 @@ public class StaticApplication extends Application {
 
 	public String getUserName() {
 		return Controller.peekInstance().getLoginName();
+	}
+	
+	public float getDensity() {
+		return mDensity;
 	}
 
 }

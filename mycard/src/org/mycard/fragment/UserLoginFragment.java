@@ -28,7 +28,7 @@ public class UserLoginFragment extends BaseFragment {
 	
 	private ProgressDialog mProgressDialog;
 	
-	private int currentState;
+	private int currentState = UserStatusTracker.LOGIN_STATUS_LOG_OUT;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

@@ -16,24 +16,40 @@
         <requestFocus />
     </EditText>
 
-    <EditText
+    <org.mycard.widget.ShowHidePasswdEditText
+        style="@style/EditTextAppTheme"
         android:id="@+id/passWordEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/usernameEditText"
         android:layout_alignRight="@+id/usernameEditText"
         android:layout_below="@+id/usernameEditText"
+        android:drawableRight="@drawable/ic_visible"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_marginTop="10dip"
+        android:layout_marginTop="20dip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/passWordEditText"
         android:layout_below="@+id/passWordEditText"
         android:text="@string/login"
+        android:textColor="@android:color/white"
         android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/signUpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/loginButton"
+        android:layout_alignBottom="@+id/loginButton"
+        android:layout_marginLeft="29dp"
+        android:layout_toRightOf="@+id/loginButton"
+        android:text="@string/sign_up"
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
+
 </RelativeLayout>
