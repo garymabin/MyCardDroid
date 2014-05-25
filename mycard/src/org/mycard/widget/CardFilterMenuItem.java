@@ -160,7 +160,7 @@ public class CardFilterMenuItem extends LinearLayout implements ICardFilter, OnM
 		case R.id.filter_group_type_none:
 			handled = setCurrentSelection(0, 0);
 			if (handled) {
-				onFilter(ICardFilter.CARD_FILTER_TYPE_ALL, ICardFilter.CARD_FILTER_TYPE_MONSTER_ALL, -1, null);
+				onFilter(ICardFilter.CARD_FILTER_TYPE_ALL, ICardFilter.CARD_FILTER_TYPE_ALL, -1, null);
 			}
 			break;
 		case R.id.filter_group_ot:

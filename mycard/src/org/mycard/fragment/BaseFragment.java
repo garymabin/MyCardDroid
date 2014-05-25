@@ -53,8 +53,11 @@ public abstract class BaseFragment extends Fragment implements Handler.Callback,
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mTitle = getArguments().getString(ARG_ITEM_TITLE);
-		setTitle();
+		Bundle param = getArguments();
+		if (param != null) {
+			mTitle = param.getString(ARG_ITEM_TITLE);
+			setTitle();
+		}
 	}
 
 	protected void setTitle() {

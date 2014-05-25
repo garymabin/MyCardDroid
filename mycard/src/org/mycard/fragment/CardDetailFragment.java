@@ -33,7 +33,6 @@ public class CardDetailFragment extends BaseFragment implements
 
 	public static CardDetailFragment newInstance(Bundle param) {
 		CardDetailFragment fragment = new CardDetailFragment();
-
 		fragment.setArguments(param);
 		return fragment;
 	}

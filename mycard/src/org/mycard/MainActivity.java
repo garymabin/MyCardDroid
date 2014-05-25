@@ -11,12 +11,13 @@ import org.mycard.core.Controller;
 import org.mycard.fragment.BaseFragment.OnActionBarChangeCallback;
 import org.mycard.fragment.BaseFragment;
 import org.mycard.fragment.CardDetailFragment;
+import org.mycard.fragment.DuelFragment;
 import org.mycard.fragment.HomePageFragment;
 import org.mycard.fragment.CardWikiFragment;
 import org.mycard.fragment.ChatRoomFragment;
 import org.mycard.fragment.FinalPhaseFragment;
-import org.mycard.fragment.DuelFragment;
-import org.mycard.fragment.UserStatusFragment;
+import org.mycard.fragment.PersonalCenterFragment;
+import org.mycard.fragment.UserLoginFragment;
 import org.mycard.model.Model;
 import org.mycard.model.data.ResourcesConstants;
 import org.mycard.setting.SettingsActivity;
@@ -42,13 +43,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity implements
 		OnActionBarChangeCallback, Handler.Callback, OnClickListener, Constants {
@@ -91,6 +91,8 @@ public class MainActivity extends ActionBarActivity implements
 	private ActionBarDrawerToggle mDrawerToggle;
 	private ListView mDrawerList;
 	private String[] mFragmentItems;
+	
+	private boolean isExit;
 
 	private Integer[] mDrawerImageArray = { R.drawable.ic_drawer_home,
 			R.drawable.ic_drawer_duel, R.drawable.ic_drawer_card_wiki,
@@ -110,15 +112,14 @@ public class MainActivity extends ActionBarActivity implements
 
 	private LinearLayout mLeftDrawer;
 
-	private ViewGroup mUserPanel;
-
-	private TextView mUserStatusDes;
-	
 	private Menu mMenu;
+	
+	private FragmentManager mFragmentManager;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mFragmentManager = getSupportFragmentManager();
 		setContentView(R.layout.activity_main);
 		initActionBar();
 		initView();
@@ -126,7 +127,7 @@ public class MainActivity extends ActionBarActivity implements
 		mController = Controller.peekInstance();
 		mActionBarCreator = new ActionBarCreator(this);
 		mHandler = new EventHandler(this);
-		mController.asyncUpdateServer(mHandler
+		mController.asyncUpdateMycardServer(mHandler
 				.obtainMessage(Constants.MSG_ID_UPDATE_SERVER));
 	}
 	
@@ -165,10 +166,7 @@ public class MainActivity extends ActionBarActivity implements
 				R.drawable.ic_navigation_drawer, R.string.mycard,
 				R.string.mycard);
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-		mUserStatusDes = (TextView) findViewById(R.id.user_status_des_text);
-		mUserStatusDes.setText(R.string.login_sign_up);
-
+		
 		mFragmentItems = getResources().getStringArray(R.array.fragment_items);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 		int size = mDrawerImageArray.length;
@@ -182,11 +180,8 @@ public class MainActivity extends ActionBarActivity implements
 		mDrawerList.setAdapter(new SimpleAdapter(this, mDrawerListData,
 				R.layout.drawer_list_item, dataFrom, viewTo));
 		mLeftDrawer = (LinearLayout) findViewById(R.id.left_layout);
-		mUserPanel = (ViewGroup) findViewById(R.id.user_panel);
-		mUserPanel.setOnClickListener(this);
-
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-		selectItem(1);
+		selectItem(2);
 	}
 
 	private void initActionBar() {
@@ -266,8 +261,8 @@ public class MainActivity extends ActionBarActivity implements
 		case FRAGMENT_ID_FINAL_PHASE:
 			fragment = new FinalPhaseFragment();
 			break;
-		case FRAGMENT_ID_USER_STATUS:
-			fragment = new UserStatusFragment();
+		case FRAGMENT_ID_PERSONAL_CENTER:
+			fragment = new PersonalCenterFragment();
 			break;
 		default:
 			break;
@@ -276,9 +271,8 @@ public class MainActivity extends ActionBarActivity implements
 		args.putString(BaseFragment.ARG_ITEM_TITLE, mFragmentItems[id - 1]);
 		fragment.setArguments(args);
 		// Insert the fragment by replacing any existing fragment
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		FragmentTransaction transaction = fragmentManager.beginTransaction();
-		fragmentManager.popBackStack();
+		FragmentTransaction transaction = mFragmentManager.beginTransaction();
+		mFragmentManager.popBackStack();
 		transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 		transaction.replace(R.id.content_frame, fragment).commit();
 	}
@@ -289,16 +283,18 @@ public class MainActivity extends ActionBarActivity implements
 		case FRAGMENT_ID_CARD_DETAIL:
 			fragment = CardDetailFragment.newInstance(param);
 			break;
+		case FRAGMENT_ID_USER_LOGIN:
+			fragment = new UserLoginFragment();
+			fragment.setArguments(param);
 		default:
 			break;
 		}
 		// Insert the fragment by adding a new fragment
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		FragmentTransaction ft = fragmentManager.beginTransaction();
-		Fragment parent = fragmentManager.findFragmentById(R.id.content_frame);
+		FragmentTransaction ft = mFragmentManager.beginTransaction();
+		Fragment parent = mFragmentManager.findFragmentById(R.id.content_frame);
 		fragment.setTargetFragment(parent, requestCode);
 		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-		ft.add(R.id.content_frame, fragment).addToBackStack(null).commit();
+		ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 	}
 
 	@Override
@@ -307,18 +303,30 @@ public class MainActivity extends ActionBarActivity implements
 		switch (msgType) {
 		case Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE:
 			if (action == FRAGMENT_ID_DUEL) {
-				mActionBarCreator = new ActionBarCreator(this).setRoomCreate(
-						true).setPlay(true);
+				mActionBarCreator = new ActionBarCreator(this).setNew(
+						true, arg1).setPlay(true);
+				mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+				mActionBar.setDisplayShowTitleEnabled(false);
 			} else if (action == FRAGMENT_ID_CARD_WIKI) {
 				mActionBarCreator = new ActionBarCreator(this).setFilter(true).setSearch(true, arg1).setReset(true);
+				mActionBar.setDisplayShowTitleEnabled(true);
+				mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+			} else if (action == FRAGMENT_ID_PERSONAL_CENTER){
+				mActionBarCreator = new ActionBarCreator(this).setPersonalCenter(true, R.string.logout);
+				mActionBar.setDisplayShowTitleEnabled(true);
+				mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 			} else {
 				mActionBarCreator = new ActionBarCreator(this);
+				mActionBar.setDisplayShowTitleEnabled(true);
+				mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 			}
 			break;
 		case Constants.ACTION_BAR_CHANGE_TYPE_DATA_LOADING:
+			mActionBar.setDisplayShowTitleEnabled(false);
+			mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 			if (action == 0) {
-				mActionBarCreator = new ActionBarCreator(this).setRoomCreate(
-						true).setPlay(true);
+				mActionBarCreator = new ActionBarCreator(this).setNew(
+						true, 0).setPlay(true);
 			} else {
 				mActionBarCreator = new ActionBarCreator(this).setLoading(true);
 			}
@@ -329,7 +337,7 @@ public class MainActivity extends ActionBarActivity implements
 	}
 
 	public YGOServerInfo getServer() {
-		return Model.peekInstance().getServerList().get(0);
+		return Model.peekInstance().getMyCardServer();
 	}
 
 	@Override
@@ -338,7 +346,9 @@ public class MainActivity extends ActionBarActivity implements
 		case Constants.MSG_ID_UPDATE_SERVER:
 			break;
 		case Constants.ACTION_BAR_EVENT_TYPE_PERSONAL_CENTER:
-			navigateToFragment(FRAGMENT_ID_USER_STATUS);
+			if (!(mFragmentManager.findFragmentById(R.id.content_frame) instanceof PersonalCenterFragment)) {
+				navigateToFragment(FRAGMENT_ID_PERSONAL_CENTER);
+			}
 			break;
 		case Constants.ACTION_BAR_EVENT_TYPE_SETTINGS:
 			Log.d(TAG, "receive settings click action");
@@ -346,10 +356,14 @@ public class MainActivity extends ActionBarActivity implements
 			startActivity(intent);
 			break;
 		case Constants.ACTION_BAR_EVENT_TYPE_DONATE:
-			BaseFragment fragment = (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.content_frame);
+			BaseFragment fragment = (BaseFragment) mFragmentManager.findFragmentById(R.id.content_frame);
 			Bundle bundle = new Bundle();
 			bundle.putInt(ResourcesConstants.MODE_OPTIONS, ResourcesConstants.DIALOG_MODE_DONATE);
 			fragment.showDialog(bundle);
+			break;
+		case Constants.MSG_ID_EXIT_CONFIRM_ALARM:
+			isExit = false;
+			break;
 		default:
 			break;
 		}
@@ -359,10 +373,19 @@ public class MainActivity extends ActionBarActivity implements
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.user_panel) {
-			navigateToFragment(FRAGMENT_ID_USER_STATUS);
+			navigateToFragment(FRAGMENT_ID_PERSONAL_CENTER);
 			mDrawerLayout.closeDrawer(mLeftDrawer);
 		}
-
 	}
-
+	
+	@Override
+	public void finish() {
+		if (!isExit) {
+			isExit = true;
+			Toast.makeText(this, R.string.exit_hint, Toast.LENGTH_SHORT).show();
+			mHandler.sendEmptyMessageDelayed(Constants.MSG_ID_EXIT_CONFIRM_ALARM, 2000);
+		} else {
+			super.finish();
+		}
+	}
 }

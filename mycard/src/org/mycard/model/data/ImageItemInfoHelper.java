@@ -12,7 +12,10 @@ public final class ImageItemInfoHelper {
 	final static String HTTP_PREFIX = "http://";
 	final static String HTTPS_PREFIX = "https://";
 	
-	private static final String IMAGE_SUFFIX = ".jpg";
+	public static final String AVATAR_IMAGE_PRIFIX = "avatar";
+	public static final String PNG_IMAGE_SUFFIX = ".png";
+	
+	private static final String JPG_IMAGE_SUFFIX = ".jpg";
 			
 	
 	public static boolean isThumnailExist(ImageItem item) {
@@ -36,12 +39,12 @@ public final class ImageItemInfoHelper {
 		if (!new File(sb.toString()).exists()) {
 			new File(sb.toString()).mkdirs();
 		}
-		sb.append(item.id).append(IMAGE_SUFFIX);
+		sb.append(item.id).append(JPG_IMAGE_SUFFIX);
 		return sb.toString();
 	}
 	
 	public static String getThumnailUrl(ImageItem item) {
-		String url = item.id;
+		String url = item.urlSegment;
 		if (TextUtils.isEmpty(url))
 			return null;
 		
@@ -49,7 +52,7 @@ public final class ImageItemInfoHelper {
 			return url;
 		
 		final String baseUrl = ResourcesConstants.THUMBNAIL_URL;
-		url = TextUtils.isEmpty(baseUrl) ? null : baseUrl + url + IMAGE_SUFFIX;
+		url = TextUtils.isEmpty(baseUrl) ? null : baseUrl + item.id + JPG_IMAGE_SUFFIX;
 		return url;
 	}
 	
@@ -74,12 +77,12 @@ public final class ImageItemInfoHelper {
 		if (!new File(sb.toString()).exists()) {
 			new File(sb.toString()).mkdirs();
 		}
-		sb.append(item.id).append(IMAGE_SUFFIX);
+		sb.append(item.id).append(JPG_IMAGE_SUFFIX);
 		return sb.toString();
 	}
 	
 	public static String getImageUrl(ImageItem item) {
-		String url = item.id;
+		String url = item.urlSegment;
 		if (TextUtils.isEmpty(url))
 			return null;
 		
@@ -87,7 +90,7 @@ public final class ImageItemInfoHelper {
 			return url;
 		
 		final String baseUrl = ResourcesConstants.IMAGE_URL;
-		url = TextUtils.isEmpty(baseUrl) ? null : baseUrl + url + IMAGE_SUFFIX;
+		url = TextUtils.isEmpty(baseUrl) ? null : baseUrl + item.id + JPG_IMAGE_SUFFIX;
 		return url;
 	}
 	

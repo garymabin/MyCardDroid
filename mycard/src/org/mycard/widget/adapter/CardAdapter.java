@@ -131,7 +131,7 @@ public class CardAdapter extends CursorAdapter implements IDataObserver{
 			
 			Bitmap thumbnail = Model.peekInstance().getBitmap(item, Constants.IMAGE_TYPE_THUMNAIL);
 			if (thumbnail != null) {
-				holder.mController.setBitmap(thumbnail);
+				holder.mController.setBitmap(thumbnail, false);
 			} else {
 				holder.mController.setImageItem(item);
 				requestImage(item, false);
@@ -264,6 +264,6 @@ public class CardAdapter extends CursorAdapter implements IDataObserver{
 		if (ctlr == null || ctlr.isLoaded(item))
 			return;
 
-		ctlr.setBitmap(holder.getBitmap());
+		ctlr.setBitmap(holder.getBitmap(), true);
 	}
 }

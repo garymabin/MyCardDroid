@@ -3,7 +3,7 @@
     <string name="mycard">萌卡</string>
     <string name="crash_title">应用程序崩溃</string>
     <string name="crashed">w(ﾟДﾟ)w.. 萌卡崩溃啦！</string>
-    <string name="crash_dialog_comment_prompt">萌卡崩溃了喵，请将错误日志通过邮件发送给俺们喵，有其他想法可以在下面反馈喵!</string>
+    <string name="crash_dialog_comment_prompt">萌卡崩溃了喵，错误日志在您点击确定之后将会发送给俺们喵，有其他想法可以在下面反馈喵!</string>
     <string name="crash_dialog_ok_toast">感谢喵!</string>
     <string name="room_list">房间列表</string>
     <string name="action_settings">设置</string>
@@ -56,6 +56,8 @@
     <string name="sign_up">注册</string>
     <string name="login_sign_up">登录/注册</string>
     <string name="logging">登录中</string>
+    <string name="logout">退出登录</string>
+    <string name="login_failed">登录失败</string>
     <string name="personal_center">个人中心</string>
     <string name="user_name">用户名</string>
     <string name="password">密码</string>
@@ -152,4 +154,23 @@
     <string name="settings_game_card_path">卡图存放路径</string>
     <string name="settings_game_font_name">字体列表</string>
     <string name="settings_game_res_path">资源路径</string>
+    
+    <string name="login_hint_not_logged_in">&lt;p>\u00A0\u00A0请&lt;a href="login">&lt;u>登录&lt;/u>&lt;/a>后以查看决斗房间列表哦，或者切换到&lt;a href="freemode">&lt;u>自由连接&lt;/u>&lt;/a>模式喵&lt;/p></string>
+    
+    <string name="server_ip">IP地址:</string>
+    <string name="server_port">端口:</string>
+    
+    <!-- 下载任务Toast -->
+    <string name="toast_start_to_download">%1$s开始下载</string>
+    <string name="notification_labels_spilit">、</string>
+    <string name="app_is_downloading">%1$d款应用正在下载</string>
+    <string name="app_down_success">%1$s下载完成</string>
+    <string name="click_to_install">点击安装软件</string>
+    <string name="new_client_version">萌卡有新版本啦！</string>
+    <string name="toast_download_installing">%1$s正在安装</string>
+    <string name="toast_download_success">%1$s下载完成</string>
+    <string name="toast_download_failed">%1$s下载失败</string>
+    <string name="toast_already_added_to_download">%1$s已加入下载任务</string>
+    <string name="clear_cache_completed">已清除缓存与本地安装包</string>
+    <string name="exit_hint">"再按一次退出萌卡喵！"</string>
 </resources>

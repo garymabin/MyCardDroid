@@ -36,11 +36,15 @@ public class ImageViewImageItemController extends AbstractImageItemController {
 	}
 
 	@Override
-	public void setBitmap(Bitmap bmp) {
+	public void setBitmap(Bitmap bmp, boolean isAnimationNeeded) {
 		if (mImageView != null) {
 			if (bmp != null) {
 				mImageView.setScaleType(ScaleType.CENTER_CROP);
-				showTransitionDrawable(mImageView, bmp);
+				if (isAnimationNeeded) {
+					showTransitionDrawable(mImageView, bmp);
+				} else {
+					mImageView.setImageBitmap(bmp);
+				}
 				mIsLoaded = true;
 			}
 		}

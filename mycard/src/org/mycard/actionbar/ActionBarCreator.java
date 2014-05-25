@@ -4,29 +4,31 @@ import org.mycard.R;
 
 import android.content.Context;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.SearchView;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class ActionBarCreator {
-
+	
 	private Context mContext;
 
-	public ActionBarCreator(Context context) {
-		mContext = context;
+	public ActionBarCreator(ActionBarActivity activity) {
+		mContext = activity;
 	}
 
 	private boolean mLoading = false;
 
 	private boolean mSearch = false;
 
-	private boolean mRoomCreate = false;
+	private boolean mNew = false;
+	private int mNewRes = 0;
 
 	private boolean mSettings = true;
 
 	private boolean mPlay = false;
 
 	private boolean mPersonalCenter = true;
+	private int mPersonalCenterDes = 0;
 
 	private boolean mFilter = false;
 
@@ -35,9 +37,10 @@ public class ActionBarCreator {
 	private boolean mReset = false;
 	
 	private int mSearchResId;
-
-	public ActionBarCreator setPersonalCenter(boolean userStatus) {
+	
+	public ActionBarCreator setPersonalCenter(boolean userStatus, int desId) {
 		mPersonalCenter = userStatus;
+		mPersonalCenterDes = desId;
 		return this;
 	}
 
@@ -57,8 +60,9 @@ public class ActionBarCreator {
 		return this;
 	}
 
-	public ActionBarCreator setRoomCreate(boolean roomCreate) {
-		mRoomCreate = roomCreate;
+	public ActionBarCreator setNew(boolean actionNew, int resID) {
+		mNew = actionNew;
+		mNewRes = resID;
 		return this;
 	}
 
@@ -76,7 +80,7 @@ public class ActionBarCreator {
 		mReset = reset;
 		return this;
 	}
-
+	
 	public boolean isFilterEnabled() {
 		return mFilter;
 	}
@@ -87,7 +91,8 @@ public class ActionBarCreator {
 		if (mPersonalCenter) {
 			MenuItem useritem = menu.add(Menu.NONE,
 					R.id.action_personal_center, index++,
-					R.string.personal_center);
+					mPersonalCenterDes == 0 ? R.string.personal_center :
+						mPersonalCenterDes);
 			MenuItemCompat.setShowAsAction(useritem,
 					MenuItemCompat.SHOW_AS_ACTION_NEVER);
 		}
@@ -151,18 +156,16 @@ public class ActionBarCreator {
 									| MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 			MenuItemCompat.setActionView(item, mSearchResId);
 		}
-		if (mRoomCreate) {
+		if (mNew) {
 			MenuItem item = menu
 					.add(Menu.NONE,
 							R.id.action_new,
 							index++,
-							mContext.getResources().getString(
-									R.string.action_new_room)).setIcon(
+							mContext.getResources().getString(mNewRes == 0 ?
+									R.string.action_new_room : mNewRes)).setIcon(
 							R.drawable.ic_action_new);
 			MenuItemCompat.setShowAsAction(item,
 					MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		}
-
 	}
-
 }

@@ -1,6 +1,5 @@
 package org.mycard.model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,12 +8,15 @@ import org.mycard.StaticApplication;
 import org.mycard.model.data.DataStore;
 import org.mycard.model.data.ImageItem;
 import org.mycard.model.data.wrapper.BaseDataWrapper;
+import org.mycard.net.download.DownloadTask;
+import org.mycard.net.download.TaskList;
 import org.mycard.ygo.YGOArrayStore;
 import org.mycard.ygo.YGORoomInfo;
 import org.mycard.ygo.YGOServerInfo;
 
 import android.graphics.Bitmap;
 import android.os.Message;
+import android.util.SparseArray;
 
 
 public class Model {
@@ -25,16 +27,13 @@ public class Model {
 	
 	private YGOArrayStore mYGOArrayStore;
 	
-	private List<YGOServerInfo> mServerList;
-	
 	private ImageModelHelper mImgModelHelper;
 	
 	private Set<IDataObserver> mObserverList;
 	
 	private Model(StaticApplication app) {
-		mDataStore = new DataStore();
+		mDataStore = new DataStore(app);
 		mImgModelHelper = new ImageModelHelper();
-		mServerList = new ArrayList<YGOServerInfo>();
 		mYGOArrayStore = new YGOArrayStore(app.getResources());
 		mObserverList = new HashSet<IDataObserver>();
 	}
@@ -51,8 +50,12 @@ public class Model {
 		mDataStore.updateData(wrapper);
 	}
 
-	public List<YGOServerInfo> getServerList() {
-		return mDataStore.getServerList();
+	public YGOServerInfo getMyCardServer() {
+		return mDataStore.getMyCardServer();
+	}
+	
+	public SparseArray<YGOServerInfo> getServers() {
+		return mDataStore.getServers();
 	}
 
 	public List<YGORoomInfo> getRooms() {
@@ -103,6 +106,19 @@ public class Model {
 
 	public void requestDataOperation(IDataObserver observer, Message msg) {
 		mImgModelHelper.requestDataOperation(observer, msg);
+	}
+
+	public void reportDownloadEvent(int eventId, List<DownloadTask> taskList) {
+		mDataStore.reportDownloadEvent(eventId, taskList);
+	}
+
+	public void reportDownloadEvent(int eventId,
+			DownloadTask task) {
+		mDataStore.reportDownloadEvent(eventId, task);
+	}
+
+	public TaskList getTaskList() {
+		return mDataStore.getTaskList();
 	}
 
 }

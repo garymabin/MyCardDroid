@@ -30,38 +30,16 @@
             android:paddingLeft="5dip"
             android:paddingRight="5dip" >
 
-            <RelativeLayout
-                android:id="@+id/user_panel"
+            <fragment
+                android:id="@+id/user_panel_fragment"
+                android:name="org.mycard.fragment.DrawerUserStatusPanelFragment"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:background="@drawable/activated_background_holo_light">
+                android:layout_height="120dp" />
 
-                <ImageView
-                    android:id="@+id/userImage"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_width="@dimen/drawer_header_height"
-                    android:layout_height="wrap_content"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/logo" />
-
-                <TextView
-                    android:id="@+id/user_status_des_text"
-                    android:layout_toRightOf="@id/userImage"
-                    android:layout_centerInParent="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dip"
-                    android:textSize="18sp"
-                    android:textColor="@color/dark_purple" />
-                <View 
-                    android:layout_width="match_parent"
-                    android:layout_alignParentBottom="true"
-                    android:layout_height="0.67dip"
-                    android:background="@color/dark_purple"/>
-            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.67dip"
+                android:background="@color/dark_purple" />
 
             <ListView
                 android:id="@+id/left_drawer"

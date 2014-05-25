@@ -27,7 +27,7 @@ public abstract class AbstractImageItemController {
 	
 	protected abstract void onImageItemChanged(int width, int height);
 	
-	public abstract void setBitmap(Bitmap bmp);
+	public abstract void setBitmap(Bitmap bmp, boolean isAnimationNeeded);
 	
 	public ImageItem getImageItem() {
 		return mImageItem;

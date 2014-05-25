@@ -69,10 +69,10 @@ public class GameSettingsFragment extends PreferenceFragment implements OnPrefer
 			mOGLESPreference.setValue((String) newValue);
 			mOGLESPreference.setSummary(mOGLESPreference.getEntry());
 		} else if(preference.getKey().equals(Settings.KEY_PREF_GAME_IMAGE_QUALITY)) {
-			mOGLESPreference.setValue((String) newValue);
+			mCardQualityPreference.setValue((String) newValue);
 			mCardQualityPreference.setSummary(mCardQualityPreference.getEntry());
 		} else if (preference.getKey().equals(Settings.KEY_PREF_GAME_FONT_NAME)) {
-			mOGLESPreference.setValue((String) newValue);
+			mFontNamePreference.setValue((String) newValue);
 			mFontNamePreference.setSummary(mFontNamePreference.getEntry());
 		}
 		return false;

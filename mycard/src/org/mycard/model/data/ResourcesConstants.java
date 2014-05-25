@@ -6,6 +6,8 @@ package org.mycard.model.data;
  */
 public interface ResourcesConstants {
 	
+	public static final String AVATAR_URL = "https://my-card.in/users/";
+	
 	public static final String FORUM_URL = "https://forum.my-card.in/";
 	
 	public static final String IMAGE_URL = "http://test2.my-card.in/images/";
@@ -21,7 +23,9 @@ public interface ResourcesConstants {
 	
 	public static final String DONATE_URL_MOBILE = "https://qr.alipay.com/ap2vghtyurv0kj0u62";
 	
-	public static final String DEFAULT_MC_SERVER_ADDR = "122.0.65.69";
+	public static final String DEFAULT_MC_SERVER_NAME = "MyCard";
+	
+	public static final String DEFAULT_MC_SERVER_ADDR = "122.0.65.73";
 	
 	public static final int DEFAULT_MC_SERVER_PORT = 7911;
 	

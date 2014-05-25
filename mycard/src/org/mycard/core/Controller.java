@@ -42,8 +42,8 @@ public class Controller {
 		
 	}
 
-	public void asyncUpdateServer(Message msg) {
-		mUpdateController.asyncUpdateServer(msg);
+	public void asyncUpdateMycardServer(Message msg) {
+		mUpdateController.asyncUpdateMycardServer(msg);
 	}
 
 	public void asyncUpdateRoomList(Message msg) {
@@ -60,6 +60,11 @@ public class Controller {
 		String name = data.getString(Constants.BUNDLE_KEY_USER_NAME);
 		mLoginStatusTracker.changeLoginStatus(UserStatusTracker.LOGIN_STATUS_LOGGING, true);
 		mLoginStatusTracker.setLoginName(name);
+	}
+	
+	public void asyncLogout() {
+		//TODO: @zh99998 how to log out.
+		mLoginStatusTracker.changeLoginStatus(UserStatusTracker.LOGIN_STATUS_LOG_OUT, true);
 	}
 	
 	public String getLoginName() {
@@ -193,6 +198,4 @@ public class Controller {
 	public void unregisterDataObserver(IDataObserver observer) {
 		mModel.unregisterDataObserver(observer);
 	}
-
-
 }

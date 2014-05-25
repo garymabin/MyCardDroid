@@ -1,308 +1,107 @@
 package org.mycard.fragment;
 
-import java.util.List;
-
 import org.mycard.R;
 import org.mycard.common.Constants;
 import org.mycard.core.Controller;
-import org.mycard.model.Model;
-import org.mycard.model.data.ResourcesConstants;
-import org.mycard.model.data.wrapper.IBaseWrapper;
-import org.mycard.ygo.YGORoomInfo;
+import org.mycard.core.UserStatusTracker;
 
-import cn.garymb.ygodata.YGOGameOptions;
-import cn.garymb.ygomobile.YGOMobileActivity;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.util.SparseArrayCompat;
-import android.util.Log;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar.OnNavigationListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout.LayoutParams;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.ArrayAdapter;
 
-public class DuelFragment extends TabFragment {
+public class DuelFragment extends BaseFragment implements OnNavigationListener {
 
-	public class RoomTabPageAdapter extends FragmentPagerAdapter {
-
-		public RoomTabPageAdapter(FragmentManager fm) {
-			super(fm);
-			// TODO Auto-generated constructor stub
-		}
-
-		@Override
-		public Fragment getItem(int arg0) {
-			// TODO Auto-generated method stub
-			Log.d(TAG, "getItem: " + arg0);
-			Fragment ft;
-			switch (arg0) {
-			case ROOM_TAG_INDEX_SINGLE_MODE:
-				ft = RoomPageFragment.newInstance(ROOM_TAG_INDEX_SINGLE_MODE);
-				break;
-			case ROOM_TAG_INDEX_MATCH_MODE:
-				ft = RoomPageFragment.newInstance(ROOM_TAG_INDEX_MATCH_MODE);
-				break;
-			case ROOM_TAG_INDEX_TAG_MODE:
-				ft = RoomPageFragment.newInstance(ROOM_TAG_INDEX_TAG_MODE);
-				break;
-			default:
-				ft = RoomPageFragment.newInstance(ROOM_TAG_INDEX_SINGLE_MODE);
-				break;
-			}
-			mFragments.put(arg0, ft);
-			return ft;
-		}
-
-		@Override
-		public void destroyItem(ViewGroup container, int position, Object object) {
-			// TODO Auto-generated method stub
-			Log.d(TAG, "destroyItem: " + position);
-			super.destroyItem(container, position, object);
-		}
-
-		@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
-			return mTabs.length;
-		}
-
-		@Override
-		public long getItemId(int position) {
-			// TODO Auto-generated method stub
-			return position;
-		}
-
-	}
-
-	private static final String TAG = "DuelFragment";
-
-	public static final String ROOM_BUNDLE_KEY_TAG_INDEX = "bundle.key.room.tag.index";
+	private String[] mDuelList;
 	
-	private static final int REQUEST_CODE_QUICK_JOIN = 0x1001;
-
-	private static final int ROOM_TAG_INDEX_SINGLE_MODE = 0;
-	private static final int ROOM_TAG_INDEX_MATCH_MODE = 1;
-	private static final int ROOM_TAG_INDEX_TAG_MODE = 2;
-
-	private SparseArrayCompat<Fragment> mFragments = new SparseArrayCompat<Fragment>();
-
-	private boolean isDataloaded = false;
-
-	private RelativeLayout mExtraView;
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
-
+	private static final int REQUEST_ID_DUEL = 0;
+	
+	private static final int DUEL_INDEX_ROOL_LIST = 0;
+	private static final int DUEL_INDEX_FREE_MODE = 1;
+	
 	@Override
 	public void onAttach(Activity activity) {
-		// TODO Auto-generated method stub
-		Log.d(TAG, "onAttach: E");
 		super.onAttach(activity);
-		mTabs = getResources().getStringArray(R.array.duel_mode);
-		mTabCount = mTabs.length;
+		mDuelList = getResources().getStringArray(R.array.duel_list);
 		mActivity.onActionBarChange(Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE,
 				FRAGMENT_ID_DUEL, 0, null);
+		mActivity.getSupportActionBar().setListNavigationCallbacks(new ArrayAdapter<String>(mActivity,
+				android.R.layout.simple_spinner_dropdown_item, mDuelList), this);
+		mActivity.getSupportActionBar().setSelectedNavigationItem(DUEL_INDEX_ROOL_LIST);
 	}
-
-	@Override
-	public void onDetach() {
-		// TODO Auto-generated method stub
-		Log.d(TAG, "onDetach: E");
-		super.onDetach();
-		for (int i = 0; i < mFragments.size(); i++) {
-			RoomPageFragment f = ((RoomPageFragment) mFragments.get(i));
-			if (f != null) {
-				f.onDetach();
-			}
-		}
-		mFragments.clear();
-	}
-
-	public void onResume() {
-		Log.d(TAG, "onResume: E");
-		super.onResume();
-		Controller.peekInstance().asyncUpdateRoomList(mHandler
-				.obtainMessage(Constants.MSG_ID_UPDATE_ROOM_LIST));
-		mActionBarCallback.onActionBarChange(
-				Constants.ACTION_BAR_CHANGE_TYPE_DATA_LOADING, 1, 0, null);
-		for (int i = 0; i < mFragments.size(); i++) {
-			RoomPageFragment f = ((RoomPageFragment) mFragments.get(i));
-			if (f != null) {
-				f.onResume();
-			}
-		}
-		Controller.peekInstance().registerForActionNew(mHandler);
-		Controller.peekInstance().registerForActionPlay(mHandler);
-	}
-
-	@Override
-	public void onPause() {
-		Log.d(TAG, "onPause: E");
-		super.onPause();
-		Controller.peekInstance().stopUpdateRoomList();
-		isDataloaded = false;
-		for (int i = 0; i < mFragments.size(); i++) {
-			RoomPageFragment f = ((RoomPageFragment) mFragments.get(i));
-			if (f != null) {
-				f.onPause();
-			}
-		}
-		Controller.peekInstance().unregisterForActionNew(mHandler);
-		Controller.peekInstance().unregisterForActionPlay(mHandler);
-	}
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		Log.d(TAG, "onCreateView: E");
-		View view = super.onCreateView(inflater, container, savedInstanceState);
-		mExtraView = (RelativeLayout) view.findViewById(R.id.extra_view);
-		if (!isDataloaded) {
-			ViewGroup vg = (ViewGroup) inflater.inflate(
-					R.layout.loading_progress, null);
-			LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,
-					LayoutParams.MATCH_PARENT);
-			lp.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-			mExtraView.addView(vg, lp);
-			mExtraView.setVisibility(View.VISIBLE);
-		}
+		View view = inflater.inflate(R.layout.duel_panel, null);
 		return view;
 	}
 
 	@Override
-	public void onDestroyView() {
-		// TODO Auto-generated method stub
-		super.onDestroyView();
-		if (isDataloaded) {
-			mExtraView.removeAllViews();
+	public boolean onNavigationItemSelected(int position, long arg1) {
+		if (position == DUEL_INDEX_ROOL_LIST) {
+			mActivity.onActionBarChange(Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE,
+					FRAGMENT_ID_DUEL, 0, null);
+		} else if (position == DUEL_INDEX_FREE_MODE) {
+			mActivity.onActionBarChange(Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE,
+					FRAGMENT_ID_DUEL, R.string.action_new_server, null);
 		}
-	}
-
-	private String[] mTabs;
-
-	@Override
-	protected FragmentPagerAdapter initFragmentAdapter() {
-		return new RoomTabPageAdapter(getChildFragmentManager());
-	}
-
-	@Override
-	protected void initTab() {
-		super.initTab();
-		int i = 0;
-		for (String title : mTabs) {
-			addTab(i++, title, mTabs.length);
-		}
-	}
-
-	@Override
-	public boolean handleMessage(Message msg) {
-		if (!isResumed()) {
-			return false;
-		}
-		switch (msg.what) {
-		case Constants.MSG_ID_UPDATE_ROOM_LIST:
-			if (msg.arg2 == IBaseWrapper.TASK_STATUS_SUCCESS) {
-				if (!isDataloaded) {
-					isDataloaded = true;
-					mActionBarCallback.onActionBarChange(
-							Constants.ACTION_BAR_CHANGE_TYPE_DATA_LOADING, 0, 0, null);
-					if (mExtraView != null) {
-						mExtraView.setVisibility(View.GONE);
-					}
-				}
-				List<YGORoomInfo> data = Model.peekInstance().getRooms();
-				int size = mFragments.size();
-				for (int i = 0; i < size; i++) {
-					RoomPageFragment f = ((RoomPageFragment) mFragments.get(i));
-					if (f != null) {
-						f.setData(data);
-					}
-				}
-				data = null;
-				// force to reclaim memory
-				System.gc();
-			} else if (msg.arg2 == IBaseWrapper.TASK_STATUS_FAILED) {
-				Controller.peekInstance().asyncUpdateRoomList(mHandler
-						.obtainMessage(Constants.MSG_ID_UPDATE_ROOM_LIST));
-				isDataloaded = false;
-				if (mExtraView != null) {
-					mExtraView.setVisibility(View.VISIBLE);
-				}
-			}
-			break;
-		case Constants.ACTION_BAR_EVENT_TYPE_NEW: {
-			Log.i(TAG, "receive action bar new click event");
-			Bundle bundle = new Bundle();
-			bundle.putInt(ResourcesConstants.MODE_OPTIONS, ResourcesConstants.DIALOG_MODE_CREATE_ROOM);
-			showDialog(bundle);
-			break;
-		}
-		case Constants.ACTION_BAR_EVENT_TYPE_PLAY: {
-			Log.i(TAG, "receive action bar play click event");
-			Bundle bundle = new Bundle();
-			bundle.putInt(ResourcesConstants.MODE_OPTIONS, ResourcesConstants.DIALOG_MODE_QUICK_JOIN);
-			showDialog(bundle, this, REQUEST_CODE_QUICK_JOIN);
-			break;
-		}
-		case REQUEST_CODE_QUICK_JOIN: {
-			YGOGameOptions options = (YGOGameOptions) msg.obj;
-			String[] nameSegments = options.mRoomName.split("$");
-			options.mRoomName = nameSegments[0];
-			boolean isPrivate = nameSegments.length > 1;
-			if (isPrivate) {
-				options.mRoomPasswd = nameSegments[1];
-			} else {
-				options.mRoomPasswd = "";
-			}
-			List<YGORoomInfo> data = Model.peekInstance().getRooms();
-			YGORoomInfo target = null;
-			for (YGORoomInfo info : data) {
-				if (info.name.equals(options.mRoomName) && isPrivate == info.privacy) {
-					target = info;
-					break;
-				}
-			}
-			if (target != null) {
-				options.mName = "illusory";
-				options.mMode = target.mode;
-				options.mServerAddr = mActivity.getServer().ipAddrString;
-				options.mPort = mActivity.getServer().port;
-				options.mRoomName = target.name;
-				options.setCompleteOptions(target.isCompleteInfo());
-				if (target.isCompleteInfo()) {
-					options.mDrawCount = target.drawCount == -1 ? 1 : target.drawCount;
-					options.mEnablePriority = target.enablePriority;
-					options.mNoDeckCheck = target.noDeckCheck;
-					options.mNoDeckShuffle = target.noDeckShuffle;
-					options.mRule = target.rule == -1 ? 0 : target.rule;
-					options.mStartHand = target.startHand == -1 ? 5 : target.startHand;
-					options.mStartLP = target.startLp == -1 ? 8000 : target.startLp;
-				} 
-				Intent intent = new Intent(getActivity(), YGOMobileActivity.class);
-//				ComponentName component = new ComponentName("cn.garymb.ygomobile", "cn.garymb.ygomobile.YGOMobileActivity");
-//				intent.setComponent(component);
-				intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-				intent.putExtra(YGOGameOptions.YGO_GAME_OPTIONS_BUNDLE_KEY, options);
-				startActivity(intent);
-			} else {
-				Toast.makeText(mActivity, R.string.quick_join_error, Toast.LENGTH_SHORT).show();
-			}
-			break;
-		}
-		default:
-			break;
-		}
+		switchState(position, Controller.peekInstance().getLoginStatus());
 		return true;
 	}
 
+	private void switchState(int position, int loginStatus) {
+		FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+		Fragment fragment;
+		if (position == 0) {
+			if (loginStatus == UserStatusTracker.LOGIN_STATUS_LOGGED_IN) {
+				fragment = new RoomListFragment();
+			} else if (loginStatus == UserStatusTracker.LOGIN_STATUS_LOG_OUT || 
+					loginStatus == UserStatusTracker.LOGIN_STATUS_LOGIN_FAILED){
+				fragment = new LoginHintFragment();
+				Bundle bundle = new Bundle();
+				bundle.putInt("loginstatus", loginStatus);
+				fragment.setTargetFragment(this, REQUEST_ID_DUEL);
+				fragment.setArguments(bundle);
+			} else {
+				Bundle bundle = new Bundle();
+				bundle.putString("username", Controller.peekInstance().getLoginName());
+				bundle.putInt("userstatus", UserStatusTracker.LOGIN_STATUS_LOGGING);
+				mActivity.navigateToChildFragment(bundle, FRAGMENT_ID_USER_LOGIN, REQUEST_ID_DUEL);
+				return;
+			}
+		} else {
+			fragment = new FreeDuelTabFragment();
+		}
+		ft.replace(R.id.duel_panel, fragment);
+		ft.commit();
+	}
+	
+	@Override
+	public void onEventFromChild(int requestCode, int eventType, int arg1,
+			int arg2, Object data) {
+		if (requestCode == REQUEST_ID_DUEL) {
+			if (eventType == FRAGMENT_NAVIGATION_DUEL_FREE_MODE_EVENT) {
+				mActivity.getSupportActionBar().setSelectedNavigationItem(1);
+			} else if (eventType == FRAGMENT_NAVIGATION_DUEL_LOGIN_ATTEMP_EVENT) {
+				Bundle bundle = new Bundle();
+				bundle.putString("username", Controller.peekInstance().getLoginName());
+				bundle.putInt("userstatus", arg1);
+				mActivity.navigateToChildFragment(bundle, FRAGMENT_ID_USER_LOGIN, REQUEST_ID_DUEL);
+			} else if (eventType == FRAGMENT_NAVIGATION_DUEL_LOGIN_SUCCEED_EVENT) {
+				FragmentManager fm = mActivity.getSupportFragmentManager();
+				fm.popBackStackImmediate();
+				FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+				Fragment fragment = new RoomListFragment();
+				ft.replace(R.id.duel_panel, fragment);
+				ft.commitAllowingStateLoss();
+			}
+		}
+	}
 }

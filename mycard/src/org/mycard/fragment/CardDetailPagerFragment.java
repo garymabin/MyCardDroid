@@ -139,12 +139,12 @@ public class CardDetailPagerFragment extends BaseFragment implements
 		Bitmap cardImage = Model.peekInstance().getBitmap(mImageItem,
 				Constants.IMAGE_TYPE_ORIGINAL);
 		if (cardImage != null) {
-			mImageItemController.setBitmap(cardImage);
+			mImageItemController.setBitmap(cardImage, false);
 		} else {
 			Bitmap thumbnail = Model.peekInstance().getBitmap(mImageItem,
 					Constants.IMAGE_TYPE_THUMNAIL);
 			if (thumbnail != null) {
-				mImageItemController.setBitmap(thumbnail);
+				mImageItemController.setBitmap(thumbnail, false);
 			}
 			mImageItemController.setImageItem(mImageItem);
 			requestImage(mImageItem, false);
@@ -230,7 +230,7 @@ public class CardDetailPagerFragment extends BaseFragment implements
 		if (item == null)
 			return;
 
-		mImageItemController.setBitmap(holder.getBitmap());
+		mImageItemController.setBitmap(holder.getBitmap(), true);
 	}
 
 }

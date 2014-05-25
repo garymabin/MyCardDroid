@@ -68,6 +68,7 @@ customReportContent = { ReportField.REPORT_ID, APP_VERSION_NAME, ANDROID_VERSION
 		resDialogTitle = R.string.crash_title, 
 		resDialogCommentPrompt = R.string.crash_dialog_comment_prompt, 
 		resDialogOkToast = R.string.crash_dialog_ok_toast)
+
 public class StaticApplication extends Application {
 
 	static {
@@ -86,10 +87,11 @@ public class StaticApplication extends Application {
 	private String mCoreConfigVersion;
 
 	private String mDataBasePath;
+	
+	private float mDensity;
 
 	@Override
 	public void onCreate() {
-		// TODO Auto-generated method stub
 		super.onCreate();
 		INSTANCE = this;
 		new NativeCrashHandler().registerForNativeCrash(this);
@@ -101,6 +103,7 @@ public class StaticApplication extends Application {
 		checkAndCopyGameSkin();
 		checkAndCopyDatabase();
 		checkAndCopyFonts();
+		mDensity = getResources().getDisplayMetrics().density;
 	}
 
 	private void checkAndCopyFonts() {
@@ -369,8 +372,11 @@ public class StaticApplication extends Application {
 	}
 
 	public String getUserName() {
-		// FIXME: should not be hard codeed +KT fix it plz.
-		return "illusory";
+		return Controller.peekInstance().getLoginName();
+	}
+	
+	public float getDensity() {
+		return mDensity;
 	}
 
 }

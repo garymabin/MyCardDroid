@@ -40,9 +40,7 @@ public class HttpUtils {
 		InputStream respStream = null;
 
 		try {
-			Log.d("HttpUtils", "before execute: uri = " + uri);
 			resp = client.execute(request);
-			Log.d("HttpUtils", "after execute");
 			StatusLine status = null;
 			if (resp == null || (status = resp.getStatusLine()) == null)
 				return null;
