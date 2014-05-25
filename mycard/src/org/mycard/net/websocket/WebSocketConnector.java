@@ -27,11 +27,9 @@ public class WebSocketConnector {
 	private StringBuilder mDataCache = new StringBuilder();
 
 	public WebSocketConnector() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public void setHandler(MoeEventHandler handler) {
-		// TODO Auto-generated method stub
 		mHandler = handler;
 	}
 

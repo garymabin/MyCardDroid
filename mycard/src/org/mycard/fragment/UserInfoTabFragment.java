@@ -17,13 +17,11 @@ public class UserInfoTabFragment extends TabFragment {
 
 		@Override
 		public Fragment getItem(int arg0) {
-			// TODO Auto-generated method stub
 			return new Fragment();
 		}
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return mTabs.length;
 		}
 

@@ -127,7 +127,7 @@ public class MainActivity extends ActionBarActivity implements
 		mController = Controller.peekInstance();
 		mActionBarCreator = new ActionBarCreator(this);
 		mHandler = new EventHandler(this);
-		mController.asyncUpdateServer(mHandler
+		mController.asyncUpdateMycardServer(mHandler
 				.obtainMessage(Constants.MSG_ID_UPDATE_SERVER));
 	}
 	
@@ -303,8 +303,8 @@ public class MainActivity extends ActionBarActivity implements
 		switch (msgType) {
 		case Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE:
 			if (action == FRAGMENT_ID_DUEL) {
-				mActionBarCreator = new ActionBarCreator(this).setRoomCreate(
-						true).setPlay(true);
+				mActionBarCreator = new ActionBarCreator(this).setNew(
+						true, arg1).setPlay(true);
 				mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 				mActionBar.setDisplayShowTitleEnabled(false);
 			} else if (action == FRAGMENT_ID_CARD_WIKI) {
@@ -325,8 +325,8 @@ public class MainActivity extends ActionBarActivity implements
 			mActionBar.setDisplayShowTitleEnabled(false);
 			mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 			if (action == 0) {
-				mActionBarCreator = new ActionBarCreator(this).setRoomCreate(
-						true).setPlay(true);
+				mActionBarCreator = new ActionBarCreator(this).setNew(
+						true, 0).setPlay(true);
 			} else {
 				mActionBarCreator = new ActionBarCreator(this).setLoading(true);
 			}
@@ -337,7 +337,7 @@ public class MainActivity extends ActionBarActivity implements
 	}
 
 	public YGOServerInfo getServer() {
-		return Model.peekInstance().getServerList().get(0);
+		return Model.peekInstance().getMyCardServer();
 	}
 
 	@Override

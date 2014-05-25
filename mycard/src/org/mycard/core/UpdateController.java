@@ -46,7 +46,7 @@ public class UpdateController implements TaskStatusCallback {
 		mMoeConnection = new WebSocketConnection(this);
 	}
 	
-	/* package */ void asyncUpdateServer(Message msg) {
+	/* package */ void asyncUpdateMycardServer(Message msg) {
 		mUpdateMessages.put(UPDATE_TYPE_SERVER_LIST, msg);
 		ServerDataWrapper wrapper = new ServerDataWrapper(Constants.REQUEST_TYPE_UPDATE_SERVER);
 		mInstantConnection.addTask(wrapper);

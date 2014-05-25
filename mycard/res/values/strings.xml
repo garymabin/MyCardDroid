@@ -152,5 +152,22 @@
     <string name="settings_game_opengl">OpenGL</string>
     
     <string name="login_hint_not_logged_in">&lt;p>请&lt;a href="login">&lt;u>登录&lt;/u>&lt;/a>后以查看决斗房间列表哦，或者切换到&lt;a href="freemode">&lt;u>自由连接&lt;/u>&lt;/a>模式喵&lt;/p></string>
+    
+    <string name="server_ip">IP地址:</string>
+    <string name="server_port">端口:</string>
+    <string name="action_new_server">添加新服务器</string>
+    
+    <!-- 下载任务Toast -->
+    <string name="toast_start_to_download">%1$s开始下载</string>
+    <string name="notification_labels_spilit">、</string>
+    <string name="app_is_downloading">%1$d款应用正在下载</string>
+    <string name="app_down_success">%1$s下载完成</string>
+    <string name="click_to_install">点击安装软件</string>
+    <string name="new_client_version">萌卡有新版本啦！</string>
+    <string name="toast_download_installing">%1$s正在安装</string>
+    <string name="toast_download_failed">%1$s下载失败</string>
+    <string name="toast_download_success">%1$s下载完成</string>
+    <string name="toast_already_added_to_download">%1$s已加入下载任务</string>
+    <string name="clear_cache_completed">已清除缓存与本地安装包</string>
     <string name="exit_hint">"再按一次退出萌卡喵！"</string>
 </resources>

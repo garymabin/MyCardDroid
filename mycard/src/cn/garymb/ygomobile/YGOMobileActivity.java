@@ -11,8 +11,6 @@ import java.nio.ByteBuffer;
 import org.mycard.R;
 import org.mycard.StaticApplication;
 
-import com.google.analytics.tracking.android.EasyTracker;
-
 import cn.garymb.ygodata.YGOGameOptions;
 import cn.garymb.ygomobile.core.IrrlichtBridge;
 import cn.garymb.ygomobile.core.NetworkController;
@@ -33,8 +31,6 @@ import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.PopupWindow.OnDismissListener;

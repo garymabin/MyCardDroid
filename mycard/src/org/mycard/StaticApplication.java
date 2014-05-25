@@ -92,7 +92,6 @@ public class StaticApplication extends Application {
 
 	@Override
 	public void onCreate() {
-		// TODO Auto-generated method stub
 		super.onCreate();
 		INSTANCE = this;
 		new NativeCrashHandler().registerForNativeCrash(this);

@@ -22,15 +22,18 @@ public class DuelFragment extends BaseFragment implements OnNavigationListener {
 	
 	private static final int REQUEST_ID_DUEL = 0;
 	
+	private static final int DUEL_INDEX_ROOL_LIST = 0;
+	private static final int DUEL_INDEX_FREE_MODE = 1;
+	
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		mDuelList = getResources().getStringArray(R.array.duel_list);
 		mActivity.onActionBarChange(Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE,
 				FRAGMENT_ID_DUEL, 0, null);
-		mDuelList = getResources().getStringArray(R.array.duel_list);
 		mActivity.getSupportActionBar().setListNavigationCallbacks(new ArrayAdapter<String>(mActivity,
 				android.R.layout.simple_spinner_dropdown_item, mDuelList), this);
-		mActivity.getSupportActionBar().setSelectedNavigationItem(0);
+		mActivity.getSupportActionBar().setSelectedNavigationItem(DUEL_INDEX_ROOL_LIST);
 	}
 	
 	@Override
@@ -42,6 +45,13 @@ public class DuelFragment extends BaseFragment implements OnNavigationListener {
 
 	@Override
 	public boolean onNavigationItemSelected(int position, long arg1) {
+		if (position == DUEL_INDEX_ROOL_LIST) {
+			mActivity.onActionBarChange(Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE,
+					FRAGMENT_ID_DUEL, 0, null);
+		} else if (position == DUEL_INDEX_FREE_MODE) {
+			mActivity.onActionBarChange(Constants.ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE,
+					FRAGMENT_ID_DUEL, R.string.action_new_server, null);
+		}
 		switchState(position, Controller.peekInstance().getLoginStatus());
 		return true;
 	}
@@ -67,7 +77,7 @@ public class DuelFragment extends BaseFragment implements OnNavigationListener {
 				return;
 			}
 		} else {
-			fragment = new FreeDuelFragment();
+			fragment = new FreeDuelTabFragment();
 		}
 		ft.replace(R.id.duel_panel, fragment);
 		ft.commit();

@@ -42,13 +42,29 @@ public interface Constants {
 	public static final int MSG_ID_LOGIN = 2;
 	public static final int MSG_ID_EXIT_CONFIRM_ALARM = 3;
 	
+	public static final int MSG_DOWN_EVENT_TASK_LIST_CHANGED = 0x1000;
+	public static final int MSG_DOWN_EVENT_STATUS_CHANGED = 0x1001;
+	public static final int MSG_DOWN_EVENT_PROGRESS = 0x1002;
+	
+	
+	/**
+	 * preference name
+	 */
 	public static final String PREF_FILE_COMMON = "pref_common";
 	public static final String PREF_KEY_LOGIN_STATUS = "pref_login_status";
 	public static final String PREF_KEY_LOGIN_NAME = "pref_login_name";
-	
 	public static final String PREF_KEY_DATA_VERSION = "pref_data_ver";
-	
 	public static final String PREF_KEY_LAST_DECK = "pref_last_deck";
+	
+	public static final String PREF_FILE_DOWNLOAD_TASK = "pref_download_task";
+	
+	public static final String PREF_FILE_SERVER_LIST = "pref_server_list";
+	
+	public static final String PREF_KEY_USER_DEF_SERVER_SIZE = "pref_server_size";
+	public static final String PREF_KEY_SERVER_NAME = "pref_server_name_";
+	public static final String PREF_KEY_SERVER_ADDR = "pref_server_addr_";
+	public static final String PREF_KEY_SERVER_PORT = "pref_server_port_";
+	
 	
 	
 	public static final int ACTION_BAR_CHANGE_TYPE_PAGE_CHANGE = 0x1000;
@@ -99,5 +115,11 @@ public interface Constants {
 	public static final String SETTINGS_FARGMENT_COMMON = "org.mycard.fragment.setting.CommonSettingsFragment";
 	public static final String SETTINGS_FARGMENT_GAME = "org.mycard.fragment.setting.GameSettingsFragment";
 	public static final String SETTINGS_FARGMENT_ABOUT = "org.mycard.fragment.setting.AboutSettingsFragment";
+
+	public static final String ACTION_VIEW_DOWNLOAD_STATUS = "action_view_download_status";
+
+	public static final String ACTION_VIEW_UPDATE = "action_view_update";
+
+	public static final String ACTION_NEW_CLIENT_VERSION = "action_new_client_version";
 
 }

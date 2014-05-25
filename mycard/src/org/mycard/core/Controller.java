@@ -42,8 +42,8 @@ public class Controller {
 		
 	}
 
-	public void asyncUpdateServer(Message msg) {
-		mUpdateController.asyncUpdateServer(msg);
+	public void asyncUpdateMycardServer(Message msg) {
+		mUpdateController.asyncUpdateMycardServer(msg);
 	}
 
 	public void asyncUpdateRoomList(Message msg) {

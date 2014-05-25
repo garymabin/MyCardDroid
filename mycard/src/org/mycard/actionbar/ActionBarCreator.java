@@ -20,7 +20,8 @@ public class ActionBarCreator {
 
 	private boolean mSearch = false;
 
-	private boolean mRoomCreate = false;
+	private boolean mNew = false;
+	private int mNewRes = 0;
 
 	private boolean mSettings = true;
 
@@ -59,8 +60,9 @@ public class ActionBarCreator {
 		return this;
 	}
 
-	public ActionBarCreator setRoomCreate(boolean roomCreate) {
-		mRoomCreate = roomCreate;
+	public ActionBarCreator setNew(boolean actionNew, int resID) {
+		mNew = actionNew;
+		mNewRes = resID;
 		return this;
 	}
 
@@ -154,13 +156,13 @@ public class ActionBarCreator {
 									| MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 			MenuItemCompat.setActionView(item, mSearchResId);
 		}
-		if (mRoomCreate) {
+		if (mNew) {
 			MenuItem item = menu
 					.add(Menu.NONE,
 							R.id.action_new,
 							index++,
-							mContext.getResources().getString(
-									R.string.action_new_room)).setIcon(
+							mContext.getResources().getString(mNewRes == 0 ?
+									R.string.action_new_room : mNewRes)).setIcon(
 							R.drawable.ic_action_new);
 			MenuItemCompat.setShowAsAction(item,
 					MenuItemCompat.SHOW_AS_ACTION_ALWAYS);

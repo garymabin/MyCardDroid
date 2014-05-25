@@ -27,6 +27,10 @@
         <item>房间列表</item>
         <item>自由连接</item>
     </string-array>
+    <string-array name="free_mode">
+        <item>服务器列表</item>
+        <item>局域网</item>
+    </string-array>
     <string-array name="card_limit">
         <item>（无）</item>
         <item>OCG</item>

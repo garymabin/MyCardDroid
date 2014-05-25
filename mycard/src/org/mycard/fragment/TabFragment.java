@@ -162,7 +162,7 @@ public abstract class TabFragment extends BaseFragment {
 											.getChildAt(checkedId)).getLeft()
 											: 0)
 											- ((RadioButton) rg_nav_content
-													.getChildAt(2)).getLeft(),
+													.getChildAt(mTabCount > 2 ? 2 : 1)).getLeft(),
 									0);
 						}
 					}
