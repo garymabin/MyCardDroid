@@ -337,6 +337,10 @@ public class StaticApplication extends Application {
 		return mSettingsPref.getString(Settings.KEY_PREF_COMMON_CARD_PATH,
 				getDefaultImageCacheRootPath());
 	}
+	
+	public boolean getMobileNetworkPref() {
+		return mSettingsPref.getBoolean(Settings.KEY_PREF_COMMON_IMAGE_DOWNLOAD_VIA_GPRS, true);
+	}
 
 	public String getDataBasePath() {
 		return mDataBasePath;

@@ -73,7 +73,7 @@ public class DuelFragment extends BaseFragment implements OnNavigationListener {
 				Bundle bundle = new Bundle();
 				bundle.putString("username", Controller.peekInstance().getLoginName());
 				bundle.putInt("userstatus", UserStatusTracker.LOGIN_STATUS_LOGGING);
-				mActivity.navigateToChildFragment(bundle, FRAGMENT_ID_USER_LOGIN, REQUEST_ID_DUEL);
+				mActivity.navigateToChildFragment(bundle, FRAGMENT_ID_USER_LOGIN, REQUEST_ID_DUEL, true);
 				return;
 			}
 		} else {
@@ -93,7 +93,7 @@ public class DuelFragment extends BaseFragment implements OnNavigationListener {
 				Bundle bundle = new Bundle();
 				bundle.putString("username", Controller.peekInstance().getLoginName());
 				bundle.putInt("userstatus", arg1);
-				mActivity.navigateToChildFragment(bundle, FRAGMENT_ID_USER_LOGIN, REQUEST_ID_DUEL);
+				mActivity.navigateToChildFragment(bundle, FRAGMENT_ID_USER_LOGIN, REQUEST_ID_DUEL, true);
 			} else if (eventType == FRAGMENT_NAVIGATION_DUEL_LOGIN_SUCCEED_EVENT) {
 				FragmentManager fm = mActivity.getSupportFragmentManager();
 				fm.popBackStackImmediate();

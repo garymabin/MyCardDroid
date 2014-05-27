@@ -322,7 +322,7 @@ public class CardWikiFragment extends BaseFragment implements
 		mSavedPosition = mListView.getFirstVisiblePosition();
 		View v = mListView.getChildAt(0);
 		mSavedYPixelFromItemTop = (v == null) ? 0 : v.getTop();
-		mActivity.navigateToChildFragment(bundle, FRAGMENT_ID_CARD_DETAIL, REQUEST_ID_CARD_DETAIL);
+		mActivity.navigateToChildFragment(bundle, FRAGMENT_ID_CARD_DETAIL, REQUEST_ID_CARD_DETAIL, false);
 		if (mActionMode != null) {
 			mActionMode.finish();
 		}

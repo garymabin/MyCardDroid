@@ -279,7 +279,7 @@ public class MainActivity extends ActionBarActivity implements
 		transaction.replace(R.id.content_frame, fragment).commit();
 	}
 	
-	public void navigateToChildFragment(Bundle param, int id, int requestCode) {
+	public void navigateToChildFragment(Bundle param, int id, int requestCode, boolean isReplace) {
 		Fragment fragment = null;
 		switch (id) {
 		case FRAGMENT_ID_CARD_DETAIL:
@@ -296,7 +296,11 @@ public class MainActivity extends ActionBarActivity implements
 		Fragment parent = mFragmentManager.findFragmentById(R.id.content_frame);
 		fragment.setTargetFragment(parent, requestCode);
 		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-		ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+		if (isReplace) {
+			ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+		} else {
+			ft.add(R.id.content_frame, fragment).addToBackStack(null).commit();
+		}
 	}
 
 	@Override

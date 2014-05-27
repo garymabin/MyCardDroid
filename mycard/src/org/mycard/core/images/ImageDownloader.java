@@ -44,7 +44,7 @@ public class ImageDownloader {
 	/* package */ void execute(ImageFileDownloadTaskHolder holder) {
 		int resultCode = ImageFileDownloadTaskHolder.RET_DOWNLOAD_SUCCEED;
 		
-		if (Settings.downloadImageSwitcherState && !Controller.peekInstance().isWifiConnected()) {
+		if (StaticApplication.peekInstance().getMobileNetworkPref() && !Controller.peekInstance().isWifiConnected()) {
 			holder.setDownloadResult(ImageFileDownloadTaskHolder.RET_DOWNLOAD_FAILED);
 			return;
 		}

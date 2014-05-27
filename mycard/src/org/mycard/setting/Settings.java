@@ -16,8 +16,6 @@ public final class Settings {
 	public static final String KEY_PREF_GAME_IMAGE_QUALITY = "pref_key_game_image_quality";
 	public static final String KEY_PREF_GAME_OGLES_CONFIG = "pref_key_game_ogles_config";
 
-	public static boolean downloadImageSwitcherState = true;
-
 	/**
 	 * 
 	 */
