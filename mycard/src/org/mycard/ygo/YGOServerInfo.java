@@ -4,12 +4,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.mycard.model.data.BaseInfo;
 
+import android.os.Parcel;
+
 public class YGOServerInfo extends BaseInfo {
 	
 	public YGOServerInfo() {
 	}
 	
-	public YGOServerInfo(String name, String ip, int port) {
+	public YGOServerInfo(String id, String name, String ip, int port) {
+		this.id = id;
 		this.name = name;
 		ipAddrString = ip;
 		this.port = port;
@@ -20,8 +23,6 @@ public class YGOServerInfo extends BaseInfo {
 	public int port;
 	public boolean auth;
 	public int maxRooms;
-	public String urlIndex;
-	public String serverType;
 	
 	@Override
 	public YGOServerInfo clone() {
@@ -36,8 +37,6 @@ public class YGOServerInfo extends BaseInfo {
 		port = data.getInt(JSON_KEY_SERVER_PORT);
 		auth = data.getBoolean(JSON_KEY_SERVER_AUTH);
 		maxRooms = data.getInt(JSON_KEY_SERVER_MAX_ROOMS);
-		urlIndex = data.getString(JSON_KEY_SERVER_INDEX_URL);
-		serverType = data.getString(JSON_KEY_SERVER_TYPE);
 	}
 	
 	@Override
@@ -55,6 +54,41 @@ public class YGOServerInfo extends BaseInfo {
 	@Override
 	public int hashCode() {
 		return id.hashCode();
+	}
+	
+	public static final Creator<YGOServerInfo> CREATOR = new Creator<YGOServerInfo>() {
+
+		@Override
+		public YGOServerInfo createFromParcel(Parcel source) {
+			YGOServerInfo info = new YGOServerInfo();
+			info.id = source.readString();
+			info.name = source.readString();
+			info.ipAddrString = source.readString();
+			info.port = source.readInt();
+			info.auth = source.readInt() > 0 ? true : false;
+			info.maxRooms = source.readInt();
+			return info;
+		}
+
+		@Override
+		public YGOServerInfo[] newArray(int size) {
+			return new YGOServerInfo[size];
+		}
+	};
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(id);
+		dest.writeString(name);
+		dest.writeString(ipAddrString);
+		dest.writeInt(port);
+		dest.writeInt(auth ? 1 : 0);
+		dest.writeInt(maxRooms);
 	}
 
 }

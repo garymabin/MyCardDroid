@@ -250,15 +250,14 @@ public class CardWikiFragment extends BaseFragment implements
 		mContext = getActivity().getApplicationContext();
 		ResourceUtils.init(mContext);
 
-		View view = inflater.inflate(R.layout.card_info_list, null);
+		mListView = (ListView) inflater.inflate(R.layout.common_list, null);
 
-		mListView = (ListView) view.findViewById(R.id.card_info_list);
 		mAdapter = new CardAdapter(mContext, mProjects_id,  null, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER, mListView);
 		mAdapter.onFragmentActive();
 		mListView.setAdapter(mAdapter);
 		mListView.setOnItemClickListener(this);
 		initCursorLoader();
-		return view;
+		return mListView;
 	}
 	
 	private void initCursorLoader() {

@@ -132,31 +132,35 @@ static void* join_game_thread(void* param) {
 	wchar_t wbuff[256];
 	char linelog[256];
 	BufferIO::DecodeUTF8(options.getIPAddr(), wbuff);
-	irr::os::Printer::log(options.getIPAddr());
 	ygo::mainGame->ebJoinIP->setText(wbuff);
 
 	myswprintf(wbuff, L"%d", options.getPort());
 	BufferIO::EncodeUTF8(wbuff, linelog);
-	irr::os::Printer::log(linelog);
 	ygo::mainGame->ebJoinPort->setText(wbuff);
-
-	wmemset(wbuff, 0, 256);
-	options.formatGameParams(wbuff);
-	BufferIO::EncodeUTF8(wbuff, linelog);
-	irr::os::Printer::log(linelog);
-	ygo::mainGame->ebJoinPass->setText(wbuff);
 
 	irr::os::Printer::log(options.getUserName());
 	BufferIO::DecodeUTF8(options.getUserName(), wbuff);
 	ygo::mainGame->ebNickName->setText(wbuff);
 
+	wmemset(wbuff, 0, 256);
+
+	bool bRoomCreate  = options.formatGameParams(wbuff);
+	if (bRoomCreate) {
+		BufferIO::EncodeUTF8(wbuff, linelog);
+		irr::os::Printer::log(linelog);
+		ygo::mainGame->ebJoinPass->setText(wbuff);
+	}
+
 	event.EventType = irr::EET_GUI_EVENT;
 	event.GUIEvent.EventType = irr::gui::EGET_BUTTON_CLICKED;
 	event.GUIEvent.Caller = ygo::mainGame->btnLanMode;
 	ygo::mainGame->device->postEventFromUser(event);
-	//TODO: wait for wLanWindow show. if network connection faster than wLanWindow, wLanWindow will still show on duel scene.
-	event.GUIEvent.Caller = ygo::mainGame->btnJoinHost;
-	ygo::mainGame->device->postEventFromUser(event);
+	if (bRoomCreate) {
+		//TODO: wait for wLanWindow show. if network connection faster than wLanWindow, wLanWindow will still show on duel scene.
+		usleep(500);
+		event.GUIEvent.Caller = ygo::mainGame->btnJoinHost;
+		ygo::mainGame->device->postEventFromUser(event);
+	}
 	exit: ygo::mainGame->gMutex.Unlock();
 	return NULL;
 }

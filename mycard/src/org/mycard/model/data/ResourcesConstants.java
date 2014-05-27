@@ -93,6 +93,8 @@ public interface ResourcesConstants {
 	public static final int DIALOG_MODE_FILTER_DEF = 5;
 	public static final int DIALOG_MODE_FILTER_LEVEL = 6;
 	public static final int DIALOG_MODE_FILTER_EFFECT = 7;
+	public static final int DIALOG_MODE_ADD_NEW_SERVER = 8;
+	public static final int DIALOG_MODE_EDIT_SERVER = 9;
 	
 	public static final String ROOM_INFO_NAME = "room.info.name";
 	public static final String ROOM_INFO_RULE = "room.info.rule";

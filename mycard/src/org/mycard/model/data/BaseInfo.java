@@ -3,7 +3,9 @@ package org.mycard.model.data;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public abstract class BaseInfo implements Cloneable, ResourcesConstants{
+import android.os.Parcelable;
+
+public abstract class BaseInfo implements Cloneable, ResourcesConstants, Parcelable{
 	
 	public String id;
 	

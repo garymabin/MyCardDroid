@@ -8,6 +8,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.mycard.model.data.BaseInfo;
 
+import android.os.Parcel;
+
 public class YGORoomInfo extends BaseInfo {
 	
 	public String name;
@@ -93,6 +95,61 @@ public class YGORoomInfo extends BaseInfo {
 			info.mUsers.add(item.clone());
 		}
 		return info;
+	}
+	
+	public static final Creator<YGORoomInfo> CREATOR = new Creator<YGORoomInfo>() {
+
+		@Override
+		public YGORoomInfo createFromParcel(Parcel source) {
+			YGORoomInfo info = new YGORoomInfo();
+			info.id = source.readString();
+			info.name = source.readString();
+			info.serverId = source.readInt();
+			info.mUsers = source.createTypedArrayList(YGOUserInfo.CREATOR);
+			info.mode = source.readInt();
+			info.rule = source.readInt();
+			info.privacy = source.readInt() > 0;
+			info.startLp = source.readInt();
+			info.startHand = source.readInt();
+			info.drawCount = source.readInt();
+			info.enablePriority = source.readInt() > 0;
+			info.noDeckCheck = source.readInt() > 0;
+			info.noDeckShuffle = source.readInt() > 0;
+			info.deleted = source.readInt() > 0;
+			info.isCompleteInfo = source.readInt() > 0;
+			return info;
+		}
+
+		@Override
+		public YGORoomInfo[] newArray(int size) {
+			return new YGORoomInfo[size];
+		}
+	};
+
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(id);
+		dest.writeString(name);
+		dest.writeInt(serverId);
+		dest.writeTypedList(mUsers);
+		dest.writeInt(mode);
+		dest.writeInt(rule);
+		dest.writeInt(privacy ? 1 :0);
+		dest.writeInt(startLp);
+		dest.writeInt(startHand);
+		dest.writeInt(drawCount);
+		dest.writeInt(enablePriority ? 1 : 0);
+		dest.writeInt(noDeckCheck ? 1 : 0);
+		dest.writeInt(noDeckShuffle ? 1 : 0);
+		dest.writeInt(deleted ? 1 : 0);
+		dest.writeInt(isCompleteInfo ? 1 : 0);
 	}
 
 }

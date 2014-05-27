@@ -53,7 +53,6 @@ public class WebSocketConnector {
 
 			@Override
 			public void onError(Exception arg0) {
-				// TODO Auto-generated method stub
 				arg0.printStackTrace();
 				mHandler.sendMessage(Message.obtain(null,
 						WebSocketThread.MSG_ID_CONNECTION_CLOSED, 0,

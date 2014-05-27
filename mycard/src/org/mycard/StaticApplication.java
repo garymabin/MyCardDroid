@@ -50,6 +50,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 @ReportsCrashes(formKey = "", // will not be used
@@ -88,6 +90,10 @@ public class StaticApplication extends Application {
 
 	private String mDataBasePath;
 	
+	private float mScreenWidth;
+	
+	private float mScreenHeight;
+	
 	private float mDensity;
 
 	@Override
@@ -103,7 +109,10 @@ public class StaticApplication extends Application {
 		checkAndCopyGameSkin();
 		checkAndCopyDatabase();
 		checkAndCopyFonts();
-		mDensity = getResources().getDisplayMetrics().density;
+		DisplayMetrics metrics = getResources().getDisplayMetrics();
+		mScreenWidth = metrics.widthPixels;
+		mScreenHeight = metrics.heightPixels;
+		
 	}
 
 	private void checkAndCopyFonts() {
@@ -372,9 +381,18 @@ public class StaticApplication extends Application {
 	}
 
 	public String getUserName() {
-		return Controller.peekInstance().getLoginName();
+		String name = Controller.peekInstance().getLoginName();
+		return TextUtils.isEmpty(name) ? "MyCard": name;
 	}
 	
+	public float getScreenWidth() {
+		return mScreenWidth;
+	}
+	
+	public float getScreenHeight() {
+		return mScreenHeight;
+	}
+
 	public float getDensity() {
 		return mDensity;
 	}

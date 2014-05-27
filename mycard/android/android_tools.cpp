@@ -411,7 +411,7 @@ irr::io::path getUserName(android_app* app) {
 			"getApplication", "()Landroid/app/Application;");
 	jobject application = jni->CallObjectMethod(lNativeActivity, MethodGetApp);
 	jclass classApp = jni->GetObjectClass(application);
-	jmethodID userNameMethod = jni->GetMethodID(classApp, "getLastDeck",
+	jmethodID userNameMethod = jni->GetMethodID(classApp, "getUserName",
 			"()Ljava/lang/String;");
 	jstring retString = (jstring) jni->CallObjectMethod(application,
 			userNameMethod);

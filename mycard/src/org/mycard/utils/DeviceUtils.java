@@ -15,9 +15,14 @@ public class DeviceUtils {
 	
 	private static final String DOWNLOAD_DIR_NAME = "downloads";
 
+	public static float getScreenWidth() {
+		return StaticApplication.peekInstance().getScreenWidth();
+	}
+	
 	public static float getDensity() {
 		return StaticApplication.peekInstance().getDensity();
 	}
+
 	
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	public static void executeWithAsyncTask(AsyncTask<Object, Object, Object> task, Object... params) {
@@ -68,5 +73,4 @@ public class DeviceUtils {
 			}
 		}
 	}
-
 }

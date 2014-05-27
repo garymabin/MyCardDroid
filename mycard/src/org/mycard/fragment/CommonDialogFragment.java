@@ -5,6 +5,7 @@ import java.util.List;
 import org.mycard.MainActivity;
 import org.mycard.R;
 import org.mycard.core.Controller;
+import org.mycard.model.Model;
 import org.mycard.model.data.ResourcesConstants;
 import org.mycard.widget.BaseDialog;
 import org.mycard.widget.DonateDialog;
@@ -15,6 +16,9 @@ import org.mycard.widget.RangeDialog;
 import org.mycard.widget.RangeDialogConfigController;
 import org.mycard.widget.RoomDialog;
 import org.mycard.widget.RoomDialogConfigController;
+import org.mycard.widget.ServerCreateDialog;
+import org.mycard.widget.ServerDialogController;
+import org.mycard.ygo.YGOServerInfo;
 
 import cn.garymb.ygodata.YGOGameOptions;
 import cn.garymb.ygomobile.YGOMobileActivity;
@@ -144,6 +148,10 @@ public class CommonDialogFragment extends DialogFragment implements
 		case ResourcesConstants.DIALOG_MODE_FILTER_EFFECT:
 			dlg = new GridSelectionDialog(mActivity, this, R.array.card_effect, getArguments());
 			break;
+		case ResourcesConstants.DIALOG_MODE_ADD_NEW_SERVER:
+		case ResourcesConstants.DIALOG_MODE_EDIT_SERVER:
+			dlg = new ServerCreateDialog(mActivity, this, getArguments());
+			break;
 		default:
 			break;
 		}
@@ -230,6 +238,11 @@ public class CommonDialogFragment extends DialogFragment implements
 				((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(), FragmentNavigationListener.FRAGMENT_NAVIGATION_CARD_EVENT, -1, -1, list);
 				break;
 			}
+			case ResourcesConstants.DIALOG_MODE_ADD_NEW_SERVER:
+			case ResourcesConstants.DIALOG_MODE_EDIT_SERVER:
+				YGOServerInfo info = ((ServerDialogController)((BaseDialog)getDialog()).getController()).getServerInfo();
+				Model.peekInstance().addNewServer(info);
+				((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(), FragmentNavigationListener.FRAGMENT_NAVIGATION_DUEL_CREATE_SERVER_EVENT, -1, -1, null);
 			default:
 				break;
 			}

@@ -57,6 +57,10 @@ public class Model {
 	public SparseArray<YGOServerInfo> getServers() {
 		return mDataStore.getServers();
 	}
+	
+	public void addNewServer(YGOServerInfo info) {
+		mDataStore.addNewServer(info);
+	}
 
 	public List<YGORoomInfo> getRooms() {
 		return mDataStore.getRooms();
@@ -119,6 +123,10 @@ public class Model {
 
 	public TaskList getTaskList() {
 		return mDataStore.getTaskList();
+	}
+
+	public void removeServer(int groupId) {
+		mDataStore.removeServer(groupId);
 	}
 
 }

@@ -80,7 +80,7 @@ public class DuelFragment extends BaseFragment implements OnNavigationListener {
 			fragment = new FreeDuelTabFragment();
 		}
 		ft.replace(R.id.duel_panel, fragment);
-		ft.commit();
+		ft.commitAllowingStateLoss();
 	}
 	
 	@Override
