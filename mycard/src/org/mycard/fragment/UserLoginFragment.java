@@ -4,6 +4,9 @@ import org.mycard.R;
 import org.mycard.core.Controller;
 import org.mycard.core.UserStatusTracker;
 
+import com.github.johnpersano.supertoasts.SuperActivityToast;
+import com.github.johnpersano.supertoasts.SuperToast;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -97,7 +100,8 @@ public class UserLoginFragment extends BaseFragment {
 			mProgressDialog.show();
 		} else if (status == UserStatusTracker.LOGIN_STATUS_LOGIN_FAILED) {
 			mProgressDialog.dismiss();
-			Toast.makeText(mActivity, R.string.login_failed, Toast.LENGTH_SHORT).show();
+			SuperActivityToast.create(mActivity, getResources().getString(R.string.login_failed),
+					SuperToast.Duration.VERY_SHORT).show();
 		} else if (status == UserStatusTracker.LOGIN_STATUS_LOGGED_IN){
 			mProgressDialog.dismiss();
 			((BaseFragment)getTargetFragment()).onEventFromChild(getTargetRequestCode(),

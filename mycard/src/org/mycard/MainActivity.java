@@ -23,6 +23,8 @@ import org.mycard.model.data.ResourcesConstants;
 import org.mycard.setting.SettingsActivity;
 import org.mycard.ygo.YGOServerInfo;
 
+import com.github.johnpersano.supertoasts.SuperActivityToast;
+import com.github.johnpersano.supertoasts.SuperToast;
 import com.google.analytics.tracking.android.EasyTracker;
 
 import android.content.Intent;
@@ -322,14 +324,14 @@ public class MainActivity extends ActionBarActivity implements
 			}
 			break;
 		case Constants.ACTION_BAR_CHANGE_TYPE_DATA_LOADING:
-			mActionBar.setDisplayShowTitleEnabled(false);
-			mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 			if (action == 0) {
 				mActionBarCreator = new ActionBarCreator(this).setNew(
 						true, 0).setPlay(true);
 			} else {
 				mActionBarCreator = new ActionBarCreator(this).setLoading(true);
 			}
+			mActionBar.setDisplayShowTitleEnabled(false);
+			mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		default:
 			break;
 		}
@@ -382,7 +384,8 @@ public class MainActivity extends ActionBarActivity implements
 	public void finish() {
 		if (!isExit) {
 			isExit = true;
-			Toast.makeText(this, R.string.exit_hint, Toast.LENGTH_SHORT).show();
+			SuperActivityToast.create(this, getResources().getString(R.string.exit_hint),
+					SuperToast.Duration.MEDIUM).show();
 			mHandler.sendEmptyMessageDelayed(Constants.MSG_ID_EXIT_CONFIRM_ALARM, 2000);
 		} else {
 			super.finish();

@@ -10,6 +10,9 @@ import org.mycard.model.data.ResourcesConstants;
 import org.mycard.model.data.wrapper.IBaseWrapper;
 import org.mycard.ygo.YGORoomInfo;
 
+import com.github.johnpersano.supertoasts.SuperActivityToast;
+import com.github.johnpersano.supertoasts.SuperToast;
+
 import cn.garymb.ygodata.YGOGameOptions;
 import cn.garymb.ygomobile.YGOMobileActivity;
 import android.app.Activity;
@@ -161,7 +164,6 @@ public class RoomListFragment extends TabFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		Log.d(TAG, "onCreateView: E");
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		mExtraView = (RelativeLayout) view.findViewById(R.id.extra_view);
@@ -291,7 +293,8 @@ public class RoomListFragment extends TabFragment {
 				intent.putExtra(YGOGameOptions.YGO_GAME_OPTIONS_BUNDLE_KEY, options);
 				startActivity(intent);
 			} else {
-				Toast.makeText(mActivity, R.string.quick_join_error, Toast.LENGTH_SHORT).show();
+				SuperActivityToast.create(mActivity, getResources().getString(R.string.quick_join_error),
+						SuperToast.Duration.VERY_SHORT).show();
 			}
 			break;
 		}
